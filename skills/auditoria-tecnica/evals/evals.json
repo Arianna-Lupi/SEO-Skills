@@ -1,0 +1,39 @@
+{
+  "skill_name": "auditoria-tecnica",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vamos a hacer onboarding de un ecommerce nuevo, miviverotienda.com. Te paso el export de Screaming Frog (internal_all.csv e issues_overview_report.csv) en ./export_sf. Haceme la auditoría técnica completa.",
+      "expected_output": "Una auditoría en los 3 bloques (indexabilidad/rastreabilidad, velocidad/CWV, seguridad+canonical), auditada por plantillas (home, categoría, ficha, blog), con cada issue clasificado por severidad y por plantilla afectada, y un plan de remediación priorizado. Idealmente apoyada en el script parse_sf.py para resumir el crawl.",
+      "assertions": [
+        "cubre los 3 bloques: indexabilidad/rastreabilidad, velocidad/Core Web Vitals y seguridad/canonicalización",
+        "agrupa los issues por plantilla (no página por página)",
+        "clasifica cada issue por severidad (Crítico / Alto / Medio / Bajo)",
+        "entrega un plan de remediación priorizado que ataca primero lo que bloquea rastreo/indexación",
+        "usa o propone el script parse_sf.py para resumir el export de Screaming Frog",
+        "mide Core Web Vitals con INP y no con el deprecado FID"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Mi blog perdió la mitad del tráfico orgánico el último mes y no cambié el contenido. Qué reviso?",
+      "expected_output": "La skill encuadra esto como caso de caída de tráfico, prioriza el bloque 1 (indexabilidad: robots.txt con Disallow /, noindex, 4xx/5xx, cobertura GSC, sitemap) como sospechoso principal, audita por plantillas y pide los datos que falten (export SF o GSC) en vez de inventar resultados.",
+      "assertions": [
+        "prioriza la revisión de indexabilidad/rastreabilidad (robots.txt Disallow /, meta noindex, errores 4xx/5xx, cobertura en GSC)",
+        "audita por plantillas en lugar de página por página",
+        "pide el export o acceso que falte (Screaming Frog / GSC) antes de afirmar hallazgos",
+        "no inventa métricas de bloques para los que no tiene datos"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Solo quiero que me confirmes si esta etiqueta canonical de mi home está bien puesta: <link rel=\"canonical\" href=\"https://misitio.com/\">. No me hagas la auditoría entera.",
+      "expected_output": "Edge case fuera de alcance del flujo completo: responde la duda puntual de canonical (self-canonical correcto) sin ejecutar la auditoría de 3 bloques, y opcionalmente sugiere la auditoría completa solo si el usuario la quiere. No fuerza el procedimiento entero ni inventa issues.",
+      "assertions": [
+        "responde solo la duda puntual del canonical sin ejecutar la auditoría completa de los 3 bloques",
+        "indica si el canonical es self-canonical correcto para la home",
+        "no clasifica issues inexistentes ni genera un plan de remediación completo no solicitado"
+      ]
+    }
+  ]
+}

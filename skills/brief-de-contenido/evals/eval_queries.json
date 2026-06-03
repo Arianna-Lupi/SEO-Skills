@@ -1,0 +1,17 @@
+[
+  { "query": "Tengo priorizada la keyword \"mejores zapatillas para correr\" del cluster Running y voy a escribir un artículo nuevo de blog. Armame la estructura para pasársela al redactor.", "should_trigger": true },
+  { "query": "qué encabezados y qué título le pongo a este artículo nuevo sobre cafeteras italianas", "should_trigger": true },
+  { "query": "Quiero darle cariño a la landing /diseno-web-barcelona que perdió posiciones. No la reescribas entera, decime qué cambiar antes de tocar nada.", "should_trigger": true },
+  { "query": "como organizo este post? no se que secciones meter ni el orden", "should_trigger": true },
+  { "query": "Necesito alinear al redactor, al diseñador y al SEO en un solo documento antes de producir la ficha de producto de las zapatillas Nike Pegasus.", "should_trigger": true },
+  { "query": "qué meta titulo y meta descripcion uso para una pagina de servicios de fisioterapia en Valencia", "should_trigger": true },
+  { "query": "Voy a actualizar un artículo viejo del 2021 sobre recetas keto, qué debería cubrir y qué encabezados conviene que tenga ahora.", "should_trigger": true },
+
+  { "query": "Armame el reporte mensual de SEO para el cliente con los datos de Search Console de mayo.", "should_trigger": false },
+  { "query": "dame una lista de keywords para mi nicho de jardinería urbana, no se por donde empezar", "should_trigger": false },
+  { "query": "audita la velocidad de mi sitio y revisá por qué Google no me indexa algunas páginas", "should_trigger": false },
+  { "query": "El artículo ya está escrito, solo redactámelo más natural y optimizado para NLP sin cambiar la estructura.", "should_trigger": false },
+  { "query": "Mirame el top 10 de la SERP de \"seguro de coche barato\" y decime qué tipo de contenido rankea y quiénes son la competencia.", "should_trigger": false },
+  { "query": "generame el schema JSON-LD de tipo Article para este post que ya tengo publicado", "should_trigger": false },
+  { "query": "como agrupo estas 200 keywords en clusters tematicos para planear mi calendario editorial del semestre", "should_trigger": false }
+]

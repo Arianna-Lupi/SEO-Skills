@@ -1,0 +1,42 @@
+{
+  "skill_name": "brief-de-contenido",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo priorizada la keyword \"mejores zapatillas para correr\" (cluster Running, rol spoke) y quiero crear un artículo nuevo de blog. La SERP del top 3 son guías comparativas largas con tablas. Armame el brief para pasárselo al redactor.",
+      "expected_output": "Un brief de tipo Blog que parte del análisis del top 3 (formato guía/comparativa con tabla), con intención informativa-comercial, metatítulo y metadescripción dentro de rango, jerarquía de encabezados sin saltos, PAA convertidas en H2/H3, benchmark con el hueco a llenar y enlaces internos del cluster con anchor y URL.",
+      "assertions": [
+        "el tipo de brief elegido es Blog y se justifica con el formato del top 3 de la SERP",
+        "el metatítulo tiene 50-60 caracteres y empieza con la keyword principal",
+        "la metadescripción tiene 120-155 caracteres e incluye un CTA",
+        "incluye jerarquía H1-H3 con un solo H1 que contiene la keyword y sin saltos de nivel (no hay H2 seguido de H4)",
+        "al menos un H2 responde una pregunta de People Also Ask (PAA)",
+        "incluye una sección de benchmark del top 3 indicando el hueco a llenar",
+        "lista al menos un enlace interno con anchor text concreto y URL destino del cluster"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Quiero hacerle \"cariño\" a una landing de servicios que ya tengo publicada en /diseno-web-barcelona porque perdió posiciones. La keyword es \"diseño web barcelona\". No la reescribas entera, decime qué cambiar.",
+      "expected_output": "Un Brief de Optimización (W10) para contenido existente, de variante Landing/Servicios, que documenta los cambios ANTES de tocar la pieza, conserva lo que ya funciona, e incluye propuesta de valor above the fold, prueba social y CTA, además de metas y jerarquía revisadas.",
+      "assertions": [
+        "el brief es de tipo OPTIMIZACIÓN (W10), no de contenido nuevo",
+        "aplica la variante Landing/Servicios (propuesta de valor above the fold + CTA + prueba social)",
+        "incluye un bloque de cambios documentados antes de tocar la pieza y otro de qué se conserva",
+        "el metatítulo propuesto tiene 50-60 caracteres con la keyword al inicio",
+        "no propone reescribir la página desde cero"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Pasame directo a brief la keyword \"comprar bici de montaña\" para una ficha de ecommerce. No tengo tiempo de mirar la SERP, hacelo de una.",
+      "expected_output": "La skill se niega a generar el brief sin analizar antes el top 3 de la SERP (regla: el brief lo dicta la SERP), explica por qué y ofrece traer la SERP con SerpApi/manual; si igual avanza, marca que el formato queda sin validar. Cuando proceda, produce un brief E-commerce con atributos técnicos, reseñas, urgencia/escasez y cross/up-sell.",
+      "assertions": [
+        "no entrega un brief final sin haber analizado el top 3 de la SERP",
+        "explica la regla \"el brief lo dicta la SERP\" y propone cómo obtenerla (SerpApi o manual)",
+        "si genera el brief, aplica la variante E-commerce (atributos técnicos, reseñas/prueba social, urgencia/escasez, cross/up-sell)",
+        "el metatítulo respeta 50-60 caracteres y la metadescripción 120-155 con CTA"
+      ]
+    }
+  ]
+}

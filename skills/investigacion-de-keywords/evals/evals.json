@@ -1,0 +1,41 @@
+{
+  "skill_name": "investigacion-de-keywords",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo un estudio de yoga en Bogotá, público mujeres de 28 a 45 principiantes que buscan reducir el estrés. Armame la investigación de keywords para llenar la tab de Investigación de palabras clave.",
+      "expected_output": "Un entregable con resumen de audiencia por los 5 ejes del Cuestionario SEO, una lista de mínimo 30 keywords descubiertas con los 4 métodos, clasificadas por intención, agrupadas en clusters, con volumen/dificultad y selección del punto dulce priorizando long-tail, en una tabla lista para la Plantilla Master.",
+      "assertions": [
+        "incluye un resumen de audiencia que cubre los 5 ejes del Cuestionario SEO (demografía, intereses/necesidades, comportamiento online, intención, puntos de dolor)",
+        "lista al menos 30 keywords candidatas",
+        "cada keyword tiene una intención clasificada como informativa, comercial, transaccional o navegacional",
+        "las keywords están agrupadas en clusters temáticos",
+        "marca el punto dulce (volumen medio-alto x dificultad baja) y prioriza long-tail sobre head terms",
+        "la salida es una tabla con columnas keyword, cluster, intención, volumen, dificultad, URL sugerida y H1",
+        "las URLs sugeridas son cortas, sin tildes y contienen la keyword"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "No sé por dónde empezar con el SEO de mi web de venta de cafe de especialidad. Qué términos podría posicionar en Google?",
+      "expected_output": "La skill reconoce esto como investigación de keywords aunque no se nombre, pide o deriva la audiencia con el Cuestionario SEO antes de listar keywords, y luego entrega lista + intención + clusters + punto dulce. No salta directo a tirar keywords sin audiencia.",
+      "assertions": [
+        "interpreta la consulta como una investigación de keywords aunque el usuario no use la palabra 'keywords'",
+        "define o solicita la audiencia (Cuestionario SEO) antes de proponer keywords",
+        "agrupa las keywords resultantes en clusters",
+        "prioriza long-tail y señala el punto dulce"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Mi agencia de IA me tiró estas 40 keywords para mi tienda de plantas. Las uso tal cual y empiezo a escribir?",
+      "expected_output": "La skill advierte que la IA sirve para generar ideas pero no para validar, y exige confirmar volumen/dificultad con datos reales (DinoRank/Ahrefs/GSC) antes de usarlas; clasifica intención, agrupa en clusters, aplica el Duelo de Keywords y selecciona el punto dulce. Edge case: no acepta una lista de IA sin validación.",
+      "assertions": [
+        "advierte explícitamente que la IA es para ideas y que el volumen/KD se valida con datos reales (DinoRank/Ahrefs/GSC)",
+        "no aprueba usar la lista tal cual sin validación de métricas",
+        "aplica el Duelo de Keywords ante keywords similares (gana mejor ratio volumen/dificultad)",
+        "agrupa en clusters y marca el punto dulce priorizando long-tail"
+      ]
+    }
+  ]
+}
