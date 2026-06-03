@@ -13,7 +13,24 @@ Pegá esto en tu terminal. Descarga e instala todas las skills y agentes en tu C
 curl -fsSL https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.sh | bash
 ```
 
+En Windows (PowerShell):
+
+```powershell
+irm https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.ps1 | iex
+```
+
 Reiniciá Claude Code y escribí `/` para verlas (por ejemplo `/brief-de-contenido`).
+
+### Requisitos (spoiler: casi nada)
+
+- **Las skills no necesitan ningún programa.** Son instrucciones en texto: Claude las
+  lee y hace el trabajo. Sin Python, sin Node, sin nada. Si no tenés nada instalado,
+  igual funcionan.
+- **Para instalar** solo hace falta `git` (el instalador lo usa para descargar).
+- **Los scripts son un extra opcional.** Cada skill trae un script que hace el paso
+  mecánico y ahorra tokens. Si tenés Python o [uv](https://astral.sh/uv) corren solos;
+  si no, la skill lo detecta y sigue en "modo manual" (Claude hace ese paso a mano). No
+  se rompe nada. El instalador te avisa qué detectó.
 
 Eso instala a nivel usuario (`~/.claude/`), así las tenés en todos tus proyectos. Si
 preferís clonar primero y mirar el código antes de correrlo:
