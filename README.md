@@ -19,18 +19,42 @@ En Windows (PowerShell):
 irm https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.ps1 | iex
 ```
 
-Reiniciá Claude Code y escribí `/` para verlas (por ejemplo `/brief-de-contenido`).
+Reiniciá tu cliente y escribí `/` para verlas (por ejemplo `/brief-de-contenido`).
+
+### Soporta varios clientes
+
+El instalador funciona con Claude Code y con otros clientes que usan el estándar
+Agent Skills. Si corrés el comando en una terminal interactiva, te muestra un menú para
+elegir. Si no, instala en Claude Code por defecto. Para elegir directo, usá `--client`
+(`-Client` en PowerShell):
+
+- `claude` — Claude Code (por defecto). Instala skills y los 3 subagentes.
+- `cursor` — Cursor (`./.cursor/skills`).
+- `agents` — VS Code y otros del estándar Agent Skills (`./.agents/skills`).
+- `codex` — OpenAI Codex (`./.codex/skills`).
+- `copilot` — GitHub Copilot (`./.github/skills`).
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.sh | bash -s -- --client cursor
+```
+
+Las skills se instalan en todos los clientes. Los subagentes son un concepto de Claude
+Code, así que solo se instalan ahí; en los demás clientes el instalador lo avisa y las
+skills siguen funcionando igual.
 
 ### Requisitos (spoiler: casi nada)
 
-- **Las skills no necesitan ningún programa.** Son instrucciones en texto: Claude las
+- **Las skills no necesitan ningún programa.** Son instrucciones en texto: el modelo las
   lee y hace el trabajo. Sin Python, sin Node, sin nada. Si no tenés nada instalado,
   igual funcionan.
 - **Para instalar** solo hace falta `git` (el instalador lo usa para descargar).
-- **Los scripts son un extra opcional.** Cada skill trae un script que hace el paso
-  mecánico y ahorra tokens. Si tenés Python o [uv](https://astral.sh/uv) corren solos;
-  si no, la skill lo detecta y sigue en "modo manual" (Claude hace ese paso a mano). No
-  se rompe nada. El instalador te avisa qué detectó.
+- **Los scripts siempre pueden correr** si dejás que el instalador configure
+  [uv](https://astral.sh/uv): es un paso extra, sin permisos de administrador y sin
+  Python del sistema (uv trae su propio Python y resuelve las dependencias solo). En una
+  terminal interactiva el instalador te pregunta si querés instalarlo; si corrés el
+  comando piped (curl|bash), no instala nada en silencio pero te muestra el comando, o lo
+  forzás con `--with-uv` (`-WithUv` en PowerShell). Si no querés uv, las skills siguen en
+  "modo manual" y no se rompe nada. Para saltar el chequeo: `--no-uv` (`-NoUv`).
 
 Eso instala a nivel usuario (`~/.claude/`), así las tenés en todos tus proyectos. Si
 preferís clonar primero y mirar el código antes de correrlo:
@@ -38,8 +62,10 @@ preferís clonar primero y mirar el código antes de correrlo:
 ```bash
 git clone https://github.com/Arianna-Lupi/SEO-Skills.git
 cd SEO-Skills
-./install.sh              # tu usuario (~/.claude) — recomendado
-# ./install.sh --project  # solo el proyecto actual (./.claude)
+./install.sh                    # Claude Code, tu usuario (~/.claude) — recomendado
+# ./install.sh --project        # Claude Code, solo el proyecto actual (./.claude)
+# ./install.sh --client cursor  # otro cliente (cursor | agents | codex | copilot)
+# ./install.sh --with-uv        # además configura uv para que los scripts corran solos
 ```
 
 > ¿Qué hace el instalador? Copia cada skill (con su `SKILL.md`, `scripts/` y
