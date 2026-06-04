@@ -4,3 +4,9 @@ __pycache__/
 .venv/
 venv/
 node_modules/
+
+# Datos de auditoría locales del usuario (no subir)
+.seo-audit/
+
+# Vault personal de Obsidian
+.obsidian/
