@@ -59,42 +59,33 @@ El flujo completo de la semana, en orden, deja la tab "Investigación de palabra
 
 **Filtro final (Diana, video 14):** Filtro de Negocio (sin relación directa → eliminar) + Validación de Intención + Competencia vs. Oportunidad (elegir el mejor equilibrio facilidad/visitas).
 
-**Reglas de URL (video 15):** cortas, sin tildes, con la keyword.
-**Reglas de H1:** atractivo, con keyword, y mirar lo que ya rankea en Google para igualar la intención y añadir un valor extra (ej: "…y cómo aplicarlo con éxito").
+**Reglas de URL (video 15):** cortas, sin tildes, con la keyword. **Reglas de H1:** atractivo, con keyword, y mirar lo que ya rankea en Google para igualar la intención y añadir un valor extra (ej: "…y cómo aplicarlo con éxito").
 
 ## Prompts originales que da el curso (verbatim)
 
 **Lluvia de ideas con IA (video 10):**
-> 🎯 Prompt: Generador de Ideas de Palabras Clave
-> "Actúa como un Estratega SEO en aprendoseo. Basándote en mi proyecto de [Tu Nicho/Servicio], ayúdame a realizar una lluvia de ideas y utiliza el método de IA para generar una lista de 30 palabras clave iniciales. Clasifica cada término según su intención de búsqueda (Informativa, Transaccional o Navegacional) para que pueda volcarlas directamente en mi Plantilla Master y empezar a estructurar mi estrategia de contenidos."
+> 🎯 Prompt: Generador de Ideas de Palabras Clave "Actúa como un Estratega SEO en aprendoseo. Basándote en mi proyecto de [Tu Nicho/Servicio], ayúdame a realizar una lluvia de ideas y utiliza el método de IA para generar una lista de 30 palabras clave iniciales. Clasifica cada término según su intención de búsqueda (Informativa, Transaccional o Navegacional) para que pueda volcarlas directamente en mi Plantilla Master y empezar a estructurar mi estrategia de contenidos."
 
 **Clasificar por intención (video 3):**
-> 🎯 Prompt: Especialista en Intenciones de Búsqueda SEO
-> "Actúa como un Estratega de Contenidos en aprendoseo. Ayúdame a clasificar una lista de ideas de búsqueda para mi proyecto en Informativas (aprender), Navegacionales (encontrar una marca) y Transaccionales (comprar). Analiza la intención detrás de cada término para decidir qué tipo de página (blog o producto) debo crear en aprendoseo y así captar al usuario en la etapa correcta de su decisión."
+> 🎯 Prompt: Especialista en Intenciones de Búsqueda SEO "Actúa como un Estratega de Contenidos en aprendoseo. Ayúdame a clasificar una lista de ideas de búsqueda para mi proyecto en Informativas (aprender), Navegacionales (encontrar una marca) y Transaccionales (comprar). Analiza la intención detrás de cada término para decidir qué tipo de página (blog o producto) debo crear en aprendoseo y así captar al usuario en la etapa correcta de su decisión."
 
 **Agrupar en clusters (video 11):**
-> 🎯 Prompt: Arquitecto de Clusters y Estructura SEO
-> "Actúa como un Estratega de Arquitectura Web en aprendoseo. Toma mi lista de palabras clave de [Tu Nicho] y ayúdame a agruparlas en clusters o subcategorías temáticas. Define el nombre de cada clúster (ej. 'Cursos de SEO' o 'Servicios de Pestañas') para que pueda organizar mi sitio en secciones lógicas, facilitando que Google entienda la jerarquía de mi contenido y mejorando la navegación para el usuario en aprendoseo."
+> 🎯 Prompt: Arquitecto de Clusters y Estructura SEO "Actúa como un Estratega de Arquitectura Web en aprendoseo. Toma mi lista de palabras clave de [Tu Nicho] y ayúdame a agruparlas en clusters o subcategorías temáticas. Define el nombre de cada clúster (ej. 'Cursos de SEO' o 'Servicios de Pestañas') para que pueda organizar mi sitio en secciones lógicas, facilitando que Google entienda la jerarquía de mi contenido y mejorando la navegación para el usuario en aprendoseo."
 
 **Analizar con herramientas (video 12):**
-> 🎯 Prompt: Analista de Datos y Herramientas SEO
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a analizar mi lista de palabras clave utilizando métricas de herramientas como Ahrefs Free, SEMrush o Wordstream. Identifica el Volumen de Búsqueda y la Dificultad (KD) para cada término de mi proyecto en aprendoseo, y recomiéndame cuáles priorizar para obtener resultados más rápidos basándote en un equilibrio entre relevancia y baja competencia."
+> 🎯 Prompt: Analista de Datos y Herramientas SEO "Actúa como un Estratega SEO en aprendoseo. Ayúdame a analizar mi lista de palabras clave utilizando métricas de herramientas como Ahrefs Free, SEMrush o Wordstream. Identifica el Volumen de Búsqueda y la Dificultad (KD) para cada término de mi proyecto en aprendoseo, y recomiéndame cuáles priorizar para obtener resultados más rápidos basándote en un equilibrio entre relevancia y baja competencia."
 
 **Seleccionar / limpiar (video 13):**
-> 🎯 Prompt: Especialista en Curaduría y Selección SEO
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a limpiar mi lista de palabras clave para aprendoseo eliminando términos irrelevantes. Filtra las keywords que tengan volumen medio y dificultad baja, e identifícate 5 palabras clave de cola larga (long-tail) usando Google Autocomplete, asegurando que cada una responda a una necesidad específica de mi usuario y tenga una alta probabilidad de conversión."
+> 🎯 Prompt: Especialista en Curaduría y Selección SEO "Actúa como un Estratega SEO en aprendoseo. Ayúdame a limpiar mi lista de palabras clave para aprendoseo eliminando términos irrelevantes. Filtra las keywords que tengan volumen medio y dificultad baja, e identifícate 5 palabras clave de cola larga (long-tail) usando Google Autocomplete, asegurando que cada una responda a una necesidad específica de mi usuario y tenga una alta probabilidad de conversión."
 
 **Completar URL / Idea / H1 (video 15):**
-> 🎯 Prompt: Especialista en Estructura de Palabras Clave y On-Page
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a completar los campos avanzados de mi Plantilla Master para el proyecto de aprendoseo. Basado en mi palabra clave objetivo, sugiéreme una estructura de URL optimizada, una Idea de Contenido específica (qué explicar y qué ventajas resaltar) y un H1 (Título principal) que atrape la atención y responda a la intención de búsqueda, asegurando que mi página esté lista para competir por el primer lugar en Google."
+> 🎯 Prompt: Especialista en Estructura de Palabras Clave y On-Page "Actúa como un Estratega SEO en aprendoseo. Ayúdame a completar los campos avanzados de mi Plantilla Master para el proyecto de aprendoseo. Basado en mi palabra clave objetivo, sugiéreme una estructura de URL optimizada, una Idea de Contenido específica (qué explicar y qué ventajas resaltar) y un H1 (Título principal) que atrape la atención y responda a la intención de búsqueda, asegurando que mi página esté lista para competir por el primer lugar en Google."
 
 **Definir público objetivo (video 9):**
-> 🎯 Prompt: Especialista en Definición de Audiencia SEO
-> "Actúa como un Estratega de Marketing Digital en aprendoseo. Ayúdame a definir mi público objetivo para aprendoseo utilizando los datos de mi cuestionario. Identifica sus datos demográficos, intereses, comportamiento en línea y, sobre todo, su intención predominante (¿buscan información, comparan opciones o están listos para comprar?) para asegurar que mi investigación de palabras clave atraiga tráfico que realmente convierta."
+> 🎯 Prompt: Especialista en Definición de Audiencia SEO "Actúa como un Estratega de Marketing Digital en aprendoseo. Ayúdame a definir mi público objetivo para aprendoseo utilizando los datos de mi cuestionario. Identifica sus datos demográficos, intereses, comportamiento en línea y, sobre todo, su intención predominante (¿buscan información, comparan opciones o están listos para comprar?) para asegurar que mi investigación de palabras clave atraiga tráfico que realmente convierta."
 
 **Validación final de la semana (video 16):**
-> 🎯 Prompt: Estratega de Consolidación de Palabras Clave
-> "Actúa como un Mentor SEO en aprendoseo. Ayúdame a revisar mi progreso de la Semana 4 para mi proyecto en aprendoseo. Valida que he completado los pasos críticos: definición de audiencia, lluvia de ideas (30+ keywords), agrupación por clusters y el filtrado por relevancia y dificultad. Genera un resumen ejecutivo de mi estrategia actual de palabras clave y asegúrate de que mi Plantilla Master refleje una hoja de ruta clara para empezar a crear contenido que realmente atraiga y convierta."
+> 🎯 Prompt: Estratega de Consolidación de Palabras Clave "Actúa como un Mentor SEO en aprendoseo. Ayúdame a revisar mi progreso de la Semana 4 para mi proyecto en aprendoseo. Valida que he completado los pasos críticos: definición de audiencia, lluvia de ideas (30+ keywords), agrupación por clusters y el filtrado por relevancia y dificultad. Genera un resumen ejecutivo de mi estrategia actual de palabras clave y asegúrate de que mi Plantilla Master refleje una hoja de ruta clara para empezar a crear contenido que realmente atraiga y convierta."
 
 ## Términos del diploma (definiciones)
 

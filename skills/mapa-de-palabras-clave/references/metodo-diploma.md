@@ -58,44 +58,34 @@ La "hoja de ruta de la semana" (Arianna, video 1), ejecutada sobre la pestaña *
 ## Prompts originales que da el curso (verbatim)
 
 **Inicio del mapa (Arianna, video 1):**
-> 🎯 Prompt: Arquitecto de Mapas de Palabras Clave
-> "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a iniciar la creación de mi Mapa de Palabras Clave para aprendoseo. Explícame cómo descargar todas las URLs de mi sitio y cómo evaluarlas usando el checklist de valor SEO. Guíame para asignar una palabra clave principal y una intención de búsqueda a cada página existente, de modo que pueda definir un plan de acción claro: ¿debo optimizar, redireccionar o borrar cada URL para maximizar el tráfico orgánico?"
+> 🎯 Prompt: Arquitecto de Mapas de Palabras Clave "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a iniciar la creación de mi Mapa de Palabras Clave para aprendoseo. Explícame cómo descargar todas las URLs de mi sitio y cómo evaluarlas usando el checklist de valor SEO. Guíame para asignar una palabra clave principal y una intención de búsqueda a cada página existente, de modo que pueda definir un plan de acción claro: ¿debo optimizar, redireccionar o borrar cada URL para maximizar el tráfico orgánico?"
 
 **Mapeo y auditoría (Verónica, video 2):**
-> 🎯 Prompt: Estratega de Mapeo y Auditoría de Contenidos
-> "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a transformar mi lista de URLs de aprendoseo en un Mapa de Palabras Clave estratégico. Sigue este proceso: Auditoría de Valor: Clasifica mis páginas actuales para identificar cuáles tienen 'Valor SEO' y cuáles no. Mapeo 1:1: Asigna una palabra clave principal y una intención de búsqueda específica a cada URL para evitar la canibalización. Análisis de Brechas: Compara mi estructura con la competencia para ver qué contenidos me faltan. Plan de Acción: Define para cada URL si debemos Optimizar, Redireccionar o Eliminar, basándote en su potencial de posicionamiento."
+> 🎯 Prompt: Estratega de Mapeo y Auditoría de Contenidos "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a transformar mi lista de URLs de aprendoseo en un Mapa de Palabras Clave estratégico. Sigue este proceso: Auditoría de Valor: Clasifica mis páginas actuales para identificar cuáles tienen 'Valor SEO' y cuáles no. Mapeo 1:1: Asigna una palabra clave principal y una intención de búsqueda específica a cada URL para evitar la canibalización. Análisis de Brechas: Compara mi estructura con la competencia para ver qué contenidos me faltan. Plan de Acción: Define para cada URL si debemos Optimizar, Redireccionar o Eliminar, basándote en su potencial de posicionamiento."
 
 **Extracción de URLs (video 3):**
-> 🎯 Prompt: Especialista en Extracción de Datos y URLs
-> "Actúa como un Estratega SEO Técnico en aprendoseo. Ayúdame a realizar la extracción completa de las URLs de mi proyecto en aprendoseo. Guíame paso a paso para utilizar Screaming Frog (u otras alternativas como el sitemap XML) para obtener el listado de todas las direcciones de mi sitio. Enséñame a limpiar y organizar esta lista en mi Plantilla Master para que cada URL sea la base de mi futuro Mapa de Palabras Clave."
+> 🎯 Prompt: Especialista en Extracción de Datos y URLs "Actúa como un Estratega SEO Técnico en aprendoseo. Ayúdame a realizar la extracción completa de las URLs de mi proyecto en aprendoseo. Guíame paso a paso para utilizar Screaming Frog (u otras alternativas como el sitemap XML) para obtener el listado de todas las direcciones de mi sitio. Enséñame a limpiar y organizar esta lista en mi Plantilla Master para que cada URL sea la base de mi futuro Mapa de Palabras Clave."
 
 **Evaluar valor SEO (video 4):**
-> 🎯 Prompt: Especialista en Evaluación de Valor SEO
-> "Actúa como un Auditor SEO en aprendoseo. Analiza mi lista de URLs de aprendoseo y clasifica cuáles tienen Valor SEO basándote en si responden a una intención de búsqueda clara, tienen potencial de tráfico o ayudan a la conversión. Identifica las páginas administrativas o internas que debemos ignorar para centrar nuestra estrategia solo en el contenido que posiciona."
+> 🎯 Prompt: Especialista en Evaluación de Valor SEO "Actúa como un Auditor SEO en aprendoseo. Analiza mi lista de URLs de aprendoseo y clasifica cuáles tienen Valor SEO basándote en si responden a una intención de búsqueda clara, tienen potencial de tráfico o ayudan a la conversión. Identifica las páginas administrativas o internas que debemos ignorar para centrar nuestra estrategia solo en el contenido que posiciona."
 
 **Asignar keyword (video 5):**
-> 🎯 Prompt: Estratega de Asignación de Keywords
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a asignar la Palabra Clave Principal a cada URL con valor SEO de mi proyecto aprendoseo. Analiza el contenido actual de cada página y selecciona el término que mejor represente su temática, asegurándote de que sea una palabra que los usuarios realmente busquen y que no se repita en otras URLs para evitar la canibalización."
+> 🎯 Prompt: Estratega de Asignación de Keywords "Actúa como un Estratega SEO en aprendoseo. Ayúdame a asignar la Palabra Clave Principal a cada URL con valor SEO de mi proyecto aprendoseo. Analiza el contenido actual de cada página y selecciona el término que mejor represente su temática, asegurándote de que sea una palabra que los usuarios realmente busquen y que no se repita en otras URLs para evitar la canibalización."
 
 **Intención por niveles (video 6):**
-> 🎯 Prompt: Analista de Intención y Niveles de Conversión
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a clasificar las palabras clave de mi mapa de aprendoseo según su nivel de intención: Baja (informativa), Media (investigación) o Alta (transaccional/decisión). Analiza qué espera encontrar el usuario con cada término y asegúrate de que el contenido de la URL asignada responda exactamente a esa expectativa para garantizar que Google nos posicione en los primeros lugares."
+> 🎯 Prompt: Analista de Intención y Niveles de Conversión "Actúa como un Estratega SEO en aprendoseo. Ayúdame a clasificar las palabras clave de mi mapa de aprendoseo según su nivel de intención: Baja (informativa), Media (investigación) o Alta (transaccional/decisión). Analiza qué espera encontrar el usuario con cada término y asegúrate de que el contenido de la URL asignada responda exactamente a esa expectativa para garantizar que Google nos posicione en los primeros lugares."
 
 **Analizar datos (video 7):**
-> 🎯 Prompt: Analista de Métricas y Posicionamiento
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a investigar el Volumen de búsqueda, la Dificultad (KD) y la Posición actual de las palabras clave de mi mapa para aprendoseo. Identifica qué páginas no están posicionando (fuera del top 100) para detectar oportunidades críticas de optimización y vuelca estos datos en mi Plantilla Master para priorizar mis esfuerzos."
+> 🎯 Prompt: Analista de Métricas y Posicionamiento "Actúa como un Estratega SEO en aprendoseo. Ayúdame a investigar el Volumen de búsqueda, la Dificultad (KD) y la Posición actual de las palabras clave de mi mapa para aprendoseo. Identifica qué páginas no están posicionando (fuera del top 100) para detectar oportunidades críticas de optimización y vuelca estos datos en mi Plantilla Master para priorizar mis esfuerzos."
 
 **Plan de acción (video 8):**
-> 🎯 Prompt: Estratega de Decisiones y Plan de Acción SEO
-> "Actúa como un Director SEO en aprendoseo. Ayúdame a definir el Plan de Acción para cada URL de mi mapa en aprendoseo. Analiza los datos de posición y relevancia para decidir si debemos Mantener (si está en top 3), Optimizar (si está entre 4 y 20), Eliminar (si no tiene valor) o Redireccionar (si hay canibalización), asegurando que cada movimiento mejore el rendimiento global del sitio."
+> 🎯 Prompt: Estratega de Decisiones y Plan de Acción SEO "Actúa como un Director SEO en aprendoseo. Ayúdame a definir el Plan de Acción para cada URL de mi mapa en aprendoseo. Analiza los datos de posición y relevancia para decidir si debemos Mantener (si está en top 3), Optimizar (si está entre 4 y 20), Eliminar (si no tiene valor) o Redireccionar (si hay canibalización), asegurando que cada movimiento mejore el rendimiento global del sitio."
 
 **Priorización / quick wins (video 9):**
-> 🎯 Prompt: Estratega de Priorización y Quick Wins
-> "Actúa como un SEO Lead en aprendoseo. Ayúdame a seleccionar las 5 URLs prioritarias de mi mapa de aprendoseo para empezar la ejecución. Filtra las páginas que tengan el mejor equilibrio entre Volumen de búsqueda, Baja dificultad y Relevancia de negocio. Define un orden lógico de trabajo (Quick Wins primero) para que mi estrategia de contenido genere tráfico en el menor tiempo posible."
+> 🎯 Prompt: Estratega de Priorización y Quick Wins "Actúa como un SEO Lead en aprendoseo. Ayúdame a seleccionar las 5 URLs prioritarias de mi mapa de aprendoseo para empezar la ejecución. Filtra las páginas que tengan el mejor equilibrio entre Volumen de búsqueda, Baja dificultad y Relevancia de negocio. Define un orden lógico de trabajo (Quick Wins primero) para que mi estrategia de contenido genere tráfico en el menor tiempo posible."
 
 **Validación final (Arianna, video 10):**
-> 🎯 Prompt: Estratega de Consolidación y Mapa Maestro
-> "Actúa como un Líder SEO en aprendoseo. Ayúdame a validar mi Mapa de Palabras Clave final para aprendoseo. Revisa que haya limpiado correctamente las URLs (sin duplicados ni basura técnica), asignado una keyword única por página para evitar canibalización y definido acciones claras (Optimizar, Redireccionar o Eliminar). Asegúrate de que mis 5 prioridades estén alineadas con la intención de búsqueda para maximizar el impacto de mi estrategia."
+> 🎯 Prompt: Estratega de Consolidación y Mapa Maestro "Actúa como un Líder SEO en aprendoseo. Ayúdame a validar mi Mapa de Palabras Clave final para aprendoseo. Revisa que haya limpiado correctamente las URLs (sin duplicados ni basura técnica), asignado una keyword única por página para evitar canibalización y definido acciones claras (Optimizar, Redireccionar o Eliminar). Asegúrate de que mis 5 prioridades estén alineadas con la intención de búsqueda para maximizar el impacto de mi estrategia."
 
 ## Términos del diploma (definiciones)
 

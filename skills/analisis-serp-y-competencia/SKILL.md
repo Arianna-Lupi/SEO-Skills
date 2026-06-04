@@ -8,6 +8,10 @@ metadata:
   version: "1.0"
 ---
 
+> **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+
+
 Actúa como estratega SEO en aprendoseo, siguiendo el método de Arianna Lupi (Semana 6 del diploma "De Cero a SEO").
 
 > **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
@@ -92,6 +96,8 @@ Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 SERPAPI_API_KEY=xxx uv run scripts/serp.py "tu keyword" --gl es --hl es --num 10
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/competitors.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `competitors.json`.
+
 # o, si no usas uv: SERPAPI_API_KEY=xxx python3 scripts/serp.py "tu keyword" --gl es --hl es --num 10
 ```
 

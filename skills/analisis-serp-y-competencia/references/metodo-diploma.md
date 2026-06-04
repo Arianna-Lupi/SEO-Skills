@@ -12,8 +12,7 @@ Arianna Lupi dicta la Semana 6 completa (7 videos). El análisis de competencia 
    - ¿Es fácil navegar? ¿Cómo es su diseño?
    - ¿Qué encabezados (H1, H2) usan?
    - ¿Tienen blog? ¿Qué tipo de fotos publican?
-   - ¿Cuál es su llamado a la acción (CTA): botón de compra, registro, etc.?
-   La idea es ver "no solo qué dicen, sino cómo lo dicen" y qué te gusta/disgusta de su experiencia de usuario.
+   - ¿Cuál es su llamado a la acción (CTA): botón de compra, registro, etc.? La idea es ver "no solo qué dicen, sino cómo lo dicen" y qué te gusta/disgusta de su experiencia de usuario.
 
 3. **Identificar competidores SEO reales (video 3) — 3 métodos:**
    - **Búsqueda Directa en Google:** meter tus keywords principales y ver quiénes ocupan las primeras posiciones de forma recurrente. (Google Search es "la más fiel a la realidad del usuario".)
@@ -62,32 +61,25 @@ Arianna Lupi dicta la Semana 6 completa (7 videos). El análisis de competencia 
 ## Prompts originales que da el curso (verbatim)
 
 **Inicio / negocio vs SEO (video 1):**
-> 🎯 Prompt: Analista de Competencia Estratégica
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a iniciar mi Análisis de Competidores para el proyecto de aprendoseo. Explícame la diferencia entre un competidor de negocio y un competidor SEO (quienes me quitan visibilidad en Google). Guíame para identificar a los que dominan las palabras clave que yo deseo y enséñame a usar este análisis como un 'selling point' para demostrar el valor del SEO al ver el tráfico que otros están captando y yo aún no."
+> 🎯 Prompt: Analista de Competencia Estratégica "Actúa como un Estratega SEO en aprendoseo. Ayúdame a iniciar mi Análisis de Competidores para el proyecto de aprendoseo. Explícame la diferencia entre un competidor de negocio y un competidor SEO (quienes me quitan visibilidad en Google). Guíame para identificar a los que dominan las palabras clave que yo deseo y enséñame a usar este análisis como un 'selling point' para demostrar el valor del SEO al ver el tráfico que otros están captando y yo aún no."
 
 **Benchmarking inicial / Ojo Clínico (video 2):**
-> 🎯 Prompt: Analista de Benchmarking SEO
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a realizar un análisis inicial de competidores para aprendoseo. Identifica 3 competidores que aparezcan en el Top 3 de Google para mis palabras clave principales. Evalúa visualmente su estructura: ¿Qué tipo de contenido publican? ¿Cómo es su diseño y facilidad de navegación? ¿Qué llamados a la acción (CTA) utilizan? Ayúdame a encontrar qué están haciendo mejor que yo para detectar debilidades en mi sitio y oportunidades de mejora estratégica."
+> 🎯 Prompt: Analista de Benchmarking SEO "Actúa como un Estratega SEO en aprendoseo. Ayúdame a realizar un análisis inicial de competidores para aprendoseo. Identifica 3 competidores que aparezcan en el Top 3 de Google para mis palabras clave principales. Evalúa visualmente su estructura: ¿Qué tipo de contenido publican? ¿Cómo es su diseño y facilidad de navegación? ¿Qué llamados a la acción (CTA) utilizan? Ayúdame a encontrar qué están haciendo mejor que yo para detectar debilidades en mi sitio y oportunidades de mejora estratégica."
 
 **Identificar competidores (video 3):**
-> 🎯 Prompt: Detective de Visibilidad y Competencia
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a desenmascarar a los competidores que dominan las SERPs para aprendoseo. Rastrea mis 5 palabras clave maestras e identifica qué dominios aparecen repetidamente en los primeros puestos. Clasifícalos entre competidores directos y sitios de autoridad para entender con quién compito realmente por el tráfico y cómo puedo diferenciar mi estrategia para superarlos."
+> 🎯 Prompt: Detective de Visibilidad y Competencia "Actúa como un Estratega SEO en aprendoseo. Ayúdame a desenmascarar a los competidores que dominan las SERPs para aprendoseo. Rastrea mis 5 palabras clave maestras e identifica qué dominios aparecen repetidamente en los primeros puestos. Clasifícalos entre competidores directos y sitios de autoridad para entender con quién compito realmente por el tráfico y cómo puedo diferenciar mi estrategia para superarlos."
 
 **Analizar estrategia / Top keywords y pages (video 4):**
-> 🎯 Prompt: Analista de Estrategias y Competencias
-> "Actúa como un Estratega SEO en aprendoseo. Ayúdame a auditar la estrategia de mis competidores para aprendoseo usando herramientas como Ahrefs o similares. Guíame para identificar sus Top Keywords y sus Top Pages (las páginas que más tráfico les traen). Analiza estos datos para encontrar brechas de contenido en mi sitio y dime qué temas o formatos están usando ellos que yo debería implementar para robarles visibilidad en las SERPs."
+> 🎯 Prompt: Analista de Estrategias y Competencias "Actúa como un Estratega SEO en aprendoseo. Ayúdame a auditar la estrategia de mis competidores para aprendoseo usando herramientas como Ahrefs o similares. Guíame para identificar sus Top Keywords y sus Top Pages (las páginas que más tráfico les traen). Analiza estos datos para encontrar brechas de contenido en mi sitio y dime qué temas o formatos están usando ellos que yo debería implementar para robarles visibilidad en las SERPs."
 
 **Competir y reportar (video 5):**
-> 🎯 Prompt: Estratega de Benchmarking y Reporte Competitivo
-> "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a sintetizar el análisis de competencia de aprendoseo en un reporte de alto impacto. Guíame para comparar mi tráfico y palabras clave frente a mis competidores, destacando las 'Brechas de Contenido' (lo que ellos tienen y yo no). Enséñame a presentar estos datos como una oportunidad de negocio, demostrando cuánto tráfico estamos perdiendo y definiendo acciones concretas para superar su estructura y autoridad."
+> 🎯 Prompt: Estratega de Benchmarking y Reporte Competitivo "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a sintetizar el análisis de competencia de aprendoseo en un reporte de alto impacto. Guíame para comparar mi tráfico y palabras clave frente a mis competidores, destacando las 'Brechas de Contenido' (lo que ellos tienen y yo no). Enséñame a presentar estos datos como una oportunidad de negocio, demostrando cuánto tráfico estamos perdiendo y definiendo acciones concretas para superar su estructura y autoridad."
 
 **Convertir ideas en tareas (video 6):**
-> 🎯 Prompt: Gestor de Estrategia y Ejecución SEO
-> "Actúa como un Project Manager SEO en aprendoseo. Ayúdame a convertir los insights de mi análisis de competencia en una lista de tareas para aprendoseo. Evalúa qué ideas son viables según mis recursos (tiempo, presupuesto, equipo), asígnales un responsable y define un plazo de ejecución. Prioriza las tareas siguiendo las plantillas del plan y dime qué recursos extra o tutoriales necesito para ejecutar aquello que aún no sé hacer solo."
+> 🎯 Prompt: Gestor de Estrategia y Ejecución SEO "Actúa como un Project Manager SEO en aprendoseo. Ayúdame a convertir los insights de mi análisis de competencia en una lista de tareas para aprendoseo. Evalúa qué ideas son viables según mis recursos (tiempo, presupuesto, equipo), asígnales un responsable y define un plazo de ejecución. Prioriza las tareas siguiendo las plantillas del plan y dime qué recursos extra o tutoriales necesito para ejecutar aquello que aún no sé hacer solo."
 
 **Checklist final (video 7):**
-> 🎯 Prompt: Especialista en Benchmarking y Checklist Estratégico
-> "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a finalizar mi Checklist de Competencia para aprendoseo. Revisa mi tabla comparativa de competidores, valida las brechas de contenido detectadas y ayúdame a estructurar el Plan de Acción definitivo: define qué tareas son realistas según mi presupuesto, quién las ejecutará y en qué plazo, para asegurar que este análisis se transforme en una ventaja competitiva real en las SERPs."
+> 🎯 Prompt: Especialista en Benchmarking y Checklist Estratégico "Actúa como un Consultor SEO Senior en aprendoseo. Ayúdame a finalizar mi Checklist de Competencia para aprendoseo. Revisa mi tabla comparativa de competidores, valida las brechas de contenido detectadas y ayúdame a estructurar el Plan de Acción definitivo: define qué tareas son realistas según mi presupuesto, quién las ejecutará y en qué plazo, para asegurar que este análisis se transforme en una ventaja competitiva real en las SERPs."
 
 ## Términos del diploma (definiciones)
 
