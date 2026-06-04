@@ -35,7 +35,11 @@ Carpeta por proyecto, **gitignored** (datos del cliente, no se suben):
     competitors.json         {by_pillar:[{pillar,query,results:[{position,domain,title,url}]}], strategic:[]}
                                ← analisis-serp-y-competencia
     ai-features.json         {queries:[{query,ai_overview,featured_snippet,paa,recommendation}]}   ← optimizacion-geo-aeo
-    content-briefs.json      {briefs:[{keyword,type,url,meta_title,angle,status}]}   ← brief-de-contenido / redaccion
+    content-briefs.json      {briefs:[{keyword, title(H1), meta_title, meta_desc, type, url,
+                               status, angle, draft_file("content/<slug>.html"), headings:[],
+                               secondary_keywords:[], entities:[], internal_links:[{anchor,url}],
+                               metrics:{word_count,density,...}}]}   ← brief-de-contenido / redaccion
+    content/<slug>.html        ← el BORRADOR redactado (para que "Ver contenido" lo abra)
     prior-audits.json        {audits:[{name,score,date,summary,file}]}
     inventory-summary.json   {total_urls,source,http_sample,note}   ← inventario-de-urls
     next-steps.json          {steps:[{prio,area,action,impact,effort}]}
@@ -46,6 +50,7 @@ Reglas:
 - **Funciona con lo que haya.** No hace falta tener todos los archivos: las secciones sin datos se ocultan solas.
 - Cada skill, al terminar su trabajo para un sitio, **escribe/actualiza su JSON** en `data/` (con `Write` o su script). No pisa los de las demás.
 - Los valores que no son reales van como `"pendiente"` y/o se listan en `meta.pending_data`.
+- **Contenido redactado:** guarda cada borrador como `.seo-audit/<sitio>/content/<slug>.html` y referencia su ruta en `content-briefs.json → draft_file`. El dashboard muestra cada contenido como un brief (título, meta título, meta descripción, keyword, encabezados, entidades, enlaces internos) con un botón **"Ver contenido"** que abre ese borrador.
 
 ## Proceso
 
