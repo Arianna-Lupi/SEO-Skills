@@ -86,6 +86,10 @@ TEMPLATE = r"""<!DOCTYPE html>
   code{background:var(--panel2);padding:1px 5px;border-radius:5px;font-size:13px}
   .foot{margin-top:50px;color:var(--mut);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
   .empty{color:var(--mut);font-size:13px}
+  .btn{display:inline-block;background:var(--acc);color:#fff;padding:5px 12px;border-radius:7px;font-size:13px;font-weight:600;white-space:nowrap}
+  .btn:hover{text-decoration:none;opacity:.9}
+  details{margin-top:10px}summary{cursor:pointer;color:var(--acc);font-size:13px;user-select:none}
+  .brief th{width:150px}.len{color:var(--mut);font-size:12px}
 </style>
 </head>
 <body>
@@ -131,8 +135,32 @@ async function boot(){
   rows(app,"🤖 Búsqueda con IA (GEO/AEO)",["Query","AI Overview","Featured","PAA","Recomendación"],
     (J["ai-features"].queries||[]).map(q=>[`<code>${esc(q.query)}</code>`,q.ai_overview?'<span class="chk">Sí</span>':'<span class="muted">No</span>',
       (q.featured_snippet&&q.featured_snippet.present)?'Sí':'<span class="muted">No</span>',String((q.paa||[]).length),esc(q.recommendation)]),srcOf(J["ai-features"]));
-  rows(app,"✍️ Briefs / Contenido",["Keyword","Tipo","Meta título","Ángulo","Estado"],
-    (J["content-briefs"].briefs||[]).map(b=>[`<b>${esc(b.keyword)}</b> ${b.url?`<code>${esc(b.url)}</code>`:''}`,esc(b.type),esc(b.meta_title),esc(b.angle),`<span class="chk">${esc(b.status)}</span>`]));
+  // contenidos / briefs: una tarjeta por contenido (título, meta, keyword, link al borrador)
+  const briefs=J["content-briefs"].briefs||[];
+  if(briefs.length){
+    const sec2=$(`<section><h2>✍️ Contenidos redactados / briefs</h2></section>`);
+    briefs.forEach(b=>{
+      const len=(s)=>s?`<span class="len">(${String(s).length} car.)</span>`:'';
+      const meta=[
+        b.meta_title?`<tr><th>Meta título</th><td>${esc(b.meta_title)} ${len(b.meta_title)}</td></tr>`:'',
+        b.meta_desc?`<tr><th>Meta descripción</th><td>${esc(b.meta_desc)} ${len(b.meta_desc)}</td></tr>`:'',
+        b.url?`<tr><th>URL destino</th><td><code>${esc(b.url)}</code></td></tr>`:'',
+        b.type?`<tr><th>Tipo</th><td>${esc(b.type)}</td></tr>`:'',
+        b.status?`<tr><th>Estado</th><td><span class="chk">${esc(b.status)}</span></td></tr>`:'',
+        b.angle?`<tr><th>Ángulo</th><td>${esc(b.angle)}</td></tr>`:'',
+      ].filter(Boolean).join('');
+      const det=briefDetails(b);
+      const link=b.draft_file?`<a class="btn" href="${esc(b.draft_file)}" target="_blank" rel="noopener">📄 Ver contenido</a>`:'<span class="muted">(borrador no guardado)</span>';
+      const card=$(`<div class="card" style="margin-bottom:14px"></div>`);
+      card.innerHTML=`<div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:start">
+        <div><b style="font-size:16px">${esc(b.title||b.h1||b.keyword)}</b>
+        <div style="margin-top:4px">Keyword: <span class="tag gold">${esc(b.keyword)}</span></div></div>
+        <div>${link}</div></div>
+        <table class="brief" style="margin-top:10px"><tbody>${meta}</tbody></table>${det}`;
+      sec2.appendChild(card);
+    });
+    app.appendChild(sec2);
+  }
   // inventory
   const iv=J["inventory-summary"]||{};
   if(iv.total_urls!=null||iv.http_sample){const s2=$(`<section><h2>🗺️ Inventario y rastreabilidad</h2></section>`);
@@ -147,6 +175,15 @@ function rows(app,title,head,body,extra){if(!body||!body.length)return;
   const tb=t.querySelector('tbody');body.forEach(r=>tb.appendChild($(`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`)));
   const s=$(`<section><h2>${title}</h2></section>`);s.appendChild(t);if(extra)s.appendChild($(`<div>${extra}</div>`));app.appendChild(s);}
 function srcOf(o){return (o&&o.source)?`<div class="src">Fuente: ${esc(o.source)}</div>`:''}
+function briefDetails(b){
+  const parts=[];
+  if(b.headings&&b.headings.length)parts.push(`<div style="margin-top:8px"><b>Jerarquía de encabezados</b><div>${b.headings.map(h=>`<div class="muted" style="font-size:13px">${esc(h)}</div>`).join('')}</div></div>`);
+  if(b.secondary_keywords&&b.secondary_keywords.length)parts.push(`<div style="margin-top:8px"><b>KWs secundarias</b><div>${b.secondary_keywords.map(k=>`<span class="tag">${esc(k)}</span>`).join('')}</div></div>`);
+  if(b.entities&&b.entities.length)parts.push(`<div style="margin-top:8px"><b>Entidades (NLP)</b><div>${b.entities.map(k=>`<span class="tag">${esc(k)}</span>`).join('')}</div></div>`);
+  if(b.internal_links&&b.internal_links.length)parts.push(`<div style="margin-top:8px"><b>Enlaces internos</b><div>${b.internal_links.map(k=>`<span class="tag">${esc(typeof k==='string'?k:(k.anchor+' → '+k.url))}</span>`).join('')}</div></div>`);
+  if(b.metrics)parts.push(`<div style="margin-top:8px"><b>Métricas</b> <span class="muted">${esc(Object.entries(b.metrics).map(([k,v])=>k+': '+v).join(' · '))}</span></div>`);
+  return parts.length?`<details><summary>Ver brief completo</summary>${parts.join('')}</details>`:'';
+}
 boot();
 </script>
 </body>
