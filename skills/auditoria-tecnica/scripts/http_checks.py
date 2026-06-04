@@ -29,10 +29,23 @@ Deps: requests (ver requirements.txt). Sin requests → ok:false, exit 0.
 
 import argparse
 import json
+import os
 import sys
 from concurrent.futures import ThreadPoolExecutor
 
-USER_AGENT = "aprendoseo-http-checks/1.0"
+# UA de navegador real por defecto: muchos sitios (Cloudflare, WAFs) devuelven
+# 403 a User-Agents que parecen bot. Se puede sobreescribir con la variable de
+# entorno SEO_USER_AGENT si el sitio exige otra cosa.
+DEFAULT_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+)
+USER_AGENT = os.environ.get("SEO_USER_AGENT", DEFAULT_UA)
+BROWSER_HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+}
 TIMEOUT = 15
 
 
@@ -43,7 +56,7 @@ def out(obj):
 
 def check_one(requests, url):
     res = {"url": url, "status": None, "https": url.lower().startswith("https://"), "redirect_to": None}
-    headers = {"User-Agent": USER_AGENT}
+    headers = BROWSER_HEADERS
     try:
         r = requests.head(url, headers=headers, allow_redirects=False, timeout=TIMEOUT)
         if r.status_code in (405, 501) or r.status_code >= 400:
@@ -119,7 +132,21 @@ def main():
         else:
             summary["error"] += 1
 
-    out({"ok": True, "checked": len(results), "results": results, "summary": summary})
+    payload = {"ok": True, "checked": len(results), "results": results, "summary": summary}
+
+    # Si TODO devolvió 403/429, casi seguro hay un WAF/anti-bot (Cloudflare):
+    # avisamos para que el alumno no crea que su sitio está roto.
+    statuses = [r["status"] for r in results if isinstance(r["status"], int)]
+    if statuses and all(s in (403, 429) for s in statuses):
+        payload["blocked"] = True
+        payload["hint"] = (
+            "Todas las URLs respondieron 403/429: probablemente un WAF/anti-bot "
+            "(Cloudflare) bloquea el rastreo por TLS fingerprint, no por User-Agent. "
+            "Si es tu sitio, crea una WAF rule que permita tu crawler o usa Screaming Frog. "
+            "Prueba otro User-Agent con la variable de entorno SEO_USER_AGENT."
+        )
+
+    out(payload)
 
 
 if __name__ == "__main__":

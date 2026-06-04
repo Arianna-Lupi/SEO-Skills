@@ -28,13 +28,26 @@ Deps: solo stdlib.
 
 import argparse
 import json
+import os
 import re
 import sys
 import xml.etree.ElementTree as ET
 from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 
-USER_AGENT = "aprendoseo-inventario-urls/1.0 (+sitemap-reader)"
+# UA de navegador real por defecto: muchos sitios (Cloudflare, WAFs) devuelven
+# 403 a User-Agents que parecen bot, incluso para robots.txt y sitemap.xml.
+# Se puede sobreescribir con la variable de entorno SEO_USER_AGENT.
+DEFAULT_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+)
+USER_AGENT = os.environ.get("SEO_USER_AGENT", DEFAULT_UA)
+BROWSER_HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+}
 TIMEOUT = 20
 
 
@@ -42,14 +55,27 @@ def log(msg):
     print(msg, file=sys.stderr)
 
 
+# Acumula errores de fetch para diagnosticar bloqueos (403/WAF) al final.
+FETCH_ERRORS = []
+
+
 def fetch(url):
     """Devuelve (bytes, None) o (None, error_str)."""
     try:
-        req = Request(url, headers={"User-Agent": USER_AGENT})
+        req = Request(url, headers=BROWSER_HEADERS)
         with urlopen(req, timeout=TIMEOUT) as resp:
             return resp.read(), None
     except Exception as e:  # noqa: BLE001 - degradación controlada
+        FETCH_ERRORS.append(str(e))
         return None, str(e)
+
+
+def looks_blocked():
+    """True si algún fetch fue rechazado por WAF/anti-bot (403/Forbidden/429)."""
+    return any(
+        ("403" in e) or ("Forbidden" in e) or ("429" in e)
+        for e in FETCH_ERRORS
+    )
 
 
 def normalize_site(site):
@@ -136,10 +162,25 @@ def main():
     urls = collect_urls(seeds, args.max)
 
     if not urls:
+        if looks_blocked():
+            print(json.dumps({
+                "ok": False,
+                "blocked": True,
+                "reason": "El sitio rechazó las peticiones (403/Forbidden): hay un WAF/anti-bot (típicamente Cloudflare) que bloquea clientes HTTP por TLS fingerprint, no solo por User-Agent.",
+                "fallback": (
+                    "1) Si es TU sitio: en Cloudflare crea una WAF rule que permita tu rastreo "
+                    "(por IP o por User-Agent), o exporta las URLs desde Google Search Console "
+                    "(Sitemaps / Páginas indexadas). "
+                    "2) Si no es tuyo: usa Screaming Frog (motor de navegador real, ≤500 URLs gratis) "
+                    "o el sitemap obtenido vía GSC. "
+                    "3) Prueba otro User-Agent con la variable de entorno SEO_USER_AGENT."
+                ),
+            }, ensure_ascii=False))
+            return
         print(json.dumps({
             "ok": False,
             "reason": "No se encontraron sitemaps válidos ni URLs (robots.txt sin Sitemap: y sitemap.xml ausente o vacío).",
-            "fallback": "modo manual: prueba rutas de sitemap no estándar, o usa Screaming Frog CLI (gratis ≤500 URLs) para rastrear el sitio.",
+            "fallback": "modo manual: prueba rutas de sitemap no estándar (--sitemap), o usa Screaming Frog CLI (gratis ≤500 URLs) para rastrear el sitio.",
         }, ensure_ascii=False))
         return
 
