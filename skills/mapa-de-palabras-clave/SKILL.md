@@ -1,6 +1,6 @@
 ---
 name: mapa-de-palabras-clave
-description: Usá esta skill cuando el usuario YA tenga un sitio con URLs y quiera asignarles keywords, mapear palabras clave a sus páginas, detectar canibalización o priorizar qué páginas optimizar — aunque no diga "mapa" ni "canibalización", p.ej. "tengo varias páginas peleando por lo mismo", "qué keyword le pongo a cada URL", "cuáles páginas optimizo primero", "qué páginas de mi web actualizo". Construye el Mapa de Palabras Clave del método "De Cero a SEO" (aprendoseo, Verónica Romero): inventaria todas las URLs, evalúa su Valor SEO, asigna UNA keyword primaria por URL (1:1) para evitar canibalización, clasifica intención por temperatura y define el plan de acción y el Top 5 de quick wins.
+description: Usa esta skill cuando el usuario YA tenga un sitio con URLs y quiera asignarles keywords, mapear palabras clave a sus páginas, detectar canibalización o priorizar qué páginas optimizar — aunque no diga "mapa" ni "canibalización", p.ej. "tengo varias páginas peleando por lo mismo", "qué keyword le pongo a cada URL", "cuáles páginas optimizo primero", "qué páginas de mi web actualizo". Construye el Mapa de Palabras Clave del método "De Cero a SEO" (aprendoseo, Verónica Romero): inventaria todas las URLs, evalúa su Valor SEO, asigna UNA keyword primaria por URL (1:1) para evitar canibalización, clasifica intención por temperatura y define el plan de acción y el Top 5 de quick wins.
 compatibility: Script opcional requiere Python 3 (uv), solo stdlib. SerpApi/Ahrefs MCP y skill inventario-de-urls opcionales (la skill funciona 100% manual).
 metadata:
   author: aprendoseo
@@ -10,7 +10,7 @@ metadata:
 
 Actúa como especialista en arquitectura de keywords en aprendoseo, siguiendo el método de Verónica Romero (Semana 5 del diploma "De Cero a SEO").
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Verónica están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Verónica están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -60,18 +60,18 @@ Nunca exijas un MCP. Ver `../../MCP-SETUP.md`.
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para detectar canibalización (misma keyword en varias URLs) y quick wins en vez de cruzar filas a mano: es determinista, ahorra tokens y es exacto. Pasá el mapa por `--file` (CSV o JSON con `{url, keyword, volume?, difficulty?, position?}`). Usá su JSON como diagnóstico.
+Si Python 3 está disponible, **ejecuta el script** para detectar canibalización (misma keyword en varias URLs) y quick wins en vez de cruzar filas a mano: es determinista, ahorra tokens y es exacto. Pasa el mapa por `--file` (CSV o JSON con `{url, keyword, volume?, difficulty?, position?}`). Usa su JSON como diagnóstico.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 uv run skills/mapa-de-palabras-clave/scripts/canibalizacion.py --file mapa.csv
-# o, si no usás uv: python3 skills/mapa-de-palabras-clave/scripts/canibalizacion.py --file mapa.csv
+# o, si no usas uv: python3 skills/mapa-de-palabras-clave/scripts/canibalizacion.py --file mapa.csv
 # JSON o stdin también valen:
 cat mapa.json | uv run skills/mapa-de-palabras-clave/scripts/canibalizacion.py --file - --format json
 ```
 
-Corré con `--help` para ver opciones. Devuelve `{"ok":true,"cannibalization":[{"keyword","urls":[...]}],"one_to_one_ok":bool,"quick_wins":[{"url","keyword","why"}],"summary":{...}}`. Revisá `cannibalization` para forzar el mapa 1:1 y `quick_wins` (volumen alto + dificultad baja + posición 11-20) como prioridades. Solo stdlib. Si Python no está disponible, hacelo en **modo manual**.
+Ejecútalo con `--help` para ver opciones. Devuelve `{"ok":true,"cannibalization":[{"keyword","urls":[...]}],"one_to_one_ok":bool,"quick_wins":[{"url","keyword","why"}],"summary":{...}}`. Revisa `cannibalization` para forzar el mapa 1:1 y `quick_wins` (volumen alto + dificultad baja + posición 11-20) como prioridades. Solo stdlib. Si Python no está disponible, hazlo en **modo manual**.
 
 ## Salida
 
@@ -102,7 +102,7 @@ Top 5 (orden): 1) /cafe-organico (pos 9, KD baja → empuje a top 5). 2) /cafe-d
 ## Gotchas
 
 - **UNA keyword primaria por URL (1:1)**, no la misma keyword en varias URLs: eso es la canibalización que el mapa previene.
-- Si la URL **ya está en top 3**, marcá **"Mantener" y no la toques**, no la "optimices" por inercia.
+- Si la URL **ya está en top 3**, márcala como **"Mantener" y no la toques**, no la "optimices" por inercia.
 - URL **sin valor SEO** (legales, política de privacidad, página de autor, etiquetas, gracias/checkout) → **no le asignes keyword ni la optimices**.
 - El Top 5 son **quick wins** (cerca del top 10 + baja dificultad + buen volumen), no las keywords más difíciles.
 - Inventariá **TODAS las URLs**, no solo las "bonitas": las olvidadas son donde más se esconde la canibalización.

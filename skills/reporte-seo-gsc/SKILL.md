@@ -1,6 +1,6 @@
 ---
 name: reporte-seo-gsc
-description: Usá esta skill cuando haya que redactar el informe SEO mensual para un cliente a partir de las 4 métricas de Google Search Console (clics, impresiones, CTR, posición promedio), según el método del diploma "De Cero a SEO" (aprendoseo). Convierte datos de GSC en un informe ejecutivo mes vs mes con interpretación de negocio, no en una tabla cruda. Usala al cierre de mes o cuando el cliente pida resultados — aunque no diga "reporte", p.ej. "armá el informe mensual de SEO para el cliente", "¿cómo venimos este mes?", "justificá el trabajo SEO", "pasame los resultados de Search Console".
+description: Usa esta skill cuando haya que redactar el informe SEO mensual para un cliente a partir de las 4 métricas de Google Search Console (clics, impresiones, CTR, posición promedio), según el método del diploma "De Cero a SEO" (aprendoseo). Convierte datos de GSC en un informe ejecutivo mes vs mes con interpretación de negocio, no en una tabla cruda. Úsala al cierre de mes o cuando el cliente pida resultados — aunque no diga "reporte", p.ej. "arma el informe mensual de SEO para el cliente", "¿cómo venimos este mes?", "justifica el trabajo SEO", "pásame los resultados de Search Console".
 compatibility: Script opcional requiere Python 3 (uv). GSC vía mcp-gsc (GRATIS), Ahrefs MCP (pago) o SerpApi (apoyo) — todos opcionales; funciona pegando el export CSV de GSC.
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como consultor SEO en aprendoseo que reporta a un cliente. El cliente no quiere datos: quiere **entender qué pasó y qué sigue**. Traduce las métricas a **valor de negocio** con tono ejecutivo.
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -81,24 +81,24 @@ Además: **tabla mes vs mes** lista para pegar y **vínculo a Trello** para las 
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para comparar mes vs. mes desde los exports de GSC: calcula deltas y aplica las reglas de interpretación del diploma de forma determinista, ahorrando tokens y evitando errores de aritmética.
+Si Python 3 está disponible, **ejecuta el script** para comparar mes vs. mes desde los exports de GSC: calcula deltas y aplica las reglas de interpretación del diploma de forma determinista, ahorrando tokens y evitando errores de aritmética.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```
 uv run skills/reporte-seo-gsc/scripts/gsc_report.py --current mayo.csv --previous abril.csv
-# o, si no usás uv: python3 skills/reporte-seo-gsc/scripts/gsc_report.py --current mayo.csv --previous abril.csv
+# o, si no usas uv: python3 skills/reporte-seo-gsc/scripts/gsc_report.py --current mayo.csv --previous abril.csv
 # nº de ganadores/perdedores a listar:
 uv run skills/reporte-seo-gsc/scripts/gsc_report.py --current cur.csv --previous prev.csv --top 15
 ```
 
-Corré con `--help` para ver opciones. Salida: `{"ok":true,"totals":{"clicks":{"cur","prev","delta_pct"},"impressions":{...},"ctr":{...},"position":{...}},"winners":[...],"losers":[...],"insights":[...]}` (p.ej. *"impresiones ↑ + clics ↓ → problema de CTR/Meta Title"*). Solo stdlib. Si falla devuelve `{"ok":false,"reason":...}` (exit 0) → **modo manual**: calculá deltas y aplicá las reglas a mano. Exporta el informe de Rendimiento de GSC con columnas Query/Page, Clicks, Impressions, CTR, Position.
+Corre con `--help` para ver opciones. Salida: `{"ok":true,"totals":{"clicks":{"cur","prev","delta_pct"},"impressions":{...},"ctr":{...},"position":{...}},"winners":[...],"losers":[...],"insights":[...]}` (p.ej. *"impresiones ↑ + clics ↓ → problema de CTR/Meta Title"*). Solo stdlib. Si falla devuelve `{"ok":false,"reason":...}` (exit 0) → **modo manual**: calcula deltas y aplica las reglas a mano. Exporta el informe de Rendimiento de GSC con columnas Query/Page, Clicks, Impressions, CTR, Position.
 
 ## Gotchas
 
-- Interpretá: **impresiones ↑ + clics ↓ = problema de CTR / metatítulo, no de posicionamiento** (interpretación estrella del diploma → revisar metas con `optimizacion-on-page-meta`).
+- Interpreta: **impresiones ↑ + clics ↓ = problema de CTR / metatítulo, no de posicionamiento** (interpretación estrella del diploma → revisar metas con `optimizacion-on-page-meta`).
 - GSC da **4 métricas: clics, impresiones, CTR y posición promedio** — no inventes otras ni mezcles con datos de Analytics.
-- Compará **mes vs mes en UTC, sobre las mismas fechas**; no compares un mes con festivos/estacionalidad distinta sin avisarlo.
+- Compara **mes vs mes en UTC, sobre las mismas fechas**; no compares un mes con festivos/estacionalidad distinta sin avisarlo.
 - El reporte es **para el cliente: ejecutivo y en valor de negocio, no un volcado de métricas** ni una tabla cruda de GSC.
-- **Posición media que empeora ≠ mal resultado**: puede bajar al entrar keywords nuevas de cola larga; cruzala siempre con clics/impresiones.
-- Cerrá con **próximos pasos accionables vinculados a Trello**, no con un párrafo genérico.
+- **Posición media que empeora ≠ mal resultado**: puede bajar al entrar keywords nuevas de cola larga; crúzala siempre con clics/impresiones.
+- Cierra con **próximos pasos accionables vinculados a Trello**, no con un párrafo genérico.

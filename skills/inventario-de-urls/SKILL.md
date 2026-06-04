@@ -1,6 +1,6 @@
 ---
 name: inventario-de-urls
-description: Usá esta skill cuando necesites el inventario de TODAS (o casi todas) las URLs de un sitio y el usuario NO te pasó un export. Es el paso previo obligado a mapa-de-palabras-clave, auditoria-tecnica y arquitectura-y-enlazado-interno cuando falta la lista de URLs — aunque el usuario no diga "inventario", p.ej. "armá un mapa de keywords de ejemplo.com", "auditá ejemplo.com", "¿cuántas páginas tiene el sitio?", "sacá todas las URLs". Dos caminos: por sitemap (cero instalación, sin coste) o con Screaming Frog CLI headless (GRATIS hasta 500 URLs), que aporta códigos de estado y grafo de enlaces. No inventes URLs: extraelas de la fuente real.
+description: Usa esta skill cuando necesites el inventario de TODAS (o casi todas) las URLs de un sitio y el usuario NO te pasó un export. Es el paso previo obligado a mapa-de-palabras-clave, auditoria-tecnica y arquitectura-y-enlazado-interno cuando falta la lista de URLs — aunque el usuario no diga "inventario", p.ej. "arma un mapa de keywords de ejemplo.com", "audita ejemplo.com", "¿cuántas páginas tiene el sitio?", "saca todas las URLs". Dos caminos: por sitemap (cero instalación, sin coste) o con Screaming Frog CLI headless (GRATIS hasta 500 URLs), que aporta códigos de estado y grafo de enlaces. No inventes URLs: extráelas de la fuente real.
 compatibility: Script opcional requiere Python 3 (uv, solo stdlib). Camino sitemap por Bash/WebFetch sin instalar nada. Screaming Frog CLI opcional (GRATIS ≤500 URLs; licencia solo >500 URLs/config/JS/scheduling/API).
 metadata:
   author: aprendoseo
@@ -111,24 +111,24 @@ Usuario: *"Haz un mapa de keywords de ejemplo.com"* (sin adjuntar URLs).
 
 ## Script determinista (ahorro de tokens)
 
-Si Python está disponible, EJECUTÁ este script para el paso mecánico del **camino sitemap** (es determinista, ahorra tokens y mejora precisión) y usá su salida JSON en vez de leer robots.txt/XML crudo. Si falta una dependencia o algo falla, seguí en modo manual.
+Si Python está disponible, EJECUTA este script para el paso mecánico del **camino sitemap** (es determinista, ahorra tokens y mejora precisión) y usa su salida JSON en vez de leer robots.txt/XML crudo. Si falta una dependencia o algo falla, sigue en modo manual.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 uv run scripts/inventario_urls.py https://ejemplo.com
-# o, si no usás uv: python3 scripts/inventario_urls.py https://ejemplo.com
+# o, si no usas uv: python3 scripts/inventario_urls.py https://ejemplo.com
 # opcional: --sitemap https://ejemplo.com/sitemap_index.xml   --max 2000
 ```
 
-Corré con `--help` para ver opciones. Solo usa la librería estándar (sin instalar nada ni claves). Devuelve:
-`{"ok": true, "source": "robots|sitemap.xml", "count": N, "urls": [...]}` — o si no encuentra sitemaps, `{"ok": false, "reason": "...", "fallback": "..."}`. Es la ruta free de cero deps; para >500 URLs, huérfanas o códigos de estado en vivo seguí usando Screaming Frog CLI.
+Corre con `--help` para ver opciones. Solo usa la librería estándar (sin instalar nada ni claves). Devuelve:
+`{"ok": true, "source": "robots|sitemap.xml", "count": N, "urls": [...]}` — o si no encuentra sitemaps, `{"ok": false, "reason": "...", "fallback": "..."}`. Es la ruta free de cero deps; para >500 URLs, huérfanas o códigos de estado en vivo sigue usando Screaming Frog CLI.
 
 ## Gotchas
 
 - El **sitemap solo lista lo que el sitio publicó — NO detecta páginas huérfanas ni códigos de estado en vivo** ni el grafo de enlaces; sirve para un primer inventario, no para auditoría profunda.
-- Leé **robots.txt → directivas `Sitemap:` antes de adivinar `/sitemap.xml`**: a veces el sitemap está en una ruta no estándar declarada solo en robots.
-- Seguí el **`<sitemapindex>`** hasta los sitemaps hijos; si te quedás en el índice perdés las URLs reales.
-- **Inventar o "adivinar" URLs, no**: extraelas siempre de robots.txt/sitemap o del crawl real.
+- Lee **robots.txt → directivas `Sitemap:` antes de adivinar `/sitemap.xml`**: a veces el sitemap está en una ruta no estándar declarada solo en robots.
+- Sigue el **`<sitemapindex>`** hasta los sitemaps hijos; si te quedas en el índice pierdes las URLs reales.
+- **Inventar o "adivinar" URLs, no**: extráelas siempre de robots.txt/sitemap o del crawl real.
 - El **CLI de Screaming Frog es GRATIS hasta 500 URLs** (headless + export CSV/bulk/report); la licencia solo hace falta para >500 URLs, config guardada, render JS, scheduling o API — no para esto.
-- Usá `--overwrite` (o `--timestamped-output`), no lo omitas: el comando falla si el output ya existe.
+- Usa `--overwrite` (o `--timestamped-output`), no lo omitas: el comando falla si el output ya existe.

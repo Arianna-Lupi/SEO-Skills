@@ -2,12 +2,12 @@
 
 13 skills y 3 agentes de Claude Code para automatizar los flujos SEO del equipo,
 customizados con el método interno del diplomado "De Cero a SEO". Funcionan sin conectar
-nada y, si querés, se conectan a SerpApi (gratis), Google Search Console (gratis) o
+nada y, si quieres, se conectan a SerpApi (gratis), Google Search Console (gratis) o
 Ahrefs (pago).
 
 ## Instalación (un comando)
 
-Pegá esto en tu terminal. Descarga e instala todas las skills y agentes en tu Claude Code:
+Pega esto en tu terminal. Descarga e instala todas las skills y agentes en tu Claude Code:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.sh | bash
@@ -19,13 +19,13 @@ En Windows (PowerShell):
 irm https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.ps1 | iex
 ```
 
-Reiniciá tu cliente y escribí `/` para verlas (por ejemplo `/brief-de-contenido`).
+Reinicia tu cliente y escribe `/` para verlas (por ejemplo `/brief-de-contenido`).
 
 ### Soporta varios clientes
 
 El instalador funciona con Claude Code y con otros clientes que usan el estándar
-Agent Skills. Si corrés el comando en una terminal interactiva, te muestra un menú para
-elegir. Si no, instala en Claude Code por defecto. Para elegir directo, usá `--client`
+Agent Skills. Si corres el comando en una terminal interactiva, te muestra un menú para
+elegir. Si no, instala en Claude Code por defecto. Para elegir directo, usa `--client`
 (`-Client` en PowerShell):
 
 - `claude` — Claude Code (por defecto). Instala skills y los 3 subagentes.
@@ -45,19 +45,19 @@ skills siguen funcionando igual.
 ### Requisitos (spoiler: casi nada)
 
 - **Las skills no necesitan ningún programa.** Son instrucciones en texto: el modelo las
-  lee y hace el trabajo. Sin Python, sin Node, sin nada. Si no tenés nada instalado,
+  lee y hace el trabajo. Sin Python, sin Node, sin nada. Si no tienes nada instalado,
   igual funcionan.
 - **Para instalar** solo hace falta `git` (el instalador lo usa para descargar).
-- **Los scripts siempre pueden correr** si dejás que el instalador configure
+- **Los scripts siempre pueden correr** si dejas que el instalador configure
   [uv](https://astral.sh/uv): es un paso extra, sin permisos de administrador y sin
   Python del sistema (uv trae su propio Python y resuelve las dependencias solo). En una
-  terminal interactiva el instalador te pregunta si querés instalarlo; si corrés el
+  terminal interactiva el instalador te pregunta si quieres instalarlo; si corres el
   comando piped (curl|bash), no instala nada en silencio pero te muestra el comando, o lo
-  forzás con `--with-uv` (`-WithUv` en PowerShell). Si no querés uv, las skills siguen en
+  fuerzas con `--with-uv` (`-WithUv` en PowerShell). Si no quieres uv, las skills siguen en
   "modo manual" y no se rompe nada. Para saltar el chequeo: `--no-uv` (`-NoUv`).
 
-Eso instala a nivel usuario (`~/.claude/`), así las tenés en todos tus proyectos. Si
-preferís clonar primero y mirar el código antes de correrlo:
+Eso instala a nivel usuario (`~/.claude/`), así las tienes en todos tus proyectos. Si
+prefieres clonar primero y mirar el código antes de correrlo:
 
 ```bash
 git clone https://github.com/Arianna-Lupi/SEO-Skills.git
@@ -72,7 +72,23 @@ cd SEO-Skills
 > `references/`) a `~/.claude/skills/` y cada agente a `~/.claude/agents/`. No pide
 > permisos de administrador ni toca nada más.
 
-## Qué hay acá
+## Actualizar
+
+El instalador deja una marca de versión en tu carpeta de skills, así que sabe
+cuándo salió algo nuevo. Para ver si hay actualización sin tocar nada:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.sh | bash -s -- --check
+# Windows:  & ([scriptblock]::Create((irm https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main/install.ps1))) -Check
+```
+
+Te dice qué versión tienes instalada y cuál es la última. Si hay una nueva,
+vuelve a correr el comando de instalación: detecta tu versión anterior, te
+avisa y te pregunta antes de sobrescribir. Para actualizar sin que pregunte,
+usa `--update` (PowerShell: `-Update`). Si instalaste desde un clon del repo,
+trae primero los cambios con `git pull` y vuelve a correr `./install.sh`.
+
+## Qué hay aquí
 
 ```
 SEO-Skills/             ← raíz del repo
@@ -108,7 +124,7 @@ SEO-Skills/             ← raíz del repo
 
 ## Instalación manual (alternativa)
 
-Si no querés usar `install.sh`, copialas a mano desde el repo clonado:
+Si no quieres usar `install.sh`, cópialas a mano desde el repo clonado:
 
 ```bash
 # Skills y agentes a nivel usuario (todos tus proyectos):
@@ -120,14 +136,14 @@ mkdir -p .claude/skills .claude/agents
 cp -R skills/* .claude/skills/ && cp agents/*.md .claude/agents/
 ```
 
-Reiniciá Claude Code y verificá:
-- Skills: escribí `/` y deberían aparecer (por ejemplo, `/brief-de-contenido`).
-- Agentes: Claude delega solo según su `description`, o se lo pedís directo ("usá el
+Reinicia Claude Code y verifica:
+- Skills: escribe `/` y deberían aparecer (por ejemplo, `/brief-de-contenido`).
+- Agentes: Claude delega solo según su `description`, o se lo pides directo ("usa el
   agente-contenido para esta keyword").
 
 Scripts deterministas (opcional, pero recomendado): los scripts ahorran tokens y dan más
 precisión. La forma más simple es instalar [uv](https://astral.sh/uv) y correrlos con
-`uv run` (resuelve las dependencias solo, cero instalación). Si preferís pip:
+`uv run` (resuelve las dependencias solo, cero instalación). Si prefieres pip:
 
 ```bash
 pip install -r requirements.txt
@@ -139,15 +155,15 @@ pip install -r requirements.txt
 - Un brief rápido: con `/brief-de-contenido` te pide la keyword objetivo y arma el brief
   (analiza la SERP, decide el formato, redacta las metas, la jerarquía de encabezados y
   los enlaces).
-- Investigación completa: pedí "usá el `agente-investigacion-keywords` para el nicho X" y
+- Investigación completa: pide "usa el `agente-investigacion-keywords` para el nicho X" y
   te devuelve la tabla lista para la Plantilla Master, los clusters y los 10 de Oro.
 - Flujo de contenido: el `agente-contenido` va de SERP a brief, borrador y on-page, con
   un checkpoint para que revises el brief antes de redactar.
 
 ## Datos en vivo (opcional)
 
-Sin conectar nada, pegás los datos y listo. Si querés datos en vivo:
-- SerpApi (gratis): SERP, People Also Ask y autocompletar. Conectalo primero.
+Sin conectar nada, pegas los datos y listo. Si quieres datos en vivo:
+- SerpApi (gratis): SERP, People Also Ask y autocompletar. Conéctalo primero.
 - GSC `mcp-gsc` (gratis): Search Console en vivo (reportes y cobertura).
 - Ahrefs (pago): volumen, KD, backlinks y auditoría.
 - Screaming Frog CLI (gratis hasta 500 URLs): crawl para inventario, auditoría y

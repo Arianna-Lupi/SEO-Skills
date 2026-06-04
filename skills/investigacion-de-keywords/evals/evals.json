@@ -3,7 +3,7 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Tengo un estudio de yoga en Bogotá, público mujeres de 28 a 45 principiantes que buscan reducir el estrés. Armame la investigación de keywords para llenar la tab de Investigación de palabras clave.",
+      "prompt": "Tengo un estudio de yoga en Bogotá, público mujeres de 28 a 45 principiantes que buscan reducir el estrés. Ármame la investigación de keywords para llenar la tab de Investigación de palabras clave.",
       "expected_output": "Un entregable con resumen de audiencia por los 5 ejes del Cuestionario SEO, una lista de mínimo 30 keywords descubiertas con los 4 métodos, clasificadas por intención, agrupadas en clusters, con volumen/dificultad y selección del punto dulce priorizando long-tail, en una tabla lista para la Plantilla Master.",
       "assertions": [
         "incluye un resumen de audiencia que cubre los 5 ejes del Cuestionario SEO (demografía, intereses/necesidades, comportamiento online, intención, puntos de dolor)",

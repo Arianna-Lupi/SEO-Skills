@@ -65,7 +65,7 @@ def main():
     if not api_key:
         fail(
             "Falta SERPAPI_API_KEY en el entorno.",
-            "modo manual: buscá la query en Google en incógnito (región correcta) y anotá top 10, PAA y features a mano.",
+            "modo manual: busca la query en Google en incógnito (región correcta) y anota top 10, PAA y features a mano.",
         )
 
     try:
@@ -73,7 +73,7 @@ def main():
     except ImportError:
         fail(
             "Falta la dependencia 'requests' (pip install -r requirements.txt).",
-            "modo manual: revisá la SERP en el navegador en incógnito.",
+            "modo manual: revisa la SERP en el navegador en incógnito.",
         )
 
     params = {
@@ -91,11 +91,11 @@ def main():
     except Exception as e:  # noqa: BLE001
         fail(
             f"Error de red/SerpApi: {e}",
-            "modo manual: revisá la SERP en el navegador en incógnito.",
+            "modo manual: revisa la SERP en el navegador en incógnito.",
         )
 
     if data.get("error"):
-        fail(f"SerpApi devolvió error: {data['error']}", "modo manual: revisá la SERP en el navegador.")
+        fail(f"SerpApi devolvió error: {data['error']}", "modo manual: revisa la SERP en el navegador.")
 
     organic = data.get("organic_results", []) or []
     top = [

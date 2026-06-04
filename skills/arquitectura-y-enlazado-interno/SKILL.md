@@ -1,6 +1,6 @@
 ---
 name: arquitectura-y-enlazado-interno
-description: Diseña la arquitectura web y el enlazado interno (pilar→clusters) según el método del diploma "De Cero a SEO" (aprendoseo). Usá esta skill cuando haya que estructurar un sitio o repartir enlaces internos — AUNQUE el usuario no diga "arquitectura" ni "enlazado interno", p.ej. "cómo organizo las páginas/categorías de mi web", "tengo páginas que no reciben enlaces / no rankean", "mi contenido está muy enterrado", "el jugo SEO no llega a las páginas que venden", o al planificar un sitio nuevo. Entrega mapa de arquitectura pilar→clusters, lista de huérfanas y sugerencias de enlaces con anchor.
+description: Diseña la arquitectura web y el enlazado interno (pilar→clusters) según el método del diploma "De Cero a SEO" (aprendoseo). Usa esta skill cuando haya que estructurar un sitio o repartir enlaces internos — AUNQUE el usuario no diga "arquitectura" ni "enlazado interno", p.ej. "cómo organizo las páginas/categorías de mi web", "tengo páginas que no reciben enlaces / no rankean", "mi contenido está muy enterrado", "el jugo SEO no llega a las páginas que venden", o al planificar un sitio nuevo. Entrega mapa de arquitectura pilar→clusters, lista de huérfanas y sugerencias de enlaces con anchor.
 compatibility: Script opcional de detección de huérfanas/depth requiere Python 3 (uv, solo stdlib) y exports de Screaming Frog; si no, modo manual. Ahrefs MCP (pago) y SerpApi MCP (gratis) opcionales.
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como arquitecto de información en aprendoseo. Marco del diploma: *"Lo que no se rastrea, no existe"* — y lo que está a 6 clics, casi no se rastrea. Tu misión es que el **Link Equity ("jugo SEO")** llegue donde importa.
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -73,25 +73,25 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para detectar huérfanas y analizar el enlazado interno desde los exports de Screaming Frog: es determinista, ahorra tokens y no requiere leer los CSV en contexto.
+Si Python 3 está disponible, **ejecuta el script** para detectar huérfanas y analizar el enlazado interno desde los exports de Screaming Frog: es determinista, ahorra tokens y no requiere leer los CSV en contexto.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```
 uv run skills/arquitectura-y-enlazado-interno/scripts/orphans.py --internal internal_all.csv --inlinks all_inlinks.csv
-# o, si no usás uv: python3 skills/arquitectura-y-enlazado-interno/scripts/orphans.py --internal internal_all.csv --inlinks all_inlinks.csv
+# o, si no usas uv: python3 skills/arquitectura-y-enlazado-interno/scripts/orphans.py --internal internal_all.csv --inlinks all_inlinks.csv
 # umbral de pocos inlinks ajustable (default <3):
 uv run skills/arquitectura-y-enlazado-interno/scripts/orphans.py --internal internal_all.csv --inlinks all_inlinks.csv --low 5
 ```
 
-Corré con `--help` para ver opciones. Salida: `{"ok":true,"orphans":[...],"low_inlinks":[{"url","inlinks"}],"depth_gt3":[...],"summary":{...}}`. Solo stdlib. Si falla (archivo o columna ausente) devuelve `{"ok":false,"reason":...}` (exit 0) → **modo manual**: cruzá internal_all vs. all_inlinks a ojo.
+Corre con `--help` para ver opciones. Salida: `{"ok":true,"orphans":[...],"low_inlinks":[{"url","inlinks"}],"depth_gt3":[...],"summary":{...}}`. Solo stdlib. Si falla (archivo o columna ausente) devuelve `{"ok":false,"reason":...}` (exit 0) → **modo manual**: cruza internal_all vs. all_inlinks a ojo.
 
 ## Gotchas
 
 - **Regla de los 3 clics desde la home** — toda página relevante debe alcanzarse en ≤3 clics; estructura demasiado profunda (>3) entierra contenido y diluye el jugo SEO.
-- **Una página huérfana (sin enlaces internos) no se rastrea bien — detectala** — toda URL con 0 inlinks es invisible; dale al menos un inlink relevante.
-- **Definí los enlaces internos y su anchor DESDE el brief, no después** — entran en la planificación de la pieza, no se improvisan al final.
-- **No concentres todo el link equity en una sola página** — repartí hacia las páginas de conversión infraenlazadas; over-linking (todo con todo) también diluye. Sé selectivo y jerárquico.
+- **Una página huérfana (sin enlaces internos) no se rastrea bien — detéctala** — toda URL con 0 inlinks es invisible; dale al menos un inlink relevante.
+- **Define los enlaces internos y su anchor DESDE el brief, no después** — entran en la planificación de la pieza, no se improvisan al final.
+- **No concentres todo el link equity en una sola página** — reparte hacia las páginas de conversión infraenlazadas; over-linking (todo con todo) también diluye. Sé selectivo y jerárquico.
 - **Anchors descriptivos, no genéricos** ("clic aquí", "ver más") desperdician la señal temática.
 - **No olvides los enlaces contenido→producto:** sin ellos el tráfico informacional nunca llega a convertir.
 - **No confundas Crawl Depth** (profundidad de clics) con **Crawl Width** (amplitud por nivel).

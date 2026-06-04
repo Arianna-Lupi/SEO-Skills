@@ -1,6 +1,6 @@
 ---
 name: brief-de-contenido
-description: Usá esta skill cuando el usuario vaya a escribir u optimizar una pieza y necesite definir su estructura antes de redactar — aunque no diga "brief", p.ej. "qué estructura/encabezados pongo en este artículo", "cómo organizo este post", "qué meta título y descripción uso", "qué debería cubrir esta página", "voy a actualizar este artículo viejo". Crea el brief de contenido ("la brújula" del redactor) del método "De Cero a SEO" (aprendoseo, Arianna Lupi, Semanas 8 y 10): el brief lo dicta la SERP, no tu opinión. Genera los 3 tipos (Blog, Landing/Servicios, E-commerce) y el Brief de Optimización para contenido existente. No pases una keyword a redacción sin brief.
+description: Usa esta skill cuando el usuario vaya a escribir u optimizar una pieza y necesite definir su estructura antes de redactar — aunque no diga "brief", p.ej. "qué estructura/encabezados pongo en este artículo", "cómo organizo este post", "qué meta título y descripción uso", "qué debería cubrir esta página", "voy a actualizar este artículo viejo". Crea el brief de contenido ("la brújula" del redactor) del método "De Cero a SEO" (aprendoseo, Arianna Lupi, Semanas 8 y 10): el brief lo dicta la SERP, no tu opinión. Genera los 3 tipos (Blog, Landing/Servicios, E-commerce) y el Brief de Optimización para contenido existente. No pases una keyword a redacción sin brief.
 compatibility: Script opcional requiere Python 3 (uv) + requests/beautifulsoup4 (y SERPAPI_API_KEY o --urls); SerpApi/Ahrefs MCP opcionales (la skill funciona 100% manual con Headings Map).
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como **estratega/editor SEO en aprendoseo**, siguiendo el método de Arianna Lupi de las Semanas 8 (contenido nuevo) y 10 (optimización). El brief es el **manual de instrucciones** del redactor. Regla de oro: **el brief lo dicta la SERP** — analiza el top 3 ANTES de decidir nada. Si los que rankean son guías, tu brief pide una guía.
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -139,24 +139,24 @@ Tipo: Blog · Cluster: Ingredientes activos · Rol: Spoke
 
 ## Script determinista (ahorro de tokens)
 
-Si Python está disponible, EJECUTÁ este script para extraer el esquema (H1/H2/H3) de los competidores del top de la SERP (es determinista, ahorra tokens y mejora precisión) y usá su JSON como base del brief — recordá que el brief lo dicta la SERP. Si falta `SERPAPI_API_KEY` o las dependencias `requests`/`beautifulsoup4`, seguí en modo manual (Headings Map a mano), o pasá `--urls` para saltarte SerpApi.
+Si Python está disponible, EJECUTA este script para extraer el esquema (H1/H2/H3) de los competidores del top de la SERP (es determinista, ahorra tokens y mejora precisión) y usa su JSON como base del brief — recuerda que el brief lo dicta la SERP. Si falta `SERPAPI_API_KEY` o las dependencias `requests`/`beautifulsoup4`, sigue en modo manual (Headings Map a mano), o pasa `--urls` para saltarte SerpApi.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 SERPAPI_API_KEY=xxx uv run scripts/serp_outline.py "tu keyword" --top 5 --gl es --hl es
-# o, si no usás uv: SERPAPI_API_KEY=xxx python3 scripts/serp_outline.py "tu keyword" --top 5 --gl es --hl es
+# o, si no usas uv: SERPAPI_API_KEY=xxx python3 scripts/serp_outline.py "tu keyword" --top 5 --gl es --hl es
 # sin SerpApi: uv run scripts/serp_outline.py "tu keyword" --urls "https://a.com/x,https://b.com/y"
 ```
 
-Corré con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "competitors": [{url,h1,headings:["H2: ...","H3: ..."]}], "common_questions": [...PAA...], "suggested_outline": [...H2 fusionados por frecuencia...]}`. Si falla, `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0). Validá la jerarquía a mano antes de entregar.
+Corre con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "competitors": [{url,h1,headings:["H2: ...","H3: ..."]}], "common_questions": [...PAA...], "suggested_outline": [...H2 fusionados por frecuencia...]}`. Si falla, `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0). Valida la jerarquía a mano antes de entregar.
 
 ## Gotchas
 
-- **El brief lo dicta la SERP, no tu opinión:** analizá el top 3 ANTES de definir formato. Si rankean guías largas, no propongas una landing corta. Sin top 3 analizado, no hay brief.
-- **Metatítulo 50-60 caracteres con la keyword al inicio**, no al final ni fuera de rango; **metadescripción 120-155 caracteres con CTA**, no sin llamada a la acción. Contá los caracteres siempre.
+- **El brief lo dicta la SERP, no tu opinión:** analiza el top 3 ANTES de definir formato. Si rankean guías largas, no propongas una landing corta. Sin top 3 analizado, no hay brief.
+- **Metatítulo 50-60 caracteres con la keyword al inicio**, no al final ni fuera de rango; **metadescripción 120-155 caracteres con CTA**, no sin llamada a la acción. Cuenta los caracteres siempre.
 - Jerarquía **H1 → H2 → H3 sin saltar niveles** (H2 → H4 está prohibido): un solo H1 con la keyword, estructura completa.
-- **La IA rompe la jerarquía de encabezados** e inventa estructura: validá la jerarquía a mano (Headings Map) antes de entregar, no confíes en el output crudo.
+- **La IA rompe la jerarquía de encabezados** e inventa estructura: valida la jerarquía a mano (Headings Map) antes de entregar, no confíes en el output crudo.
 - Los **enlaces internos se definen desde el brief** (anchor text + URL del cluster), no se los dejes "al redactor".
-- En W10 (optimización), **documentá los cambios ANTES de tocar la pieza** y conservá lo que ya rankea; no reescribas desde cero ni toques sin trazabilidad.
-- Recordá: **"un brief bien hecho es el 50% del éxito"** (Arianna) — invertí aquí el tiempo.
+- En W10 (optimización), **documenta los cambios ANTES de tocar la pieza** y conserva lo que ya rankea; no reescribas desde cero ni toques sin trazabilidad.
+- Recuerda: **"un brief bien hecho es el 50% del éxito"** (Arianna) — invierte aquí el tiempo.

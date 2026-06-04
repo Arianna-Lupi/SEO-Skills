@@ -1,6 +1,6 @@
 ---
 name: optimizacion-on-page-meta
-description: Optimiza metatítulos, metadescripciones y on-page de una URL según el método del diploma "De Cero a SEO" (aprendoseo). Usá esta skill cuando vayas a publicar o reoptimizar una página — AUNQUE el usuario no diga "meta" ni "on-page", p.ej. "armame el título y la descripción de esta página", "tengo CTR bajo / no me hacen clic en Google", "mejorá el on-page de esta URL", "dame variantes para A/B de CTR". Genera metatítulo (50-60 chars, keyword al inicio) y metadescripción (120-155 con CTA), variantes para A/B y un checklist on-page accionable. No publiques nada sin pasar por aquí.
+description: Optimiza metatítulos, metadescripciones y on-page de una URL según el método del diploma "De Cero a SEO" (aprendoseo). Usa esta skill cuando vayas a publicar o reoptimizar una página — AUNQUE el usuario no diga "meta" ni "on-page", p.ej. "ármame el título y la descripción de esta página", "tengo CTR bajo / no me hacen clic en Google", "mejora el on-page de esta URL", "dame variantes para A/B de CTR". Genera metatítulo (50-60 chars, keyword al inicio) y metadescripción (120-155 con CTA), variantes para A/B y un checklist on-page accionable. No publiques nada sin pasar por aquí.
 compatibility: Script opcional de validación de metas requiere Python 3 (uv); si no está, modo manual con simulador de SERP. SerpApi MCP (gratis) y Ahrefs MCP (pago) opcionales.
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como especialista on-page en aprendoseo. Tu trabajo es que la página **se rastree, se indexe y posicione**, y que cuando aparezca en la SERP, la gente haga clic. Recuerda el marco del diploma: *"Lo que no se rastrea, no existe"* — pero rastrear no basta si el metatítulo no convence.
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -60,19 +60,19 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para validar las metas en vez de contar caracteres a mano: es determinista, ahorra tokens y da conteos exactos. Usá su JSON como fuente de verdad.
+Si Python 3 está disponible, **ejecuta el script** para validar las metas en vez de contar caracteres a mano: es determinista, ahorra tokens y da conteos exactos. Usa su JSON como fuente de verdad.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 uv run skills/optimizacion-on-page-meta/scripts/meta_check.py \
   --title "Tu metatítulo" \
   --desc "Tu metadescripción con CTA →" \
   --keyword "keyword principal"
-# o, si no usás uv: python3 skills/optimizacion-on-page-meta/scripts/meta_check.py --title "..." --desc "..." --keyword "..."
+# o, si no usas uv: python3 skills/optimizacion-on-page-meta/scripts/meta_check.py --title "..." --desc "..." --keyword "..."
 ```
 
-Corré con `--help` para ver opciones. Devuelve `{"ok":true,"title":{"len","in_range_50_60","keyword_at_start"},"desc":{"len","in_range_120_155","has_cta_hint","keyword_present"},"warnings":[...]}`. Tomá `warnings` como la lista de ajustes (título 50-60 con keyword al inicio; meta 120-155 con CTA y keyword). Solo stdlib, sin deps. Si Python no está disponible, validá en **modo manual** con el simulador de SERP.
+Corre con `--help` para ver opciones. Devuelve `{"ok":true,"title":{"len","in_range_50_60","keyword_at_start"},"desc":{"len","in_range_120_155","has_cta_hint","keyword_present"},"warnings":[...]}`. Toma `warnings` como la lista de ajustes (título 50-60 con keyword al inicio; meta 120-155 con CTA y keyword). Solo stdlib, sin deps. Si Python no está disponible, valida en **modo manual** con el simulador de SERP.
 
 ## Salida
 
@@ -95,8 +95,8 @@ Variantes:
 
 ## Gotchas
 
-- **Metatítulo 50-60 chars con keyword al inicio; metadescripción 120-155 con CTA** — verificá siempre el corte en el simulador, no a ojo. Keyword al final = menos peso y menos clic.
-- **La metadescripción no es factor de ranking directo, pero mueve el CTR** — escribíla para que la persona haga clic, no para "meter keyword".
+- **Metatítulo 50-60 chars con keyword al inicio; metadescripción 120-155 con CTA** — verifica siempre el corte en el simulador, no a ojo. Keyword al final = menos peso y menos clic.
+- **La metadescripción no es factor de ranking directo, pero mueve el CTR** — escríbela para que la persona haga clic, no para "meter keyword".
 - **No dupliques metas entre URLs** — cada página, su título y su descripción únicos; metas duplicadas confunden a Google y canibalizan.
 - **Saltos de encabezado** (H2→H4) rompen la jerarquía y confunden al rastreador.
 - **URLs con tildes/eñes o larguísimas** → menos rastreables y compartibles. Corta y sin tildes.

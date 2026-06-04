@@ -1,6 +1,6 @@
 ---
 name: schema-jsonld
-description: Usá esta skill cuando haya que generar datos estructurados Schema.org en JSON-LD válidos para una página, según el SEO técnico del diploma "De Cero a SEO" (aprendoseo). Aplicala siempre que publiques o reoptimices una página y quieras habilitar rich results (estrellas, FAQ, breadcrumbs, sitelinks) y reforzar entidades/autoría para la búsqueda con IA — aunque el usuario no diga "schema" ni "JSON-LD", p.ej. "quiero que me salgan las estrellas en Google", "habilitá el desplegable de FAQ en la SERP", "datos estructurados para este artículo", "marcá esta ficha de producto". Entrega el bloque `<script>` listo para pegar y validado. No marques contenido que no exista en la página: Google penaliza.
+description: Usa esta skill cuando haya que generar datos estructurados Schema.org en JSON-LD válidos para una página, según el SEO técnico del diploma "De Cero a SEO" (aprendoseo). Aplícala siempre que publiques o reoptimices una página y quieras habilitar rich results (estrellas, FAQ, breadcrumbs, sitelinks) y reforzar entidades/autoría para la búsqueda con IA — aunque el usuario no diga "schema" ni "JSON-LD", p.ej. "quiero que me salgan las estrellas en Google", "habilita el desplegable de FAQ en la SERP", "datos estructurados para este artículo", "marca esta ficha de producto". Entrega el bloque `<script>` listo para pegar y validado. No marques contenido que no exista en la página: Google penaliza.
 compatibility: Script opcional requiere Python 3 (uv, solo stdlib). Validación con Rich Results Test / validador schema.org (gratis). SerpApi MCP (GRATIS) o Ahrefs (pago) opcionales para ver qué rich results valen la pena.
 metadata:
   author: aprendoseo
@@ -54,23 +54,23 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para construir y validar el JSON-LD en vez de escribirlo a mano: es determinista, ahorra tokens y evita marcado inventado. Usá su JSON (`jsonld`) como salida y `missing_required`/`warnings` como checklist.
+Si Python 3 está disponible, **ejecuta el script** para construir y validar el JSON-LD en vez de escribirlo a mano: es determinista, ahorra tokens y evita marcado inventado. Usa su JSON (`jsonld`) como salida y `missing_required`/`warnings` como checklist.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 uv run skills/schema-jsonld/scripts/schema_gen.py \
   --type Article \
   --field headline="Título" \
   --field author='{"@type":"Person","name":"Arianna"}'
-# o, si no usás uv: python3 skills/schema-jsonld/scripts/schema_gen.py --type Article --field headline="Título"
+# o, si no usas uv: python3 skills/schema-jsonld/scripts/schema_gen.py --type Article --field headline="Título"
 # o con un objeto completo:
 uv run skills/schema-jsonld/scripts/schema_gen.py --type Product --json '{"name":"X","offers":{...}}'
 ```
 
-Corré con `--help` para ver opciones.
+Corre con `--help` para ver opciones.
 
-Tipos soportados: `Article, BlogPosting, Product, FAQPage, HowTo, BreadcrumbList, LocalBusiness, Organization, WebSite`. Devuelve `{"ok":true,"type","jsonld":{...},"missing_required":[...],"warnings":[...]}`. **No marques contenido inexistente:** `FAQPage`/`HowTo` solo si las preguntas o pasos son visibles en la página (el script ya lo advierte). Solo stdlib. Si Python no está disponible, generá el bloque en **modo manual**.
+Tipos soportados: `Article, BlogPosting, Product, FAQPage, HowTo, BreadcrumbList, LocalBusiness, Organization, WebSite`. Devuelve `{"ok":true,"type","jsonld":{...},"missing_required":[...],"warnings":[...]}`. **No marques contenido inexistente:** `FAQPage`/`HowTo` solo si las preguntas o pasos son visibles en la página (el script ya lo advierte). Solo stdlib. Si Python no está disponible, genera el bloque en **modo manual**.
 
 ## Salida
 
@@ -114,8 +114,8 @@ Tipos soportados: `Article, BlogPosting, Product, FAQPage, HowTo, BreadcrumbList
 ## Gotchas
 
 - **NO marques contenido que no es visible en la página** (FAQPage solo si las FAQ se ven, ratings solo si las reseñas son reales y visibles) — Google penaliza con acción manual de spam.
-- **Validá el JSON-LD (Rich Results Test + validador schema.org) antes de publicar**, no después: 0 errores y resolvé los warnings que apliquen.
-- **Un tipo por intención de página** (Article / Product / FAQPage / HowTo…), no mezcles `@type` que se contradigan; conectá entidades con `@id` para un grafo coherente.
-- Incluí las propiedades **requeridas**, no solo las opcionales (ej. `Article` sin `author`/`headline` no genera rich result).
+- **Valida el JSON-LD (Rich Results Test + validador schema.org) antes de publicar**, no después: 0 errores y resuelve los warnings que apliquen.
+- **Un tipo por intención de página** (Article / Product / FAQPage / HowTo…), no mezcles `@type` que se contradigan; conecta entidades con `@id` para un grafo coherente.
+- Incluye las propiedades **requeridas**, no solo las opcionales (ej. `Article` sin `author`/`headline` no genera rich result).
 - El schema **habilita rich results y entendimiento de entidades, no posiciona** — no es factor de ranking directo.
-- **Revisá el informe de Mejoras en GSC tras desplegar**, no asumas que quedó bien: un error rompe el rich result en silencio.
+- **Revisa el informe de Mejoras en GSC tras desplegar**, no asumas que quedó bien: un error rompe el rich result en silencio.

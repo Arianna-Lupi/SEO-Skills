@@ -1,6 +1,6 @@
 ---
 name: estrategia-de-contenidos-clusters
-description: Usá esta skill cuando el usuario tenga el mapa de keywords listo y necesite priorizar qué escribir y en qué orden, elegir las "10 de Oro", organizarlas en 3-5 Topic Clusters (pilar + spokes) y bajar todo a la tab "Estrategia" — aunque no diga "clusters" ni "estrategia", p.ej. "ya investigué keywords, ¿ahora qué escribo primero?", "cómo organizo mis temas", "qué contenido priorizo", "cómo agrupo mis artículos". Sigue la Semana 7 del diploma "De Cero a SEO" (aprendoseo) y cubre los tres pilares: Estrategia de Contenidos, E-E-A-T y CRO. No empieces a producir contenido sin pasar por aquí.
+description: Usa esta skill cuando el usuario tenga el mapa de keywords listo y necesite priorizar qué escribir y en qué orden, elegir las "10 de Oro", organizarlas en 3-5 Topic Clusters (pilar + spokes) y bajar todo a la tab "Estrategia" — aunque no diga "clusters" ni "estrategia", p.ej. "ya investigué keywords, ¿ahora qué escribo primero?", "cómo organizo mis temas", "qué contenido priorizo", "cómo agrupo mis artículos". Sigue la Semana 7 del diploma "De Cero a SEO" (aprendoseo) y cubre los tres pilares: Estrategia de Contenidos, E-E-A-T y CRO. No empieces a producir contenido sin pasar por aquí.
 compatibility: Script opcional requiere Python 3 (uv), solo stdlib (sin API). SerpApi/Ahrefs MCP opcionales (la skill funciona 100% manual).
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como **estratega de contenidos SEO en aprendoseo**, siguiendo el método de Arianna Lupi de la Semana 7 del diploma "De Cero a SEO". Tu trabajo es convertir datos sueltos en un plan: qué escribir, en qué orden y por qué.
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -136,24 +136,24 @@ CALENDARIO PRIORIZADO:
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para agrupar la lista de keywords: es determinista (sin API, solo stdlib), ahorra tokens y da clusters reproducibles. Tomá su JSON como punto de partida y ajustá pilares con criterio (E-E-A-T, intención, negocio).
+Si Python 3 está disponible, **ejecuta el script** para agrupar la lista de keywords: es determinista (sin API, solo stdlib), ahorra tokens y da clusters reproducibles. Toma su JSON como punto de partida y ajusta pilares con criterio (E-E-A-T, intención, negocio).
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```
 uv run skills/estrategia-de-contenidos-clusters/scripts/cluster.py --file keywords.txt
-# o, si no usás uv: python3 skills/estrategia-de-contenidos-clusters/scripts/cluster.py --file keywords.txt
+# o, si no usas uv: python3 skills/estrategia-de-contenidos-clusters/scripts/cluster.py --file keywords.txt
 # con volúmenes reales (de Ahrefs) para elegir mejor el pilar:
 uv run skills/estrategia-de-contenidos-clusters/scripts/cluster.py --json '[{"keyword":"rutina facial","volume":1200}, ...]'
 ```
 
-Corré con `--help` para ver opciones. Salida: `{"ok":true,"clusters":[{"pilar","keywords":[...]}],"unclustered":[...],"count":N}`. Es solo stdlib, así que casi siempre corre; si falla devuelve `{"ok":false,"reason":...}` (exit 0) → **modo manual**: agrupá razonando por tema/token compartido. El umbral de solapamiento se ajusta con `--threshold` (default 0.34).
+Corre con `--help` para ver opciones. Salida: `{"ok":true,"clusters":[{"pilar","keywords":[...]}],"unclustered":[...],"count":N}`. Es solo stdlib, así que casi siempre corre; si falla devuelve `{"ok":false,"reason":...}` (exit 0) → **modo manual**: agrupa razonando por tema/token compartido. El umbral de solapamiento se ajusta con `--threshold` (default 0.34).
 
 ## Gotchas
 
 - Las **"10 de Oro" se eligen de las ~40 keywords ya investigadas**, no inventes keywords nuevas en este paso.
-- Elegí las 10 ponderando relevancia + volumen + KD + intención + oportunidad, **no solo por volumen**: volumen alto con KD imposible y sin relación con el negocio NO es de oro.
-- **Balanceá contenido nuevo vs. optimizar existente**: reescribir desde cero lo que ya rankea desperdicia autoridad; aprovechá lo que ya tenés.
+- Elige las 10 ponderando relevancia + volumen + KD + intención + oportunidad, **no solo por volumen**: volumen alto con KD imposible y sin relación con el negocio NO es de oro.
+- **Balancea contenido nuevo vs. optimizar existente**: reescribir desde cero lo que ya rankea desperdicia autoridad; aprovecha lo que ya tienes.
 - **E-E-A-T necesita autoría real** (bios verificables, foto, credenciales, "Sobre nosotros" sólido), no solo poner un nombre al pie del artículo.
 - Son los **tres** pilares (Estrategia + E-E-A-T + CRO), no solo el primero: sin CRO el tráfico no convierte, sin E-E-A-T no rankea estable.
 - **Máximo 3-5 clusters** al inicio, no más: pasar de 5 dispersa el esfuerzo y el enlazado interno.

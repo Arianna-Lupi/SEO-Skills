@@ -3,7 +3,7 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Vamos a hacer onboarding de un ecommerce nuevo, miviverotienda.com. Te paso el export de Screaming Frog (internal_all.csv e issues_overview_report.csv) en ./export_sf. Haceme la auditoría técnica completa.",
+      "prompt": "Vamos a hacer onboarding de un ecommerce nuevo, miviverotienda.com. Te paso el export de Screaming Frog (internal_all.csv e issues_overview_report.csv) en ./export_sf. Hazme la auditoría técnica completa.",
       "expected_output": "Una auditoría en los 3 bloques (indexabilidad/rastreabilidad, velocidad/CWV, seguridad+canonical), auditada por plantillas (home, categoría, ficha, blog), con cada issue clasificado por severidad y por plantilla afectada, y un plan de remediación priorizado. Idealmente apoyada en el script parse_sf.py para resumir el crawl.",
       "assertions": [
         "cubre los 3 bloques: indexabilidad/rastreabilidad, velocidad/Core Web Vitals y seguridad/canonicalización",

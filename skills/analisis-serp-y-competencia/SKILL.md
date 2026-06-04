@@ -1,6 +1,6 @@
 ---
 name: analisis-serp-y-competencia
-description: Usá esta skill cuando el usuario quiera analizar competidores, estudiar la SERP de sus keywords o encontrar brechas/gaps de contenido — aunque no diga "SERP" ni "competencia", p.ej. "quién me gana en Google", "por qué rankean ellos y yo no", "qué le falta a mi contenido frente a los primeros", "qué hacen los que están arriba", "qué temas no estoy cubriendo". Sigue el método "De Cero a SEO" (aprendoseo, Arianna Lupi): distingue Competidor de Negocio vs Competidor SEO, identifica rivales por 3 métodos (incluido el "Análisis de Repetición"), aplica el ejercicio manual "Ojo Clínico" sobre el top 3, mapea keywords/páginas/autoridad y entrega un reporte de brechas bajo el marco "Costo de Oportunidad".
+description: Usa esta skill cuando el usuario quiera analizar competidores, estudiar la SERP de sus keywords o encontrar brechas/gaps de contenido — aunque no diga "SERP" ni "competencia", p.ej. "quién me gana en Google", "por qué rankean ellos y yo no", "qué le falta a mi contenido frente a los primeros", "qué hacen los que están arriba", "qué temas no estoy cubriendo". Sigue el método "De Cero a SEO" (aprendoseo, Arianna Lupi): distingue Competidor de Negocio vs Competidor SEO, identifica rivales por 3 métodos (incluido el "Análisis de Repetición"), aplica el ejercicio manual "Ojo Clínico" sobre el top 3, mapea keywords/páginas/autoridad y entrega un reporte de brechas bajo el marco "Costo de Oportunidad".
 compatibility: Script opcional requiere Python 3 (uv) y requests + SERPAPI_API_KEY; SerpApi/Ahrefs MCP opcionales (la skill funciona 100% manual con Google en incógnito).
 metadata:
   author: aprendoseo
@@ -10,7 +10,7 @@ metadata:
 
 Actúa como estratega SEO en aprendoseo, siguiendo el método de Arianna Lupi (Semana 6 del diploma "De Cero a SEO").
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -86,22 +86,22 @@ Reporte: "No tener guías de preparación cede el tráfico informativo a revista
 
 ## Script determinista (ahorro de tokens)
 
-Si Python está disponible, EJECUTÁ este script para capturar la SERP (es determinista, ahorra tokens y mejora precisión) y razoná sobre su JSON compacto en vez de sobre HTML. Si falta la clave `SERPAPI_API_KEY` o la dependencia `requests`, seguí en modo manual (Google en incógnito).
+Si Python está disponible, EJECUTA este script para capturar la SERP (es determinista, ahorra tokens y mejora precisión) y razona sobre su JSON compacto en vez de sobre HTML. Si falta la clave `SERPAPI_API_KEY` o la dependencia `requests`, sigue en modo manual (Google en incógnito).
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 SERPAPI_API_KEY=xxx uv run scripts/serp.py "tu keyword" --gl es --hl es --num 10
-# o, si no usás uv: SERPAPI_API_KEY=xxx python3 scripts/serp.py "tu keyword" --gl es --hl es --num 10
+# o, si no usas uv: SERPAPI_API_KEY=xxx python3 scripts/serp.py "tu keyword" --gl es --hl es --num 10
 ```
 
-Corré con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "top": [{position,title,link,snippet}], "paa": [...], "related": [...], "features": {"ai_overview": bool, "featured_snippet": bool, "knowledge_panel": bool}}`. Si falla, devuelve `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0).
+Corre con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "top": [{position,title,link,snippet}], "paa": [...], "related": [...], "features": {"ai_overview": bool, "featured_snippet": bool, "knowledge_panel": bool}}`. Si falla, devuelve `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0).
 
 ## Gotchas
 
-- **Competidor SEO ≠ competidor de negocio:** quien rankea tus keywords (puede ser Wikipedia, un blog o un medio que no vende lo que vos), no necesariamente quien te compite vendiendo.
-- Hacé el **"Ojo Clínico" manual sobre el top 3 ANTES de las herramientas**, no al revés: el análisis a ojo va primero, las métricas después.
-- El objetivo es **la brecha de contenido (lo que ellos cubren y vos no)**, no copiar al rival ni juntar una lista de datos.
-- Analizá **3-4 competidores**, priorizando los del Análisis de Repetición, no "todos los que aparezcan".
-- Enmarcá el reporte en **Costo de Oportunidad** (tráfico/clientes perdidos por cada gap), no como reporte descriptivo.
-- Mirá la SERP en **modo incógnito / región correcta**, no logueado: la personalización falsea el ranking.
+- **Competidor SEO ≠ competidor de negocio:** quien rankea tus keywords (puede ser Wikipedia, un blog o un medio que no vende lo que tú), no necesariamente quien te compite vendiendo.
+- Haz el **"Ojo Clínico" manual sobre el top 3 ANTES de las herramientas**, no al revés: el análisis a ojo va primero, las métricas después.
+- El objetivo es **la brecha de contenido (lo que ellos cubren y tú no)**, no copiar al rival ni juntar una lista de datos.
+- Analiza **3-4 competidores**, priorizando los del Análisis de Repetición, no "todos los que aparezcan".
+- Enmarca el reporte en **Costo de Oportunidad** (tráfico/clientes perdidos por cada gap), no como reporte descriptivo.
+- Mira la SERP en **modo incógnito / región correcta**, no logueado: la personalización falsea el ranking.

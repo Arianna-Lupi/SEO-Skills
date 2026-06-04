@@ -31,9 +31,9 @@
 #   - Para should_trigger:false → queremos trigger_rate BAJO  (< 0.5 = PASS, near-miss no debe disparar).
 # UMBRAL DE APROBACIÓN: 0.5. Una query falla si cae del lado equivocado del 0.5.
 #
-# Train / validation split: separá tus queries 60/40. Iterá la `description`
-# SOLO contra el set de TRAIN (~60%) y, recién cuando pase, validá una única vez
-# contra el set de VALIDATION (~40%) que nunca usaste para ajustar. Así evitás
+# Train / validation split: separa tus queries 60/40. Itera la `description`
+# SOLO contra el set de TRAIN (~60%) y, solo cuando pase, valida una única vez
+# contra el set de VALIDATION (~40%) que nunca usaste para ajustar. Así evitas
 # sobreajustar la descripción a tus propios ejemplos. La guía sugiere ~5
 # iteraciones de refinamiento sobre train antes de tocar validation.
 #

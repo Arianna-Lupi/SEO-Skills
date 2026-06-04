@@ -36,7 +36,7 @@ estima el trabajo que falta para llevarlos a producción.
   scripts con `--help` más PEP 723 y `uv run`, divulgación progresiva (mostrar el
   detalle solo cuando hace falta), y evals (`evals.json` más `eval_queries.json` de
   activación) en las 3 skills principales.
-- MCP y herramientas opcionales. Funcionan sin conectar nada: pegás los datos y listo.
+- MCP y herramientas opcionales. Funcionan sin conectar nada: pegas los datos y listo.
   Si conectás algo, en vivo: SerpApi (gratis) da SERP y PAA; GSC `mcp-gsc` (gratis) da
   Search Console; Ahrefs (pago) da volumen, KD, backlinks y auditoría; y el CLI de
   Screaming Frog (gratis hasta 500 URLs) hace los crawls. Guías:
@@ -51,7 +51,7 @@ Se cruzaron dos fuentes:
 1. Contexto interno del diplomado (lo que hace que sea customizado). Se revisó el
    corpus real del curso (16 semanas más el Bonus, con las transcripciones y resúmenes
    ya cargados en la base del chatbot) para sacar el método que enseña cada semana. Por
-   eso cada skill dice "usá el método X del diploma" en vez de dar SEO genérico. Las
+   eso cada skill dice "usa el método X del diploma" en vez de dar SEO genérico. Las
    citas por semana están en cada skill y en la sección 5.
 
 2. YouTube y web (ideas de agentes y skills, más el formato técnico). Se buscaron ideas
@@ -149,7 +149,7 @@ herramientas).
 3. `analisis-serp-y-competencia`. Competidor de Negocio frente a competidor de SEO,
    directos e indirectos, identificación (búsqueda directa, herramientas, "Análisis de
    Repetición"), el "Ojo Clínico" manual, una tabla de competidores, los gaps y el
-   reporte de "Costo de Oportunidad". MCP: SerpApi (lo ideal acá, gratis) o Ahrefs
+   reporte de "Costo de Oportunidad". MCP: SerpApi (lo ideal aquí, gratis) o Ahrefs
    serp-overview (pago).
 
 4. `estrategia-de-contenidos-clusters`. De los "10 de Oro" salen 3 a 5 clusters (pilar

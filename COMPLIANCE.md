@@ -55,7 +55,7 @@ Las skills dan procedimientos numerados con defaults sensatos en vez de menús d
 Hay tres niveles. El frontmatter (`name` y `description`) es el único que siempre se carga. El cuerpo de la SKILL.md se lee on-demand cuando la skill se activa. Y `scripts/` se ejecuta solo si Python está disponible y el paso lo amerita. El detalle de conexión de datos se externaliza a `MCP-SETUP.md`.
 
 ### 8. Descriptions optimizadas
-Las descripciones son imperativas y algo "pushy" para disparar la activación o la delegación. Listan los triggers, incluido el caso en que el usuario no nombra la skill ni el agente, y cierran con la línea de frontera "NO uses… para X". Todas quedan por debajo de 1024 caracteres; las de los 3 agentes miden 846, 867 y 893. Empiezan con un verbo de acción ("Delegá a este agente cuando…", "Usá esta skill cuando…", "Ejecuta…", "Crea…").
+Las descripciones son imperativas y algo "pushy" para disparar la activación o la delegación. Listan los triggers, incluido el caso en que el usuario no nombra la skill ni el agente, y cierran con la línea de frontera "NO uses… para X". Todas quedan por debajo de 1024 caracteres; las de los 3 agentes miden 846, 867 y 893. Empiezan con un verbo de acción ("Delega a este agente cuando…", "Usa esta skill cuando…", "Ejecuta…", "Crea…").
 
 ### 9. Frontmatter spec-compliant
 - `name` en kebab-case e idéntico al nombre de la carpeta (verificado).
@@ -88,7 +88,7 @@ Siguiendo la guía *"Optimizing skill descriptions"* (https://agentskills.io/ski
 - `skills/investigacion-de-keywords/evals/eval_queries.json`
 - `skills/auditoria-tecnica/evals/eval_queries.json`
 
-Cada set trae 14 queries en español, casuales y formales, con typos realistas. Son 7 con `should_trigger: true` (prompts realistas, varios que no nombran el dominio, con nombres de cliente, nicho o URLs) y 7 con `should_trigger: false`, que son near-misses fuertes: comparten vocabulario pero pertenecen a otra skill. Por ejemplo "armame el reporte mensual" cae en `reporte-seo-gsc`, "dame keywords para mi nicho" en `investigacion-de-keywords` y "audita la velocidad" en `auditoria-tecnica`.
+Cada set trae 14 queries en español, casuales y formales, con typos realistas. Son 7 con `should_trigger: true` (prompts realistas, varios que no nombran el dominio, con nombres de cliente, nicho o URLs) y 7 con `should_trigger: false`, que son near-misses fuertes: comparten vocabulario pero pertenecen a otra skill. Por ejemplo "ármame el reporte mensual" cae en `reporte-seo-gsc`, "dame keywords para mi nicho" en `investigacion-de-keywords` y "audita la velocidad" en `auditoria-tecnica`.
 
 El runner `scripts/trigger_eval.sh` corre cada query N veces vía `claude -p "$query" --output-format json`, detecta con `jq` si se disparó un `tool_use` `name=="Skill"` para esa skill y calcula el `trigger_rate` por query:
 

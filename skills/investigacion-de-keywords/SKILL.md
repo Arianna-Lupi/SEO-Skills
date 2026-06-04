@@ -1,6 +1,6 @@
 ---
 name: investigacion-de-keywords
-description: Usá esta skill cuando el usuario quiera investigar, buscar, encontrar o descubrir palabras clave / keywords, armar una lista de palabras clave, clasificarlas por intención, agruparlas en clusters o decidir cuáles atacar primero — aunque no diga "keywords", p.ej. "qué términos podría posicionar", "qué busca mi público en Google", "no sé por dónde empezar con SEO en mi web", "ayudame a llenar la tab de Investigación de palabras clave". Sigue el método del diploma "De Cero a SEO" (aprendoseo): define audiencia con el Cuestionario SEO, descubre con los 4 métodos, clasifica por intención, agrupa en clusters y selecciona el "punto dulce" (volumen medio-alto × dificultad baja, priorizando long-tail).
+description: Usa esta skill cuando el usuario quiera investigar, buscar, encontrar o descubrir palabras clave / keywords, armar una lista de palabras clave, clasificarlas por intención, agruparlas en clusters o decidir cuáles atacar primero — aunque no diga "keywords", p.ej. "qué términos podría posicionar", "qué busca mi público en Google", "no sé por dónde empezar con SEO en mi web", "ayúdame a llenar la tab de Investigación de palabras clave". Sigue el método del diploma "De Cero a SEO" (aprendoseo): define audiencia con el Cuestionario SEO, descubre con los 4 métodos, clasifica por intención, agrupa en clusters y selecciona el "punto dulce" (volumen medio-alto × dificultad baja, priorizando long-tail).
 compatibility: Script opcional requiere Python 3 (uv) y requests; SerpApi/Ahrefs MCP opcionales (la skill funciona 100% manual).
 metadata:
   author: aprendoseo
@@ -10,7 +10,7 @@ metadata:
 
 Actúa como especialista en investigación de palabras clave en aprendoseo, siguiendo el método de Arianna Lupi y Diana Rodríguez (Semana 4 del diploma "De Cero a SEO").
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -92,25 +92,25 @@ Negocio: estudio de yoga en Bogotá. Audiencia: mujeres 28-45, principiantes, bu
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para expandir semillas: es determinista, ahorra tokens y mejora la precisión del long-tail. Usá su JSON como base y luego validá volumen/KD con el MCP de Ahrefs (el script NO los trae).
+Si Python 3 está disponible, **ejecuta el script** para expandir semillas: es determinista, ahorra tokens y mejora la precisión del long-tail. Usa su JSON como base y luego valida volumen/KD con el MCP de Ahrefs (el script NO los trae).
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```
 SERPAPI_API_KEY=... uv run skills/investigacion-de-keywords/scripts/expand_keywords.py --seed "rutina facial" --seed "serum vitamina c" --gl es --hl es
-# o, si no usás uv: SERPAPI_API_KEY=... python3 skills/investigacion-de-keywords/scripts/expand_keywords.py --seed "rutina facial" --seed "serum vitamina c" --gl es --hl es
+# o, si no usas uv: SERPAPI_API_KEY=... python3 skills/investigacion-de-keywords/scripts/expand_keywords.py --seed "rutina facial" --seed "serum vitamina c" --gl es --hl es
 # o por archivo (una semilla por línea):
 SERPAPI_API_KEY=... uv run skills/investigacion-de-keywords/scripts/expand_keywords.py --file semillas.txt --gl es --hl es
 ```
 
-Corré con `--help` para ver opciones. Salida: `{"ok":true,"seeds":[...],"candidates":[{"keyword","source":"autocomplete|related|paa"}],"count":N}`. Si falta `requests` o `SERPAPI_API_KEY` devuelve `{"ok":false,"reason":...,"fallback":...}` (exit 0) → **modo manual**: usá `mcp__serpapi__search` o Google Autocomplete a mano. Recordá: volumen/KD reales vienen de Ahrefs MCP, no de este script.
+Ejecútalo con `--help` para ver opciones. Salida: `{"ok":true,"seeds":[...],"candidates":[{"keyword","source":"autocomplete|related|paa"}],"count":N}`. Si falta `requests` o `SERPAPI_API_KEY` devuelve `{"ok":false,"reason":...,"fallback":...}` (exit 0) → **modo manual**: usa `mcp__serpapi__search` o Google Autocomplete a mano. Recuerda: volumen/KD reales vienen de Ahrefs MCP, no de este script.
 
 ## Gotchas
 
 - La IA es para **generar ideas**, NO para validar: el volumen/KD se confirma con datos reales (DinoRank/Ahrefs), no con lo que diga el modelo.
-- Apuntá al **"punto dulce" (volumen medio-alto × dificultad baja)**, no a la keyword de mayor volumen.
+- Apunta al **"punto dulce" (volumen medio-alto × dificultad baja)**, no a la keyword de mayor volumen.
 - Para empezar, **long-tail > head terms** (la cola larga rankea antes y convierte mejor).
-- Definí la **audiencia (Cuestionario SEO) ANTES** de cualquier keyword: *"mejor 100 que necesitan que 10.000 que curiosean"*.
-- Agrupá siempre en **clusters**: sin clusters no se construye Topic Authority.
+- Define la **audiencia (Cuestionario SEO) ANTES** de cualquier keyword: *"mejor 100 que necesitan que 10.000 que curiosean"*.
+- Agrupa siempre en **clusters**: sin clusters no se construye Topic Authority.
 - URL **corta, sin tildes y con la keyword**, no larga ni con acentos.
 - H1 con la keyword **lo más a la izquierda posible**, no al final.

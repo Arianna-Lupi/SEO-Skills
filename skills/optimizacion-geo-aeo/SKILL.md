@@ -1,6 +1,6 @@
 ---
 name: optimizacion-geo-aeo
-description: Usá esta skill cuando haya que optimizar contenido para la búsqueda con IA según el diploma "De Cero a SEO" (aprendoseo) — W14 (AEO) y W16 (GEO/AEO para LLMs). Aplicala siempre que quieras que tu contenido sea citado en Google AI Overviews, ChatGPT, Perplexity o Bing Copilot, o que gane featured snippet / People Also Ask / Knowledge Panel — aunque el usuario no diga "GEO/AEO", p.ej. "cómo aparezco en ChatGPT", "quiero salir en el resumen de IA de Google", "que me cite Perplexity", "optimizá esta guía para la era IA". En 2026 el CTR orgánico se fuga hacia las respuestas de IA: no publiques contenido informacional sin pasar por aquí.
+description: Usa esta skill cuando haya que optimizar contenido para la búsqueda con IA según el diploma "De Cero a SEO" (aprendoseo) — W14 (AEO) y W16 (GEO/AEO para LLMs). Aplícala siempre que quieras que tu contenido sea citado en Google AI Overviews, ChatGPT, Perplexity o Bing Copilot, o que gane featured snippet / People Also Ask / Knowledge Panel — aunque el usuario no diga "GEO/AEO", p.ej. "cómo aparezco en ChatGPT", "quiero salir en el resumen de IA de Google", "que me cite Perplexity", "optimiza esta guía para la era IA". En 2026 el CTR orgánico se fuga hacia las respuestas de IA: no publiques contenido informacional sin pasar por aquí.
 compatibility: Script opcional requiere Python 3 (uv) y SERPAPI_API_KEY + requests. SerpApi MCP (GRATIS) o Ahrefs Brand Radar (pago) opcionales; funciona en manual con Google + ChatGPT/Perplexity.
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como especialista en GEO/AEO en aprendoseo. Tu trabajo ya no es solo "salir primero": es **que te citen** cuando la IA responde por el usuario. Marco del diploma (Arianna, W16): *"En la búsqueda con IA no compites por un clic, compites por una mención"*. El CTR orgánico se está cayendo hacia los AI Overviews — quien no es citable, desaparece.
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 **AEO vs GEO (no son lo mismo):**
 - **AEO (Answer Engine Optimization, W14):** optimizar para **motores de respuesta** — featured snippets, People Also Ask, Knowledge Panel, AI Overviews de Google. La respuesta vive *en la SERP*.
@@ -81,22 +81,22 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 
 ## Script determinista (ahorro de tokens)
 
-Si Python está disponible, EJECUTÁ este script para detectar las features de IA/respuesta de la SERP (es determinista, ahorra tokens y mejora precisión) y actuá sobre su JSON en vez de leer la SERP a ojo. Si falta `SERPAPI_API_KEY` o la dependencia `requests`, seguí en modo manual (Google incógnito + ChatGPT/Perplexity).
+Si Python está disponible, EJECUTÁ este script para detectar las features de IA/respuesta de la SERP (es determinista, ahorra tokens y mejora precisión) y actúa sobre su JSON en vez de leer la SERP a ojo. Si falta `SERPAPI_API_KEY` o la dependencia `requests`, seguí en modo manual (Google incógnito + ChatGPT/Perplexity).
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 SERPAPI_API_KEY=xxx uv run scripts/ai_features.py "tu pregunta/keyword" --gl es --hl es
-# o, si no usás uv: SERPAPI_API_KEY=xxx python3 scripts/ai_features.py "tu pregunta/keyword" --gl es --hl es
+# o, si no usas uv: SERPAPI_API_KEY=xxx python3 scripts/ai_features.py "tu pregunta/keyword" --gl es --hl es
 ```
 
-Corré con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "ai_overview": bool, "featured_snippet": {"present": bool, "type": "paragraph|list|table|null"}, "paa": [...], "answer_box": bool, "recommendation": "..."}` — la recomendación es por reglas (p. ej. "hay featured snippet de lista → estructurá tu respuesta como lista de N pasos"). Si falla, `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0).
+Corre con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "ai_overview": bool, "featured_snippet": {"present": bool, "type": "paragraph|list|table|null"}, "paa": [...], "answer_box": bool, "recommendation": "..."}` — la recomendación es por reglas (p. ej. "hay featured snippet de lista → estructura tu respuesta como lista de N pasos"). Si falla, `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0).
 
 ## Gotchas
 
-- **AEO (featured snippets / PAA / AI Overviews en la SERP) ≠ GEO (LLMs: AI Overviews / ChatGPT / Perplexity / Copilot citándote en su respuesta).** Optimizá para ambos pero no los mezcles en el reporte.
+- **AEO (featured snippets / PAA / AI Overviews en la SERP) ≠ GEO (LLMs: AI Overviews / ChatGPT / Perplexity / Copilot citándote en su respuesta).** Optimiza para ambos pero no los mezcles en el reporte.
 - Estructura **answer-first: respuesta directa de 40-60 palabras al inicio**, no enterrada tras 3 párrafos de intro. Si no está en los primeros 60 caracteres útiles, la IA cita a otro.
-- **Respondé las PAA con encabezados en forma de pregunta** ("¿Qué es…?", "¿Cómo…?"), no con encabezados genéricos ("Introducción", "Ventajas") — perdés los slots de pregunta.
-- Las IAs **citan marca / E-E-A-T, no solo enlaces**: en GEO te pueden citar sin enlazarte. Medí menciones de marca (Brand Radar / búsqueda manual), no solo backlinks.
+- **Responde las PAA con encabezados en forma de pregunta** ("¿Qué es…?", "¿Cómo…?"), no con encabezados genéricos ("Introducción", "Ventajas") — pierdes los slots de pregunta.
+- Las IAs **citan marca / E-E-A-T, no solo enlaces**: en GEO te pueden citar sin enlazarte. Mide menciones de marca (Brand Radar / búsqueda manual), no solo backlinks.
 - Contenido **con autoría y fecha, no anónimo**: las IAs descartan lo que no tiene E-E-A-T verificable.
 - Esto **extiende el SEO clásico, no lo reemplaza**: sin rastreo/indexación (W12) no hay nada que citar (*"lo que no se rastrea, no existe"*).

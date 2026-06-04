@@ -1,6 +1,6 @@
 ---
 name: redaccion-y-optimizacion-nlp
-description: Redacta y optimiza contenido SEO siguiendo el método de la Semana 11 del diploma "De Cero a SEO" (Dana Aliaga) + módulo NLP. Mantra "Escribe para humanos, optimiza para robots". Usá esta skill cuando tengas que escribir, reescribir o mejorar un artículo/página para que posicione — AUNQUE el usuario no diga "NLP" ni "SEO", p.ej. "escribime/mejorá este artículo para que posicione", "humanizá este texto de IA", "optimizá la keyword en este contenido", "revisá la densidad/escaneabilidad". Convierte un brief aprobado en borrador optimizado: ubicación de keyword (H1 + primeras 100 palabras), relevancia semántica/entidades (NLP, TF*IDF), escaneabilidad, Image SEO. No publiques sin pasar el checklist on-page y NLP de aquí.
+description: Redacta y optimiza contenido SEO siguiendo el método de la Semana 11 del diploma "De Cero a SEO" (Dana Aliaga) + módulo NLP. Mantra "Escribe para humanos, optimiza para robots". Usa esta skill cuando tengas que escribir, reescribir o mejorar un artículo/página para que posicione — AUNQUE el usuario no diga "NLP" ni "SEO", p.ej. "escríbeme/mejora este artículo para que posicione", "humaniza este texto de IA", "optimiza la keyword en este contenido", "revisa la densidad/escaneabilidad". Convierte un brief aprobado en borrador optimizado: ubicación de keyword (H1 + primeras 100 palabras), relevancia semántica/entidades (NLP, TF*IDF), escaneabilidad, Image SEO. No publiques sin pasar el checklist on-page y NLP de aquí.
 compatibility: Script opcional de legibilidad/densidad requiere Python 3 (uv); si no está, modo manual. SerpApi MCP (gratis) y Ahrefs MCP (pago) opcionales para research/entidades.
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como **redactor/a SEO en aprendoseo**, siguiendo el método de Dana Aliaga (Semana 11) y el módulo de NLP. Mantra que gobierna TODO: **"Escribe para humanos, optimiza para robots."** Primero las personas; los buscadores después.
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -33,7 +33,7 @@ Requisito: sin brief no se redacta. Si no hay brief, vuelve a `brief-de-contenid
 
 Esta skill **funciona sin ningún MCP** (research manual). Los datos mejoran la fase de investigación y el análisis de entidades.
 
-1. **Sin MCP (manual):** busca la keyword en Google y lee a mano los **AI Overviews**, el bloque **People Also Ask** y los **competidores** del top. Para entidades/relevancia semántica el **default es DinoRank (TF*IDF)** — el "arma secreta" del diploma. Alternativas si ya las usás: Surfer SEO (gaps LSI), Neuron Writer. Para legibilidad, default **Hemingway**; alternativas Grammarly, Jasper.
+1. **Sin MCP (manual):** busca la keyword en Google y lee a mano los **AI Overviews**, el bloque **People Also Ask** y los **competidores** del top. Para entidades/relevancia semántica el **default es DinoRank (TF*IDF)** — el "arma secreta" del diploma. Alternativas si ya las usas: Surfer SEO (gaps LSI), Neuron Writer. Para legibilidad, default **Hemingway**; alternativas Grammarly, Jasper.
 
 2. **SerpApi MCP (GRATIS — principal para research):** `mcp__serpapi__search` para traer:
    - **AI Overviews** y **People Also Ask** → preguntas y subtemas que el texto debe responder.
@@ -89,19 +89,19 @@ Marca status **"Redactado"** y haz el check: **H1 / URL / keyword** correctos. A
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para medir legibilidad, densidad y colocación de keyword en vez de estimarlo a ojo: es determinista, ahorra tokens y es exacto. Pasá el artículo por `--file` o stdin (texto grande no va en la línea de comandos). Usá su JSON como base del diagnóstico.
+Si Python 3 está disponible, **ejecuta el script** para medir legibilidad, densidad y colocación de keyword en vez de estimarlo a ojo: es determinista, ahorra tokens y es exacto. Pasa el artículo por `--file` o stdin (texto grande no va en la línea de comandos). Usa su JSON como base del diagnóstico.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 uv run skills/redaccion-y-optimizacion-nlp/scripts/readability.py \
   --keyword "keyword principal" --file ruta/al/articulo.md
-# o, si no usás uv: python3 skills/redaccion-y-optimizacion-nlp/scripts/readability.py --keyword "keyword principal" --file ruta/al/articulo.md
+# o, si no usas uv: python3 skills/redaccion-y-optimizacion-nlp/scripts/readability.py --keyword "keyword principal" --file ruta/al/articulo.md
 # o por stdin:
 cat articulo.md | uv run skills/redaccion-y-optimizacion-nlp/scripts/readability.py --keyword "keyword principal" --file -
 ```
 
-Corré con `--help` para ver opciones. Devuelve `{"ok":true,"word_count","sentence_count","avg_sentence_words","long_sentences","paragraphs","keyword_density_pct","keyword_in_first_100_words","headings":{...},"flags":[...]}`. Tomá `flags` como las correcciones a aplicar (frases >25 palabras, densidad fuera de rango, keyword en primeras 100 palabras, jerarquía de encabezados). Acepta Markdown o texto plano; solo stdlib. Si Python no está disponible, evaluá en **modo manual**.
+Corre con `--help` para ver opciones. Devuelve `{"ok":true,"word_count","sentence_count","avg_sentence_words","long_sentences","paragraphs","keyword_density_pct","keyword_in_first_100_words","headings":{...},"flags":[...]}`. Toma `flags` como las correcciones a aplicar (frases >25 palabras, densidad fuera de rango, keyword en primeras 100 palabras, jerarquía de encabezados). Acepta Markdown o texto plano; solo stdlib. Si Python no está disponible, evalúa en **modo manual**.
 
 ## Salida
 
@@ -149,10 +149,10 @@ ON-PAGE
 
 ## Gotchas
 
-- **Escribí para humanos, optimizá para robots** — en ese orden. No rellenes con keywords: el **keyword stuffing penaliza** y se lee mal.
+- **Escribe para humanos, optimiza para robots** — en ese orden. No rellenes con keywords: el **keyword stuffing penaliza** y se lee mal.
 - **Keyword en el H1 y en las primeras 100 palabras, natural** — no la fuerces ni la repitas en cada párrafo.
-- **Optimizá ENTIDADES / relevancia semántica, no la repetición de la keyword** — el resto del tema se cubre con TF*IDF (DinoRank) y entidades relacionadas, no repitiendo el término exacto.
-- **Humanizá el texto de IA (reposo + voz de marca), no publiques el output crudo** — la IA da el outline, vos das el texto final; validá jerarquía y datos.
+- **Optimiza ENTIDADES / relevancia semántica, no la repetición de la keyword** — el resto del tema se cubre con TF*IDF (DinoRank) y entidades relacionadas, no repitiendo el término exacto.
+- **Humaniza el texto de IA (reposo + voz de marca), no publiques el output crudo** — la IA da el outline, tú das el texto final; valida jerarquía y datos.
 - **Image SEO sí cuenta:** filename con guiones + ALT descriptivo + WebP + dimensiones, no "IMG_2843.jpg" pesada.
-- **Definí la voz (3 adjetivos) primero, no después** — sin ella el texto sale inconsistente.
+- **Define la voz (3 adjetivos) primero, no después** — sin ella el texto sale inconsistente.
 - Esta skill cierra el flujo: estrategia (W7) → brief (W8/W10) → **redacción (W11)** → status "Redactado" en la Plantilla Master.

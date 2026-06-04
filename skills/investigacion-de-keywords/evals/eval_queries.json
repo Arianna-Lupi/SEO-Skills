@@ -1,17 +1,17 @@
 [
   { "query": "Quiero investigar palabras clave para mi tienda online de café de especialidad. ¿Por dónde empiezo?", "should_trigger": true },
   { "query": "no se que terminos podria posicionar en google para mi estudio de yoga en Rosario", "should_trigger": true },
-  { "query": "Ayudame a llenar la tab de Investigación de palabras clave del template del diploma para el nicho de pañales ecológicos.", "should_trigger": true },
+  { "query": "Ayúdame a llenar la tab de Investigación de palabras clave del template del diploma para el nicho de pañales ecológicos.", "should_trigger": true },
   { "query": "qué busca mi público en Google cuando quiere contratar un fotógrafo de bodas", "should_trigger": true },
   { "query": "Tengo una web nueva de asesoría fiscal y no sé por dónde arrancar con el SEO, necesito términos para atacar.", "should_trigger": true },
-  { "query": "descubrime ideas de keywords long tail con volumen medio y dificultad baja para clases de inglés online", "should_trigger": true },
-  { "query": "clasificame estas búsquedas por intención (informacional, transaccional, etc) y agrupalas en clusters: \"comprar bici\", \"como elegir bici\", \"mejores bicis 2026\"", "should_trigger": true },
+  { "query": "descúbreme ideas de keywords long tail con volumen medio y dificultad baja para clases de inglés online", "should_trigger": true },
+  { "query": "clasifícame estas búsquedas por intención (informacional, transaccional, etc) y agrúpalas en clusters: \"comprar bici\", \"como elegir bici\", \"mejores bicis 2026\"", "should_trigger": true },
 
-  { "query": "Ya tengo la keyword \"mejores zapatillas para correr\" priorizada, armame el brief de contenido para el redactor.", "should_trigger": false },
-  { "query": "Mirá la SERP de \"curso de excel online\" y decime quiénes son mis competidores y qué formato rankea en el top 3.", "should_trigger": false },
-  { "query": "armame el informe mensual de search console con clics e impresiones del último mes", "should_trigger": false },
-  { "query": "diseñame la arquitectura del sitio y el enlazado interno para estas categorías de mi ecommerce", "should_trigger": false },
-  { "query": "revisá el robots.txt y los canonical de mi sitio porque creo que hay páginas mal indexadas", "should_trigger": false },
-  { "query": "Tengo el listado de keywords del cluster, ahora mapeámelas a URLs concretas para saber qué página ataca cada una.", "should_trigger": false },
-  { "query": "optimizame los meta títulos y descripciones de estas 10 páginas que ya tienen tráfico", "should_trigger": false }
+  { "query": "Ya tengo la keyword \"mejores zapatillas para correr\" priorizada, ármame el brief de contenido para el redactor.", "should_trigger": false },
+  { "query": "Mira la SERP de \"curso de excel online\" y dime quiénes son mis competidores y qué formato rankea en el top 3.", "should_trigger": false },
+  { "query": "ármame el informe mensual de search console con clics e impresiones del último mes", "should_trigger": false },
+  { "query": "diséñame la arquitectura del sitio y el enlazado interno para estas categorías de mi ecommerce", "should_trigger": false },
+  { "query": "revisa el robots.txt y los canonical de mi sitio porque creo que hay páginas mal indexadas", "should_trigger": false },
+  { "query": "Tengo el listado de keywords del cluster, ahora mapéamelas a URLs concretas para saber qué página ataca cada una.", "should_trigger": false },
+  { "query": "optimízame los meta títulos y descripciones de estas 10 páginas que ya tienen tráfico", "should_trigger": false }
 ]

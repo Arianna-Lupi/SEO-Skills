@@ -1,17 +1,17 @@
 [
-  { "query": "Hacé una auditoría técnica completa de mi sitio tiendanatural.com antes de arrancar el proyecto.", "should_trigger": true },
+  { "query": "Haz una auditoría técnica completa de mi sitio tiendanatural.com antes de arrancar el proyecto.", "should_trigger": true },
   { "query": "se me cayó el tráfico de golpe y no se por que, ayuda", "should_trigger": true },
   { "query": "Google no me indexa varias páginas nuevas, ¿qué reviso?", "should_trigger": true },
   { "query": "el sitio carga lentísimo y tengo los Core Web Vitals en rojo, qué hago", "should_trigger": true },
   { "query": "Vamos a migrar la web a un dominio nuevo y rediseñarla, quiero revisar la salud técnica antes y después.", "should_trigger": true },
-  { "query": "revisá el robots.txt, los canonical y el sitemap de mi-sitio.com porque algo está mal configurado", "should_trigger": true },
-  { "query": "es la revisión trimestral del proyecto del cliente, chequeá indexabilidad, velocidad y seguridad", "should_trigger": true },
+  { "query": "revisa el robots.txt, los canonical y el sitemap de mi-sitio.com porque algo está mal configurado", "should_trigger": true },
+  { "query": "es la revisión trimestral del proyecto del cliente, revisa indexabilidad, velocidad y seguridad", "should_trigger": true },
 
-  { "query": "Mirame el top 5 de la SERP de \"abogado laboralista madrid\" y analizá a la competencia que rankea.", "should_trigger": false },
-  { "query": "armame el reporte mensual de SEO con las métricas de Google Search Console", "should_trigger": false },
-  { "query": "investigame keywords para mi nicho de repostería sin gluten, no sé por dónde empezar", "should_trigger": false },
+  { "query": "Mírame el top 5 de la SERP de \"abogado laboralista madrid\" y analiza a la competencia que rankea.", "should_trigger": false },
+  { "query": "ármame el reporte mensual de SEO con las métricas de Google Search Console", "should_trigger": false },
+  { "query": "investígame keywords para mi nicho de repostería sin gluten, no sé por dónde empezar", "should_trigger": false },
   { "query": "qué encabezados y qué meta título le pongo a este artículo nuevo sobre finanzas personales", "should_trigger": false },
-  { "query": "generame el schema JSON-LD de tipo LocalBusiness para mi página de contacto", "should_trigger": false },
-  { "query": "Tengo un listado de URLs en un excel, hacé el inventario y clasificalas por tipo de plantilla.", "should_trigger": false },
-  { "query": "optimizame el on-page de esta página: keyword principal, encabezados y densidad, sin tocar lo técnico", "should_trigger": false }
+  { "query": "genérame el schema JSON-LD de tipo LocalBusiness para mi página de contacto", "should_trigger": false },
+  { "query": "Tengo un listado de URLs en un excel, haz el inventario y clasifícalas por tipo de plantilla.", "should_trigger": false },
+  { "query": "optimízame el on-page de esta página: keyword principal, encabezados y densidad, sin tocar lo técnico", "should_trigger": false }
 ]

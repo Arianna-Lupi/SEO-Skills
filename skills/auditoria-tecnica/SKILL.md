@@ -1,6 +1,6 @@
 ---
 name: auditoria-tecnica
-description: Ejecuta una auditoría SEO técnica completa en los 3 bloques del diploma "De Cero a SEO" (indexabilidad, velocidad/CWV, seguridad+canonical). Usá esta skill cuando haya que revisar la salud técnica de un sitio — AUNQUE el usuario no diga "auditoría técnica", p.ej. "se me cayó el tráfico y no sé por qué", "Google no me indexa", "el sitio carga lento / CWV en rojo", "voy a migrar/rediseñar", "revisá robots.txt / canonical / sitemap", u onboarding de proyecto nuevo y revisiones trimestrales. Audita POR PLANTILLAS, no página por página, y entrega issues por severidad con plan de remediación.
+description: Ejecuta una auditoría SEO técnica completa en los 3 bloques del diploma "De Cero a SEO" (indexabilidad, velocidad/CWV, seguridad+canonical). Usa esta skill cuando haya que revisar la salud técnica de un sitio — AUNQUE el usuario no diga "auditoría técnica", p.ej. "se me cayó el tráfico y no sé por qué", "Google no me indexa", "el sitio carga lento / CWV en rojo", "voy a migrar/rediseñar", "revisa robots.txt / canonical / sitemap", u onboarding de proyecto nuevo y revisiones trimestrales. Audita POR PLANTILLAS, no página por página, y entrega issues por severidad con plan de remediación.
 compatibility: Scripts opcionales: resumen de crawl (stdlib, Python 3 vía uv) y http_checks en vivo (requiere `requests`); si no, modo manual. Screaming Frog CLI (gratis hasta 500 URLs), GSC MCP (gratis) y Ahrefs MCP (pago) opcionales.
 metadata:
   author: aprendoseo
@@ -12,7 +12,7 @@ metadata:
 
 Actúa como auditor técnico en aprendoseo. Filosofía del diploma: *"Lo que no se rastrea, no existe"* y *"Menos es más si es lo correcto"*. No optimizas páginas sueltas: **optimizas el contenedor** (la plantilla).
 
-> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Leé ese archivo para seguir el método exacto del curso; no improvises el método.
+> **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 ## Cuándo usar
 
@@ -82,36 +82,36 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 
 ## Script determinista (ahorro de tokens)
 
-Si Python 3 está disponible, **ejecutá el script** para resumir el crawl: es determinista, ahorra tokens y evita leer CSV enormes en contexto. Usá su JSON como base del informe de severidad.
+Si Python 3 está disponible, **ejecuta el script** para resumir el crawl: es determinista, ahorra tokens y evita leer CSV enormes en contexto. Usa su JSON como base del informe de severidad.
 
-Ejecutá (cero instalación, resuelve deps solo):
+Ejecuta (cero instalación, resuelve deps solo):
 
 ```
 # con export de Screaming Frog (preferido):
 uv run skills/auditoria-tecnica/scripts/parse_sf.py --folder ./export_sf
-# o, si no usás uv: python3 skills/auditoria-tecnica/scripts/parse_sf.py --folder ./export_sf
+# o, si no usas uv: python3 skills/auditoria-tecnica/scripts/parse_sf.py --folder ./export_sf
 # o apuntando a archivos sueltos:
 uv run skills/auditoria-tecnica/scripts/parse_sf.py --internal internal_all.csv --issues issues_overview_report.csv
 ```
 
-Corré con `--help` para ver opciones. Salida: `{"ok":true,"urls_total":N,"status_codes":{...},"non_indexable":N,"by_template_hint":{...},"issues":[{"issue","severity_hint","count"}],"missing_files":[...]}`. Solo stdlib.
+Corre con `--help` para ver opciones. Salida: `{"ok":true,"urls_total":N,"status_codes":{...},"non_indexable":N,"by_template_hint":{...},"issues":[{"issue","severity_hint","count"}],"missing_files":[...]}`. Solo stdlib.
 
-Si NO hay export de SF, usá el fallback en vivo (necesita `requests`):
+Si NO hay export de SF, usa el fallback en vivo (necesita `requests`):
 
 ```
 uv run skills/auditoria-tecnica/scripts/http_checks.py --file urls.txt --cap 200 --concurrency 8
-# o, si no usás uv: python3 skills/auditoria-tecnica/scripts/http_checks.py --file urls.txt --cap 200 --concurrency 8
+# o, si no usas uv: python3 skills/auditoria-tecnica/scripts/http_checks.py --file urls.txt --cap 200 --concurrency 8
 ```
 
-Salida: `{"ok":true,"checked":N,"results":[{"url","status","https","redirect_to"}],"summary":{...}}`. Si falta `requests` devuelve `{"ok":false,"reason":...,"fallback":...}` (exit 0) → **modo manual**: revisá status/HTTPS con Screaming Frog o a mano.
+Salida: `{"ok":true,"checked":N,"results":[{"url","status","https","redirect_to"}],"summary":{...}}`. Si falta `requests` devuelve `{"ok":false,"reason":...,"fallback":...}` (exit 0) → **modo manual**: revisa status/HTTPS con Screaming Frog o a mano.
 
 ## Gotchas
 
-- **Auditá POR PLANTILLAS, no página por página** — un fallo de plantilla afecta a TODAS sus instancias; arreglás el contenedor y propagás el fix. Página por página = trabajo infinito.
+- **Audita POR PLANTILLAS, no página por página** — un fallo de plantilla afecta a TODAS sus instancias; arreglas el contenedor y propagas el fix. Página por página = trabajo infinito.
 - **Primero rastreo/indexación (lo que no se rastrea no existe), después velocidad** — no optimices CWV de páginas que Google ni siquiera puede indexar. Bloque 1 antes que Bloque 2.
-- **El CLI de Screaming Frog es GRATIS hasta 500 URLs** — no asumas que necesitás licencia; solo hace falta para >500 URLs, config guardada, render JS, scheduling o API.
-- **No inventes datos de un bloque sin export — marcalo incompleto** — si no hay crawl/GSC para un bloque, decilo explícito; no rellenes con suposiciones.
-- **No confundas INP con FID:** FID está deprecado; medí **INP**.
-- **Canonical cruzado** mal puesto consolida señales en la URL equivocada; usá self-canonical.
+- **El CLI de Screaming Frog es GRATIS hasta 500 URLs** — no asumas que necesitas licencia; solo hace falta para >500 URLs, config guardada, render JS, scheduling o API.
+- **No inventes datos de un bloque sin export — márcalo incompleto** — si no hay crawl/GSC para un bloque, dilo explícito; no rellenes con suposiciones.
+- **No confundas INP con FID:** FID está deprecado; mide **INP**.
+- **Canonical cruzado** mal puesto consolida señales en la URL equivocada; usa self-canonical.
 - **Reportar issues sin severidad ni plan = informe inútil.** Prioriza por impacto.
-- **Imágenes pesadas = causa #1 de LCP malo:** filtrá **>100 kb** y pasá a WebP.
+- **Imágenes pesadas = causa #1 de LCP malo:** filtra **>100 kb** y pasa a WebP.

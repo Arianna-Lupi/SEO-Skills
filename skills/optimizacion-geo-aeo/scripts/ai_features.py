@@ -60,17 +60,17 @@ def classify_answer_box(ab):
 def build_recommendation(ai_overview, fs_present, fs_type, has_paa):
     parts = []
     if fs_present and fs_type == "list":
-        parts.append("Hay featured snippet de lista → estructurá tu respuesta como lista numerada de N pasos/ítems, con frase-respuesta directa antes de la lista.")
+        parts.append("Hay featured snippet de lista → estructura tu respuesta como lista numerada de N pasos/ítems, con frase-respuesta directa antes de la lista.")
     elif fs_present and fs_type == "table":
-        parts.append("Hay featured snippet de tabla → incluí una tabla comparativa clara con encabezados de columna.")
+        parts.append("Hay featured snippet de tabla → incluye una tabla comparativa clara con encabezados de columna.")
     elif fs_present and fs_type == "paragraph":
-        parts.append("Hay featured snippet de párrafo → respondé la pregunta en 40-55 palabras al inicio (answer-first), tono directo.")
+        parts.append("Hay featured snippet de párrafo → responde la pregunta en 40-55 palabras al inicio (answer-first), tono directo.")
     if ai_overview:
-        parts.append("Hay AI Overview → reforzá E-E-A-T (autoría + fecha), datos citables y respuestas atómicas para que la IA te cite.")
+        parts.append("Hay AI Overview → refuerza E-E-A-T (autoría + fecha), datos citables y respuestas atómicas para que la IA te cite.")
     if has_paa:
-        parts.append("Hay People Also Ask → convertí esas preguntas en H2/H3 literales con respuesta breve debajo de cada una.")
+        parts.append("Hay People Also Ask → convierte esas preguntas en H2/H3 literales con respuesta breve debajo de cada una.")
     if not parts:
-        parts.append("SERP sin features de IA destacadas → igual aplicá answer-first y estructura por preguntas para captar futuros snippets.")
+        parts.append("SERP sin features de IA destacadas → igual aplica answer-first y estructura por preguntas para captar futuros snippets.")
     return " ".join(parts)
 
 
@@ -89,7 +89,7 @@ def main():
     if not api_key:
         fail(
             "Falta SERPAPI_API_KEY en el entorno.",
-            "modo manual: buscá la query en Google (incógnito) y verificá AI Overview / featured snippet / PAA a ojo, y validá en ChatGPT/Perplexity.",
+            "modo manual: busca la query en Google (incógnito) y verifica AI Overview / featured snippet / PAA a ojo, y valida en ChatGPT/Perplexity.",
         )
 
     try:
@@ -97,7 +97,7 @@ def main():
     except ImportError:
         fail(
             "Falta la dependencia 'requests' (pip install -r requirements.txt).",
-            "modo manual: verificá las features de IA en el navegador.",
+            "modo manual: verifica las features de IA en el navegador.",
         )
 
     params = {"engine": "google", "q": args.query, "gl": args.gl, "hl": args.hl, "api_key": api_key}
@@ -106,10 +106,10 @@ def main():
         resp.raise_for_status()
         data = resp.json()
     except Exception as e:  # noqa: BLE001
-        fail(f"Error de red/SerpApi: {e}", "modo manual: verificá las features en el navegador.")
+        fail(f"Error de red/SerpApi: {e}", "modo manual: verifica las features en el navegador.")
 
     if data.get("error"):
-        fail(f"SerpApi error: {data['error']}", "modo manual: verificá las features en el navegador.")
+        fail(f"SerpApi error: {data['error']}", "modo manual: verifica las features en el navegador.")
 
     ai_overview = "ai_overview" in data
     ab = data.get("answer_box")

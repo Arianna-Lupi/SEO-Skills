@@ -7,7 +7,7 @@
 serp_outline.py — Extractor de esquemas (H1/H2/H3) de los competidores del top de la SERP.
 
 Qué hace (determinista):
-  1. Obtiene las URLs orgánicas del top N (vía SerpApi) — o usá --urls para
+  1. Obtiene las URLs orgánicas del top N (vía SerpApi) — o usa --urls para
      pasar una lista y saltarte SerpApi.
   2. Descarga cada URL y extrae su estructura de encabezados H1/H2/H3.
   3. Junta los H2 más repetidos en un esquema sugerido y suma las preguntas
@@ -105,8 +105,8 @@ def main():
         from bs4 import BeautifulSoup  # noqa: PLC0415
     except ImportError as e:
         fail(
-            f"Falta dependencia ({e}). Instalá: pip install -r requirements.txt",
-            "modo manual: abrí el top 3-5 de la SERP y copiá sus H2/H3 a mano (Headings Map).",
+            f"Falta dependencia ({e}). Instala: pip install -r requirements.txt",
+            "modo manual: abre el top 3-5 de la SERP y copia sus H2/H3 a mano (Headings Map).",
         )
 
     paa = []
@@ -115,11 +115,11 @@ def main():
     else:
         res, err = get_top_urls(args.query, args.top, args.gl, args.hl, requests)
         if err:
-            fail(err, "modo manual: pasá --urls con el top de la SERP, o analizá los encabezados a mano.")
+            fail(err, "modo manual: pasa --urls con el top de la SERP, o analiza los encabezados a mano.")
         urls, paa = res["urls"], res["paa"]
 
     if not urls:
-        fail("No hay URLs para analizar.", "modo manual: pasá --urls o revisá la query.")
+        fail("No hay URLs para analizar.", "modo manual: pasa --urls o revisa la query.")
 
     competitors = []
     all_h2 = []

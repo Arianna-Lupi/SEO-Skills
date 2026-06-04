@@ -139,7 +139,7 @@ def main():
         print(json.dumps({
             "ok": False,
             "reason": "No se encontraron sitemaps válidos ni URLs (robots.txt sin Sitemap: y sitemap.xml ausente o vacío).",
-            "fallback": "modo manual: probá rutas de sitemap no estándar, o usá Screaming Frog CLI (gratis ≤500 URLs) para rastrear el sitio.",
+            "fallback": "modo manual: prueba rutas de sitemap no estándar, o usa Screaming Frog CLI (gratis ≤500 URLs) para rastrear el sitio.",
         }, ensure_ascii=False))
         return
 

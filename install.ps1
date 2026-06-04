@@ -8,6 +8,8 @@
 # Con parametros (clona el repo y corre .\install.ps1):
 #   .\install.ps1 -Client cursor
 #   .\install.ps1 -Project          (Claude Code, solo este proyecto)
+#   .\install.ps1 -Check            (solo dice si hay version nueva; no instala)
+#   .\install.ps1 -Update           (actualiza las skills sin preguntar)
 #   .\install.ps1 -WithUv           (instala uv aunque no sea interactivo)
 #   .\install.ps1 -NoUv             (no chequea uv)
 #   .\install.ps1 -Dir C:\ruta      (carpeta concreta: crea skills\ y agents\)
@@ -19,13 +21,28 @@ param(
   [string]$Client = "claude",   # claude | cursor | agents | codex | copilot
   [switch]$Project,             # Claude Code: solo este proyecto
   [string]$Dir = "",            # carpeta concreta (override)
+  [switch]$Check,               # solo busca actualizaciones, no instala
+  [switch]$Update,              # actualiza sin preguntar
   [switch]$WithUv,              # instala uv aunque no sea interactivo
   [switch]$NoUv                 # salta el chequeo de uv
 )
 
 $ErrorActionPreference = "Stop"
-$RepoUrl = "https://github.com/Arianna-Lupi/SEO-Skills.git"
-$UvPs1   = "https://astral.sh/uv/install.ps1"
+$RepoUrl  = "https://github.com/Arianna-Lupi/SEO-Skills.git"
+$RawBase  = "https://raw.githubusercontent.com/Arianna-Lupi/SEO-Skills/main"
+$UvPs1    = "https://astral.sh/uv/install.ps1"
+$Marker   = ".seo-skills-version"
+
+function Get-RemoteVersion {
+  try { return (Invoke-RestMethod -Uri "$RawBase/VERSION" -TimeoutSec 8).ToString().Trim() }
+  catch { return "" }
+}
+# Devuelve $true si $a es mas nueva que $b (compara como [version], con fallback a texto).
+function Test-Newer($a, $b) {
+  if ([string]::IsNullOrEmpty($a) -or [string]::IsNullOrEmpty($b)) { return $false }
+  if ($a -eq $b) { return $false }
+  try { return ([version]$a -gt [version]$b) } catch { return ($a -ne $b) }
+}
 
 Write-Host ""
 Write-Host "SEO Skills - aprendoseo (De Cero a SEO)" -ForegroundColor Cyan
@@ -34,8 +51,9 @@ Write-Host ""
 
 # --- 1) localizar la fuente; clonar a temp si corre via irm|iex ---
 $src = $null
+$localClone = $false
 if ($PSScriptRoot -and (Test-Path (Join-Path $PSScriptRoot "skills"))) {
-  $src = $PSScriptRoot
+  $src = $PSScriptRoot; $localClone = $true
 } else {
   if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
     Write-Error "Necesitas git para descargar el repo. Instala git y reintenta."
@@ -48,8 +66,21 @@ if ($PSScriptRoot -and (Test-Path (Join-Path $PSScriptRoot "skills"))) {
 }
 if (-not (Test-Path (Join-Path $src "skills"))) { Write-Error "No encontre skills/ en $src"; return }
 
+# Version de este paquete y la ultima publicada.
+$selfVersion = "0.0.0"
+$vfile = Join-Path $src "VERSION"
+if (Test-Path $vfile) { $selfVersion = (Get-Content $vfile -First 1).Trim() }
+$remoteVersion = Get-RemoteVersion
+
+# --- 1b) si corres un clon local viejo, avisa que hay instalador nuevo ---
+if ($localClone -and (Test-Newer $remoteVersion $selfVersion)) {
+  Write-Host "! Hay una version nueva del instalador y de las skills: $selfVersion -> $remoteVersion." -ForegroundColor Yellow
+  Write-Host "  Para traerla: 'git pull' en el repo, o corre el comando de una linea de arriba." -ForegroundColor DarkGray
+  Write-Host ""
+}
+
 # --- 2) determinar interactividad y elegir cliente ---
-$interactive = [Environment]::UserInteractive -and -not [Console]::IsInputRedirected
+$interactive = [Environment]::UserInteractive -and -not [Console]::IsInputRedirected -and -not $Check
 $clientGiven = $PSBoundParameters.ContainsKey('Client')
 $useDir = -not [string]::IsNullOrEmpty($Dir)
 
@@ -100,6 +131,40 @@ if ($useDir) {
   }
 }
 
+# Version ya instalada en ese destino, si hay marcador previo.
+$installedVersion = ""
+$markerPath = Join-Path $skillsDest $Marker
+if (Test-Path $markerPath) { $installedVersion = (Get-Content $markerPath -First 1).Trim() }
+$target = if ($remoteVersion) { $remoteVersion } else { $selfVersion }
+
+# --- modo -Check: informa y sale ---
+if ($Check) {
+  Write-Host "Cliente: $Client    Carpeta: $skillsDest" -ForegroundColor DarkGray
+  if ($installedVersion) { Write-Host "Instalada:  $installedVersion" } else { Write-Host "Instalada:  (ninguna detectada aqui)" }
+  Write-Host "Disponible: $target"
+  if (-not $installedVersion) {
+    Write-Host "! No hay instalacion previa aqui. Corre el instalador sin -Check para instalarlas." -ForegroundColor Yellow
+  } elseif (Test-Newer $target $installedVersion) {
+    Write-Host "! Hay una version nueva ($installedVersion -> $target). Actualiza con: -Update" -ForegroundColor Yellow
+  } else {
+    Write-Host "OK - Estas al dia (version $installedVersion)." -ForegroundColor Green
+  }
+  return
+}
+
+# --- si ya hay version instalada, avisa y pide confirmacion (salvo -Update) ---
+if ($installedVersion -and -not $Update) {
+  if (Test-Newer $target $installedVersion) {
+    Write-Host "! Ya tienes la version $installedVersion instalada; esta es la $target." -ForegroundColor Yellow
+    if ($interactive) {
+      $doup = Read-Host "Actualizo las skills a la $target? [S/n]"
+      if ($doup -match '^[nN]') { Write-Host "Listo, no toco nada." -ForegroundColor DarkGray; return }
+    }
+  } else {
+    Write-Host "Ya estas en la version $installedVersion; reinstalo los archivos por si acaso." -ForegroundColor DarkGray
+  }
+}
+
 New-Item -ItemType Directory -Force -Path $skillsDest | Out-Null
 if ($agentsDest) { New-Item -ItemType Directory -Force -Path $agentsDest | Out-Null }
 
@@ -120,8 +185,15 @@ if ($agentsDest) {
   }
 }
 
+# Marcador de version para detectar futuras actualizaciones.
+Set-Content -Path $markerPath -Value $selfVersion -Encoding utf8
+
 Write-Host ""
-Write-Host "OK - Instaladas $sk skills en $skillsDest" -ForegroundColor Green
+if ($installedVersion -and $installedVersion -ne $selfVersion) {
+  Write-Host "OK - Actualizadas $sk skills a la version $selfVersion en $skillsDest (antes: $installedVersion)" -ForegroundColor Green
+} else {
+  Write-Host "OK - Instaladas $sk skills (version $selfVersion) en $skillsDest" -ForegroundColor Green
+}
 if ($agentsDest) {
   Write-Host "OK - Instalados $ag agentes en $agentsDest" -ForegroundColor Green
 } else {
@@ -154,7 +226,7 @@ if ($NoUv) {
   if ($doInstall) {
     Write-Host "Instalando uv..."
     try { Invoke-RestMethod $UvPs1 | Invoke-Expression; $uvJustInstalled = $true }
-    catch { Write-Host "! No se pudo instalar uv automaticamente. Hacelo a mano: irm $UvPs1 | iex" -ForegroundColor Yellow }
+    catch { Write-Host "! No se pudo instalar uv automaticamente. Hazlo a mano: irm $UvPs1 | iex" -ForegroundColor Yellow }
   }
   if ($uvJustInstalled) {
     Write-Host "OK - uv instalado." -ForegroundColor Green
@@ -163,4 +235,5 @@ if ($NoUv) {
 }
 
 Write-Host ""
-Write-Host "Listo. Reinicia tu cliente y escribi '/' (por ejemplo /brief-de-contenido)." -ForegroundColor Green
+Write-Host "Listo. Reinicia tu cliente y escribe '/' (por ejemplo /brief-de-contenido)." -ForegroundColor Green
+Write-Host "Para buscar actualizaciones mas adelante, corre el instalador con -Check." -ForegroundColor DarkGray
