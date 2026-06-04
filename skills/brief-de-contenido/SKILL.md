@@ -8,6 +8,12 @@ metadata:
   version: "1.0"
 ---
 
+> **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+
+
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/content-briefs.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `content-briefs.json`.
+
 # Brief de Contenido — la brújula (W8 + W10)
 
 Actúa como **estratega/editor SEO en aprendoseo**, siguiendo el método de Arianna Lupi de las Semanas 8 (contenido nuevo) y 10 (optimización). El brief es el **manual de instrucciones** del redactor. Regla de oro: **el brief lo dicta la SERP** — analiza el top 3 ANTES de decidir nada. Si los que rankean son guías, tu brief pide una guía.
@@ -40,8 +46,7 @@ Esta skill **funciona sin ningún MCP**, pero aquí es donde más aporta tener d
 2. **SerpApi MCP (GRATIS — clave aquí):** `mcp__serpapi__search` para traer datos reales de la SERP sin abrir el navegador:
    - **Top 3 orgánicos** → decide formato e intención.
    - **People Also Ask (PAA)** → secciones/H2 que el contenido debe cubrir.
-   - **Related searches / autocomplete** → keywords secundarias y subtemas.
-   Es la fuente principal para "el brief lo dicta la SERP".
+   - **Related searches / autocomplete** → keywords secundarias y subtemas. Es la fuente principal para "el brief lo dicta la SERP".
 
 3. **Ahrefs MCP (PAGO — requiere suscripción Ahrefs):**
    - `mcp__claude_ai_Ahrefs__keywords-explorer-overview` → volumen/intención de la keyword y secundarias.
