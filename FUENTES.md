@@ -1,19 +1,12 @@
 # Fuentes
 
-Estas son las fuentes que usamos para el entregable. Van en dos bloques: (A) el
-contexto interno del diplomado, que es lo que hace que las skills estén
-customizadas, y (B) la investigación externa: ideas de agentes, el formato
-técnico de Claude y las herramientas.
+Estas son las fuentes que usamos para el entregable. Van en dos bloques: (A) el contexto interno del diplomado, que es lo que hace que las skills estén customizadas, y (B) la investigación externa: ideas de agentes, el formato técnico de Claude y las herramientas.
 
 ---
 
 ## A. Contexto interno del diplomado "De Cero a SEO" (aprendoseo)
 
-Salido del corpus real del curso: transcripciones, resúmenes y prompts ya
-ingeridos en la base del chatbot (colección `chunks` en MongoDB, 16 semanas más
-Bonus). Instructores: Arianna Lupi (líder), Verónica Romero, Diana Rodríguez,
-Juan Carlos Angulo, Ibrahim Mogollón, Dana Aliaga, María Márquez (off-page) y
-Daniel (IA).
+Salido del corpus real del curso: transcripciones, resúmenes y prompts ya ingeridos en la base del chatbot (colección `chunks` en MongoDB, 16 semanas más Bonus). Instructores: Arianna Lupi (líder), Verónica Romero, Diana Rodríguez, Juan Carlos Angulo, Ibrahim Mogollón, Dana Aliaga, María Márquez (off-page) y Daniel (IA).
 
 | Área / skill | Semana(s) del diploma |
 |--------------|------------------------|
@@ -77,12 +70,7 @@ Daniel (IA).
 | Pipeline research→brief→draft con Claude Code | Ahrefs — *Content Engineering with Claude Code*: https://ahrefs.com/blog/how-i-do-content-engineering-with-claude-code/ |
 | Keyword research agent en n8n | n8nlab.io: https://n8nlab.io/blog/build-ai-keyword-research-agent-n8n · DataForSEO: https://dataforseo.com/help-center/automate-keyword-research-with-n8n-and-dataforseo |
 
-> **Nota honesta sobre YouTube:** la búsqueda devolvió sobre todo blogs, repos y
-> flujos de n8n, más que páginas de video con título o canal verificables. Lo que
-> recogí son los patrones de agente que circulan en esos videos (el equipo
-> "director + especialistas", los pipelines research→brief→publish), y los
-> corroboré con las fuentes no-video de arriba. No inventé títulos ni URLs de
-> videos.
+> **Nota honesta sobre YouTube:** la búsqueda devolvió sobre todo blogs, repos y flujos de n8n, más que páginas de video con título o canal verificables. Lo que recogí son los patrones de agente que circulan en esos videos (el equipo "director + especialistas", los pipelines research→brief→publish), y los corroboré con las fuentes no-video de arriba. No inventé títulos ni URLs de videos.
 
 ## B.3 Repos SEO de referencia (inventario de skills/agentes)
 
@@ -103,21 +91,12 @@ Daniel (IA).
 
 ## C. Herramientas, MCPs y APIs
 
-- **SerpApi** (GRATIS ~100/mes) — SERP/PAA/autocomplete en vivo. MCP remoto:
-  `https://mcp.serpapi.com/TU_TOKEN/mcp`. Cuenta/token: https://serpapi.com/manage
-- **Ahrefs** (PAGO) — volumen/KD/backlinks/auditoría/GSC. Vía conector claude.ai:
-  https://claude.ai/customize/connectors · API: https://ahrefs.com/api
-- **GSC MCP `mcp-gsc`** (GRATIS, comunitario) — Search Console en vivo
-  (clics/impresiones/CTR/posición, inspección de URLs, sitemaps). Python/`uvx`:
-  https://github.com/AminForou/mcp-gsc
-- **Screaming Frog SEO Spider CLI** — crawl headless + export CSV **GRATIS hasta
-  500 URLs** (licencia £199/año solo para >500 URLs / config guardada / render JS /
-  scheduling / API). Docs: https://www.screamingfrog.co.uk/seo-spider/user-guide/general/
-  · precios: https://www.screamingfrog.co.uk/seo-spider/pricing/
-  · referencia interna que ya lo usa gratis: `../../technical-audit/` (aprendoseo).
+- **SerpApi** (GRATIS ~100/mes) — SERP/PAA/autocomplete en vivo. MCP remoto: `https://mcp.serpapi.com/TU_TOKEN/mcp`. Cuenta/token: https://serpapi.com/manage
+- **Ahrefs** (PAGO) — volumen/KD/backlinks/auditoría/GSC. Vía conector claude.ai: https://claude.ai/customize/connectors · API: https://ahrefs.com/api
+- **GSC MCP `mcp-gsc`** (GRATIS, comunitario) — Search Console en vivo (clics/impresiones/CTR/posición, inspección de URLs, sitemaps). Python/`uvx`: https://github.com/AminForou/mcp-gsc
+- **Screaming Frog SEO Spider CLI** — crawl headless + export CSV **GRATIS hasta 500 URLs** (licencia £199/año solo para >500 URLs / config guardada / render JS / scheduling / API). Docs: https://www.screamingfrog.co.uk/seo-spider/user-guide/general/ · precios: https://www.screamingfrog.co.uk/seo-spider/pricing/ · referencia interna que ya lo usa gratis: `../../technical-audit/` (aprendoseo).
 - **uv / uvx** (para correr `mcp-gsc`): https://astral.sh/uv
-- Dependencias de los scripts deterministas: `requests`, `beautifulsoup4`
-  (ver `requirements.txt`); el resto es stdlib de Python 3.
+- Dependencias de los scripts deterministas: `requests`, `beautifulsoup4` (ver `requirements.txt`); el resto es stdlib de Python 3.
 
 ---
 
@@ -125,6 +104,5 @@ Daniel (IA).
 
 1. Minado del corpus del diplomado (método real por semana) → grounding de cada skill.
 2. Investigación externa (B) → ideas de agentes + formato técnico correcto.
-3. Validación del CLI de Screaming Frog contra un proyecto interno real que ya lo
-   corre gratis (`../../technical-audit/`) → corrección del framing free/paid.
+3. Validación del CLI de Screaming Frog contra un proyecto interno real que ya lo corre gratis (`../../technical-audit/`) → corrección del framing free/paid.
 4. Datos de conexión de MCPs verificados contra docs oficiales / READMEs.
