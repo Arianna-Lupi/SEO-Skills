@@ -1,6 +1,6 @@
 # Compliance: conformidad con las best practices de agentskills.io
 
-Este documento cruza el deliverable (13 skills y 3 subagentes del milestone "SEO skills — De Cero a SEO") con las best practices oficiales de [agentskills.io](https://agentskills.io). Para cada práctica decimos cómo se cumple y dónde verlo.
+Este documento cruza el deliverable (13 skills SEO + 2 utilitarias `configurar-serpapi` y `dashboard-seo`, y 3 subagentes del milestone "SEO skills — De Cero a SEO") con las best practices oficiales de [agentskills.io](https://agentskills.io). Para cada práctica decimos cómo se cumple y dónde verlo.
 
 Fuentes citadas:
 
@@ -17,11 +17,11 @@ Fuentes citadas:
 | 1 | Grounded in real expertise | ✅ | Todas las SKILL.md citan método/semanas del diploma |
 | 2 | Spending context wisely (<500 líneas / <5000 tok) | ✅ | SKILL.md de 92–157 líneas; mayor ≈ 2.4k tok |
 | 3 | Add what the agent lacks (no SEO genérico) | ✅ | Reglas propias del diploma (punto dulce, 3 bloques, brief lo dicta la SERP) |
-| 4 | Coherent units (1 skill = 1 unidad de trabajo) | ✅ | 13 skills atómicas; 3 agentes orquestan secuencias |
+| 4 | Coherent units (1 skill = 1 unidad de trabajo) | ✅ | 15 skills atómicas (13 SEO + 2 utilitarias); 3 agentes orquestan secuencias |
 | 5 | Calibrating control (defaults, no menús; procedures) | ✅ | Procesos paso a paso con defaults; sin preguntar de más |
 | 6 | Patterns (gotchas, templates, checklists, validation loops) | ✅ | Secciones Gotchas / Salida / Checklist / CHECKPOINT |
 | 7 | Progressive disclosure (frontmatter → cuerpo → scripts) | ✅ | name+description en frontmatter; scripts en `scripts/` |
-| 8 | Optimized descriptions (imperativas, pushy, ≤1024) | ✅ | 13 skills + 3 agentes; agentes 846–893 chars |
+| 8 | Optimized descriptions (imperativas, pushy, ≤1024) | ✅ | 15 skills + 3 agentes; agentes 846–893 chars |
 | 9 | Frontmatter spec-compliant | ✅ | name kebab == carpeta; metadata; compatibility |
 | 10 | Scripts best-practices (JSON stdout, --help, PEP723) | ✅ | 14/14 scripts con argparse + json.dumps + bloque PEP723 |
 | 11 | Eval scaffolding (evals/ en las flagship) | ✅ | `evals/evals.json` en las 3 flagship |
@@ -39,7 +39,7 @@ Ninguna SKILL.md pasa de las 500 líneas ni de los 5000 tokens. El rango real va
 Las skills no enseñan SEO genérico. Aportan el método propio del diploma, que el modelo no trae de fábrica: el "Duelo de Keywords", la selección de las "10 de Oro", la auditoría por plantillas en lugar de página por página, la jerarquía H1–H4 sin saltos, los rangos de metas (50–60 c, 120–155 c) y la Plantilla Master como destino de cada entregable.
 
 ### 4. Coherent units
-Una skill es una unidad de trabajo entregable. Las 13 skills son atómicas (keywords, mapa, SERP, clusters, brief, redacción, on-page, schema, auditoría, arquitectura, inventario, GSC, GEO/AEO). Los 3 subagentes (`agente-investigacion-keywords`, `agente-auditoria-tecnica`, `agente-contenido`) no duplican lógica: orquestan secuencias de varias skills cuando el volumen de lectura justifica su propio contexto.
+Una skill es una unidad de trabajo entregable. Las 13 skills SEO son atómicas (keywords, mapa, SERP, clusters, brief, redacción, on-page, schema, auditoría, arquitectura, inventario, GSC, GEO/AEO), más 2 skills utilitarias (`configurar-serpapi`, `dashboard-seo`). Los 3 subagentes (`agente-investigacion-keywords`, `agente-auditoria-tecnica`, `agente-contenido`) no duplican lógica: orquestan secuencias de varias skills cuando el volumen de lectura justifica su propio contexto.
 
 ### 5. Calibrating control: defaults en vez de menús
 Las skills dan procedimientos numerados con defaults sensatos en vez de menús de opciones. Definen una herramienta por defecto (por ejemplo DinoRank o Ahrefs para volumen), avanzan sin preguntar lo evidente y solo se detienen en puntos de validación reales: falta de audiencia, SERP ambigua, falta de datos de un bloque. Los agentes traen CHECKPOINTS explícitos en lugar de declaraciones vagas.

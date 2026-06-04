@@ -92,8 +92,7 @@ Es un programa hecho en Python que se corre con `uvx`, y se comunica con Claude 
    ```
 2. Consigue credenciales de Google. Tienes dos caminos, elige uno:
    - **OAuth (recomendado):** OAuth es el sistema de Google para darle permiso a una app sin compartir tu contraseña. Descarga el `client_secrets.json` desde Google Cloud Console (la primera vez te abre el navegador para que inicies sesión).
-   - **Cuenta de servicio:** una cuenta de servicio es un "usuario robot" de Google. Descarga su `service_account.json` y agrega el email de esa cuenta como usuario con acceso a tu propiedad de GSC.
-     *(Ya tenemos una cuenta de servicio de Google en el proyecto, así que se puede reutilizar.)*
+   - **Cuenta de servicio:** una cuenta de servicio es un "usuario robot" de Google. Descarga su `service_account.json` y agrega el email de esa cuenta como usuario con acceso a tu propiedad de GSC. *(Ya tenemos una cuenta de servicio de Google en el proyecto, así que se puede reutilizar.)*
 3. Conéctalo a Claude Code (scope `user`). Usa el bloque que corresponda al camino que elegiste:
    ```bash
    # OAuth:

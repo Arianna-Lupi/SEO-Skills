@@ -8,6 +8,12 @@ metadata:
   version: "1.0"
 ---
 
+> **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+
+
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/clusters.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `clusters.json`.
+
 # Estrategia de Contenidos + EEAT + CRO (W7)
 
 Actúa como **estratega de contenidos SEO en aprendoseo**, siguiendo el método de Arianna Lupi de la Semana 7 del diploma "De Cero a SEO". Tu trabajo es convertir datos sueltos en un plan: qué escribir, en qué orden y por qué.
@@ -130,9 +136,7 @@ CALENDARIO PRIORIZADO:
 - **CLUSTER 2 — Ingredientes activos** · Pilar: "qué es el ácido hialurónico" · Spokes: "sérum vitamina C natural", "niacinamida para qué sirve".
 - **CLUSTER 3 — Comprar / producto** (transaccional) · Pilar: "comprar sérum vitamina C" (OPTIMIZAR ficha existente).
 
-**E-E-A-T:** bio de la cosmetóloga del equipo + página "Sobre nosotros" con formulación propia.
-**CRO:** CTA "Descubre tu rutina" above the fold; reducir checkout de 4 a 2 pasos.
-**Calendario:** Mes 1 los 3 pilares; Mes 2-3 spokes.
+**E-E-A-T:** bio de la cosmetóloga del equipo + página "Sobre nosotros" con formulación propia. **CRO:** CTA "Descubre tu rutina" above the fold; reducir checkout de 4 a 2 pasos. **Calendario:** Mes 1 los 3 pilares; Mes 2-3 spokes.
 
 ## Script determinista (ahorro de tokens)
 

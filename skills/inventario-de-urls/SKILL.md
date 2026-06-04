@@ -8,6 +8,12 @@ metadata:
   version: "1.0"
 ---
 
+> **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+
+
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/inventory-summary.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `inventory-summary.json`.
+
 # Inventario de URLs (paso previo de datos)
 
 Actúa como recolector de URLs en aprendoseo. Antes de mapear keywords, auditar o diseñar arquitectura necesitas **la lista real de URLs del sitio**. Si el usuario no te la pasó, tu trabajo es extraerla de la fuente. Filosofía del diploma: *"Lo que no se rastrea, no existe"* — y para rastrearlo primero hay que **listarlo**.
@@ -38,6 +44,8 @@ Sin instalar nada ni MCP. Vía **Bash (`curl`)** o **WebFetch**. Orden estricto:
 4. Parsea todos los `<loc>` → esa es tu lista de URLs.
 
 > **Límite del camino sitemap:** solo ves URLs **publicadas en el sitemap**. NO detecta **páginas huérfanas**, NO trae **códigos de estado en vivo** ni el **grafo de enlaces internos**. Suficiente para un primer inventario; insuficiente para auditoría profunda.
+
+> **Si el sitio bloquea el rastreo (`"blocked": true`):** el script ya manda un User-Agent de navegador real, así que pasa la mayoría de los sitios. Si aun así devuelve `"blocked": true`, hay un WAF/anti-bot (típicamente **Cloudflare**) que bloquea por *TLS fingerprint*, no por User-Agent — ningún cliente HTTP plano lo evita. **No insistas ni intentes evadirlo.** Guía al usuario: (1) si es **su** sitio, que cree una WAF rule en Cloudflare que permita su rastreo (por IP o User-Agent) o que exporte las URLs desde **Google Search Console** (Sitemaps / Páginas indexadas); (2) si no es suyo, usa **Screaming Frog** (motor de navegador real) o el sitemap obtenido vía GSC; (3) opcionalmente, prueba otro User-Agent con la variable de entorno `SEO_USER_AGENT`.
 
 ### Camino Screaming Frog CLI (más rico) — GRATIS hasta 500 URLs
 
@@ -121,8 +129,7 @@ uv run scripts/inventario_urls.py https://ejemplo.com
 # opcional: --sitemap https://ejemplo.com/sitemap_index.xml   --max 2000
 ```
 
-Corre con `--help` para ver opciones. Solo usa la librería estándar (sin instalar nada ni claves). Devuelve:
-`{"ok": true, "source": "robots|sitemap.xml", "count": N, "urls": [...]}` — o si no encuentra sitemaps, `{"ok": false, "reason": "...", "fallback": "..."}`. Es la ruta free de cero deps; para >500 URLs, huérfanas o códigos de estado en vivo sigue usando Screaming Frog CLI.
+Corre con `--help` para ver opciones. Solo usa la librería estándar (sin instalar nada ni claves). Devuelve: `{"ok": true, "source": "robots|sitemap.xml", "count": N, "urls": [...]}` — o si no encuentra sitemaps, `{"ok": false, "reason": "...", "fallback": "..."}`. Es la ruta free de cero deps; para >500 URLs, huérfanas o códigos de estado en vivo sigue usando Screaming Frog CLI.
 
 ## Gotchas
 

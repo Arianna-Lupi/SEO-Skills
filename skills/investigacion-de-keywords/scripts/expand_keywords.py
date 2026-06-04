@@ -81,6 +81,25 @@ def serp_get(requests, params, key):
         return None
 
 
+def _load_seo_env():
+    """Carga ~/.claude/seo-skills.env (KEY=valor por linea) en el entorno si existe.
+    Asi la SERPAPI_API_KEY que guardo la skill configurar-serpapi se usa en cada
+    sesion sin re-exportarla. No pisa variables ya presentes en el entorno."""
+    path = os.path.expanduser("~/.claude/seo-skills.env")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            for raw in fh:
+                line = raw.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, v = line.split("=", 1)
+                k = k.strip()
+                if k and k not in os.environ:
+                    os.environ[k] = v.strip().strip('"').strip("'")
+    except OSError:
+        pass
+
+
 def main():
     ap = argparse.ArgumentParser(
         description="Expande semillas con SerpApi (autocomplete + related + PAA).",
@@ -101,10 +120,12 @@ def main():
 
     import requests
 
+    _load_seo_env()
+
     key = os.environ.get("SERPAPI_API_KEY")
     if not key:
         out({"ok": False, "reason": "falta SERPAPI_API_KEY en el entorno",
-             "fallback": "modo manual: usa mcp__serpapi__search o Google Autocomplete manualmente"})
+             "fallback": "modo manual: usa mcp__serpapi__search o Google Autocomplete manualmente. O configura tu clave gratis (cuenta SerpApi free) con la skill configurar-serpapi."})
 
     seeds = read_seeds(args)
     if not seeds:

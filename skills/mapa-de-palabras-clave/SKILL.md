@@ -8,6 +8,10 @@ metadata:
   version: "1.0"
 ---
 
+> **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+
+
 Actúa como especialista en arquitectura de keywords en aprendoseo, siguiendo el método de Verónica Romero (Semana 5 del diploma "De Cero a SEO").
 
 > **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Verónica están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
@@ -42,10 +46,9 @@ Nunca exijas un MCP. Ver `../../MCP-SETUP.md`.
 
 1. **Inventariar TODAS las URLs** del sitio (Screaming Frog ≤500 free o sitemap) → tab "Mapa de Palabras Clave".
 2. **Evaluar el Valor SEO** de cada URL con la pregunta test:
-   > **"¿Un usuario buscaría esto en Google?"**
+> **"¿Un usuario buscaría esto en Google?"**
    - **CON valor (Sí):** páginas de servicios, blog, categorías de producto.
-   - **SIN valor (No):** legales, política de privacidad, página de autor, carpetas, etiquetas, gracias/checkout.
-   Marca Valor SEO = **Sí / No**. Las "No" no reciben keyword.
+   - **SIN valor (No):** legales, política de privacidad, página de autor, carpetas, etiquetas, gracias/checkout. Marca Valor SEO = **Sí / No**. Las "No" no reciben keyword.
 3. **Asignar UNA keyword primaria por URL (1:1).** Una keyword no puede repetirse en dos URLs → así se evita la **canibalización**.
 4. **Clasificar intención por temperatura:**
    - **Baja** = informativa.
@@ -66,6 +69,8 @@ Ejecuta (cero instalación, resuelve deps solo):
 
 ```bash
 uv run skills/mapa-de-palabras-clave/scripts/canibalizacion.py --file mapa.csv
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/next-steps.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `next-steps.json` (quick wins) y/o `keywords.json`.
+
 # o, si no usas uv: python3 skills/mapa-de-palabras-clave/scripts/canibalizacion.py --file mapa.csv
 # JSON o stdin también valen:
 cat mapa.json | uv run skills/mapa-de-palabras-clave/scripts/canibalizacion.py --file - --format json
