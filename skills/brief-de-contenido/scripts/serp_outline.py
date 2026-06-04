@@ -42,6 +42,19 @@ import re
 import sys
 from collections import Counter
 
+# UA de navegador real por defecto: muchos sitios (Cloudflare, WAFs) devuelven
+# 403 a User-Agents que parecen bot. Se puede sobreescribir con SEO_USER_AGENT.
+DEFAULT_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+)
+USER_AGENT = os.environ.get("SEO_USER_AGENT", DEFAULT_UA)
+BROWSER_HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+}
+
 
 def log(msg):
     print(msg, file=sys.stderr)
@@ -53,6 +66,7 @@ def fail(reason, fallback):
 
 
 def get_top_urls(query, top, gl, hl, requests):
+    _load_seo_env()
     api_key = os.environ.get("SERPAPI_API_KEY")
     if not api_key:
         return None, "Falta SERPAPI_API_KEY y no se pasó --urls."
@@ -85,6 +99,25 @@ def extract_headings(html, BeautifulSoup):
         if text:
             headings.append(f"{tag.name.upper()}: {text}")
     return h1, headings
+
+
+def _load_seo_env():
+    """Carga ~/.claude/seo-skills.env (KEY=valor por linea) en el entorno si existe.
+    Asi la SERPAPI_API_KEY que guardo la skill configurar-serpapi se usa en cada
+    sesion sin re-exportarla. No pisa variables ya presentes en el entorno."""
+    path = os.path.expanduser("~/.claude/seo-skills.env")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            for raw in fh:
+                line = raw.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, v = line.split("=", 1)
+                k = k.strip()
+                if k and k not in os.environ:
+                    os.environ[k] = v.strip().strip('"').strip("'")
+    except OSError:
+        pass
 
 
 def main():
@@ -125,7 +158,7 @@ def main():
     all_h2 = []
     for url in urls:
         try:
-            r = requests.get(url, timeout=25, headers={"User-Agent": "aprendoseo-brief/1.0"})
+            r = requests.get(url, timeout=25, headers=BROWSER_HEADERS)
             r.raise_for_status()
             h1, headings = extract_headings(r.text, BeautifulSoup)
         except Exception as e:  # noqa: BLE001

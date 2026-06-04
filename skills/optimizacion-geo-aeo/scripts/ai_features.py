@@ -74,6 +74,25 @@ def build_recommendation(ai_overview, fs_present, fs_type, has_paa):
     return " ".join(parts)
 
 
+def _load_seo_env():
+    """Carga ~/.claude/seo-skills.env (KEY=valor por linea) en el entorno si existe.
+    Asi la SERPAPI_API_KEY que guardo la skill configurar-serpapi se usa en cada
+    sesion sin re-exportarla. No pisa variables ya presentes en el entorno."""
+    path = os.path.expanduser("~/.claude/seo-skills.env")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            for raw in fh:
+                line = raw.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, v = line.split("=", 1)
+                k = k.strip()
+                if k and k not in os.environ:
+                    os.environ[k] = v.strip().strip('"').strip("'")
+    except OSError:
+        pass
+
+
 def main():
     ap = argparse.ArgumentParser(
         description="Detecta features de IA/respuesta (AEO/GEO) de una SERP vía SerpApi.",
@@ -85,11 +104,13 @@ def main():
     ap.add_argument("--hl", default="es", help="Idioma (hl), default 'es'")
     args = ap.parse_args()
 
+    _load_seo_env()
+
     api_key = os.environ.get("SERPAPI_API_KEY")
     if not api_key:
         fail(
             "Falta SERPAPI_API_KEY en el entorno.",
-            "modo manual: busca la query en Google (incógnito) y verifica AI Overview / featured snippet / PAA a ojo, y valida en ChatGPT/Perplexity.",
+            "modo manual: busca la query en Google (incógnito) y verifica AI Overview / featured snippet / PAA a ojo, y valida en ChatGPT/Perplexity. O configura tu clave gratis (cuenta SerpApi free) con la skill configurar-serpapi.",
         )
 
     try:
