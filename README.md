@@ -75,6 +75,7 @@ SEO-Skills/             ← raíz del repo
 ├── COMPLIANCE.md       ← cómo cumple las best practices de agentskills.io
 ├── MCP-SETUP.md        ← conectar SerpApi (gratis) / GSC mcp-gsc (gratis) / Ahrefs (pago)
 ├── SCREAMING-FROG.md   ← usar el CLI de Screaming Frog (gratis hasta 500 URLs)
+├── ROADMAP.md          ← qué viene (próxima: presentaciones Slidev para clientes, #1)
 ├── requirements.txt    ← deps de los scripts (o usá `uv run` con PEP 723, cero instalación)
 ├── scripts/trigger_eval.sh ← runner de pruebas de activación de descripciones
 ├── README.md           ← este archivo
