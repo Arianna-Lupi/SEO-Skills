@@ -1,6 +1,6 @@
 # SEO skills y agentes de Claude (aprendoseo, "De Cero a SEO")
 
-15 skills (13 de SEO + 2 utilitarias: `configurar-serpapi` y `dashboard-seo`) y 3 agentes de Claude Code para automatizar los flujos SEO del equipo, customizados con el método interno del diplomado "De Cero a SEO". Funcionan sin conectar nada y, si quieres, se conectan a SerpApi (gratis), Google Search Console (gratis) o Ahrefs (pago). **Todo flujo termina en un dashboard local** con lo encontrado.
+16 skills (14 de SEO + 2 utilitarias: `configurar-serpapi` y `dashboard-seo`) y 3 agentes de Claude Code para automatizar los flujos SEO del equipo, customizados con el método interno del diplomado "De Cero a SEO". Funcionan sin conectar nada y, si quieres, se conectan a SerpApi (gratis), Google Search Console (gratis) o Ahrefs (pago). **Todo flujo termina en un dashboard local** con lo encontrado.
 
 ## Instalación (un comando)
 
@@ -79,7 +79,7 @@ SEO-Skills/             ← raíz del repo
 ├── requirements.txt    ← deps de los scripts (o usá `uv run` con PEP 723, cero instalación)
 ├── scripts/trigger_eval.sh ← runner de pruebas de activación de descripciones
 ├── README.md           ← este archivo
-├── skills/             ← 15 carpetas; cada una: SKILL.md + scripts/<script>.py
+├── skills/             ← 16 carpetas; cada una: SKILL.md + scripts/<script>.py
 │   ├── investigacion-de-keywords/        (SKILL.md + scripts/expand_keywords.py)
 │   ├── mapa-de-palabras-clave/           (+ scripts/canibalizacion.py)
 │   ├── analisis-serp-y-competencia/      (+ scripts/serp.py)
@@ -88,6 +88,7 @@ SEO-Skills/             ← raíz del repo
 │   ├── redaccion-y-optimizacion-nlp/     (+ scripts/readability.py)
 │   ├── optimizacion-on-page-meta/        (+ scripts/meta_check.py)
 │   ├── auditoria-tecnica/                (+ scripts/parse_sf.py, http_checks.py)
+│   ├── analisis-rendimiento/             (+ scripts/run_unlighthouse.py)
 │   ├── arquitectura-y-enlazado-interno/  (+ scripts/orphans.py)
 │   ├── reporte-seo-gsc/                  (+ scripts/gsc_report.py)
 │   ├── inventario-de-urls/               (+ scripts/inventario_urls.py)   [extra]
@@ -139,7 +140,7 @@ El proceso está pensado para que, sin importar por dónde entres, **siempre ter
 1. **Datos del sitio.** `inventario-de-urls` saca las URLs; si hace falta SERP en vivo, `configurar-serpapi` guarda tu API key (una vez).
 2. **Investigación y estrategia.** `investigacion-de-keywords` → `mapa-de-palabras-clave` → `analisis-serp-y-competencia` → `estrategia-de-contenidos-clusters`. (O el `agente-investigacion-keywords` de una.)
 3. **Contenido.** `brief-de-contenido` → `redaccion-y-optimizacion-nlp` → `optimizacion-on-page-meta` → `schema-jsonld`. (O el `agente-contenido`.)
-4. **Técnico.** `auditoria-tecnica` + `arquitectura-y-enlazado-interno` + `reporte-seo-gsc` + `optimizacion-geo-aeo`. (O el `agente-auditoria-tecnica`.)
+4. **Técnico.** `auditoria-tecnica` + `analisis-rendimiento` (CWV de todo el sitio) + `arquitectura-y-enlazado-interno` + `reporte-seo-gsc` + `optimizacion-geo-aeo`. (O el `agente-auditoria-tecnica`.)
 5. **Cierre.** Cada skill/agente deja su salida estructurada en `.seo-audit/<sitio>/data/*.json`; `dashboard-seo` lo une y te devuelve el **URL local**.
 
 Reglas que sostienen el flujo:
@@ -215,6 +216,11 @@ Convenciones:
 - **Invocar**: `/auditoria-tecnica` · "se me cayó el tráfico", "Google no me indexa", "revisa robots.txt / canonical".
 - **Devuelve**: issues por severidad, auditoría por plantillas (no página por página) y plan de remediación.
 - **Scripts (2)**: `parse_sf.py --folder <carpeta SF>` (o `--internal internal_all.csv --issues issues.csv`) digiere exports de Screaming Frog → status codes, no-indexables, hint por plantilla. `http_checks.py --file urls.txt [--cap 200] [--concurrency 8]` chequea status/HTTPS/redirecciones en vivo cuando no hay export. Ambos detectan bloqueo WAF.
+
+**`analisis-rendimiento`** — rendimiento de TODO el sitio con Unlighthouse (Lighthouse en cada ruta).
+- **Invocar**: `/analisis-rendimiento` · "el sitio carga lento", "tengo los CWV en rojo", "qué páginas son las más lentas", "mídeme el rendimiento de todas las páginas".
+- **Devuelve**: scores performance/accesibilidad/best-practices/SEO + Core Web Vitals de **laboratorio** (LCP, CLS, TBT, FCP, Speed Index), peores páginas y rendimiento **por plantilla**. Cubre el Bloque 2 de `auditoria-tecnica` a escala de sitio.
+- **Script**: `run_unlighthouse.py --site https://sitio.com [--mobile] [--max-routes N]` (corre Unlighthouse vía npx) o `--json ci-result.json` para parsear un export. Escribe `performance.json`. Sin Node → modo manual (PageSpeed Insights). Solo stdlib (Node solo para rastrear en vivo). Laboratorio ≠ campo (CrUX/GSC).
 
 **`arquitectura-y-enlazado-interno`** — diseña arquitectura pilar→clusters y enlazado.
 - **Invocar**: `/arquitectura-y-enlazado-interno` · "cómo organizo mis categorías", "el jugo SEO no llega a las páginas que venden".

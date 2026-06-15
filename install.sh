@@ -74,7 +74,7 @@ done
 
 say ""
 say "${BLUE}SEO Skills — aprendoseo (\"De Cero a SEO\")${RST}"
-say "${DIM}13 skills + 3 agentes para Claude Code y clientes compatibles${RST}"
+say "${DIM}16 skills + 3 agentes para Claude Code y clientes compatibles${RST}"
 say ""
 
 # --- 1) localizar la fuente; clonar a temp si corre vía curl|bash ---

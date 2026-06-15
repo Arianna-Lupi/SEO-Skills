@@ -46,7 +46,7 @@ function Test-Newer($a, $b) {
 
 Write-Host ""
 Write-Host "SEO Skills - aprendoseo (De Cero a SEO)" -ForegroundColor Cyan
-Write-Host "13 skills + 3 agentes para Claude Code y clientes compatibles" -ForegroundColor DarkGray
+Write-Host "16 skills + 3 agentes para Claude Code y clientes compatibles" -ForegroundColor DarkGray
 Write-Host ""
 
 # --- 1) localizar la fuente; clonar a temp si corre via irm|iex ---

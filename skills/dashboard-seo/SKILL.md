@@ -29,6 +29,12 @@ Carpeta por proyecto, **gitignored** (datos del cliente, no se suben):
     issues.json              {issues:[{id,title,severity("Crítico|Alto|Medio|Bajo-Medio|Bajo"),
                                block,fix,status,evidence,verified(true|"parcial"|"doc"|"no confirmado"),
                                github?}], counts:{...}}   ← auditoria-tecnica
+    performance.json         {source,site,strategy,summary:{pages_scanned,avg_performance,avg_accessibility,
+                               avg_best_practices,avg_seo}, core_web_vitals:{lcp_ms_avg,cls_avg,tbt_ms_avg,
+                               fcp_ms_avg,si_ms_avg,note}, cwv_pages_failing, worst_pages:[{path,performance,
+                               lcp_ms,cls,tbt_ms}], by_template_hint, issues:[{id,title,severity,
+                               pages_affected,worst_score,avg_savings_ms,max_savings_kb,examples}]}
+                               (CWV de LABORATORIO + errores/oportunidades de Lighthouse)   ← analisis-rendimiento
     keywords.json            {candidates:[{keyword,seed,source,intent,volume,kd}], golden:[{kw,cluster,why}], note}
                                (volume/kd = "pendiente" si no hay export real)   ← investigacion-de-keywords
     clusters.json            {clusters:[{pilar,url,spokes:[]}]}   ← estrategia-de-contenidos-clusters
