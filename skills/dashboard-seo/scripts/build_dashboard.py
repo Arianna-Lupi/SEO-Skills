@@ -18,6 +18,11 @@ Convención de carpeta (gitignored, datos del cliente):
     data/                      ← lo escriben las skills/agentes
       meta.json                (resumen global + summary + pending_data + data_sources)
       issues.json              ({issues:[{id,title,severity,block,fix,status,evidence,verified,github}], counts})
+      performance.json         ({source,site,strategy,summary:{pages_scanned,avg_performance,avg_accessibility,
+                               avg_best_practices,avg_seo}, core_web_vitals:{lcp_ms_avg,cls_avg,tbt_ms_avg,fcp_ms_avg,
+                               si_ms_avg,note}, cwv_pages_failing, worst_pages:[...], by_template_hint,
+                               issues:[{id,title,severity,pages_affected,worst_score,avg_savings_ms,
+                               max_savings_kb,examples:[...]}]})  ← analisis-rendimiento
       keywords.json            ({candidates:[...], golden:[{kw,cluster,why}], note})
       clusters.json            ({clusters:[{pilar,url,spokes:[]}]})
       competitors.json         ({by_pillar:[{pillar,query,results:[{position,domain,title,url}]}], strategic:[]})
@@ -96,7 +101,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 <header><h1>Auditoría SEO — <span id="site"></span></h1><div class="sub" id="subhead"></div></header>
 <div class="wrap" id="app">Cargando…</div>
 <script>
-const J={};const FILES=["meta","issues","prior-audits","keywords","clusters","competitors","ai-features","content-briefs","inventory-summary","next-steps"];
+const J={};const FILES=["meta","issues","performance","prior-audits","keywords","clusters","competitors","ai-features","content-briefs","inventory-summary","next-steps"];
 const $=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild};
 const esc=(s)=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 async function boot(){
@@ -120,6 +125,8 @@ async function boot(){
       esc(i.block),esc(i.fix),
       `${esc(i.status)} ${i.verified===true?'<span class="chk">✓verif</span>':i.verified==='no confirmado'?'<span class="no">⚠ sin confirmar</span>':'<span class="warn">~</span>'}`,
       `<span class="src">${esc(i.evidence)}</span>`]),srcOf(J["issues"]));
+  // performance (Unlighthouse / Lighthouse en cada ruta)
+  perfSection(app);
   rows(app,"📋 Auditorías previas",["Auditoría","Score","Resumen","Archivo"],
     (J["prior-audits"].audits||[]).map(a=>[`<b>${esc(a.name)}</b>`,`<span class="tag">${esc(a.score)}</span>`,esc(a.summary),a.file?`<code>${esc(a.file)}</code>`:'']),srcOf(J["prior-audits"]));
   rows(app,"⭐ Las 10 de Oro",["Keyword","Cluster","Por qué"],
@@ -183,6 +190,42 @@ function briefDetails(b){
   if(b.internal_links&&b.internal_links.length)parts.push(`<div style="margin-top:8px"><b>Enlaces internos</b><div>${b.internal_links.map(k=>`<span class="tag">${esc(typeof k==='string'?k:(k.anchor+' → '+k.url))}</span>`).join('')}</div></div>`);
   if(b.metrics)parts.push(`<div style="margin-top:8px"><b>Métricas</b> <span class="muted">${esc(Object.entries(b.metrics).map(([k,v])=>k+': '+v).join(' · '))}</span></div>`);
   return parts.length?`<details><summary>Ver brief completo</summary>${parts.join('')}</details>`:'';
+}
+// ⚡ Rendimiento (Unlighthouse / Lighthouse). Solo datos reales de laboratorio.
+function gradeScore(v){if(v==null)return 'muted';return v>=90?'chk':v>=50?'warn':'no';}
+function gradeCwv(key,v){if(v==null)return 'muted';const good={lcp_ms:2500,cls:0.1,tbt_ms:200,fcp_ms:1800}[key];if(good==null)return '';return v<=good?'chk':v<=good*1.6?'warn':'no';}
+function fmtMs(v){return v==null?'—':(v>=1000?(v/1000).toFixed(2)+' s':Math.round(v)+' ms');}
+function perfSection(app){
+  const p=J["performance"]||{};const s=p.summary||{};
+  if(s.pages_scanned==null)return;
+  const sec=$(`<section><h2>⚡ Rendimiento (Unlighthouse · Lighthouse)</h2></section>`);
+  const cards=[["Páginas",s.pages_scanned,'muted'],["Performance",s.avg_performance,gradeScore(s.avg_performance)],
+    ["Accesibilidad",s.avg_accessibility,gradeScore(s.avg_accessibility)],["Best practices",s.avg_best_practices,gradeScore(s.avg_best_practices)],
+    ["SEO",s.avg_seo,gradeScore(s.avg_seo)]].filter(c=>c[1]!=null);
+  const cg=$(`<div class="grid cards" style="margin-bottom:14px"></div>`);
+  cards.forEach(([l,n,g])=>cg.appendChild($(`<div class="card stat"><div class="n ${g}">${n}</div><div class="l">${l}${l!=='Páginas'?' (med.)':''}</div></div>`)));
+  sec.appendChild(cg);
+  const cwv=p.core_web_vitals||{};
+  const cwvRows=[["LCP","lcp_ms_avg","lcp_ms"],["CLS","cls_avg","cls"],["TBT","tbt_ms_avg","tbt_ms"],["FCP","fcp_ms_avg","fcp_ms"],["Speed Index","si_ms_avg","si_ms"]]
+    .filter(([,k])=>cwv[k]!=null)
+    .map(([l,k,gk])=>{const v=cwv[k];const disp=k==='cls_avg'?Number(v).toFixed(3):fmtMs(v);return `<span class="tag"><b class="${gradeCwv(gk,v)}">${l}</b> ${disp}</span>`;}).join('');
+  if(cwvRows){const fail=p.cwv_pages_failing||{};const failTxt=Object.keys(fail).length?` · páginas que superan el umbral: ${Object.entries(fail).map(([k,n])=>esc(k)+'='+n).join(', ')}`:'';
+    sec.appendChild($(`<div class="card" style="margin-bottom:14px"><b>Core Web Vitals (media)</b><div style="margin-top:6px">${cwvRows}</div><div class="src">${esc(cwv.note||'')}${failTxt}</div></div>`));}
+  app.appendChild(sec);
+  rows(app,"🐢 Páginas más lentas",["Ruta","Performance","LCP","CLS","TBT"],
+    (p.worst_pages||[]).map(w=>[`<code>${esc(w.path)}</code>`,`<b class="${gradeScore(w.performance)}">${w.performance==null?'—':w.performance}</b>`,
+      fmtMs(w.lcp_ms),w.cls==null?'—':Number(w.cls).toFixed(3),fmtMs(w.tbt_ms)]),srcOf(p));
+  const bt=p.by_template_hint||{};const btKeys=Object.keys(bt);
+  if(btKeys.length>1)rows(app,"🧩 Rendimiento por plantilla (1er segmento)",["Plantilla","Páginas","Performance media"],
+    btKeys.map(k=>[`<span class="tag">${esc(k)}</span>`,String(bt[k].pages),`<b class="${gradeScore(bt[k].avg_performance)}">${bt[k].avg_performance==null?'—':bt[k].avg_performance}</b>`]));
+  // errores / oportunidades detectados por Lighthouse (audits que no pasan)
+  const iss=p.issues||[];
+  rows(app,`🐞 Errores y oportunidades (${iss.length}) — Lighthouse`,["Sev","Audit","Problema","Páginas","Ahorro est.","Ejemplos"],
+    iss.map(i=>[`<span class="pill ${esc(i.severity)}">${esc(i.severity)}</span>`,
+      `<code>${esc(i.id)}</code>`,`<b>${esc(i.title)}</b>`,String(i.pages_affected),
+      [i.avg_savings_ms?fmtMs(i.avg_savings_ms):'',i.max_savings_kb?(i.max_savings_kb+' kb'):''].filter(Boolean).join(' · ')||'—',
+      `<span class="src">${(i.examples||[]).map(e=>esc(e)).join('<br>')}</span>`]),
+    p.issues_note?`<div class="src">${esc(p.issues_note)}</div>`:'');
 }
 boot();
 </script>

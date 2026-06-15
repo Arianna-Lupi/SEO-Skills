@@ -32,7 +32,7 @@ Funcionas **sin MCP**: en modo manual el usuario pega exports de **Screaming Fro
 ## Procedimiento (con puntos de validación)
 1. **Encuadre.** Confirma dominio, alcance, e identifica las **plantillas** del sitio. Pregunta si existe una auditoría anterior para poder hacer el diff.
 2. **Bloque 1 — Indexabilidad y Rastreabilidad:** robots.txt, sitemap.xml, meta robots/noindex, errores 4xx/5xx, redirecciones (cadenas/bucles), cobertura en GSC, presupuesto de rastreo, y **páginas huérfanas** (vía `arquitectura-y-enlazado-interno`).
-3. **Bloque 2 — Velocidad y Core Web Vitals:** LCP, CLS, INP por plantilla; peso de imágenes/recursos; render-blocking; móvil vs. desktop.
+3. **Bloque 2 — Velocidad y Core Web Vitals:** LCP, CLS, INP por plantilla; peso de imágenes/recursos; render-blocking; móvil vs. desktop. Para el sitio completo usa la skill **`analisis-rendimiento`** (`scripts/run_unlighthouse.py --site <url>`, Unlighthouse corre Lighthouse en cada ruta → `performance.json`); son CWV de **laboratorio** (el veredicto oficial es de campo/CrUX/GSC).
 4. **Bloque 3 — Seguridad y Canonicalización:** HTTPS/certificado, mixed content, canonicals correctos, duplicado/parámetros, hreflang si aplica.
    - **CHECKPOINT 1:** si falta data de un bloque entero (p. ej. no hay CWV), declara ese bloque "incompleto" y di qué export hace falta; no inventes resultados.
 5. **Clasificar por severidad:** Crítico / Alto / Medio / Bajo, según impacto en rastreo→indexación→posicionamiento. Agrupa cada issue **por plantilla** afectada e indica nº de URLs impactadas.

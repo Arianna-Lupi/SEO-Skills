@@ -60,7 +60,7 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 5. `meta robots`: detecta `noindex` no deseados.
 
 **Bloque 2 — Velocidad / Core Web Vitals**
-6. Mide **LCP**, **INP** (sustituye al antiguo FID) y **CLS** con PageSpeed Insights.
+6. Mide **LCP**, **INP** (sustituye al antiguo FID) y **CLS**. Para una URL suelta, PageSpeed Insights. Para **todo el sitio agrupado por plantilla**, delega en la skill **`analisis-rendimiento`** (Unlighthouse corre Lighthouse en cada ruta y deja `performance.json`); recuerda que son datos de **laboratorio** (el veredicto oficial de Google es de campo/CrUX).
 7. Imágenes **>100 kb** (Screaming Frog) → convertir a **WebP**.
 8. **Audita por plantillas, no página por página**: arregla el contenedor y propagas el fix.
 

@@ -95,6 +95,7 @@ Salido del corpus real del curso: transcripciones, resúmenes y prompts ya inger
 - **Ahrefs** (PAGO) — volumen/KD/backlinks/auditoría/GSC. Vía conector claude.ai: https://claude.ai/customize/connectors · API: https://ahrefs.com/api
 - **GSC MCP `mcp-gsc`** (GRATIS, comunitario) — Search Console en vivo (clics/impresiones/CTR/posición, inspección de URLs, sitemaps). Python/`uvx`: https://github.com/AminForou/mcp-gsc
 - **Screaming Frog SEO Spider CLI** — crawl headless + export CSV **GRATIS hasta 500 URLs** (licencia £199/año solo para >500 URLs / config guardada / render JS / scheduling / API). Docs: https://www.screamingfrog.co.uk/seo-spider/user-guide/general/ · precios: https://www.screamingfrog.co.uk/seo-spider/pricing/ · referencia interna que ya lo usa gratis: `../../technical-audit/` (aprendoseo).
+- **Unlighthouse** — escanea TODO el sitio corriendo Google Lighthouse en cada ruta (open source, vía `npx unlighthouse-ci`). Base de la skill `analisis-rendimiento`. Docs: https://unlighthouse.dev/ · Lighthouse: https://developer.chrome.com/docs/lighthouse/overview · CWV (campo vs laboratorio): https://web.dev/articles/vitals
 - **uv / uvx** (para correr `mcp-gsc`): https://astral.sh/uv
 - Dependencias de los scripts deterministas: `requests`, `beautifulsoup4` (ver `requirements.txt`); el resto es stdlib de Python 3.
 

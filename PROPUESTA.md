@@ -2,13 +2,13 @@
 
 Tarea: investigar y proponer 10 skills de Claude más 2 o 3 agentes de Claude para automatizar los flujos SEO del equipo, customizados con el contexto interno del diplomado "De Cero a SEO". De cada uno se explica qué hace, qué tiene por dentro, de dónde salió y cuánto tomaría tenerlo en producción.
 
-Estado: las 13 skills SEO (las 10 pedidas más 3 extras) más 2 skills utilitarias (`configurar-serpapi` para datos en vivo y `dashboard-seo` para el entregable final) y los 3 agentes ya están escritos como archivos reales y usables en `skills/` y `agents/`, no son solo ideas. Casi cada skill trae además un script determinista en `scripts/` que hace el paso mecánico y devuelve JSON, lo que ahorra tokens y da más precisión. Esta propuesta los resume y estima el trabajo que falta para llevarlos a producción.
+Estado: las 14 skills SEO (las 10 pedidas más 4 extras) más 2 skills utilitarias (`configurar-serpapi` para datos en vivo y `dashboard-seo` para el entregable final) y los 3 agentes ya están escritos como archivos reales y usables en `skills/` y `agents/`, no son solo ideas. Casi cada skill trae además un script determinista en `scripts/` que hace el paso mecánico y devuelve JSON, lo que ahorra tokens y da más precisión. Esta propuesta los resume y estima el trabajo que falta para llevarlos a producción.
 
 ---
 
 ## 1. Resumen ejecutivo
 
-- 13 skills SEO (procedimientos de un solo propósito, deterministas y baratos): las 10 pedidas más 3 extras (`inventario-de-urls`, `optimizacion-geo-aeo`, `schema-jsonld`), más 2 skills utilitarias: `configurar-serpapi` (conecta datos en vivo guardando la API key del usuario) y `dashboard-seo` (paso de cierre: reúne todo lo encontrado en una web local y devuelve un URL). Reproducen el método del diploma, desde el keyword research hasta el reporte mensual.
+- 14 skills SEO (procedimientos de un solo propósito, deterministas y baratos): las 10 pedidas más 4 extras (`inventario-de-urls`, `optimizacion-geo-aeo`, `schema-jsonld`, `analisis-rendimiento`), más 2 skills utilitarias: `configurar-serpapi` (conecta datos en vivo guardando la API key del usuario) y `dashboard-seo` (paso de cierre: reúne todo lo encontrado en una web local y devuelve un URL). Reproducen el método del diploma, desde el keyword research hasta el reporte mensual.
 - 3 agentes (coordinadores de varios pasos, cada uno con su propio contexto) que encadenan esas skills en flujos completos: investigación de keywords de principio a fin, auditoría técnica, y el flujo de contenido (SERP, brief, redacción, on-page).
 - Scripts deterministas (`skills/<skill>/scripts/*.py`): cada skill con un paso mecánico trae un script Python que lo ejecuta y devuelve JSON compacto, para que el modelo razone sobre el resultado y no sobre HTML o CSV crudos. Eso ahorra tokens y da más precisión. Si falta la clave o una dependencia, no fallan: la skill sigue en modo manual.
 - Todo está customizado al diploma. Usa la Plantilla Master (la hoja de Google sobre la que se apoya el método), Trello, y la terminología propia de Arianna ("punto dulce", "Duelo de Keywords", "Mapa de Palabras Clave", "Ojo Clínico", "10 de Oro", "Costo de Oportunidad", temperatura de intención, etc.).
@@ -31,7 +31,7 @@ Se cruzaron dos fuentes:
 
 ## 3. Las skills (vista de tabla)
 
-10 skills núcleo (1 a 10) más 3 extras (11 a 13). La columna Script indica el ayudante determinista que trae cada una.
+10 skills núcleo (1 a 10) más 4 extras (11 a 14). La columna Script indica el ayudante determinista que trae cada una.
 
 | # | Skill | Qué hace | Script determinista | Origen (diploma) | Origen (externo) | A producción |
 |---|-------|----------|---------------------|------------------|------------------|--------------|
@@ -48,6 +48,7 @@ Se cruzaron dos fuentes:
 | 11 | `inventario-de-urls` (extra) | Extrae todas/la mayoría de las URLs si no hay export: sitemap (gratis) o Screaming Frog CLI | `inventario_urls.py` | W5/W9/W12 (crawl) | Screaming Frog user guide; `technical-audit` interno | ~2 h |
 | 12 | `optimizacion-geo-aeo` (extra) | Optimiza para AI Overviews/ChatGPT/Perplexity + featured snippets/PAA (AEO/GEO) | `ai_features.py` | W14/W16 | SearchEngineLand; Synscribe; seo-geo/aeo skills | ~3 h |
 | 13 | `schema-jsonld` (extra) | Genera + valida JSON-LD por tipo de página (Article/Product/FAQ/HowTo…) | `schema_gen.py` | SEO técnico | seo-schema skills | ~2 h |
+| 14 | `analisis-rendimiento` (extra) | Rendimiento de todo el sitio con Unlighthouse (Lighthouse por ruta): scores + CWV de laboratorio + lista de errores, por plantilla | `run_unlighthouse.py` | W12 (Bloque 2) | Unlighthouse; Lighthouse; seo-performance skills | ~3 h |
 
 ⭐ = la de más valor en el día a día ("un brief bien hecho es el 50% del éxito", dice Arianna). (extra) = añadidas sobre las 10 pedidas, justificadas por las fuentes o el diploma.
 
