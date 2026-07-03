@@ -79,14 +79,15 @@ SEO-Skills/             ← raíz del repo
 ├── requirements.txt    ← deps de los scripts (o usá `uv run` con PEP 723, cero instalación)
 ├── scripts/trigger_eval.sh ← runner de pruebas de activación de descripciones
 ├── README.md           ← este archivo
-├── skills/             ← 16 carpetas; cada una: SKILL.md + scripts/<script>.py
+├── skills/             ← 17 carpetas; cada una: SKILL.md + scripts/<script>.py
 │   ├── investigacion-de-keywords/        (SKILL.md + scripts/expand_keywords.py)
 │   ├── mapa-de-palabras-clave/           (+ scripts/canibalizacion.py)
 │   ├── analisis-serp-y-competencia/      (+ scripts/serp.py)
+│   ├── analisis-de-competidores/         (+ scripts/competitor_domains.py)
 │   ├── estrategia-de-contenidos-clusters/(+ scripts/cluster.py)
 │   ├── brief-de-contenido/               (+ scripts/serp_outline.py)
 │   ├── redaccion-y-optimizacion-nlp/     (+ scripts/readability.py)
-│   ├── optimizacion-on-page-meta/        (+ scripts/meta_check.py)
+│   ├── optimizacion-on-page-meta/        (+ scripts/meta_check.py, serp_metadata.py)
 │   ├── auditoria-tecnica/                (+ scripts/parse_sf.py, http_checks.py)
 │   ├── analisis-rendimiento/             (+ scripts/run_unlighthouse.py)
 │   ├── arquitectura-y-enlazado-interno/  (+ scripts/orphans.py)
@@ -138,7 +139,7 @@ pip install -r requirements.txt
 El proceso está pensado para que, sin importar por dónde entres, **siempre termines con un dashboard local** que reúne todo lo encontrado.
 
 1. **Datos del sitio.** `inventario-de-urls` saca las URLs; si hace falta SERP en vivo, `configurar-serpapi` guarda tu API key (una vez).
-2. **Investigación y estrategia.** `investigacion-de-keywords` → `mapa-de-palabras-clave` → `analisis-serp-y-competencia` → `estrategia-de-contenidos-clusters`. (O el `agente-investigacion-keywords` de una.)
+2. **Investigación y estrategia.** `investigacion-de-keywords` → `mapa-de-palabras-clave` → `analisis-de-competidores` → `analisis-serp-y-competencia` → `estrategia-de-contenidos-clusters`. (O el `agente-investigacion-keywords` de una.)
 3. **Contenido.** `brief-de-contenido` → `redaccion-y-optimizacion-nlp` → `optimizacion-on-page-meta` → `schema-jsonld`. (O el `agente-contenido`.)
 4. **Técnico.** `auditoria-tecnica` + `analisis-rendimiento` (CWV de todo el sitio) + `arquitectura-y-enlazado-interno` + `reporte-seo-gsc` + `optimizacion-geo-aeo`. (O el `agente-auditoria-tecnica`.)
 5. **Cierre.** Cada skill/agente deja su salida estructurada en `.seo-audit/<sitio>/data/*.json`; `dashboard-seo` lo une y te devuelve el **URL local**.
@@ -178,6 +179,11 @@ Convenciones:
 - **Devuelve**: Competidor de Negocio vs SEO, top 3 con "Ojo Clínico" y reporte de brechas bajo "Costo de Oportunidad".
 - **Script**: `serp.py "<query>" [--gl es] [--hl es] [--num 10]`. Trae top orgánico, PAA y features de la SERP vía SerpApi. Sin key → modo manual.
 
+**`analisis-de-competidores`** — descubre por dominio quiénes son tus competidores SEO de una keyword.
+- **Invocar**: `/analisis-de-competidores` · "quiénes rankean esta palabra", "sácame los dominios de mi competencia".
+- **Devuelve**: lista de dominios priorizada por repetición (aparecer en varias SERPs = crítico) y mejor posición.
+- **Script**: `competitor_domains.py "<kw1|kw2>" [--top 10] [--own midominio.com] [--urls ...] [--no-visit]`. Busca la SERP, entra a cada URL siguiendo redirects y extrae el dominio registrado (eTLD+1). Sin key → modo manual. Deps: requests + tldextract.
+
 **`estrategia-de-contenidos-clusters`** — prioriza qué escribir y arma Topic Clusters.
 - **Invocar**: `/estrategia-de-contenidos-clusters` · "ya investigué keywords, ¿ahora qué escribo primero?".
 - **Devuelve**: 3-5 clusters (pilar + spokes), las "10 de Oro" priorizadas y la tab "Estrategia" (con E-E-A-T y CRO).
@@ -198,7 +204,7 @@ Convenciones:
 **`optimizacion-on-page-meta`** — genera metatítulo, metadescripción y checklist on-page.
 - **Invocar**: `/optimizacion-on-page-meta` · "ármame el título y la descripción", "tengo CTR bajo en Google".
 - **Devuelve**: metatítulo (50-60, keyword al inicio), metadescripción (120-155 con CTA), variantes A/B y checklist.
-- **Script**: `meta_check.py --title "<t>" --desc "<d>" --keyword "<kw>"`. Valida longitudes y posición de keyword. Salida: `title`, `desc`, `warnings`. Stdlib pura.
+- **Scripts**: `meta_check.py --title "<t>" --desc "<d>" --keyword "<kw>"` valida longitudes y posición de keyword (stdlib pura). `serp_metadata.py "<kw>" [--top 10] [--urls ...]` entra al top de la SERP y extrae metatítulo/metadescripción/H1 de los competidores para tener el benchmark de CTR antes de redactar (deps: requests + beautifulsoup4).
 
 **`schema-jsonld`** — genera datos estructurados Schema.org en JSON-LD válidos.
 - **Invocar**: `/schema-jsonld` · "quiero que me salgan las estrellas en Google", "habilita el desplegable de FAQ".
