@@ -87,12 +87,23 @@ Vuelca el brief a la tab **"Producción"** de la Plantilla Master y crea/actuali
 
 ## Salida
 
-Genera el **sub-template según el tipo**. Estructura base:
+Genera el **sub-template según el tipo**. **Todo brief ARRANCA con la tabla de brief** (resumen de cabecera obligatorio); después va el detalle.
 
 ```
 BRIEF DE CONTENIDO — [keyword principal]
 Tipo: [Blog | Landing/Servicios | E-commerce | OPTIMIZACIÓN]
 Cluster: [nombre] · Rol: [Pilar/Spoke] · URL: [destino/existente]
+
+TABLA DE BRIEF (cabecera obligatoria)
+| Campo             | Contenido                                              |
+|-------------------|--------------------------------------------------------|
+| Keyword primaria  | [keyword principal]                                    |
+| Keyword secundaria| [1-3 secundarias, coma; o `pendiente de dato`]         |
+| Meta título       | [50-60c, keyword al inicio]                            |
+| Meta descripción  | [120-155c, con CTA]                                    |
+| H1                | [un solo H1 con la keyword]                            |
+| KV                | [volumen de búsqueda real; si no hay, `pendiente de dato`] |
+| Intención         | [informativa / comercial / transaccional]             |
 
 1. INTENCIÓN Y FORMATO
    Intención: [informativa/comercial/transaccional]
@@ -155,6 +166,8 @@ SERPAPI_API_KEY=xxx uv run scripts/serp_outline.py "tu keyword" --top 5 --gl es 
 ```
 
 Corre con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "competitors": [{url,h1,headings:["H2: ...","H3: ..."]}], "common_questions": [...PAA...], "suggested_outline": [...H2 fusionados por frecuencia...]}`. Si falla, `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0). Valida la jerarquía a mano antes de entregar.
+
+Para elegir PRIMERO qué dominios/URLs son la competencia real de la keyword, corre la skill `analisis-de-competidores` y pásale sus URLs a este script con `--urls`.
 
 ## Gotchas
 

@@ -80,6 +80,20 @@ uv run skills/optimizacion-on-page-meta/scripts/meta_check.py \
 
 Corre con `--help` para ver opciones. Devuelve `{"ok":true,"title":{"len","in_range_50_60","keyword_at_start"},"desc":{"len","in_range_120_155","has_cta_hint","keyword_present"},"warnings":[...]}`. Toma `warnings` como la lista de ajustes (título 50-60 con keyword al inicio; meta 120-155 con CTA y keyword). Solo stdlib, sin deps. Si Python no está disponible, valida en **modo manual** con el simulador de SERP.
 
+## Script de benchmark de metas (competencia)
+
+Antes de redactar, saca el **benchmark real de CTR**: entra al top de la SERP y extrae qué metatítulo y metadescripción usan los que ya rankean tu keyword. Este segundo script hace el pipeline: SerpApi busca la keyword → toma el top N → **entra a cada URL** → extrae `<title>`, `<meta name="description">`, H1 y og:*, cuenta caracteres y marca rango. Redactas TU metadata con ese benchmark delante (nunca de memoria), entendiendo primero la **intención** que revela la SERP.
+
+```bash
+uv run skills/optimizacion-on-page-meta/scripts/serp_metadata.py "sérum vitamina c natural" --top 10 --gl es --hl es
+# sin SerpApi, pasando URLs a mano (p.ej. las que sacó analisis-de-competidores):
+uv run skills/optimizacion-on-page-meta/scripts/serp_metadata.py "sérum vitamina c natural" --urls "https://a.com/x,https://b.com/y"
+```
+
+Devuelve `{"ok":true,"query":...,"paa":[...],"competitors":[{url,serp_title,serp_snippet,meta_title,meta_title_len,meta_title_in_range,meta_description,meta_description_len,meta_description_in_range,h1,og_title,og_description}]}`. Deps: requests + beautifulsoup4 (uv las resuelve). Sin clave/deps degrada a modo manual (copiar títulos/metas del top a mano). Flujo: **este script (benchmark) → redactas → `meta_check.py` (validas)**.
+
+Para DESCUBRIR primero qué dominios/URLs son la competencia, usa la skill `analisis-de-competidores` y pásale aquí las URLs con `--urls`.
+
 ## Salida
 
 - **Set de metas:** metatítulo elegido + 3-5 variantes (con conteo de caracteres) y metadescripción + variantes.
