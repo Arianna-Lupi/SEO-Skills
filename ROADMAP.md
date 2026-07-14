@@ -4,7 +4,10 @@ Estado y próximos pasos de las SEO skills (aprendoseo, "De Cero a SEO"). Issues
 
 ## Publicado
 
-### v1.3.0 (actual)
+### Sin versión (develop)
+- **feat(canibalizacion):** skill `deteccion-de-canibalizacion` — diagnostica canibalización REAL (no la preventiva de `mapa-de-palabras-clave`) cruzando el rendimiento real por query+página de Google Search Console: agrupa por query, calcula cuánto se reparte el clic entre URLs (`dominance_ratio`) y clasifica severidad (Alta/Media/Bajo) con acción recomendada (fusionar+301, diferenciar intención o monitorear). Vuelca hallazgos a `.seo-audit/<sitio>/data/issues.json`.
+
+### v1.3.0
 - **feat(rendimiento):** skill `analisis-rendimiento` — rendimiento de **todo el sitio** con [Unlighthouse](https://unlighthouse.dev/) (Lighthouse en cada ruta, no página por página). Scores performance/accesibilidad/best-practices/SEO + Core Web Vitals de **laboratorio** (LCP, CLS, TBT, FCP, Speed Index), peores páginas y rendimiento **por plantilla**. Vuelca a `.seo-audit/<sitio>/data/performance.json`.
 - **feat(dashboard):** sección ⚡ Rendimiento (tarjetas de scores con color por umbral, CWV medios, páginas más lentas y rendimiento por plantilla). Lee `performance.json`; se oculta si no hay datos.
 - **feat(flujo):** Bloque 2 (Velocidad/CWV) de `auditoria-tecnica` ahora delega en `analisis-rendimiento` para el sitio completo. Mantiene la regla de datos (cero números inventados) y la distinción laboratorio vs. campo (CrUX/GSC).
