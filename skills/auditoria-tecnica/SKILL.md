@@ -46,7 +46,7 @@ Funciona **sin MCP**: con Screaming Frog + GSC + revisión manual basta para los
 3. **Ahrefs MCP (PAGO — ideal aquí):** `mcp__claude_ai_Ahrefs__site-audit-projects` (proyecto), `...site-audit-issues` (issues por severidad), `...site-audit-page-explorer` (filtrar por plantilla/segmento), `...site-audit-page-content`. Para cobertura/rendimiento real: `...gsc-pages`, `...gsc-performance-history`. Ahrefs es de pago.
 3. **SerpApi MCP (GRATIS — limitado aquí):** `mcp__serpapi__search` solo sirve para validar indexación con `site:` u observar la SERP; **no audita técnica**.
 
-**Inventario de URLs (opcional, automático):** si el usuario no pasó el export de URLs, usa la skill `inventario-de-urls` para extraerlas — por **sitemap (cero instalación)** o con **Screaming Frog CLI (GRATIS hasta 500 URLs; licencia solo para >500 URLs / config guardada / render JS / scheduling / API)**, que además trae códigos de estado e indexabilidad para los 3 bloques. aprendoseo ya tiene esto resuelto gratis en la herramienta interna `technical-audit`.
+**Inventario de URLs (opcional, automático):** si el usuario no pasó el export de URLs, usa la skill `inventario-de-urls` para extraerlas — por **sitemap (cero instalación)** o con **Screaming Frog CLI** (gratis), que además trae códigos de estado e indexabilidad para los 3 bloques. El tope gratis de SF es de **500 URLs por rastreo, no por sitio**: para sitios grandes, `inventario-de-urls/scripts/sf_crawl_all.py` trocea en lotes de ≤500 y junta los CSV, cubriendo todo el sitio sin licencia.
 
 Config de MCP: ver `../../MCP-SETUP.md`.
 
@@ -111,11 +111,22 @@ uv run skills/auditoria-tecnica/scripts/http_checks.py --file urls.txt --cap 200
 
 Salida: `{"ok":true,"checked":N,"results":[{"url","status","https","redirect_to"}],"summary":{...}}`. Si falta `requests` devuelve `{"ok":false,"reason":...,"fallback":...}` (exit 0) → **modo manual**: revisa status/HTTPS con Screaming Frog o a mano.
 
+**Data on-page de URLs que un crawler no pudo leer (Shopify/WAF) — `onpage_extract.py`:** cuando SF (u otro crawler con UA de bot) es rate-limitado y devuelve 4xx falsos, no llega a parsear el HTML, así que faltan **title, meta description, canonical, encabezados, robots, hreflang**. Este script las recupera bajando el HTML con **UA de navegador real + throttle** y parseando on-page:
+
+```
+uv run skills/auditoria-tecnica/scripts/onpage_extract.py --file urls.txt --concurrency 4 --csv onpage.csv
+```
+
+Salida: `{"ok":true,"checked":N,"results":[{"url","status","title","meta_description","meta_robots","canonical","self_canonical","h1","h2_count","hreflang","lang","word_count","indexability","indexability_status",...}]}`. Recupera la capa **on-page por URL**; NO calcula inlinks/grafo/profundidad (eso requiere un crawl). `sf_crawl_all.py` lo invoca solo en sitios Shopify para enriquecer las URLs recuperadas (deja `onpage_enriched.json`).
+
 ## Gotchas
 
 - **Audita POR PLANTILLAS, no página por página** — un fallo de plantilla afecta a TODAS sus instancias; arreglas el contenedor y propagas el fix. Página por página = trabajo infinito.
 - **Primero rastreo/indexación (lo que no se rastrea no existe), después velocidad** — no optimices CWV de páginas que Google ni siquiera puede indexar. Bloque 1 antes que Bloque 2.
 - **El CLI de Screaming Frog es GRATIS hasta 500 URLs** — no asumas que necesitas licencia; solo hace falta para >500 URLs, config guardada, render JS, scheduling o API.
+- **Si SF aborta con `FATAL - You do not have sufficient disk space`** — por defecto usa almacenamiento en base de datos y exige **4 GB de disco libre**. En equipos con disco justo, cambia a **modo memoria/RAM**: `storage.mode=MEMORY` en `~/.ScreamingFrogSEOSpider/spider.config` (o GUI `Configuration > System > Storage Mode > Memory Storage`) y relanza. Para ≤500 URLs el modo memoria sobra. Detalle en `../../SCREAMING-FROG.md`.
+- **4xx masivos en una tienda Shopify (o sitio con WAF) = rate-limit, NO roturas** — SF usa UA de bot y Shopify lo bloquea con 4xx/429/430 falsos. Antes de reportar páginas rotas, **revalida con UA de navegador real**: `http_checks.py` (concurrencia baja) o deja que `sf_crawl_all.py` lo haga solo (detecta Shopify y revalida). Solo las URLs que sigan 4xx tras revalidar son roturas reales. Caso real: una tienda Shopify marcó cientos de 4xx en el crawl inicial → solo una fracción eran roturas reales tras revalidar. Detalle en `../../SCREAMING-FROG.md`.
+- **El status corregido NO trae la data on-page** — revalidar solo arregla el código; canonical/title/metas/encabezados de esas URLs siguen vacíos porque SF nunca parseó su HTML. Recupéralos con `onpage_extract.py` (UA real + throttle); `sf_crawl_all.py` ya lo hace automático en Shopify y deja `onpage_enriched.json`. El grafo de inlinks/profundidad de un Shopify solo lo da SF con licencia.
 - **No inventes datos de un bloque sin export — márcalo incompleto** — si no hay crawl/GSC para un bloque, dilo explícito; no rellenes con suposiciones.
 - **No confundas INP con FID:** FID está deprecado; mide **INP**.
 - **Canonical cruzado** mal puesto consolida señales en la URL equivocada; usa self-canonical.
