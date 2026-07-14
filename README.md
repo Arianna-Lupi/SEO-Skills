@@ -1,6 +1,6 @@
 # SEO skills y agentes de Claude (aprendoseo, "De Cero a SEO")
 
-16 skills (14 de SEO + 2 utilitarias: `configurar-serpapi` y `dashboard-seo`) y 3 agentes de Claude Code para automatizar los flujos SEO del equipo, customizados con el método interno del diplomado "De Cero a SEO". Funcionan sin conectar nada y, si quieres, se conectan a SerpApi (gratis), Google Search Console (gratis) o Ahrefs (pago). **Todo flujo termina en un dashboard local** con lo encontrado.
+20 skills (18 de SEO + 2 utilitarias: `configurar-serpapi` y `dashboard-seo`) y 3 agentes de Claude Code para automatizar los flujos SEO del equipo, customizados con el método interno del diplomado "De Cero a SEO". Funcionan sin conectar nada y, si quieres, se conectan a SerpApi (gratis), Google Search Console (gratis) o Ahrefs (pago). **Todo flujo termina en un dashboard local** con lo encontrado.
 
 ## Instalación (un comando)
 
@@ -79,9 +79,10 @@ SEO-Skills/             ← raíz del repo
 ├── requirements.txt    ← deps de los scripts (o usá `uv run` con PEP 723, cero instalación)
 ├── scripts/trigger_eval.sh ← runner de pruebas de activación de descripciones
 ├── README.md           ← este archivo
-├── skills/             ← 17 carpetas; cada una: SKILL.md + scripts/<script>.py
+├── skills/             ← 20 carpetas; cada una: SKILL.md + scripts/<script>.py
 │   ├── investigacion-de-keywords/        (SKILL.md + scripts/expand_keywords.py)
 │   ├── mapa-de-palabras-clave/           (+ scripts/canibalizacion.py)
+│   ├── deteccion-de-canibalizacion/      (+ scripts/detectar_canibalizacion.py)
 │   ├── analisis-serp-y-competencia/      (+ scripts/serp.py)
 │   ├── analisis-de-competidores/         (+ scripts/competitor_domains.py)
 │   ├── estrategia-de-contenidos-clusters/(+ scripts/cluster.py)
@@ -92,6 +93,8 @@ SEO-Skills/             ← raíz del repo
 │   ├── analisis-rendimiento/             (+ scripts/run_unlighthouse.py)
 │   ├── arquitectura-y-enlazado-interno/  (+ scripts/orphans.py)
 │   ├── reporte-seo-gsc/                  (+ scripts/gsc_report.py)
+│   ├── auditoria-de-backlinks-toxicos/   (+ scripts/classify_domains.py, generate_disavow.py) [extra]
+│   ├── link-building-y-outreach/         (referencia: metodologia-scoring.md)                [extra]
 │   ├── inventario-de-urls/               (+ scripts/inventario_urls.py)   [extra]
 │   ├── optimizacion-geo-aeo/             (+ scripts/ai_features.py)       [extra]
 │   ├── schema-jsonld/                    (+ scripts/schema_gen.py)        [extra]
@@ -141,7 +144,7 @@ El proceso está pensado para que, sin importar por dónde entres, **siempre ter
 1. **Datos del sitio.** `inventario-de-urls` saca las URLs; si hace falta SERP en vivo, `configurar-serpapi` guarda tu API key (una vez).
 2. **Investigación y estrategia.** `investigacion-de-keywords` → `mapa-de-palabras-clave` → `analisis-de-competidores` → `analisis-serp-y-competencia` → `estrategia-de-contenidos-clusters`. (O el `agente-investigacion-keywords` de una.)
 3. **Contenido.** `brief-de-contenido` → `redaccion-y-optimizacion-nlp` → `optimizacion-on-page-meta` → `schema-jsonld`. (O el `agente-contenido`.)
-4. **Técnico.** `auditoria-tecnica` + `analisis-rendimiento` (CWV de todo el sitio) + `arquitectura-y-enlazado-interno` + `reporte-seo-gsc` + `optimizacion-geo-aeo`. (O el `agente-auditoria-tecnica`.)
+4. **Técnico.** `auditoria-tecnica` + `analisis-rendimiento` (CWV de todo el sitio) + `arquitectura-y-enlazado-interno` + `reporte-seo-gsc` + `deteccion-de-canibalizacion` (con datos reales de GSC) + `optimizacion-geo-aeo`. (O el `agente-auditoria-tecnica`.)
 5. **Cierre.** Cada skill/agente deja su salida estructurada en `.seo-audit/<sitio>/data/*.json`; `dashboard-seo` lo une y te devuelve el **URL local**.
 
 Reglas que sostienen el flujo:
@@ -238,10 +241,28 @@ Convenciones:
 - **Devuelve**: informe mes vs mes (clics, impresiones, CTR, posición) con interpretación de negocio, ganadores/perdedores e insights.
 - **Script**: `gsc_report.py --current cur.csv --previous prev.csv [--top 10]`. CSV de GSC (Query/Clicks/Impressions/CTR/Position). Salida: `totals` con deltas, `winners`, `losers`, `insights`. Stdlib pura.
 
+**`deteccion-de-canibalizacion`** — diagnostica canibalización REAL con datos de ranking (GSC query+página).
+- **Invocar**: `/deteccion-de-canibalizacion` · "dos artículos míos se turnan en Google", "esta keyword no despega", "¿fusiono o redirijo estas dos páginas?".
+- **Devuelve**: queries con tráfico repartido entre varias URLs, severidad (Alta/Media/Bajo) y acción recomendada (fusionar+301, diferenciar intención o solo monitorear).
+- **Script**: `detectar_canibalizacion.py --file gsc_query_page.csv` (o `--file -` para stdin, `--format csv|json|auto`, `--min-impressions N`). CSV/JSON con filas `{query, url, clicks, impressions, position}` (export de GSC con dimensiones Query+Página). Salida: `cannibalization` (con `dominance_ratio`, `severity`, `action`), `summary`. Stdlib pura.
+
 **`optimizacion-geo-aeo`** — optimiza para ser citado en buscadores con IA (AEO/GEO).
 - **Invocar**: `/optimizacion-geo-aeo` · "cómo aparezco en ChatGPT", "quiero salir en el resumen de IA de Google".
 - **Devuelve**: ajustes para AI Overviews, ChatGPT, Perplexity, Bing Copilot, featured snippet, PAA y Knowledge Panel.
 - **Script**: `ai_features.py "<query>" [--gl es] [--hl es]`. Detecta qué features de IA dispara la query vía SerpApi. Sin key → modo manual.
+
+### Fase 4 — Link building
+
+**`auditoria-de-backlinks-toxicos`** — clasifica el perfil de backlinks por riesgo y genera el disavow.
+- **Invocar**: `/auditoria-de-backlinks-toxicos` · "auditoría de backlinks", "necesito un disavow", "tengo un export de Ahrefs de backlinks", "se me cayó el tráfico y sospecho de link spam".
+- **Devuelve**: cada dominio referente clasificado en Toxic/Suspicious/Low-quality-but-safe/Neutral-OK con evidencia auditable, y `disavow.txt` listo para subir a Search Console.
+- **Script**: `classify_domains.py --input domain-signals.csv --output domain-classification.csv --related-country ca` + `generate_disavow.py --input domain-classification.csv --output disavow.txt --site midominio.com`. Stdlib pura. Rúbrica completa en `references/rubrica-clasificacion.md`.
+- Corré esta skill **antes** de `link-building-y-outreach` — no construyas sobre un perfil sin limpiar.
+
+**`link-building-y-outreach`** — pipeline de enlaces nuevos: fuentes candidatas, gap de competencia, scoring y outreach.
+- **Invocar**: `/link-building-y-outreach` · "conseguime backlinks", "qué directorios me faltan", "analizá los enlaces de mi competencia", "armame un plan de outreach".
+- **Devuelve**: pool de fuentes candidatas por categoría, tabla de brecha vs. competencia, tabla maestra con scoring (relevancia/autoridad/viabilidad) por tier, y contenido de outreach ready-to-send para el tier Alto.
+- **Metodología**: `references/metodologia-scoring.md`. Ahrefs MCP opcional para el gap (`site-explorer-referring-domains`, `organic-competitors`).
 
 ### Configuración y cierre
 
