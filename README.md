@@ -257,10 +257,10 @@ Convenciones:
 - **Invocar**: `/auditoria-de-backlinks-toxicos` · "auditoría de backlinks", "necesito un disavow", "tengo un export de Ahrefs de backlinks", "se me cayó el tráfico y sospecho de link spam".
 - **Devuelve**: cada dominio referente clasificado en Toxic/Suspicious/Low-quality-but-safe/Neutral-OK con evidencia auditable, y `disavow.txt` listo para subir a Search Console.
 - **Script**: `classify_domains.py --input domain-signals.csv --output domain-classification.csv --related-country ca` + `generate_disavow.py --input domain-classification.csv --output disavow.txt --site midominio.com`. Stdlib pura. Rúbrica completa en `references/rubrica-clasificacion.md`.
-- Corré esta skill **antes** de `link-building-y-outreach` — no construyas sobre un perfil sin limpiar.
+- Corre esta skill **antes** de `link-building-y-outreach` — no construyas sobre un perfil sin limpiar.
 
 **`link-building-y-outreach`** — pipeline de enlaces nuevos: fuentes candidatas, gap de competencia, scoring y outreach.
-- **Invocar**: `/link-building-y-outreach` · "conseguime backlinks", "qué directorios me faltan", "analizá los enlaces de mi competencia", "armame un plan de outreach".
+- **Invocar**: `/link-building-y-outreach` · "consígueme backlinks", "qué directorios me faltan", "analiza los enlaces de mi competencia", "hazme un plan de outreach".
 - **Devuelve**: pool de fuentes candidatas por categoría, tabla de brecha vs. competencia, tabla maestra con scoring (relevancia/autoridad/viabilidad) por tier, y contenido de outreach ready-to-send para el tier Alto.
 - **Metodología**: `references/metodologia-scoring.md`. Ahrefs MCP opcional para el gap (`site-explorer-referring-domains`, `organic-competitors`).
 

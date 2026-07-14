@@ -27,8 +27,9 @@ Actúa como recolector de URLs en aprendoseo. Antes de mapear keywords, auditar 
 ## Entradas (qué te doy)
 
 - **Dominio** del sitio (obligatorio): `https://ejemplo.com`.
-- (Opcional) Si el sitio supera **500 URLs**: confirmación de si hay **licencia de Screaming Frog** (hasta 500 URLs el CLI es gratis y no hace falta).
 - (Opcional) URL directa del sitemap si la conoces.
+
+> **Sitios de >500 URLs SIN licencia:** no hace falta licencia. La versión gratis limita a 500 URLs **por rastreo**, no por sitio. Se cubre el sitio entero **troceando**: sacar todas las URLs del sitemap y rastrearlas en lotes de ≤500 con `--crawl-list`, luego juntar los CSV. Lo automatiza `scripts/sf_crawl_all.py` (ver abajo).
 
 ## Datos (herramientas opcionales)
 
@@ -47,9 +48,11 @@ Sin instalar nada ni MCP. Vía **Bash (`curl`)** o **WebFetch**. Orden estricto:
 
 > **Si el sitio bloquea el rastreo (`"blocked": true`):** el script ya manda un User-Agent de navegador real, así que pasa la mayoría de los sitios. Si aun así devuelve `"blocked": true`, hay un WAF/anti-bot (típicamente **Cloudflare**) que bloquea por *TLS fingerprint*, no por User-Agent — ningún cliente HTTP plano lo evita. **No insistas ni intentes evadirlo.** Guía al usuario: (1) si es **su** sitio, que cree una WAF rule en Cloudflare que permita su rastreo (por IP o User-Agent) o que exporte las URLs desde **Google Search Console** (Sitemaps / Páginas indexadas); (2) si no es suyo, usa **Screaming Frog** (motor de navegador real) o el sitemap obtenido vía GSC; (3) opcionalmente, prueba otro User-Agent con la variable de entorno `SEO_USER_AGENT`.
 
-### Camino Screaming Frog CLI (más rico) — GRATIS hasta 500 URLs
+### Camino Screaming Frog CLI (más rico) — GRATIS, sin tope de sitio
 
-Rastreo **headless** que devuelve la lista completa con **código de estado, tipo de contenido e indexabilidad**, más el grafo de enlaces para detectar huérfanas. **Funciona en la versión GRATIS hasta 500 URLs** (export CSV/bulk incluidos). La **licencia (~£199/año) solo se requiere para >500 URLs, config guardada (`--config`), render JS, scheduling o integraciones de API**.
+Rastreo **headless** que devuelve la lista completa con **código de estado, tipo de contenido e indexabilidad**, más el grafo de enlaces para detectar huérfanas. La versión gratis limita a **500 URLs por rastreo**, pero **no por sitio**: para sitios grandes se trocea (más abajo) y se cubre todo gratis. (Nota técnica: hay funciones que sí piden licencia — config guardada con `--config`, render JS, scheduling e integraciones de API —, pero nada de eso hace falta para el inventario.)
+
+> **Disco / modo de almacenamiento:** por defecto SF usa almacenamiento en base de datos y **exige 4 GB de disco libre**, o aborta con `FATAL - You do not have sufficient disk space`. Con disco justo, cambia a **modo memoria/RAM**: `storage.mode=MEMORY` en `~/.ScreamingFrogSEOSpider/spider.config` (o GUI `Configuration > System > Storage Mode > Memory Storage`). Para ≤500 URLs sobra. Detalle en `../../SCREAMING-FROG.md`.
 
 El binario se resuelve por la variable `SCREAMING_FROG_BINARY` o por los defaults del SO. Comando núcleo (rastrear → exportar todas las URLs internas a CSV), por SO:
 
@@ -83,13 +86,37 @@ Para huérfanas / grafo de enlaces interno, añade:
 
 **Cómo leer el resultado:** se genera `internal_all.csv` en el `--output-folder`. Léelo (Bash/Read) y úsalo como lista maestra: columnas clave **Address** (URL), **Status Code**, **Content Type**, **Indexability**. El bulk export produce los CSV de inlinks/outlinks (lista de aristas) para cruzar y encontrar URLs sin inlinks (huérfanas).
 
+### Sitio entero GRATIS por troceo (>500 URLs, sin licencia)
+
+El límite de 500 es **por rastreo**, no por sitio. `scripts/sf_crawl_all.py` saca todas las URLs del sitemap, las trocea en lotes de ≤500 (un sitemap con >500 URLs se parte solo), corre SF en modo `--crawl-list` por cada lote y junta los CSV en un único `internal_all.csv` (dedup por Address):
+
+```
+# rastrea TODO el sitio en lotes de 500 (gratis):
+python3 skills/inventario-de-urls/scripts/sf_crawl_all.py --site https://ejemplo.com --out ./sf-out
+
+# planifica los lotes sin correr SF (cuántos lotes y de cuántas URLs):
+python3 skills/inventario-de-urls/scripts/sf_crawl_all.py --site https://ejemplo.com --dry-run
+
+# pasar un sitemap directo y/o exportar también los issues:
+python3 skills/inventario-de-urls/scripts/sf_crawl_all.py --site https://ejemplo.com \
+  --sitemap https://ejemplo.com/sitemap_index.xml --bulk-export "Issues:All"
+```
+
+Salida: `{"ok":true,"urls_total":N,"batches":K,"crawled":N,"merged_csv":".../internal_all.csv","per_batch":[...],"revalidation":{...}}`. Si SF aborta por disco, avisa que cambies a `storage.mode=MEMORY`. Si no hay sitemap, cae a modo manual (pasar `--sitemap` o exportar URLs de GSC). El `merged_csv` se pasa tal cual a `parse_sf.py` / `auditoria-tecnica`.
+
+> **Tiendas Shopify y otros WAF — 4xx FALSOS por rate-limit:** SF usa User-Agent de bot; Shopify (y otros WAF) lo rate-limitan devolviendo **4xx/429/430 falsos** en URLs que en el navegador abren bien. Es bloqueo, no roturas. `sf_crawl_all.py` **detecta Shopify** (headers `x-shopify-*`, `cdn.shopify.com`) y hace **dos pasos automáticos**:
+> 1. **Revalida** los 4xx/5xx con `http_checks.py` (UA real + baja concurrencia = throttle), corrigiendo el `Status Code` en el CSV. Salida: `"revalidation": {"revalidated":N, "fixed":<falsos>, "still_bad":<roturas reales>}`.
+> 2. **Enriquece on-page** las URLs recuperadas con `onpage_extract.py` (baja el HTML con UA real y saca **title, meta description, robots, canonical, H1/H2, hreflang, word count, indexability**), porque cuando SF las vio como 4xx **nunca parseó su HTML** y esas columnas quedaron vacías. Salida: `"onpage_enrichment": {"enriched":N, "indexable":M, "json":"...onpage_enriched.json", "csv":"...onpage_enriched.csv"}`.
+>
+> Flags: `--revalidate`/`--no-revalidate`, `--enrich`/`--no-enrich`, `--revalidate-concurrency`/`--enrich-concurrency` (default 4; baja a 2 si aún bloquea). **Límite:** el enriquecimiento recupera lo on-page por URL, NO el grafo de inlinks/profundidad (eso requiere crawl; en Shopify SF gratis se bloquea, haría falta licencia). **Caso real:** una tienda Shopify marcó cientos de 4xx en el crawl inicial; tras revalidar, la gran mayoría eran falsos por rate-limit y el resto se recuperó con su data on-page completa. Detalle en `../../SCREAMING-FROG.md` ("4xx masivos en tiendas Shopify").
+
 Detalle de instalación, binarios, prerequisitos headless y los 3 comandos completos: ver **`../../SCREAMING-FROG.md`**.
 
 ## Proceso
 
-1. Confirma el **dominio** (y, solo si superas 500 URLs, si hay licencia de Screaming Frog).
+1. Confirma el **dominio**.
 2. **Cero instalación → camino sitemap:** robots.txt → directivas `Sitemap:` → sitemap.xml/index → parsear `<loc>`.
-3. **Con Screaming Frog (GRATIS ≤500 URLs):** corre el comando headless del SO correspondiente → lee `internal_all.csv` (+ All Inlinks si necesitas huérfanas).
+3. **Con Screaming Frog (GRATIS):** sitio de ≤500 URLs → comando headless directo; sitio de >500 URLs → `sf_crawl_all.py` (trocea en lotes de ≤500 y junta los CSV). Lee el `internal_all.csv` resultante (+ All Inlinks si necesitas huérfanas).
 4. **Normaliza:** quita duplicados, descarta parámetros de tracking si procede, ordena.
 5. **Entrega** la lista/tabla y deja claro de qué camino vino (y por tanto qué límites tiene).
 
