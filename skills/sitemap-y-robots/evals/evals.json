@@ -1,0 +1,60 @@
+{
+  "skill_name": "sitemap-y-robots",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Mi sitio miweb.com dejó de aparecer en Google tras el rediseño. Pegué el robots.txt: User-agent: * / Disallow: / / Sitemap: https://miweb.com/sitemap.xml",
+      "expected_output": "Detecta el Disallow: / como bloqueo crítico (lo que no se rastrea, no existe), explica la regla en lenguaje sin tecnicismos (qué es, por qué importa, cómo se soluciona), da el robots.txt corregido, pide verificar en GSC el estado del sitemap y reenviarlo, y no inventa cuántas URLs perdió.",
+      "assertions": [
+        "identifica Disallow: / en User-agent * como hallazgo crítico",
+        "entrega el robots.txt corregido y mantiene la línea Sitemap",
+        "explica con qué es, por qué importa y cómo se soluciona",
+        "pide datos de GSC (cobertura del sitemap) en vez de inventar cifras de indexación",
+        "sugiere probar el archivo en technicalseo.com/tools/robots-txt"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Mi web está hecha en Next.js y /sitemap.xml y /robots.txt dan 404. Soy SEO, no programo, ¿qué hago?",
+      "expected_output": "Explica que en sitios con código el sitemap y el robots los genera un developer, redacta un ticket técnico claro para el programador (por qué afecta, qué archivos y contenido mínimo, cómo validar) y no propone plugins de WordPress.",
+      "assertions": [
+        "indica que el sitemap y el robots los genera el developer en sitios hechos con código",
+        "redacta un ticket dirigido al programador con motivo, cambio recomendado y forma de validar",
+        "no propone plugins de WordPress ni listas manuales",
+        "incluye una plantilla mínima de robots.txt con la línea Sitemap"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Tengo una tienda Shopify y quiero quitar tres colecciones del sitemap.xml. ¿Cómo edito el archivo?",
+      "expected_output": "Aclara que en Shopify el sitemap se genera solo y no se edita, que robots.txt sí es editable, y ofrece la alternativa realizable (noindex en las colecciones o dejar de enlazarlas), sin proponer editar el sitemap.",
+      "assertions": [
+        "dice que el sitemap de Shopify se crea solo y no se edita",
+        "ofrece una alternativa realizable según el CMS (por ejemplo noindex o quitar enlaces)",
+        "no inventa un procedimiento para editar el sitemap"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Quiero que ChatGPT y Perplexity me citen, pero mi consultor me dijo que bloqueé a las IAs. ¿Cómo lo reviso?",
+      "expected_output": "Revisa robots.txt por bot de IA (GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended), distingue entrenamiento de búsqueda/navegación, menciona que Cloudflare puede inyectar reglas de bloqueo y recomienda decidir con el cliente antes de editar. Aclara que bloquear Google-Extended no afecta a Google Search.",
+      "assertions": [
+        "distingue bots de entrenamiento de bots de búsqueda o navegación",
+        "menciona que Cloudflare puede inyectar reglas que bloquean crawlers de IA",
+        "aclara que bloquear Google-Extended no afecta a Google Search",
+        "indica que robots.txt es una guía y no una barrera",
+        "usa o propone revisar_robots_sitemap.py para listar el estado por bot"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Solo dime si esta línea está bien: Sitemap: https://misitio.com/sitemap_index.xml",
+      "expected_output": "Edge case: responde la duda puntual (formato correcto de la directiva, URL absoluta y https) y sugiere comprobar que el archivo exista, sin ejecutar la revisión completa.",
+      "assertions": [
+        "responde solo la duda puntual sin ejecutar la revisión completa",
+        "confirma que la directiva usa URL absoluta con https",
+        "sugiere abrir la URL para confirmar que existe"
+      ]
+    }
+  ]
+}

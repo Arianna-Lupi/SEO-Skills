@@ -1,0 +1,41 @@
+{
+  "skill_name": "mapa-de-palabras-clave",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo estas 6 URLs de mi tienda de café y estas keywords: /cafe-de-especialidad (café de especialidad), /blog/mejor-cafe (café de especialidad), /cafe-organico (café orgánico), /aviso-legal, /tag/cafe y /wp-content/logo.png. Ármame el mapa de palabras clave.",
+      "expected_output": "Un mapa con Valor SEO por URL (aviso legal, etiquetas y archivos sin valor), una sola keyword por URL, la canibalización detectada entre las dos URLs de 'café de especialidad' con una reasignación o unificación, temperatura, plan de acción coherente y Top 5, sin inventar volúmenes ni posiciones.",
+      "assertions": [
+        "marca Valor SEO = No para el aviso legal, la etiqueta y el archivo de imagen, sin asignarles keyword",
+        "detecta la canibalización entre /cafe-de-especialidad y /blog/mejor-cafe y propone reasignar o unificar",
+        "mantiene una sola keyword primaria por URL (1:1)",
+        "clasifica la intención con la temperatura baja, media o alta",
+        "pide los datos de volumen, dificultad y posición o los marca como pendientes de dato en lugar de inventarlos",
+        "el plan de acción usa Actualizar/Optimizar, Eliminar/Redireccionar o Mantener, y Mantener solo para URLs en el top 3"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Heredé un sitio con 245 páginas y no sé qué hacer con tantas. ¿Cómo las clasifico?",
+      "expected_output": "Aplica el inventario completo, la evaluación de valor SEO y la clasificación de Vero (Conservar, Actualizar, Unificar, Eliminar), define la rama seca, filtra imágenes y archivos y prioriza home y servicios antes que los posts informativos.",
+      "assertions": [
+        "propone inventariar con Screaming Frog en modo Spider o sitemap y filtrar a URLs de contenido",
+        "evalúa el valor SEO con la pregunta de si un usuario buscaría eso en Google",
+        "usa las acciones Conservar, Actualizar, Unificar y Eliminar o su equivalente del curso",
+        "explica qué es una rama seca",
+        "prioriza home y páginas de servicio antes que los posts informativos"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "En mi mapa tengo 'ferretería', 'ferretería online' y 'tienda de ferretería' cada una en una URL distinta. ¿Está bien?",
+      "expected_output": "Detecta que las tres comparten intención (misma SERP), recomienda una sola URL principal con las variantes como H2, FAQ o texto, y explica la canibalización; menciona la excepción cuando la SERP muestra páginas distintas.",
+      "assertions": [
+        "indica que no está bien porque las tres comparten intención y causan canibalización",
+        "recomienda una sola URL con una keyword principal y las otras como variantes dentro del texto, H2 o FAQ",
+        "propone verificar la SERP para confirmar si muestran las mismas páginas",
+        "menciona que se separan solo si la SERP muestra páginas distintas"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "skill_name": "seo-ecommerce",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo una tienda en Shopify con 200 productos y 40 colecciones. No vendo nada desde Google. ¿Por dónde empiezo?",
+      "expected_output": "Revisión de estructura de colecciones con jerarquía padre e hijas y una keyword por colección, auditoría de las 5 fichas más vendidas y plan de tareas.",
+      "assertions": [
+        "propone jerarquía de colecciones padre e hijas, cada una con una keyword útil",
+        "evita multiplicar colecciones al mismo nivel",
+        "propone auditar títulos de los 5 productos más vendidos",
+        "incluye FAQ, prueba social y alt text en las fichas",
+        "no inventa volúmenes de búsqueda ni ventas"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Mis productos tienen variantes de talla y color y los filtros generan miles de URLs. ¿Qué indexo?",
+      "expected_output": "Criterios de variantes dentro del mismo producto, canónica en el tema de Shopify, paginación y filtros como colecciones propias si tienen demanda.",
+      "assertions": [
+        "las variantes viven dentro de un mismo producto",
+        "indica la canónica en el tema (canonical_url) en Shopify",
+        "trata los filtros con demanda como colecciones propias",
+        "explica la discrepancia sobre canónica de paginación y pide decidir con el cliente"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Genera el schema de esta ficha: zapato de cuero, precio 59.90 EUR, en stock, 4.6 estrellas con 31 reseñas.",
+      "expected_output": "Bloque JSON-LD Product con name, image, offers (price numérico, priceCurrency EUR, availability como URL) y aggregateRating con los datos dados.",
+      "assertions": [
+        "price es numérico sin símbolo",
+        "availability usa la URL completa de schema.org",
+        "incluye aggregateRating con ratingValue y reviewCount dados",
+        "no inventa sku, gtin ni marca no proporcionados"
+      ]
+    }
+  ]
+}

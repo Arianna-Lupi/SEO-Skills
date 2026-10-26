@@ -1,0 +1,39 @@
+{
+  "skill_name": "deteccion-de-canibalizacion",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Te pego un export de Search Console (query, página, clics, impresiones, posición) de los últimos 90 días. Para 'café de especialidad' aparecen /cafe-de-especialidad (40 clics, posición 6) y /blog/mejor-cafe (35 clics, posición 7). ¿Hay canibalización y qué hago?",
+      "expected_output": "Ejecuta o simula el script, calcula la dominancia (cerca de 53 %), clasifica severidad Alta porque el clic se reparte y las posiciones están a un puesto, verifica la SERP y recomienda fusionar con 301 hacia la URL ganadora o diferenciar según intención, sin inventar datos.",
+      "assertions": [
+        "calcula o razona la dominancia de la URL líder usando solo los números aportados",
+        "clasifica la severidad como Alta porque el clic se reparte y las posiciones son cercanas",
+        "recomienda decidir la URL ganadora y redirigir con 301 la débil hacia la fuerte, nunca al revés",
+        "propone verificar en la SERP si ambas comparten intención antes de fusionar",
+        "devuelve el fix al mapa de palabras clave (1:1) y al enlazado interno",
+        "no inventa datos que no vinieron en el export"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "En Search Console veo que mi home y mi página 'quiénes somos' salen las dos para mi nombre de marca. ¿Es canibalización?",
+      "expected_output": "Explica que es una consulta de marca (navegacional) y normalmente no es un problema, recomienda filtrarla con --brand y solo actuar si compiten dos páginas de contenido.",
+      "assertions": [
+        "identifica la consulta como navegacional o de marca",
+        "indica que normalmente no es un problema",
+        "propone filtrar las consultas de marca y revisar solo las páginas de contenido"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Tengo dos páginas que mencionan 'Madrid': una de servicio de fontanería en Madrid y otra del blog 'cómo detectar una fuga de agua en Madrid'. Alguien me dijo que canibalizan. ¿Las fusiono?",
+      "expected_output": "Aplica el criterio de Diana y Vero: no fusiona si la intención, el contenido y la estructura difieren (una transaccional local y una informativa), pide comparar la SERP y propone enlazar el artículo al servicio.",
+      "assertions": [
+        "indica que compartir una ciudad no es canibalización por sí solo",
+        "distingue la intención transaccional del servicio de la informativa del blog",
+        "recomienda confirmar con la SERP o con los datos de GSC antes de fusionar",
+        "propone un enlace contextual del artículo hacia la página de servicio"
+      ]
+    }
+  ]
+}

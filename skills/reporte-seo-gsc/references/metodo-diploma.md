@@ -1,4 +1,4 @@
-# Método del diploma — Reporte SEO Mensual (Semana 12, Arianna Lupi)
+# Método del diploma, Reporte SEO Mensual (Semana 12, Arianna Lupi)
 
 > Fuente: corpus interno "De Cero a SEO" (chunks, doc_type resumenes-prompts/transcripciones), Semana 12. Material de aprendoseo.
 
@@ -52,13 +52,13 @@ Principio de contextualización (clase 6): "No solo dar el número, sino **expli
 
 ## Prompts originales que da el curso (verbatim)
 
-**Prompt clase 6 — Estratega de Reportes SEO:**
+**Prompt clase 6, Estratega de Reportes SEO:**
 > "Actúa como Consultor SEO Senior en aprendoseo. Ayúdame a estructurar mi primer Informe Mensual para aprendoseo. Basado en mis metas de [Insertar metas, ej: aumentar tráfico un 20%], dime qué KPIs debo priorizar en la primera página para captar la atención del dueño del negocio y cómo debo redactar una conclusión que explique una caída en impresiones pero un aumento en clics."
 
-**Prompt clase 7 — Redactor de Conclusiones Estratégicas:**
+**Prompt clase 7, Redactor de Conclusiones Estratégicas:**
 > "Actúa como Consultor SEO Senior en aprendoseo. Tengo estos datos de mi proyecto en aprendoseo: Clics: +15%, Impresiones: +40%, CTR: -2%. Redacta un comentario profesional para mi reporte que explique al cliente que este aumento en impresiones es positivo (estamos ganando visibilidad) y sugiere una acción de 'magia SEO' para mejorar ese CTR en las páginas clave."
 
-**Prompt clase 8 — Auditor de Proyecto Final (revisión del reporte para certificación):**
+**Prompt clase 8, Auditor de Proyecto Final (revisión del reporte para certificación):**
 > "Actúa como Coach Senior de aprendoseo. Revisa mi avance general en aprendoseo hasta la Semana 12. Basado en mi plantilla [mencionar secciones completadas], identifica si hay alguna brecha técnica o estratégica que deba reforzar antes de la entrega final. Ayúdame a asegurar que mi reporte SEO y mi auditoría técnica sean impecables para cumplir con los estándares de certificación."
 
 ## Términos del diploma (definiciones)

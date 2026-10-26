@@ -1,0 +1,6 @@
+https://ejemplo.com/
+https://ejemplo.com/blog/
+https://ejemplo.com/blog/
+http://ejemplo.com/viejo
+https://otro.com/x
+https://ejemplo.com/gracias/

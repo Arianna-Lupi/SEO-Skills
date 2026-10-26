@@ -1,0 +1,50 @@
+{
+  "skill_name": "optimizacion-de-imagenes",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Mi blog en WordPress tarda mucho en cargar y PageSpeed dice que las imágenes son el problema. La URL tipo de artículo es https://miblog.com/guia-ejemplo/. ¿Qué hago?",
+      "expected_output": "Audita la plantilla de artículo (no todas las páginas), lista las imágenes de más de 100 kb, propone WebP y dimensiones acordes al diseño, revisa alt, width/height y lazy loading de la imagen principal, y entrega tareas que empiezan con verbo, con explainer y evidencia. Usa el script auditar_imagenes.py o su modo manual.",
+      "assertions": [
+        "audita por plantilla y no página por página",
+        "usa el umbral de 100 kb del diplomado",
+        "recomienda WebP y dimensiones acordes al diseño",
+        "revisa que la imagen principal no tenga loading=lazy",
+        "redacta tareas que empiezan con verbo e incluyen explainer (qué es, por qué importa, cómo se soluciona)",
+        "no inventa pesos: usa el script o pide el dato"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Tengo una tienda Shopify y quiero subir todas mis fotos en AVIF para que cargue rápido.",
+      "expected_output": "Aclara que Shopify no admite subir WebP o AVIF y que se comprimen las imágenes (Squoosh), con dimensiones correctas y alt, y que la plataforma entrega formatos modernos desde su CDN. No propone algo irrealizable.",
+      "assertions": [
+        "indica que Shopify no admite subir WebP ni AVIF",
+        "propone comprimir con Squoosh y ajustar dimensiones",
+        "recuerda el alt en las fotos de producto",
+        "no promete ahorros numéricos sin medición"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "¿Qué alt le pongo a la foto de mis zapatillas rojas de running para la ficha de producto?",
+      "expected_output": "Edge case: duda puntual de alt. Da un alt descriptivo y natural (producto y rasgo diferenciador), sugiere un nombre de archivo descriptivo y no ejecuta la auditoría completa ni inventa keywords.",
+      "assertions": [
+        "propone un alt descriptivo y breve, sin listas de keywords",
+        "sugiere un nombre de archivo descriptivo con guiones",
+        "no ejecuta una auditoría completa"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "La imagen principal de mi home es lo más lento y además la página salta cuando carga. Ya le puse loading=lazy a todas las imágenes.",
+      "expected_output": "Detecta que el lazy en la imagen principal daña el LCP, recomienda quitarlo y añadir fetchpriority=high como complemento, y declarar width/height para evitar el CLS, citando los Core Web Vitals (LCP, CLS) con INP como tercera métrica.",
+      "assertions": [
+        "indica quitar loading=lazy de la imagen principal",
+        "recomienda declarar width y height para reservar espacio y reducir el CLS",
+        "menciona fetchpriority=high como complemento opcional",
+        "no confunde INP con FID"
+      ]
+    }
+  ]
+}

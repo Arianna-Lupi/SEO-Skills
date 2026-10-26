@@ -1,17 +1,17 @@
-# Método del diploma — Optimización GEO / AEO para la búsqueda con IA (Semanas 14 y 16)
+# Método del diploma, Optimización GEO / AEO para la búsqueda con IA (Semanas 14 y 16)
 
 > Fuente: corpus interno "De Cero a SEO" (chunks, doc_type resumenes-prompts/transcripciones), Semanas 14 y 16. Material de aprendoseo.
 
 Dos clases enseñan este tema, con instructores distintos:
 
-- **Semana 14, clase 13 — "¿Cómo optimizar tu contenido para aparecer en respuestas de la IA?"** (instructor: **Daniel Quintero**). Introduce el concepto de **AEO (Answer Engine Optimization)**.
-- **Semana 16, clase 1 — "Clase especial SEO PARA LLMs"** (instructor: **Ibrahim Mogollón**). Cubre **GEO + AEO + LLM** ("la sopa de letras del futuro").
+- **Semana 14, clase 13, "¿Cómo optimizar tu contenido para aparecer en respuestas de la IA?"** (instructor: **Daniel Quintero**). Introduce el concepto de **AEO (Answer Engine Optimization)**.
+- **Semana 16, clase 1, "Clase especial SEO PARA LLMs"** (instructor: **Ibrahim Mogollón**). Cubre **GEO + AEO + LLM** ("la sopa de letras del futuro").
 
-Honestidad sobre la cobertura: el corpus es **sólido pero conciso** en GEO/AEO — son dos clases de resumen, no un módulo extenso. Lo de abajo es lo que el curso realmente dice; no se ha añadido material externo.
+Honestidad sobre la cobertura: el corpus es **sólido pero conciso** en GEO/AEO, son dos clases de resumen, no un módulo extenso. Lo de abajo es lo que el curso realmente dice; no se ha añadido material externo.
 
 ## El método paso a paso (como lo enseña el curso)
 
-### AEO — Semana 14, clase 13 (Daniel Quintero)
+### AEO, Semana 14, clase 13 (Daniel Quintero)
 
 Definición del curso: "Ya no basta con aparecer en los 'enlaces azules' de Google; el objetivo ahora es ser **la fuente de información** que herramientas como ChatGPT, Gemini y los Google AI Overviews (SGE) utilizan para responder a los usuarios."
 
@@ -27,9 +27,9 @@ Definición del curso: "Ya no basta con aparecer en los 'enlaces azules' de Goog
 - **Uso de Listas y Tablas:** "Estructurar la información de manera que la IA pueda extraerla fácilmente."
 - **Marcado de Datos Estructurados (Schema):** "Implementar el esquema de FAQ (Preguntas Frecuentes) es vital para que los motores de IA identifiquen qué preguntas estás resolviendo."
 
-**El nuevo estándar de contenido (ultra-estructurado):** Texto Alt en imágenes (contexto visual para la IA), Brevedad y Claridad ("menos relleno y más precisión técnica"), y **E-E-A-T** (Experiencia, Autoridad y Confianza) — "la IA prioriza contenido que parece escrito por un experto real en el tema".
+**El nuevo estándar de contenido (ultra-estructurado):** Texto Alt en imágenes (contexto visual para la IA), Brevedad y Claridad ("menos relleno y más precisión técnica"), y **E-E-A-T** (Experiencia, Autoridad y Confianza), "la IA prioriza contenido que parece escrito por un experto real en el tema".
 
-### GEO/AEO para LLMs — Semana 16, clase 1 (Ibrahim Mogollón)
+### GEO/AEO para LLMs, Semana 16, clase 1 (Ibrahim Mogollón)
 
 "El ecosistema de búsqueda ha cambiado. Ahora existen los LLMs… y nuestra misión es que estas herramientas nos citen como **la fuente de verdad**."
 
@@ -47,7 +47,7 @@ El único umbral numérico explícito que da el curso:
 
 Criterios (sin números, pero accionables):
 
-- **Auditoría Final de Control de Ibrahim** (Semana 16) — tres puntos de chequeo:
+- **Auditoría Final de Control de Ibrahim** (Semana 16), tres puntos de chequeo:
   - **Contenido:** ¿Está actualizado? ¿Es único?
   - **Estructura:** ¿Hay contenido duplicado? ¿Están bien jerarquizados los encabezados?
   - **SEO Técnico:** "es el pilar. Si la IA no puede 'leer' tu código rápidamente, te ignorará."
@@ -57,13 +57,13 @@ Criterios (sin números, pero accionables):
 
 ## Prompts originales que da el curso (verbatim)
 
-**Prompt Semana 14, clase 13 — Estratega de Visibilidad en IA (AEO):**
+**Prompt Semana 14, clase 13, Estratega de Visibilidad en IA (AEO):**
 > "Actúa como Especialista en AEO (Answer Engine Optimization) en aprendoseo. Analiza mi siguiente texto: [Insertar Texto]. Por favor, reescribe la introducción para que sea una respuesta directa que Google AI Overviews pueda citar, y estructura los beneficios en una tabla comparativa para que Gemini pueda extraer los datos fácilmente para un usuario de aprendoseo."
 
-**Prompt Semana 14, clase 14 — Auditor de Estrategia (incluye AEO):**
+**Prompt Semana 14, clase 14, Auditor de Estrategia (incluye AEO):**
 > "Actúa como Director de Estrategia SEO en aprendoseo. He aplicado las técnicas de la Semana 14 en mi proyecto de aprendoseo. Revisa mi plan de acción: [Insertar plan de acción, ej. optimización de ficha local y uso de IA para contenido]. ¿Qué paso adicional me sugieres para asegurar que mi contenido sea citado por los motores de respuesta (AEO) y qué métrica debería monitorear prioritariamente?"
 
-**Prompt Semana 16, clase 1 — Optimizador para Motores Generativos (GEO):**
+**Prompt Semana 16, clase 1, Optimizador para Motores Generativos (GEO):**
 > "Actúa como Estratega GEO en aprendoseo. Analiza mi siguiente artículo de aprendoseo: [Insertar Texto]. ¿Qué cambios estructurales debo hacer para que un modelo como Gemini me considere una fuente autorizada para responder preguntas directas sobre este tema? Enfócate en la jerarquía de información y en la eliminación de ambigüedades."
 
 ## Términos del diploma (definiciones)

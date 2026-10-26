@@ -1,0 +1,38 @@
+{
+  "skill_name": "estrategia-de-contenidos-clusters",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo 40 keywords de mi tienda de velas, el mapa de keywords y el análisis de competencia ya hechos. Elige las 10 de oro y arma los clusters.",
+      "expected_output": "Las 10 de Oro con criterio ponderado (relevancia, volumen, KD, intención, oportunidad), 3 a 5 clusters con pilar y spokes, nuevo vs. existente, E-E-A-T, CRO y calendario con capacidad mensual realista.",
+      "assertions": [
+        "elige las 10 de Oro de las keywords ya investigadas sin inventar nuevas",
+        "arma entre 3 y 5 clusters con un pilar y spokes",
+        "marca cada pieza como nuevo u optimizar existente",
+        "incluye acciones E-E-A-T y CRO y un calendario según capacidad mensual",
+        "no usa volumen o KD que no estén en los datos del usuario"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Mi cliente de audio y accesorios para autos quiere un solo cluster que incluya instalación de audio, polarizado de vidrios y wraps.",
+      "expected_output": "La skill separa los servicios en tres clusters distintos, explica que mezclar servicios diluye el cluster y el enlazado, y recomienda cluster por categoría, no por producto, con las informativas en un blog hub.",
+      "assertions": [
+        "separa audio, polarizado y wraps en clusters distintos",
+        "explica que mezclar servicios en un cluster es un error típico",
+        "recomienda cluster por categoría y las informativas en un blog hub enlazando a los servicios"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Estas dos keywords, 'dónde comprar cera para velas' y 'cera para velas', ¿van en páginas distintas?",
+      "expected_output": "La skill propone comparar la SERP real: si comparten casi todos los resultados del top 10 van en la misma página para evitar canibalización; ejecuta serp_overlap.py o pide las URLs.",
+      "assertions": [
+        "propone decidir por solapamiento de la SERP y no por parecido de texto",
+        "si comparten 7 o más URLs recomienda una sola página con una keyword principal",
+        "menciona el riesgo de canibalización",
+        "pide las URLs del top 10 en lugar de inventarlas"
+      ]
+    }
+  ]
+}

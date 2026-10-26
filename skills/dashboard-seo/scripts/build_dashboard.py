@@ -3,7 +3,7 @@
 # requires-python = ">=3.9"
 # ///
 """
-build_dashboard.py — Genera el dashboard SEO local (HTML) a partir de los datos
+build_dashboard.py, Genera el dashboard SEO local (HTML) a partir de los datos
 estructurados que las skills/agentes dejan en .seo-audit/<sitio>/data/*.json.
 
 Es el PASO DE CIERRE de cualquier flujo SEO: una sola página con todo lo encontrado
@@ -31,6 +31,11 @@ Convención de carpeta (gitignored, datos del cliente):
       prior-audits.json        ({audits:[{name,score,date,summary,file}]})
       inventory-summary.json   ({total_urls,source,http_sample,note})
       next-steps.json          ({steps:[{prio,area,action,impact,effort}]})
+      search-console.json      (salida de gsc_report.py: totals, winners, losers, insights, periods)
+      cwv-field.json           (salida de crux_campo.py: metrics p75 de campo, passes_cwv)
+      schema-validation.json   (salida de validate_schema.py: findings, summary, types)
+      backlinks.json           ({anchors:{...}, verificacion:{...}} de anchor_profile.py y verificar_enlaces.py)
+      ai-features.json         (además de queries, admite crawlers y llms_txt de ai_crawlers.py)
     index.html                 ← lo genera este script
 
 Uso:
@@ -98,17 +103,17 @@ TEMPLATE = r"""<!DOCTYPE html>
 </style>
 </head>
 <body>
-<header><h1>Auditoría SEO — <span id="site"></span></h1><div class="sub" id="subhead"></div></header>
+<header><h1>Auditoría SEO, <span id="site"></span></h1><div class="sub" id="subhead"></div></header>
 <div class="wrap" id="app">Cargando…</div>
 <script>
-const J={};const FILES=["meta","issues","performance","prior-audits","keywords","clusters","competitors","ai-features","content-briefs","inventory-summary","next-steps"];
+const J={};const FILES=["meta","issues","performance","prior-audits","keywords","clusters","competitors","ai-features","content-briefs","inventory-summary","next-steps","search-console","cwv-field","schema-validation","backlinks"];
 const $=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild};
 const esc=(s)=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 async function boot(){
   await Promise.all(FILES.map(async f=>{try{const r=await fetch(`data/${f}.json`);J[f]=r.ok?await r.json():{}}catch(e){J[f]={}}}));
   const m=J["meta"]||{},s=m.summary||{};
   document.getElementById('site').textContent=m.site||'(sitio)';
-  document.title='Auditoría SEO — '+(m.site||'');
+  document.title='Auditoría SEO, '+(m.site||'');
   document.getElementById('subhead').innerHTML=[m.stack,m.market,m.repo?('repo <code>'+esc(m.repo)+'</code>'):'',m.generated?('generado '+esc(m.generated)):''].filter(Boolean).map(x=>typeof x==='string'&&x.includes('<code')?x:esc(x)).join(' · ');
   const app=document.getElementById('app');app.innerHTML='';
   if(s&&Object.keys(s).length){
@@ -171,7 +176,12 @@ async function boot(){
   // inventory
   const iv=J["inventory-summary"]||{};
   if(iv.total_urls!=null||iv.http_sample){const s2=$(`<section><h2>🗺️ Inventario y rastreabilidad</h2></section>`);
-    s2.appendChild($(`<div class="card"><b>${iv.total_urls??'—'} URLs</b> ${iv.source?`vía <code>${esc(iv.source)}</code>`:''}. ${iv.http_sample?('HTTP live: '+esc(JSON.stringify(iv.http_sample))):''}<div class="src">${esc(iv.note||'')}</div></div>`));app.appendChild(s2);}
+    s2.appendChild($(`<div class="card"><b>${iv.total_urls??'-'} URLs</b> ${iv.source?`vía <code>${esc(iv.source)}</code>`:''}. ${iv.http_sample?('HTTP live: '+esc(JSON.stringify(iv.http_sample))):''}<div class="src">${esc(iv.note||'')}</div></div>`));app.appendChild(s2);}
+  searchConsoleSection(app);
+  cwvFieldSection(app);
+  schemaSection(app);
+  backlinksSection(app);
+  aiCrawlersSection(app);
   rows(app,"🚀 Próximos pasos (priorizado)",["#","Área","Acción","Impacto","Esfuerzo"],
     (J["next-steps"].steps||[]).map(st=>[`<b>${esc(st.prio)}</b>`,esc(st.area),esc(st.action),esc(st.impact),esc(st.effort)]));
   if(m.data_sources&&m.data_sources.length)app.appendChild($(`<div class="foot">Fuentes: ${m.data_sources.map(esc).join(' · ')}<br>Datos estructurados en <code>data/*.json</code> · regla activa: <b>cero números inventados</b>.</div>`));
@@ -194,7 +204,7 @@ function briefDetails(b){
 // ⚡ Rendimiento (Unlighthouse / Lighthouse). Solo datos reales de laboratorio.
 function gradeScore(v){if(v==null)return 'muted';return v>=90?'chk':v>=50?'warn':'no';}
 function gradeCwv(key,v){if(v==null)return 'muted';const good={lcp_ms:2500,cls:0.1,tbt_ms:200,fcp_ms:1800}[key];if(good==null)return '';return v<=good?'chk':v<=good*1.6?'warn':'no';}
-function fmtMs(v){return v==null?'—':(v>=1000?(v/1000).toFixed(2)+' s':Math.round(v)+' ms');}
+function fmtMs(v){return v==null?'-':(v>=1000?(v/1000).toFixed(2)+' s':Math.round(v)+' ms');}
 function perfSection(app){
   const p=J["performance"]||{};const s=p.summary||{};
   if(s.pages_scanned==null)return;
@@ -213,19 +223,72 @@ function perfSection(app){
     sec.appendChild($(`<div class="card" style="margin-bottom:14px"><b>Core Web Vitals (media)</b><div style="margin-top:6px">${cwvRows}</div><div class="src">${esc(cwv.note||'')}${failTxt}</div></div>`));}
   app.appendChild(sec);
   rows(app,"🐢 Páginas más lentas",["Ruta","Performance","LCP","CLS","TBT"],
-    (p.worst_pages||[]).map(w=>[`<code>${esc(w.path)}</code>`,`<b class="${gradeScore(w.performance)}">${w.performance==null?'—':w.performance}</b>`,
-      fmtMs(w.lcp_ms),w.cls==null?'—':Number(w.cls).toFixed(3),fmtMs(w.tbt_ms)]),srcOf(p));
+    (p.worst_pages||[]).map(w=>[`<code>${esc(w.path)}</code>`,`<b class="${gradeScore(w.performance)}">${w.performance==null?'-':w.performance}</b>`,
+      fmtMs(w.lcp_ms),w.cls==null?'-':Number(w.cls).toFixed(3),fmtMs(w.tbt_ms)]),srcOf(p));
   const bt=p.by_template_hint||{};const btKeys=Object.keys(bt);
   if(btKeys.length>1)rows(app,"🧩 Rendimiento por plantilla (1er segmento)",["Plantilla","Páginas","Performance media"],
-    btKeys.map(k=>[`<span class="tag">${esc(k)}</span>`,String(bt[k].pages),`<b class="${gradeScore(bt[k].avg_performance)}">${bt[k].avg_performance==null?'—':bt[k].avg_performance}</b>`]));
+    btKeys.map(k=>[`<span class="tag">${esc(k)}</span>`,String(bt[k].pages),`<b class="${gradeScore(bt[k].avg_performance)}">${bt[k].avg_performance==null?'-':bt[k].avg_performance}</b>`]));
   // errores / oportunidades detectados por Lighthouse (audits que no pasan)
   const iss=p.issues||[];
-  rows(app,`🐞 Errores y oportunidades (${iss.length}) — Lighthouse`,["Sev","Audit","Problema","Páginas","Ahorro est.","Ejemplos"],
+  rows(app,`🐞 Errores y oportunidades (${iss.length}), Lighthouse`,["Sev","Audit","Problema","Páginas","Ahorro est.","Ejemplos"],
     iss.map(i=>[`<span class="pill ${esc(i.severity)}">${esc(i.severity)}</span>`,
       `<code>${esc(i.id)}</code>`,`<b>${esc(i.title)}</b>`,String(i.pages_affected),
-      [i.avg_savings_ms?fmtMs(i.avg_savings_ms):'',i.max_savings_kb?(i.max_savings_kb+' kb'):''].filter(Boolean).join(' · ')||'—',
+      [i.avg_savings_ms?fmtMs(i.avg_savings_ms):'',i.max_savings_kb?(i.max_savings_kb+' kb'):''].filter(Boolean).join(' · ')||'-',
       `<span class="src">${(i.examples||[]).map(e=>esc(e)).join('<br>')}</span>`]),
     p.issues_note?`<div class="src">${esc(p.issues_note)}</div>`:'');
+}
+// Secciones de grupo D. Cada una se oculta si su JSON no existe o viene vacío.
+function searchConsoleSection(app){
+  const g=J["search-console"]||{};const t=g.totals;if(!t||!t.clicks)return;
+  const per=g.periods||{};const cur=per.current||'Actual',prev=per.previous||'Anterior';
+  const fmt=(v)=>v==null?'-':Number(v).toLocaleString('es');
+  const d=(o,pts)=>pts?(o.delta_pts==null?'-':(o.delta_pts>0?'+':'')+o.delta_pts+' pts'):(o.delta_pct==null?'-':(o.delta_pct>0?'+':'')+o.delta_pct+' %');
+  rows(app,"Search Console: mes vs mes",["Métrica",esc(prev),esc(cur),"Variación"],
+    [["Clics",fmt(t.clicks.prev),fmt(t.clicks.cur),d(t.clicks)],["Impresiones",fmt(t.impressions.prev),fmt(t.impressions.cur),d(t.impressions)],
+     ["CTR (%)",fmt(t.ctr.prev),fmt(t.ctr.cur),d(t.ctr)],["Posición promedio",fmt(t.position.prev),fmt(t.position.cur),d(t.position,true)]],
+    (g.insights||[]).map(i=>`<div class="src">${esc(i)}</div>`).join('')+(g.note?`<div class="src">${esc(g.note)}</div>`:''));
+  rows(app,"Páginas y keywords ganadoras",["Dimensión","Clics actual","Clics anterior","Cambio"],
+    (g.winners||[]).map(w=>[esc(w.dim),fmt(w.clicks_cur),fmt(w.clicks_prev),'+'+w.delta]));
+  rows(app,"Páginas y keywords que bajan",["Dimensión","Clics actual","Clics anterior","Cambio"],
+    (g.losers||[]).map(w=>[esc(w.dim),fmt(w.clicks_cur),fmt(w.clicks_prev),String(w.delta)]));
+}
+function cwvFieldSection(app){
+  const c=J["cwv-field"]||{};const m=c.metrics;if(!m||!Object.keys(m).length)return;
+  const names={lcp_ms:"LCP",inp_ms:"INP",cls:"CLS",ttfb_ms:"TTFB",fcp_ms:"FCP"};
+  const cls=(r)=>r==='good'?'chk':r==='poor'?'no':'warn';
+  const lbl=(r)=>r==='good'?'bueno':r==='poor'?'pobre':'mejorable';
+  const body=Object.keys(names).filter(k=>m[k]).map(k=>{const v=m[k];const disp=k==='cls'?Number(v.p75).toFixed(3):fmtMs(v.p75);
+    return [`<b>${names[k]}</b>`,`<b class="${cls(v.rating)}">${disp}</b>`,lbl(v.rating),v.good_pct==null?'-':v.good_pct+' %'];});
+  const verdict=c.passes_cwv==null?'':`<div class="card" style="margin-bottom:10px"><b>Core Web Vitals (campo): ${c.passes_cwv?'aprobados':'no aprobados'}</b> · ${esc(c.formFactor||'')} · ${esc(c.scope||'')}</div>`;
+  const s=$(`<section><h2>Core Web Vitals de campo (usuarios reales)</h2>${verdict}</section>`);app.appendChild(s);
+  rows(app,"Percentil 75 por métrica",["Métrica","p75","Estado","Visitas en rango bueno"],body,
+    `<div class="src">Fuente: ${esc(c.source||'CrUX')}. ${esc(c.note||'')}</div>`);
+}
+function schemaSection(app){
+  const sc=J["schema-validation"]||{};if(!sc.ok||!sc.findings)return;
+  const sm=sc.summary||{};
+  rows(app,`Datos estructurados (${sc.blocks||0} bloques: ${(sc.types||[]).map(esc).join(', ')||'ninguno'})`,["Sev","Tipo","Regla","Detalle"],
+    sc.findings.map(f=>[`<span class="pill ${f.severity==='Alto'?'Alto':f.severity==='Medio'?'Medio':'Bajo'}">${esc(f.severity)}</span>`,esc(f.type),`<code>${esc(f.rule)}</code>`,esc(f.detail)]),
+    `<div class="src">${esc(sc.source||'')} · Alto ${sm.Alto||0} · Medio ${sm.Medio||0} · Info ${sm.Info||0}. ${esc(sc.note||'')}</div>`);
+}
+function backlinksSection(app){
+  const b=J["backlinks"]||{};
+  const an=b.anchors;
+  if(an&&an.distribution)rows(app,`Backlinks: distribución de anchors (${an.total} enlaces)`,["Tipo","Enlaces","%"],
+    Object.entries(an.distribution).map(([k,v])=>[esc(k),String(v.count),v.pct+' %']),
+    (an.flags||[]).map(f=>`<div class="src">${esc(f)}</div>`).join('')+`<div class="src">${esc(an.note||'')}</div>`);
+  if(an&&(an.top_domains||[]).length)rows(app,"Backlinks: dominios con más enlaces",["Dominio","Enlaces","%"],
+    an.top_domains.map(d=>[esc(d.domain),String(d.count),d.pct+' %']));
+  const v=b.verificacion;
+  if(v&&(v.results||[]).length)rows(app,"Backlinks: seguimiento de enlaces conseguidos",["Origen","Estado","Anchor","rel","Dofollow"],
+    v.results.map(r=>[`<code>${esc(r.source)}</code>`,esc(r.status),esc(r.anchor||'-'),esc(r.rel||'-'),r.dofollow==null?'-':(r.dofollow?'sí':'no')]));
+}
+function aiCrawlersSection(app){
+  const a=J["ai-features"]||{};const cr=a.crawlers;if(!cr||!cr.length)return;
+  const ll=a.llms_txt;
+  rows(app,"Rastreadores de IA en robots.txt",["Rastreador","Dueño","Función","Estado"],
+    cr.map(c=>[`<code>${esc(c.agent)}</code>`,esc(c.owner),esc(c.kind),`<b class="${c.status==='bloqueado'?'no':'chk'}">${esc(c.status)}</b>`]),
+    ll?`<div class="src">llms.txt: ${ll.present?'presente':'no encontrado'}. ${esc(ll.note||'')}</div>`:'');
 }
 boot();
 </script>

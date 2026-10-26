@@ -1,0 +1,14 @@
+[
+  { "query": "revisa el robots.txt y el sitemap de mi-sitio.com, creo que bloqueé algo", "should_trigger": true },
+  { "query": "Search Console dice que mi sitemap tiene errores de lectura", "should_trigger": true },
+  { "query": "las páginas nuevas no aparecen en Google, ¿será el robots?", "should_trigger": true },
+  { "query": "genera un sitemap.xml con estas 80 URLs", "should_trigger": true },
+  { "query": "¿estoy bloqueando a GPTBot y a Perplexity sin querer?", "should_trigger": true },
+  { "query": "mi web en Next.js no tiene robots.txt, qué le pido al developer", "should_trigger": true },
+  { "query": "Descubierta, actualmente sin indexar, ¿falta en el sitemap?", "should_trigger": true },
+  { "query": "investígame keywords para mi nicho de velas aromáticas", "should_trigger": false },
+  { "query": "optimiza las imágenes de mi blog, pesan mucho", "should_trigger": false },
+  { "query": "escribe el meta title y la meta description de esta página", "should_trigger": false },
+  { "query": "arma el reporte mensual con las métricas de Search Console", "should_trigger": false },
+  { "query": "genera el schema JSON-LD de FAQ para esta página", "should_trigger": false }
+]

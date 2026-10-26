@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.9"
-# dependencies = ["requests"]
+# dependencies = []
 # ///
 """
-set_key.py — Guarda tu clave de SerpApi (u otra variable) en ~/.claude/seo-skills.env
+set_key.py, Guarda tu clave de SerpApi (u otra variable) en ~/.claude/seo-skills.env
 para que TODAS las SEO skills/scripts la usen automáticamente en cada sesión, sin
 re-exportarla. Opcionalmente la valida contra SerpApi sin gastar búsquedas.
 
@@ -29,7 +29,7 @@ Salida (JSON a stdout):
    "test": {"valid": true, "plan_searches_left": N} | null}
   o: {"ok": false, "reason": "..."}
 
-Deps: stdlib (requests solo si usas --test).
+Deps: solo stdlib (la validación usa urllib).
 """
 import argparse
 import json
@@ -73,23 +73,42 @@ def write_var(path, var, value):
 
 
 def test_key(value):
+    import json as _json  # noqa: PLC0415
+    import urllib.error  # noqa: PLC0415
+    import urllib.parse  # noqa: PLC0415
+    import urllib.request  # noqa: PLC0415
+    url = "https://serpapi.com/account?" + urllib.parse.urlencode({"api_key": value})
     try:
-        import requests  # noqa: PLC0415
-    except ImportError:
-        return {"valid": None, "note": "no se pudo validar: falta 'requests'"}
-    try:
-        r = requests.get("https://serpapi.com/account", params={"api_key": value}, timeout=20)
-        if r.status_code == 401:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "seo-skills/1.1"}), timeout=20) as r:
+            data = _json.load(r)
+    except urllib.error.HTTPError as e:
+        if e.code == 401:
             return {"valid": False, "note": "401: clave inválida"}
-        r.raise_for_status()
-        data = r.json()
-        return {
-            "valid": True,
-            "plan_searches_left": data.get("plan_searches_left"),
-            "total_searches_left": data.get("total_searches_left"),
-        }
+        if e.code == 429:
+            return {"valid": None, "note": "429: demasiadas consultas, reintenta en unos minutos"}
+        return {"valid": None, "note": f"no se pudo validar: HTTP {e.code}"}
     except Exception as e:  # noqa: BLE001
-        return {"valid": None, "note": f"no se pudo validar: {e}"}
+        return {"valid": None, "note": f"no se pudo validar: {type(e).__name__}"}
+    left = data.get("total_searches_left", data.get("plan_searches_left"))
+    res = {"valid": True, "plan_searches_left": data.get("plan_searches_left"),
+           "total_searches_left": data.get("total_searches_left")}
+    if isinstance(left, int):
+        if left <= 0:
+            res["quota_warning"] = "Sin búsquedas disponibles: las skills pasan a modo manual hasta que se renueve el plan."
+        elif left <= 10:
+            res["quota_warning"] = f"Quedan {left} búsquedas: reserva las que quedan para keywords prioritarias (Duelo de Keywords, 10 de Oro)."
+    return res
+
+
+def load_saved(path, var):
+    try:
+        for line in open(path, encoding="utf-8"):
+            line = line.strip()
+            if line.startswith(var + "="):
+                return line.split("=", 1)[1].strip().strip("'\"")
+    except OSError:
+        pass
+    return None
 
 
 def main():
@@ -98,11 +117,19 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='Ejemplo:\n  uv run set_key.py --key TU_CLAVE --test',
     )
-    ap.add_argument("--key", required=True, help="La clave. Usa '-' para leerla por stdin.")
+    ap.add_argument("--key", help="La clave. Usa '-' para leerla por stdin. Omítela con --check-only.")
+    ap.add_argument("--check-only", action="store_true", help="No guarda nada: valida la clave ya guardada y muestra la cuota.")
     ap.add_argument("--var", default="SERPAPI_API_KEY", help="Nombre de la variable (default SERPAPI_API_KEY).")
     ap.add_argument("--test", action="store_true", help="Valida la clave contra SerpApi (no gasta búsquedas).")
     args = ap.parse_args()
 
+    if args.check_only:
+        saved = load_saved(ENV_PATH, args.var)
+        if not saved:
+            out({"ok": False, "reason": f"no hay {args.var} guardada en {ENV_PATH}"})
+        out({"ok": True, "path": ENV_PATH, "var": args.var, "masked": mask(saved), "test": test_key(saved)})
+    if not args.key:
+        out({"ok": False, "reason": "falta --key (o usa --check-only)"})
     value = sys.stdin.read().strip() if args.key == "-" else args.key.strip()
     if not value:
         out({"ok": False, "reason": "clave vacía"})

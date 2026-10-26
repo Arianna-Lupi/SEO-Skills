@@ -1,0 +1,39 @@
+{
+  "skill_name": "arquitectura-y-enlazado-interno",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Mi página /curso-seo/ es la que vende y casi no recibe enlaces. Tengo un pilar /seo-tecnico/ con 3 artículos de cluster. ¿Cómo organizo los enlaces para que el jugo llegue al curso?",
+      "expected_output": "Diseña el esquema pilar a clusters con enlaces en ambos sentidos, define enlaces contenido a producto con anchor descriptivo hacia /curso-seo/, aplica el mínimo por pieza (2 contextuales y 1 a producto), la regla de los 3 clics y evita anchors genéricos; sugiere ejecutar matriz_enlaces.py si hay export de enlaces.",
+      "assertions": [
+        "propone que el pilar enlace a cada cluster y cada cluster al pilar",
+        "incluye enlaces de contenido a producto hacia /curso-seo/ con anchor descriptivo y no genérico",
+        "aplica el mínimo de 2 enlaces contextuales y 1 a producto o servicio por pieza",
+        "menciona la regla de los 3 clics medida desde la home",
+        "define los enlaces desde el brief y no después de publicar",
+        "no inventa cifras de enlaces ni de tráfico"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Octopus me muestra mis posts en /blog/categoria/subcategoria/post/ y me dijeron que están a 4 niveles, o sea demasiado profundos. ¿Es un problema?",
+      "expected_output": "Distingue profundidad de carpeta (Octopus) de clics desde la home (Screaming Frog): lo que cuenta para la regla de los 3 clics son los clics; pide el Crawl Depth real y explica cuándo sí es problema.",
+      "assertions": [
+        "distingue profundidad de carpeta de clics desde la home",
+        "indica que la regla de los 3 clics se mide en clics, con Screaming Frog (Crawl Depth)",
+        "explica que una carpeta profunda a pocos clics no es un problema de rastreo",
+        "recomienda enlazar desde la home, el menú o un pilar si hay contenido a más de 3 clics"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Tengo una tienda de juguetes y quiero que las edades sean categorías del sitio: /juguetes/3-anos/, /juguetes/5-anos/. ¿Está bien?",
+      "expected_output": "Aplica la práctica de Juan: los filtros no son categorías porque duplican contenido; propone la edad como filtro o parámetro controlado y las categorías por tipo de producto, con jerarquía clara y a pocos clics.",
+      "assertions": [
+        "indica que la edad es un filtro y no una categoría",
+        "explica el riesgo de contenido duplicado",
+        "propone categorías por tipo de producto con jerarquía clara"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "query": "café en grano",
+  "top": [
+    {
+      "position": 1,
+      "title": "Categoría",
+      "link": "https://tostadores.test/tienda/cafe-de-especialidad/",
+      "snippet": ""
+    },
+    {
+      "position": 2,
+      "title": "Guía",
+      "link": "https://cafeguia.test/blog/como-preparar-cafe",
+      "snippet": ""
+    },
+    {
+      "position": 3,
+      "title": "Métodos",
+      "link": "https://tazadiaria.test/blog/metodos-cafe",
+      "snippet": ""
+    }
+  ],
+  "paa": [],
+  "related": [],
+  "features": {
+    "ai_overview": false,
+    "featured_snippet": false,
+    "knowledge_panel": false
+  }
+}

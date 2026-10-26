@@ -1,15 +1,15 @@
 ---
 name: redaccion-y-optimizacion-nlp
-description: Redacta y optimiza contenido SEO siguiendo el método de la Semana 11 del diploma "De Cero a SEO" (Dana Aliaga) + módulo NLP. Mantra "Escribe para humanos, optimiza para robots". Usa esta skill cuando tengas que escribir, reescribir o mejorar un artículo/página para que posicione — AUNQUE el usuario no diga "NLP" ni "SEO", p.ej. "escríbeme/mejora este artículo para que posicione", "humaniza este texto de IA", "optimiza la keyword en este contenido", "revisa la densidad/escaneabilidad". Convierte un brief aprobado en borrador optimizado: ubicación de keyword (H1 + primeras 100 palabras), relevancia semántica/entidades (NLP, TF*IDF), escaneabilidad, Image SEO. No publiques sin pasar el checklist on-page y NLP de aquí.
-compatibility: Script opcional de legibilidad/densidad requiere Python 3 (uv); si no está, modo manual. SerpApi MCP (gratis) y Ahrefs MCP (pago) opcionales para research/entidades.
+description: "Redacta y optimiza contenido SEO siguiendo el método de la Semana 11 del diploma \"De Cero a SEO\" (Dana Aliaga) + módulo NLP. Mantra \"Escribe para humanos, optimiza para robots\". Usa esta skill cuando tengas que escribir, reescribir o mejorar un artículo/página para que posicione, AUNQUE el usuario no diga \"NLP\" ni \"SEO\", p.ej. \"escríbeme/mejora este artículo para que posicione\", \"humaniza este texto de IA\", \"optimiza la keyword en este contenido\", \"revisa la densidad/escaneabilidad\". Convierte un brief aprobado en borrador optimizado: ubicación de keyword (H1 + primeras 100 palabras), relevancia semántica/entidades (NLP, TF*IDF), escaneabilidad, Image SEO. No publiques sin pasar el checklist on-page y NLP de aquí."
+compatibility: Scripts opcionales readability.py y ai_tells.py requieren Python 3 (solo stdlib); si no está, modo manual. SerpApi MCP (gratis) y Ahrefs MCP (pago) opcionales para research/entidades.
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
-> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta**, que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
 
 
 > **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/content-briefs.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `content-briefs.json` (estado del borrador).
@@ -39,13 +39,13 @@ Requisito: sin brief no se redacta. Si no hay brief, vuelve a `brief-de-contenid
 
 Esta skill **funciona sin ningún MCP** (research manual). Los datos mejoran la fase de investigación y el análisis de entidades.
 
-1. **Sin MCP (manual):** busca la keyword en Google y lee a mano los **AI Overviews**, el bloque **People Also Ask** y los **competidores** del top. Para entidades/relevancia semántica el **default es DinoRank (TF*IDF)** — el "arma secreta" del diploma. Alternativas si ya las usas: Surfer SEO (gaps LSI), Neuron Writer. Para legibilidad, default **Hemingway**; alternativas Grammarly, Jasper.
+1. **Sin MCP (manual):** busca la keyword en Google y lee a mano los **AI Overviews**, el bloque **People Also Ask** y los **competidores** del top. Para entidades/relevancia semántica el **default es DinoRank (TF*IDF)**, el "arma secreta" del diploma. Alternativas si ya las usas: Surfer SEO (gaps LSI), Neuron Writer. Para legibilidad, default **Hemingway**; alternativas Grammarly, Jasper.
 
-2. **SerpApi MCP (GRATIS — principal para research):** `mcp__serpapi__search` para traer:
+2. **SerpApi MCP (GRATIS, principal para research):** `mcp__serpapi__search` para traer:
    - **AI Overviews** y **People Also Ask** → preguntas y subtemas que el texto debe responder.
    - **Competidores** del top → qué entidades y secciones cubren.
 
-3. **Ahrefs MCP (PAGO — requiere suscripción Ahrefs):**
+3. **Ahrefs MCP (PAGO, requiere suscripción Ahrefs):**
    - `mcp__claude_ai_Ahrefs__keywords-explorer-matching-terms` → **entidades y términos relacionados** para enriquecer la relevancia semántica (sin repetir la keyword).
    - `mcp__claude_ai_Ahrefs__keywords-explorer-related-terms` → subtemas adicionales.
 
@@ -53,43 +53,46 @@ Conexión de MCPs: ver `../../MCP-SETUP.md`.
 
 ## Proceso
 
-### Paso 0 — Definir la voz de marca (3 adjetivos)
+### Paso 0: Definir la voz de marca (3 adjetivos)
 Antes de escribir una palabra, fija **3 adjetivos** para la voz (ej.: empático/cercano, confiable, profesional). Todo el texto los respeta.
 
-### Paso 1 — Los 3 pilares de calidad (marco mental)
+### Paso 1: Los 3 pilares de calidad (marco mental)
 Cada decisión de redacción sirve a uno de estos:
-1. **Intención de búsqueda** (responde lo que el usuario realmente busca — del brief).
-2. **Densidad y ubicación de keywords** — keyword en el **H1** y en las **primeras 100 palabras**, de forma **natural** (nunca forzada).
+1. **Intención de búsqueda** (responde lo que el usuario realmente busca, del brief).
+2. **Densidad y ubicación de keywords**, keyword en el **H1** y en las **primeras 100 palabras**, de forma **natural** (nunca forzada).
 3. **Valor real/original** (aporta algo que la SERP no tiene: experiencia, datos propios, ejemplos).
 
-### Paso 2 — Research
+### Paso 2: Research
 Analiza **AI Overviews + People Also Ask + competidores** (SerpApi o manual). Anota preguntas a responder y entidades a cubrir.
 
-### Paso 3 — Outline con IA
+### Paso 3: Outline con IA
 Genera el esqueleto a partir del brief + research con IA. **Respeta la jerarquía del brief** (no la rompas).
 
-### Paso 4 — Humanizar
+### Paso 4: Humanizar
 Reescribe el borrador de IA con la voz de marca. Quita el tono robótico, añade experiencia real. **Escribe para humanos.**
 
-### Paso 5 — Escaneabilidad
+### Paso 4b: Revisa lo que la IA suele dejar
+Si el borrador pasó por IA, aplica la regla de Dana Aliaga: **"la IA propone, tú validas"**. Pasa el texto por `scripts/ai_tells.py` y por el checklist anti contenido genérico (ver `references/complementos-claude-seo.md`); acompaña la entrega con keyword e intención reales, qué hace el top 3 y qué eliminaste o cambiaste de la IA (práctica de coaches, ver `references/practica-coaches.md`).
+
+### Paso 5: Escaneabilidad
 - Párrafos cortos (**3-4 líneas**).
 - **Negritas** en lo importante.
 - **Listas** y subtítulos para romper bloques.
 
-### Paso 6 — Módulo NLP (lo distintivo del diploma)
+### Paso 6: Módulo NLP (lo distintivo del diploma)
 Optimiza para cómo Google entiende el texto. Los **4 análisis** de Google:
-1. **Léxico** — palabras y términos correctos del tema.
-2. **Sintáctico** — estructura gramatical clara.
-3. **Semántico** — significado y **entidades** relacionadas.
-4. **Pragmático** — contexto e intención real. Objetivo: **optimizar relevancia semántica / entidades, NO repetir la keyword.** Usa **DinoRank TF*IDF** (arma secreta) para detectar términos que faltan y añadirlos con naturalidad.
+1. **Léxico**, palabras y términos correctos del tema.
+2. **Sintáctico**, estructura gramatical clara.
+3. **Semántico**, significado y **entidades** relacionadas.
+4. **Pragmático**, contexto e intención real. Objetivo: **optimizar relevancia semántica / entidades, NO repetir la keyword.** Usa **DinoRank TF*IDF** (arma secreta) para detectar términos que faltan y añadirlos con naturalidad.
 
-### Paso 7 — Image SEO
+### Paso 7: Image SEO
 Cada imagen: **filename amigable** (con guiones, descriptivo), **ALT** descriptivo, formato **WebP**, **dimensiones correctas** (sin sobrepeso).
 
-### Paso 8 — Reposo antes de revisar
+### Paso 8: Reposo antes de revisar
 **Deja reposar** el texto antes de la revisión final. Revisar en frío detecta errores que en caliente no ves.
 
-### Paso 9 — Registrar en la Plantilla Master
+### Paso 9: Registrar en la Plantilla Master
 Marca status **"Redactado"** y haz el check: **H1 / URL / keyword** correctos. Actualiza Trello.
 
 ## Script determinista (ahorro de tokens)
@@ -107,6 +110,14 @@ cat articulo.md | uv run skills/redaccion-y-optimizacion-nlp/scripts/readability
 ```
 
 Corre con `--help` para ver opciones. Devuelve `{"ok":true,"word_count","sentence_count","avg_sentence_words","long_sentences","paragraphs","keyword_density_pct","keyword_in_first_100_words","headings":{...},"flags":[...]}`. Toma `flags` como las correcciones a aplicar (frases >25 palabras, densidad fuera de rango, keyword en primeras 100 palabras, jerarquía de encabezados). Acepta Markdown o texto plano; solo stdlib. Si Python no está disponible, evalúa en **modo manual**.
+
+## Script de marcas de texto genérico de IA
+
+```bash
+python3 skills/redaccion-y-optimizacion-nlp/scripts/ai_tells.py --file articulo.md --keyword "keyword principal"
+```
+
+Corre con `--help` para ver opciones. Señala frases de relleno típicas en español, rayas largas, aperturas de frase repetidas, frases de más de 25 palabras, cifras o estudios sin fuente cercana y exceso de keyword exacta. Es una pista para editar, **no un veredicto de autoría**. Solo stdlib.
 
 ## Salida
 
@@ -152,12 +163,20 @@ ON-PAGE
 - **Image SEO:** `serum-vitamina-c-natural-textura.webp`, ALT "textura de sérum de vitamina C natural".
 - Reposo 1 día → revisión → status "Redactado".
 
+## Opcional: complementos externos
+
+Después de seguir el método, puedes usar [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md): rúbrica de colocación de keyword, términos secundarios de referencia y checklist anti contenido genérico. Es un **Complemento externo (claude-seo, MIT), no es parte del método del diplomado**. Para la revisión de calidad y E-E-A-T de la pieza terminada usa `calidad-de-contenido-eeat`.
+
 ## Gotchas
 
-- **Escribe para humanos, optimiza para robots** — en ese orden. No rellenes con keywords: el **keyword stuffing penaliza** y se lee mal.
-- **Keyword en el H1 y en las primeras 100 palabras, natural** — no la fuerces ni la repitas en cada párrafo.
-- **Optimiza ENTIDADES / relevancia semántica, no la repetición de la keyword** — el resto del tema se cubre con TF*IDF (DinoRank) y entidades relacionadas, no repitiendo el término exacto.
-- **Humaniza el texto de IA (reposo + voz de marca), no publiques el output crudo** — la IA da el outline, tú das el texto final; valida jerarquía y datos.
+- **Escribe para humanos, optimiza para robots**, en ese orden. No rellenes con keywords: el **keyword stuffing penaliza** y se lee mal.
+- **Keyword en el H1 y en las primeras 100 palabras, natural**, no la fuerces ni la repitas en cada párrafo.
+- **Optimiza ENTIDADES / relevancia semántica, no la repetición de la keyword**, el resto del tema se cubre con TF*IDF (DinoRank) y entidades relacionadas, no repitiendo el término exacto.
+- **Humaniza el texto de IA (reposo + voz de marca), no publiques el output crudo**, la IA da el outline, tú das el texto final; valida jerarquía y datos.
 - **Image SEO sí cuenta:** filename con guiones + ALT descriptivo + WebP + dimensiones, no "IMG_2843.jpg" pesada.
-- **Define la voz (3 adjetivos) primero, no después** — sin ella el texto sale inconsistente.
+- **Define la voz (3 adjetivos) primero, no después**, sin ella el texto sale inconsistente.
 - Esta skill cierra el flujo: estrategia (W7) → brief (W8/W10) → **redacción (W11)** → status "Redactado" en la Plantilla Master.
+- **Brief y datos SEO en el mismo documento que el artículo:** sin ellos el revisor no puede evaluar la intención ni el tono (práctica de coaches).
+- **Informativo no es embudo:** "nosotros" se reserva para la CTA y el cierre no debe sonar a venta forzada.
+- **No inventes testimonios, credenciales ni cifras** para dar autoridad; deja el dato pendiente o cita fuente primaria.
+- **Longitud no es calidad:** 600 palabras que responden la intención superan a 3000 con paja. Lee en voz alta y recorta.

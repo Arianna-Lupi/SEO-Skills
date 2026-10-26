@@ -1,0 +1,39 @@
+{
+  "skill_name": "propuesta-y-reporte-de-servicios-seo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Un dentista me pidió una cotización de SEO. No sé cuánto cobrar ni cómo presentárselo.",
+      "expected_output": "Una propuesta con los 3 pilares (PV, confianza, beneficios mutuos), paquetes Bronce/Plata/Oro, cobro por hora luego paquete y tarifas pendientes de dato, sin precios inventados.",
+      "assertions": [
+        "incluye los 3 pilares de la propuesta",
+        "propone paquetes Bronce, Plata y Oro con módulos",
+        "explica empezar por hora y pasar a paquetes",
+        "no inventa tarifas ni precios y los marca como pendiente de dato",
+        "pide el cuestionario y los accesos a Search Console, Analytics y CMS"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "El tráfico de un cliente bajó este mes y tengo que escribirle.",
+      "expected_output": "Un correo honesto y proactivo con acciones y reunión breve, sin cifras inventadas; pide el dato real de la caída.",
+      "assertions": [
+        "pide la métrica real y el periodo antes de redactar cifras",
+        "el correo es honesto, proactivo y propone una reunión breve",
+        "no culpa a terceros ni promete recuperación inmediata",
+        "ofrece el plan para revertir"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Cómo le explico al cliente los problemas técnicos que encontré en su web.",
+      "expected_output": "Un explainer por issue (qué es, por qué importa, cómo se soluciona) con evidencia antes y después, sin tecnicismos.",
+      "assertions": [
+        "usa la estructura qué es, por qué importa, cómo se soluciona",
+        "evita tecnicismos y traduce a impacto de negocio",
+        "incluye evidencia y tareas con verbo",
+        "remite a reporte-seo-gsc y dashboard-seo para el reporte y el entregable visual"
+      ]
+    }
+  ]
+}

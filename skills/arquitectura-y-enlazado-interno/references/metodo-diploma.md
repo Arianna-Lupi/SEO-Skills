@@ -1,8 +1,8 @@
-# Método del diploma — Arquitectura web y enlazado interno (Semana 9, Arianna Lupi / Juan Carlos Angulo / Verónica Romero)
+# Método del diploma: Arquitectura web y enlazado interno (Semana 9, Arianna Lupi / Juan Carlos Angulo / Verónica Romero)
 
 > Fuente: corpus interno "De Cero a SEO" (chunks, doc_type resumenes-prompts/transcripciones), Semana 9. Material de aprendoseo.
 
-La Semana 9 cubre **Arquitectura Web** (Juan Carlos Angulo) y **Enlazado Interno** (Verónica Romero). Mensaje rector: *"Hazlo sencillo para el Crawler"* — si a Google le cuesta llegar a una página enterrada, no la posiciona.
+La Semana 9 cubre **Arquitectura Web** (Juan Carlos Angulo) y **Enlazado Interno** (Verónica Romero). Mensaje rector: *"Hazlo sencillo para el Crawler"*, si a Google le cuesta llegar a una página enterrada, no la posiciona.
 
 ## El método paso a paso (como lo enseña el curso)
 
@@ -12,7 +12,7 @@ La Semana 9 cubre **Arquitectura Web** (Juan Carlos Angulo) y **Enlazado Interno
 3. Equilibra **Crawl Depth** (profundidad: clics desde la Home, no superar 3 niveles) y **Crawl Width** (anchura: páginas por nivel; demasiada anchura sin jerarquía diluye autoridad).
 4. Diseña primero "en papel"/digital, no en la web: define categorías por temas lógicos y keywords de alto volumen, luego subcategorías dependientes.
 5. Diagrama el sitemap visual en **Octopus.do** (gratis); usa **Screaming Frog** para el análisis técnico masivo (404, niveles de profundidad).
-6. Mantén las URLs semánticas: `/curso-seo/` en vez de `/p=123/` — "deben tener sentido tanto para nosotros, los usuarios, como para Google".
+6. Mantén las URLs semánticas: `/curso-seo/` en vez de `/p=123/`, "deben tener sentido tanto para nosotros, los usuarios, como para Google".
 
 **B. Analizar la arquitectura existente** (video 6)
 1. Mapea el sitio en Octopus.do; identifica páginas a más de 3 clics del Home.
@@ -40,10 +40,10 @@ La Semana 9 cubre **Arquitectura Web** (Juan Carlos Angulo) y **Enlazado Interno
 
 **Los 4 tipos de enlace interno (Verónica Romero, video 5):**
 
-1. **Contextuales** — los más comunes y naturales; dentro del cuerpo del texto, hacia contenido relacionado (blog → blog).
-2. **De contenido a producto/servicio** — conectan artículos informativos con páginas transaccionales; cruciales para la conversión.
-3. **De producto a producto (cross-selling)** — recomiendan artículos complementarios; suben el ticket promedio y ayudan a Google a entender relaciones.
-4. **De navegación (Menú y Footer)** — Menú/cabecera: categorías principales. Footer: legales, mapa del sitio y accesos a colecciones clave.
+1. **Contextuales**, los más comunes y naturales; dentro del cuerpo del texto, hacia contenido relacionado (blog → blog).
+2. **De contenido a producto/servicio**, conectan artículos informativos con páginas transaccionales; cruciales para la conversión.
+3. **De producto a producto (cross-selling)**, recomiendan artículos complementarios; suben el ticket promedio y ayudan a Google a entender relaciones.
+4. **De navegación (Menú y Footer)**, Menú/cabecera: categorías principales. Footer: legales, mapa del sitio y accesos a colecciones clave.
 
 ## Prompts originales que da el curso (verbatim)
 
@@ -76,4 +76,23 @@ La Semana 9 cubre **Arquitectura Web** (Juan Carlos Angulo) y **Enlazado Interno
 - **Página huérfana (S9 transcripción):** "páginas que no tienen enlaces internos hacia ellas"; en Screaming Frog se revisa la pestaña de links internos para ver cuáles páginas tienen más/menos enlaces.
 - **URLs limpias (S9 transcripción):** "las URLs deben ser semánticas y claras... que deben tener sentido tanto para nosotros como los usuarios como para Google."
 - **Errores de arquitectura comunes (S9 chunk 6):** páginas de Login/Home repetidas ensuciando la jerarquía, falta de categorías intermedias y páginas huérfanas.
-- **Enlace contextual (S9 transcripción):** de un post de "Email Marketing" a uno de "Optimización de campañas" — el tipo más común y útil.
+- **Enlace contextual (S9 transcripción):** de un post de "Email Marketing" a uno de "Optimización de campañas", el tipo más común y útil.
+
+## Práctica de coaches (afina criterios, no contradice el curso)
+
+**Juan (Arquitectura web con Octopus, Semana 9):**
+- Cada tipo de contenido vive en su subcarpeta (servicios, productos o tienda, blog); lo que "vive afuera" se mueve a su carpeta natural.
+- El blog va categorizado: Blog > Categoría > Post. Las categorías crean pilares de contenido, idealmente después del keyword research.
+- Subpáginas coherentes: un servicio muy amplio se divide en páginas separadas si la competencia o las keywords lo justifican.
+- Los filtros no son categorías (la edad en una tienda de juguetes es filtro) para no duplicar contenido; nombres de categoría de post y de producto no repiten la misma URL.
+- Distingue estructura de URL, nivel de profundidad de carpeta y cantidad de clics desde la home. Screaming Frog muestra clics desde la home (ideal tres o menos); Octopus muestra carpetas.
+- Idealmente el home enlaza directo a los servicios principales; detecta páginas que faltan (contacto, sobre nosotros, servicios).
+- Subcarpetas de idioma o país solo donde se opera (sin `/ar/` si solo hay un país). Sin `/home-2/`, sin carpetas de año, sin páginas para redes sociales. En listados, H2 para el listado y H3 para cada elemento.
+- El modo de IA de Octopus inventa el mapa: para rastrear de verdad usa `octopus.do/sitemap/generator` (hasta 500 URLs gratis). Si el sitio no está indexado, la arquitectura actual se hace a mano.
+- El enlazado interno no entra en la auditoría técnica.
+
+**Ari:** "los servicios y los blogs deben estar a un clic del home"; "el lenguaje correcto es a 3 niveles de profundidad, o a 2"; los parámetros de URL son urgentes; el entregable técnico separa lo que puede hacer el alumno y lo que debe hacer el desarrollador o dueño.
+
+**Vero:** jerarquía home, colección, producto; primero las páginas principales, debajo lo que pertenece a cada una y al final el blog; menú que refleja los servicios; una página por servicio; clúster en 1 a 2 palabras y slug más descriptivo (`/seo/como-hacer-una-auditoria-seo/`); idioma de slug uniforme; subcarpetas antes que subdominios; home que ya posiciona sin H1: agregarlo con la keyword que ya posiciona; blog sin URL propia por artículo (`?valor=0`): derivar al SEO técnico.
+
+**Dana:** definir enlaces FROM y TO propios; planificar el enlazado como recorrido del usuario; revisar que las URLs coincidan entre briefs; el pilar da "2 o 3 líneas" por tema y enlaza al artículo específico; sin pilar y soporte se debilita la autoridad temática.

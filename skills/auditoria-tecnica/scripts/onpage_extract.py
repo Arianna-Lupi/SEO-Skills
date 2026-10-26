@@ -4,7 +4,7 @@
 # dependencies = ["requests"]
 # ///
 """
-onpage_extract.py — Extrae la data ON-PAGE de una lista de URLs con User-Agent de
+onpage_extract.py, Extrae la data ON-PAGE de una lista de URLs con User-Agent de
 navegador real + throttle (concurrencia baja). Recupera los datos que Screaming
 Frog gratis NO consigue en sitios que lo rate-limitan (Shopify y otros WAF, que
 devuelven 429 a su UA de bot y nunca le entregan el HTML real).
@@ -184,7 +184,7 @@ def extract_one(requests, url):
     try:
         raw = r.raw.read(3_000_000, decode_content=True)
         # requests asume ISO-8859-1 cuando el header Content-Type no declara charset
-        # (RFC 2616), aunque la página real sea UTF-8 — habitual en sitios sin ese
+        # (RFC 2616), aunque la página real sea UTF-8, habitual en sitios sin ese
         # detalle. Prioriza el <meta charset>/http-equiv real del HTML sobre r.encoding.
         header_declares_charset = "charset=" in (r.headers.get("Content-Type") or "").lower()
         meta_match = re.search(rb'charset=["\']?\s*([\w-]+)', raw[:2048], re.IGNORECASE)

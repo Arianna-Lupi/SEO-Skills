@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-sf_crawl_all.py — Rastrea TODO un sitio con Screaming Frog GRATIS, troceando por
+sf_crawl_all.py, Rastrea TODO un sitio con Screaming Frog GRATIS, troceando por
 lotes de ≤500 URLs (el límite de la versión gratis es por crawl, no por sitio).
 
 Idea: la versión gratis de Screaming Frog para a las 500 URLs por rastreo. En vez

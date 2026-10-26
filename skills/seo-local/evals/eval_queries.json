@@ -1,0 +1,9 @@
+[
+  {"query": "quiero salir en el mapa de Google con mi restaurante", "should_trigger": true},
+  {"query": "optimiza mi ficha de Google Business Profile", "should_trigger": true},
+  {"query": "cómo consigo más reseñas para mi consultorio", "should_trigger": true},
+  {"query": "tengo una agencia y todos los servicios están en la home, qué hago", "should_trigger": true},
+  {"query": "verifica que mi nombre, dirección y teléfono sean iguales en todas partes", "should_trigger": true},
+  {"query": "cómo optimizo las fichas de producto de mi tienda", "should_trigger": false},
+  {"query": "haz una auditoría técnica completa", "should_trigger": false}
+]

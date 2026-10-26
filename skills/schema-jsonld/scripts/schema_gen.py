@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-schema_gen.py — Genera y valida JSON-LD de schema.org para los tipos más usados
+schema_gen.py, Genera y valida JSON-LD de schema.org para los tipos más usados
 en SEO (diploma "De Cero a SEO": datos estructurados solo para contenido que
 existe y es visible en la página).
 
@@ -156,8 +156,10 @@ def main() -> int:
         warnings.append("Propiedades recomendadas ausentes: " + ", ".join(missing_recommended) + ".")
     if stype == "FAQPage":
         warnings.append("FAQPage solo si las preguntas/respuestas son VISIBLES en la página; no marques contenido inexistente.")
+        warnings.append("Google retiró el rich result de FAQ el 7 de mayo de 2026: no esperes desplegable en la SERP. El diploma (S14 L13) lo usa para IA; ese efecto no lo confirma Google.")
     if stype == "HowTo":
         warnings.append("HowTo solo si los pasos son visibles en la página; cada 'step' debe existir en el contenido.")
+        warnings.append("Google retiró el rich result de HowTo en septiembre de 2023: sin efecto en la SERP.")
     if stype in ("Article", "BlogPosting") and "publisher" in fields:
         pub = fields["publisher"]
         if isinstance(pub, dict) and "logo" not in pub:

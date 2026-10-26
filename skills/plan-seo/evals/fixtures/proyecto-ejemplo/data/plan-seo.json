@@ -1,0 +1,29 @@
+{
+  "objetivo": "Generar leads",
+  "plan": [
+    {
+      "id": 1,
+      "mes": 1,
+      "area": "tecnica",
+      "prioridad": "Alta",
+      "tarea": "Corregir el robots.txt",
+      "detalle": "Google no rastrea /servicios",
+      "responsable": "pendiente de dato",
+      "fecha": "pendiente de dato",
+      "horas": 1,
+      "entregable": "pendiente de dato"
+    },
+    {
+      "id": 2,
+      "mes": 2,
+      "area": "contenido",
+      "prioridad": "Media",
+      "tarea": "Crear la página de ortodoncia",
+      "detalle": "Una página por servicio",
+      "responsable": "pendiente de dato",
+      "fecha": "pendiente de dato",
+      "horas": 6,
+      "entregable": "pendiente de dato"
+    }
+  ]
+}

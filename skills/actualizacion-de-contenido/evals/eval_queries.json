@@ -1,0 +1,10 @@
+[
+  {"query": "Este artículo cayó en Google desde hace meses, qué le cambio sin romperlo", "should_trigger": true},
+  {"query": "Tengo muchas impresiones pero pocos clics en una URL de mi blog, qué optimizo", "should_trigger": true},
+  {"query": "Hazme el brief de optimización de esta landing que ya tengo publicada", "should_trigger": true},
+  {"query": "Qué páginas viejas de mi tienda debería actualizar primero", "should_trigger": true},
+  {"query": "Escríbeme un artículo nuevo sobre cafeteras italianas desde cero", "should_trigger": false},
+  {"query": "Genera el schema JSON-LD para esta ficha de producto", "should_trigger": false},
+  {"query": "Haz una auditoría técnica completa de mi sitio", "should_trigger": false},
+  {"query": "Qué keywords debería investigar para mi nicho", "should_trigger": false}
+]

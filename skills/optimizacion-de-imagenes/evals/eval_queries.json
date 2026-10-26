@@ -1,0 +1,13 @@
+[
+  { "query": "mis imágenes pesan mucho y la web carga lenta", "should_trigger": true },
+  { "query": "PageSpeed dice sirve imágenes en formatos modernos, cómo lo arreglo", "should_trigger": true },
+  { "query": "qué texto alternativo le pongo a las fotos de mi artículo", "should_trigger": true },
+  { "query": "convierte mis imágenes a WebP y revisa el lazy loading", "should_trigger": true },
+  { "query": "la foto principal de mi home hace que el LCP sea malo", "should_trigger": true },
+  { "query": "la página salta mientras carga las fotos, CLS alto", "should_trigger": true },
+  { "query": "haz el keyword research de mi nicho de yoga", "should_trigger": false },
+  { "query": "revisa mi robots.txt y mi sitemap", "should_trigger": false },
+  { "query": "redacta el artículo de blog sobre café de especialidad", "should_trigger": false },
+  { "query": "genera una imagen con IA para mi banner", "should_trigger": false },
+  { "query": "audita toda la parte técnica de mi sitio incluyendo indexación", "should_trigger": false }
+]

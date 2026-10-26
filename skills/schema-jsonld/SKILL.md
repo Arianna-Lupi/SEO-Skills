@@ -1,22 +1,24 @@
 ---
 name: schema-jsonld
-description: Usa esta skill cuando haya que generar datos estructurados Schema.org en JSON-LD válidos para una página, según el SEO técnico del diploma "De Cero a SEO" (aprendoseo). Aplícala siempre que publiques o reoptimices una página y quieras habilitar rich results (estrellas, FAQ, breadcrumbs, sitelinks) y reforzar entidades/autoría para la búsqueda con IA — aunque el usuario no diga "schema" ni "JSON-LD", p.ej. "quiero que me salgan las estrellas en Google", "habilita el desplegable de FAQ en la SERP", "datos estructurados para este artículo", "marca esta ficha de producto". Entrega el bloque `<script>` listo para pegar y validado. No marques contenido que no exista en la página: Google penaliza.
+description: "Usa esta skill cuando haya que generar datos estructurados Schema.org en JSON-LD válidos para una página, según el SEO técnico del diploma \"De Cero a SEO\" (aprendoseo). Aplícala siempre que publiques o reoptimices una página y quieras habilitar rich results (estrellas, FAQ, breadcrumbs, sitelinks) y reforzar entidades/autoría para la búsqueda con IA, aunque el usuario no diga \"schema\" ni \"JSON-LD\", p.ej. \"quiero que me salgan las estrellas en Google\", \"habilita el desplegable de FAQ en la SERP\", \"datos estructurados para este artículo\", \"marca esta ficha de producto\". Entrega el bloque `<script>` listo para pegar y validado (con script de validación estática). No marques contenido que no exista en la página: Google penaliza."
 compatibility: Script opcional requiere Python 3 (uv, solo stdlib). Validación con Rich Results Test / validador schema.org (gratis). SerpApi MCP (GRATIS) o Ahrefs (pago) opcionales para ver qué rich results valen la pena.
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
 > No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
 
 
-> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/issues.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `issues.json` / `next-steps.json` (schema).
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/issues.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `issues.json` / `next-steps.json` y `schema-validation.json` (salida de `validate_schema.py`, el dashboard lo muestra en su sección de schema).
 
 # Datos Estructurados / Schema.org en JSON-LD (SEO técnico)
 
-Actúa como especialista en SEO técnico en aprendoseo. El schema no posiciona por sí solo, pero **ayuda a Google a entender la página** (apoya el flujo rastreo → indexación → rich results) y refuerza las **entidades y la autoría** que las IAs usan para citarte. Marco del diploma: *"Lo que no se rastrea, no existe"* — y lo que el buscador no entiende, no luce en la SERP.
+Actúa como especialista en SEO técnico en aprendoseo. El schema no posiciona por sí solo, pero **ayuda a Google a entender la página** (apoya el flujo rastreo → indexación → rich results) y refuerza las **entidades y la autoría** que las IAs usan para citarte. Marco del diploma: *"Lo que no se rastrea, no existe"*, y lo que el buscador no entiende, no luce en la SERP.
+
+> **Método del diploma:** ver [`references/metodo-diploma.md`](references/metodo-diploma.md) (S3 L4, S10 L6, S14 L13). **Aviso de vigencia:** Google retiró el rich result de FAQ (7 de mayo de 2026) y el de HowTo (2023). El diploma enseña FAQ schema para que la IA identifique preguntas; hazlo solo con preguntas visibles y no prometas el desplegable en la SERP.
 
 ## Cuándo usar
 
@@ -36,8 +38,8 @@ Actúa como especialista en SEO técnico en aprendoseo. El schema no posiciona p
 
 Esta skill **funciona sin ningún MCP**: el JSON-LD se genera y se valida con herramientas gratuitas de Google/schema.org.
 
-1. **Sin MCP (manual — siempre válido):** identifica el tipo de página, escribe el JSON-LD y **valídalo** en el **Rich Results Test** de Google y en el **validador de schema.org**. Verifica en GSC el informe de "Mejoras" tras indexar.
-2. **SerpApi MCP (GRATIS — principal):** `mcp__serpapi__search` con tu keyword → observa **qué rich results muestran los que ya rankean** (estrellas, FAQ desplegable, sitelinks, breadcrumbs). Así sabes qué schema vale la pena implementar para esa SERP.
+1. **Sin MCP (manual, siempre válido):** identifica el tipo de página, escribe el JSON-LD y **valídalo** en el **Rich Results Test** de Google y en el **validador de schema.org**. Verifica en GSC el informe de "Mejoras" tras indexar.
+2. **SerpApi MCP (GRATIS, principal):** `mcp__serpapi__search` con tu keyword → observa **qué rich results muestran los que ya rankean** (estrellas, FAQ desplegable, sitelinks, breadcrumbs). Así sabes qué schema vale la pena implementar para esa SERP.
 3. **Ahrefs MCP (PAGO):** `mcp__claude_ai_Ahrefs__serp-overview` (features de la SERP), `...site-audit-issues` (detecta errores de datos estructurados a escala). Ahrefs es de pago.
 
 Config de MCP: ver `../../MCP-SETUP.md`.
@@ -48,13 +50,13 @@ Config de MCP: ver `../../MCP-SETUP.md`.
    - Home / sitio → `Organization` + `WebSite` (con `potentialAction` = `SearchAction` para la sitelinks searchbox).
    - Artículo / blog → `Article` o `BlogPosting` (con `author`, `datePublished`, `publisher`).
    - Producto → `Product` + `Offer` + `AggregateRating` (solo si las reseñas son reales y visibles).
-   - Preguntas frecuentes → `FAQPage` (**solo si las FAQ están visibles en la página**).
-   - Tutorial paso a paso → `HowTo`.
+   - Preguntas frecuentes → `FAQPage` (**solo si las FAQ están visibles**; sin rich result en Google desde mayo de 2026, se usa por el diploma para IA).
+   - Tutorial paso a paso → estructura con H2/H3 y listas; `HowTo` ya no genera rich result.
    - Navegación → `BreadcrumbList`.
    - Negocio físico → `LocalBusiness` (NAP: nombre, dirección, teléfono, horario).
 2. **Genera el JSON-LD válido** con las propiedades **requeridas + recomendadas** del tipo. Usa `@context: "https://schema.org"`, `@type` correcto y URLs absolutas.
 3. **Conecta entidades:** enlaza `author`/`publisher` a la `Organization` con `@id` para reforzar el grafo de entidades (clave para GEO/E-E-A-T).
-4. **Valida** en **Rich Results Test** + validador de schema.org. Cero errores; resuelve los *warnings* que apliquen.
+4. **Valida** con `scripts/validate_schema.py` (estático) y luego en **Rich Results Test** + validador de schema.org. Cero errores; resuelve los *warnings* que apliquen.
 5. **Evita marcado inexistente:** todo lo que marques debe **existir y ser visible** en la página. FAQPage sin FAQs visibles, o ratings inventados, = **penalización manual**. No lo hagas.
 6. **Registra** el bloque y el resultado de validación en la Plantilla Master; despliegue → Trello.
 
@@ -76,13 +78,26 @@ uv run skills/schema-jsonld/scripts/schema_gen.py --type Product --json '{"name"
 
 Corre con `--help` para ver opciones.
 
+**Validar lo ya publicado o un bloque antes de pegarlo** (solo stdlib; deja `schema-validation.json` para el dashboard):
+
+```bash
+python3 skills/schema-jsonld/scripts/validate_schema.py --url https://sitio.com/pagina --out .seo-audit/sitio.com/data/schema-validation.json
+python3 skills/schema-jsonld/scripts/validate_schema.py --file bloque.json
+```
+
+Detecta falta de `@context`, requeridas ausentes, placeholders, URLs relativas, fechas inválidas, ratings incompletos y tipos retirados. Es revisión estática: confirma siempre en el Rich Results Test.
+
 Tipos soportados: `Article, BlogPosting, Product, FAQPage, HowTo, BreadcrumbList, LocalBusiness, Organization, WebSite`. Devuelve `{"ok":true,"type","jsonld":{...},"missing_required":[...],"warnings":[...]}`. **No marques contenido inexistente:** `FAQPage`/`HowTo` solo si las preguntas o pasos son visibles en la página (el script ya lo advierte). Solo stdlib. Si Python no está disponible, genera el bloque en **modo manual**.
+
+## Opcional: complemento externo (después del método)
+
+Lista vigente de tipos activos y retirados, reglas de JSON-LD renderizado en servidor y notas de Product: [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md). *Complemento externo (claude-seo, MIT), no es parte del método del diplomado.*
 
 ## Salida
 
 - **Bloque `<script type="application/ld+json">` listo para pegar** en el `<head>` (o antes de `</body>`).
 - **Nota de validación:** "Validado en Rich Results Test, 0 errores".
-- **Qué rich result habilita** (ej. "habilita FAQ desplegable en la SERP").
+- **Qué rich result habilita** (ej. estrellas de Product, breadcrumbs). Si el tipo no tiene rich result vigente, dilo.
 - Fila en la pestaña **Producción / Auditoría** de la Plantilla Master.
 
 ## Ejemplo
@@ -119,9 +134,9 @@ Tipos soportados: `Article, BlogPosting, Product, FAQPage, HowTo, BreadcrumbList
 
 ## Gotchas
 
-- **NO marques contenido que no es visible en la página** (FAQPage solo si las FAQ se ven, ratings solo si las reseñas son reales y visibles) — Google penaliza con acción manual de spam.
+- **NO marques contenido que no es visible en la página** (FAQPage solo si las FAQ se ven, ratings solo si las reseñas son reales y visibles), Google penaliza con acción manual de spam.
 - **Valida el JSON-LD (Rich Results Test + validador schema.org) antes de publicar**, no después: 0 errores y resuelve los warnings que apliquen.
 - **Un tipo por intención de página** (Article / Product / FAQPage / HowTo…), no mezcles `@type` que se contradigan; conecta entidades con `@id` para un grafo coherente.
 - Incluye las propiedades **requeridas**, no solo las opcionales (ej. `Article` sin `author`/`headline` no genera rich result).
-- El schema **habilita rich results y entendimiento de entidades, no posiciona** — no es factor de ranking directo.
+- El schema **habilita rich results y entendimiento de entidades, no posiciona**, no es factor de ranking directo.
 - **Revisa el informe de Mejoras en GSC tras desplegar**, no asumas que quedó bien: un error rompe el rich result en silencio.

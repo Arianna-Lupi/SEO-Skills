@@ -1,22 +1,22 @@
 ---
 name: brief-de-contenido
-description: Usa esta skill cuando el usuario vaya a escribir u optimizar una pieza y necesite definir su estructura antes de redactar — aunque no diga "brief", p.ej. "qué estructura/encabezados pongo en este artículo", "cómo organizo este post", "qué meta título y descripción uso", "qué debería cubrir esta página", "voy a actualizar este artículo viejo". Crea el brief de contenido ("la brújula" del redactor) del método "De Cero a SEO" (aprendoseo, Arianna Lupi, Semanas 8 y 10): el brief lo dicta la SERP, no tu opinión. Genera los 3 tipos (Blog, Landing/Servicios, E-commerce) y el Brief de Optimización para contenido existente. No pases una keyword a redacción sin brief.
-compatibility: Script opcional requiere Python 3 (uv) + requests/beautifulsoup4 (y SERPAPI_API_KEY o --urls); SerpApi/Ahrefs MCP opcionales (la skill funciona 100% manual con Headings Map).
+description: "Usa esta skill cuando el usuario vaya a escribir u optimizar una pieza y necesite definir su estructura antes de redactar, aunque no diga \"brief\", p.ej. \"qué estructura/encabezados pongo en este artículo\", \"cómo organizo este post\", \"qué meta título y descripción uso\", \"qué debería cubrir esta página\", \"voy a actualizar este artículo viejo\", \"revisa el brief de este alumno\". Crea el brief de contenido (\"la brújula\" del redactor) del método \"De Cero a SEO\" (aprendoseo, Arianna Lupi, Semanas 8 y 10): el brief lo dicta la SERP, no tu opinión. Genera los 3 tipos (Blog, Landing/Servicios, E-commerce) y el Brief de Optimización para contenido existente. No pases una keyword a redacción sin brief."
+compatibility: serp_outline.py requiere Python 3 (uv) + requests/beautifulsoup4 (y SERPAPI_API_KEY o --urls); brief_check.py es solo stdlib. SerpApi/Ahrefs MCP opcionales (la skill funciona 100% manual con Headings Map).
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
-> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta**, que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
 
 
 > **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/content-briefs.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `content-briefs.json`.
 
-# Brief de Contenido — la brújula (W8 + W10)
+# Brief de Contenido: la brújula (W8 + W10)
 
-Actúa como **estratega/editor SEO en aprendoseo**, siguiendo el método de Arianna Lupi de las Semanas 8 (contenido nuevo) y 10 (optimización). El brief es el **manual de instrucciones** del redactor. Regla de oro: **el brief lo dicta la SERP** — analiza el top 3 ANTES de decidir nada. Si los que rankean son guías, tu brief pide una guía.
+Actúa como **estratega/editor SEO en aprendoseo**, siguiendo el método de Arianna Lupi de las Semanas 8 (contenido nuevo) y 10 (optimización). El brief es el **manual de instrucciones** del redactor. Regla de oro: **el brief lo dicta la SERP**, analiza el top 3 ANTES de decidir nada. Si los que rankean son guías, tu brief pide una guía.
 
 > **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
@@ -24,7 +24,7 @@ Actúa como **estratega/editor SEO en aprendoseo**, siguiendo el método de Aria
 
 - Tienes una keyword priorizada (de las **10 de Oro** / tab Estrategia) lista para producir.
 - Vas a crear **contenido nuevo** (W8) → genera el brief según su tipo.
-- Vas a **optimizar contenido existente** (W10, "darle cariño") → genera un **Brief de Optimización**.
+- Vas a **optimizar contenido existente** (W10, "darle cariño") → genera un **Brief de Optimización**. Para el proceso completo (elegir candidato con Search Console, alcance, regla de la URL, matriz Impacto vs. Esfuerzo) usa la skill `actualizacion-de-contenido`.
 - Necesitas alinear a redactor, diseñador y SEO en un solo documento.
 
 Antes de esta skill: la estrategia/clusters debe estar hecha (`estrategia-de-contenidos-clusters`). Después: redacción (`redaccion-y-optimizacion-nlp`).
@@ -43,12 +43,12 @@ Esta skill **funciona sin ningún MCP**, pero aquí es donde más aporta tener d
 
 1. **Sin MCP (manual, obligatorio mínimo):** abre Google en incógnito, busca la keyword y **lee con tus ojos el top 3**: formato, longitud aproximada, encabezados, bloque People Also Ask. Usa **Mangools** como simulador de SERP para validar metatítulo/metadescripción y **Headings Map** para extraer la jerarquía de los competidores. Documéntalo en la sección benchmark del brief.
 
-2. **SerpApi MCP (GRATIS — clave aquí):** `mcp__serpapi__search` para traer datos reales de la SERP sin abrir el navegador:
+2. **SerpApi MCP (GRATIS, clave aquí):** `mcp__serpapi__search` para traer datos reales de la SERP sin abrir el navegador:
    - **Top 3 orgánicos** → decide formato e intención.
    - **People Also Ask (PAA)** → secciones/H2 que el contenido debe cubrir.
    - **Related searches / autocomplete** → keywords secundarias y subtemas. Es la fuente principal para "el brief lo dicta la SERP".
 
-3. **Ahrefs MCP (PAGO — requiere suscripción Ahrefs):**
+3. **Ahrefs MCP (PAGO, requiere suscripción Ahrefs):**
    - `mcp__claude_ai_Ahrefs__keywords-explorer-overview` → volumen/intención de la keyword y secundarias.
    - `mcp__claude_ai_Ahrefs__keywords-explorer-matching-terms` → términos a cubrir en el brief.
    - `mcp__claude_ai_Ahrefs__serp-overview` → benchmark de quién rankea y con qué.
@@ -59,15 +59,15 @@ Conexión de MCPs: ver `../../MCP-SETUP.md`.
 
 No hay un formato único: primero **lee la SERP**, luego elige el **tipo de brief**.
 
-### Paso 1 — Analizar la SERP (top 3) → decidir intención y formato
+### Paso 1: Analizar la SERP (top 3) → decidir intención y formato
 Mira los 3 primeros resultados. ¿Qué formato es? ¿Qué intención satisface (informativa, comercial, transaccional)? **El formato de tu pieza imita lo que ya rankea.** Si rankean guías largas, no propongas una landing corta.
 
-### Paso 2 — Elegir el tipo de brief
+### Paso 2: Elegir el tipo de brief
 - **Blog (informativo):** responder dudas, autoridad, captar tráfico de cola larga.
 - **Landing / Servicios (conversión):** CTAs y propuesta de valor **above the fold**, prueba social, beneficios > características.
 - **E-commerce (transaccional):** atributos técnicos del producto, prueba social (reseñas), **urgencia/escasez**, cross-sell / up-sell.
 
-### Paso 3 — Rellenar los elementos del brief (plantilla)
+### Paso 3: Rellenar los elementos del brief (plantilla)
 1. **Intención de búsqueda** y formato decidido (con evidencia del top 3).
 2. **Metatítulo:** keyword **al inicio**, **50-60 caracteres**.
 3. **Metadescripción:** **120-155 caracteres**, persuasiva, con **CTA**.
@@ -76,21 +76,27 @@ Mira los 3 primeros resultados. ¿Qué formato es? ¿Qué intención satisface (
 6. **Enlaces internos:** definidos desde el brief, con **anchor text concreto** y URL destino (usa el cluster).
 7. **Elementos visuales sugeridos** (imágenes, tablas, infografías, vídeo).
 
-### Paso 4 (W10) — Brief de Optimización (contenido existente)
+### Paso 4 (W10): Brief de Optimización (contenido existente)
 Para piezas a refrescar ("darle cariño"):
 - **Identifica** páginas a refrescar (caída de posiciones, contenido viejo).
 - **Documenta los cambios ANTES de tocar** la pieza (qué encabezados añadir, qué actualizar, qué enlaces nuevos, qué metas reescribir).
 - Conserva lo que funciona; no reescribas desde cero lo que ya rankea.
 
-### Paso 5 — Registrar
-Vuelca el brief a la tab **"Producción"** de la Plantilla Master y crea/actualiza la tarjeta en Trello.
+### Paso 4b: Revisa el brief como lo hacen los coaches
+Antes de entregarlo, revísalo con el orden de la práctica de coaches ([`references/practica-coaches.md`](references/practica-coaches.md)): keyword contra el SERP real, H1 y meta título, jerarquía sin saltos, bloque comercial (CTA, beneficios, prueba social) y outline copiable. Redacta tus observaciones con el método **Problema, Por qué importa, Recomendación**. Corre `scripts/brief_check.py` para validar metas y jerarquía de forma determinista.
+
+### Paso 5: Registrar
+Vuelca el brief a la tab **"Producción"** de la Plantilla Master y crea/actualiza la tarjeta en Trello. Un solo documento (G-Doc) con brief y, después, el artículo.
+
+### Opcional: complementos externos
+Si el tema es competitivo o el redactor es externo, añade al brief los bloques de [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md) (tabla de competidores, tipos de brecha, ganancia de información, guía de keyword por sección). Es un **Complemento externo (claude-seo, MIT), no es parte del método del diplomado**.
 
 ## Salida
 
 Genera el **sub-template según el tipo**. **Todo brief ARRANCA con la tabla de brief** (resumen de cabecera obligatorio); después va el detalle.
 
 ```
-BRIEF DE CONTENIDO — [keyword principal]
+BRIEF DE CONTENIDO, [keyword principal]
 Tipo: [Blog | Landing/Servicios | E-commerce | OPTIMIZACIÓN]
 Cluster: [nombre] · Rol: [Pilar/Spoke] · URL: [destino/existente]
 
@@ -141,8 +147,8 @@ TABLA DE BRIEF (cabecera obligatoria)
 ```
 Tipo: Blog · Cluster: Ingredientes activos · Rol: Spoke
 1. Intención: informativa-comercial · Formato: guía con tabla comparativa (lo dicta la SERP).
-2. Metatítulo: "Sérum vitamina C natural: guía para elegir el mejor" (52 c)
-   Metadescripción: "Descubre cómo elegir un sérum de vitamina C natural según tu piel. Compara ingredientes y empieza tu rutina hoy." (134 c)
+2. Metatítulo: "Sérum vitamina C natural: guía para elegir el mejor" (51 c)
+   Metadescripción: "Descubre cómo elegir un sérum de vitamina C natural según tu piel. Compara ingredientes, concentraciones y empieza tu rutina hoy." (129 c)
 3. H1: Sérum vitamina C natural
      H2: ¿Para qué sirve la vitamina C en la piel?
      H2: Cómo elegir tu sérum (PAA: "¿qué % de vitamina C es bueno?")
@@ -155,7 +161,7 @@ Tipo: Blog · Cluster: Ingredientes activos · Rol: Spoke
 
 ## Script determinista (ahorro de tokens)
 
-Si Python está disponible, EJECUTA este script para extraer el esquema (H1/H2/H3) de los competidores del top de la SERP (es determinista, ahorra tokens y mejora precisión) y usa su JSON como base del brief — recuerda que el brief lo dicta la SERP. Si falta `SERPAPI_API_KEY` o las dependencias `requests`/`beautifulsoup4`, sigue en modo manual (Headings Map a mano), o pasa `--urls` para saltarte SerpApi.
+Si Python está disponible, EJECUTA este script para extraer el esquema (H1/H2/H3) de los competidores del top de la SERP (es determinista, ahorra tokens y mejora precisión) y usa su JSON como base del brief, recuerda que el brief lo dicta la SERP. Si falta `SERPAPI_API_KEY` o las dependencias `requests`/`beautifulsoup4`, sigue en modo manual (Headings Map a mano), o pasa `--urls` para saltarte SerpApi.
 
 Ejecuta (cero instalación, resuelve deps solo):
 
@@ -169,6 +175,14 @@ Corre con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "com
 
 Para elegir PRIMERO qué dominios/URLs son la competencia real de la keyword, corre la skill `analisis-de-competidores` y pásale sus URLs a este script con `--urls`.
 
+## Script de validación del brief
+
+```bash
+python3 skills/brief-de-contenido/scripts/brief_check.py --file brief.md --keyword "keyword principal" --tipo blog
+```
+
+Corre con `--help` para ver opciones. Devuelve metas con conteo y rango (50 a 60 y 120 a 155), keyword al inicio, un solo H1, saltos de nivel, bloques obligatorios (intención, benchmark, enlaces internos) y los bloques extra del tipo (`blog`, `landing`, `ecommerce`, `optimizacion`), más `flags` por severidad y `aprobado`. Solo stdlib. No uses "# " para el título del documento. Sin Python, valida a mano con el simulador de SERP y Headings Map.
+
 ## Gotchas
 
 - **El brief lo dicta la SERP, no tu opinión:** analiza el top 3 ANTES de definir formato. Si rankean guías largas, no propongas una landing corta. Sin top 3 analizado, no hay brief.
@@ -177,4 +191,9 @@ Para elegir PRIMERO qué dominios/URLs son la competencia real de la keyword, co
 - **La IA rompe la jerarquía de encabezados** e inventa estructura: valida la jerarquía a mano (Headings Map) antes de entregar, no confíes en el output crudo.
 - Los **enlaces internos se definen desde el brief** (anchor text + URL del cluster), no se los dejes "al redactor".
 - En W10 (optimización), **documenta los cambios ANTES de tocar la pieza** y conserva lo que ya rankea; no reescribas desde cero ni toques sin trazabilidad.
-- Recuerda: **"un brief bien hecho es el 50% del éxito"** (Arianna) — invierte aquí el tiempo.
+- Recuerda: **"un brief bien hecho es el 50% del éxito"** (Arianna), invierte aquí el tiempo.
+- **Intención mal clasificada:** reclasifica con el SERP, no con la intuición ("Tarjeta Vital" es comercial; "Comprar Tarjeta Vital" es transaccional). Es el error de brief más corregido por los coaches.
+- **Tipo de página equivocado:** si el SERP trae tiendas, el brief es de venta aunque la keyword suene informativa. No mezcles categoría con ficha de producto.
+- **No conviertas cada keyword secundaria en un H3:** estructura por las preguntas del usuario y responde primero la principal.
+- **Sin sitio todavía:** anota los enlaces internos como "enlaces a futuro" o propón categorías generales; las URLs son propuesta.
+- **Prueba social pendiente, nunca inventada.**

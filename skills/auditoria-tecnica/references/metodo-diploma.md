@@ -1,4 +1,4 @@
-# Método del diploma — Auditoría técnica SEO (Semana 12, Arianna Lupi)
+# Método del diploma, Auditoría técnica SEO (Semana 12, Arianna Lupi)
 
 > Fuente: corpus interno "De Cero a SEO" (chunks, doc_type resumenes-prompts/transcripciones), Semana 12. Material de aprendoseo.
 
@@ -9,19 +9,19 @@ La auditoría técnica del diploma se ejecuta sobre un **formato/plantilla de ta
 El orden de la auditoría que dicta el curso (S12 transcripción, repaso de cierre):
 > "hablaremos de la indexabilidad. El rastreo, el archivo robots.txt, el mapa del sitio, la arquitectura y los breadcrumbs. Luego... la auditoría técnica, cómo terminarla, asegurarnos que el sitio tenga este certificado SSL, que no haya errores de indexación."
 
-**Bloque 1 — Indexabilidad y rastreabilidad** (video 2)
-1. Distinguir **rastreabilidad (crawling)** —que los robots recorran el sitio por sus enlaces— de **indexabilidad** —que esas páginas entren al índice de Google.
+**Bloque 1, Indexabilidad y rastreabilidad** (video 2)
+1. Distinguir **rastreabilidad (crawling)** , que los robots recorran el sitio por sus enlaces,  de **indexabilidad** , que esas páginas entren al índice de Google.
 2. Simular el rastreo de Google con **Screaming Frog**; filtrar por **Response Codes** para detectar 4xx/5xx.
 3. Revisar el **robots.txt** (`tuweb.com/robots.txt`): que no haya un `Disallow: /` bloqueando páginas que quieres posicionar. Un 302 en el rastreo suele venir de un bloqueo en robots.txt.
 4. Verificar en **Google Search Console** qué páginas se indexan y que el **Sitemap** se haya procesado sin errores de lectura.
 
-**Bloque 2 — Velocidad y rendimiento (Core Web Vitals)** (video 3)
+**Bloque 2, Velocidad y rendimiento (Core Web Vitals)** (video 3)
 1. **Categorizar las páginas por plantillas** primero: en vez de revisar 1.000 páginas, identifica los diseños que se repiten (Home, Categoría/Blog, Producto/Artículo) y audita las plantillas para hallar errores **sistémicos**.
 2. Pasar las 3 plantillas principales por **PageSpeed Insights** y anotar los Core Web Vitals (LCP, FID/INP, CLS).
 3. **Optimizar imágenes** (el "fruto bajo" más rápido): formato moderno (**WebP**), peso reducido, dimensiones acordes al diseño y **atributo ALT** en cada imagen.
 4. Introducir **canonicalización**: que las páginas clave sean **self-canonical** y no apunten a URLs erróneas.
 
-**Bloque 3 — Seguridad y canonicalización** (video 4)
+**Bloque 3, Seguridad y canonicalización** (video 4)
 1. **Canonicalización profunda:** detectar duplicados (plugin de Ahrefs o Screaming Frog); definir la **URL maestra** que debe indexarse y hacer que las copias apunten a ella (`rel="canonical"`) para no diluir autoridad.
 2. **Seguridad (HTTPS/SSL):** todo el sitio bajo HTTPS; que entrar por `http://` redirija a `https://`; sin **contenido mixto**.
 3. Cerrar el documento marcando Seguridad y Canonicalización como "Finalizada".
@@ -38,7 +38,7 @@ El orden de la auditoría que dicta el curso (S12 transcripción, repaso de cier
 | Canonical | Páginas clave **self-canonical**; duplicados apuntando a la original | Screaming Frog / plugin Ahrefs (columna "Canonical") |
 | Seguridad | HTTPS en todo el sitio; redirección http→https; sin contenido mixto; certificado SSL válido | Navegador / auditoría |
 
-**Principio operativo:** auditar **por plantillas**, no página por página — "Optimiza el contenedor, no solo el contenido" (saber si un problema de velocidad es aislado o un error de diseño que afecta a todo el sitio).
+**Principio operativo:** auditar **por plantillas**, no página por página, "Optimiza el contenedor, no solo el contenido" (saber si un problema de velocidad es aislado o un error de diseño que afecta a todo el sitio).
 
 ## Prompts originales que da el curso (verbatim)
 
@@ -64,6 +64,25 @@ El orden de la auditoría que dicta el curso (S12 transcripción, repaso de cier
 ## Ejemplos del curso
 
 - **"Lo que no se rastrea, no existe" (S12 chunk 2):** antes de preocuparse por keywords hay que garantizar el camino de Google despejado; un simple error en robots.txt puede dejar fuera tus páginas más importantes.
-- **Categorización por plantillas (S12 transcripción):** "este diseño de página... es una imagen, texto, autor y todo el texto de blog" — se identifica el patrón y se audita una vez por plantilla.
+- **Categorización por plantillas (S12 transcripción):** "este diseño de página... es una imagen, texto, autor y todo el texto de blog", se identifica el patrón y se audita una vez por plantilla.
 - **Self vs non-canonical (S12 transcripción):** "vamos a ver que es self-canonical... no debería ser así, sino que debería ser non-canonical. Y la canonical es esta, la página original."
 - **"Menos es más si es lo correcto" (S12 chunk 6):** una auditoría de 10 puntos críticos accionables hoy vale más que una de 100 páginas que nadie entiende.
+
+## Semana 3: cimientos que alimentan la auditoría (añadido en v1.1)
+
+- **S3 · "Cómo funciona Google":** rastreo, indexación y renderizado son tres etapas en secuencia. Analogía del turista y el mapa. Hay que elegir bien entre renderizado del servidor (SSR) y del cliente (CSR) "para no ocultar información al buscador". Tip: "si bloqueas por error tu sitio en el robots.txt, el turista nunca llegará a tu puerta".
+- **S3 · "Cómo aparecer en Google":** el operador `site:` mide la brecha de indexación; GSC es la herramienta definitiva para saber por qué una URL no se indexa. Tip: "menos es más si lo que tienes indexado es de alta calidad" (si en `site:` salen carpetas de administración o archivos basura, es señal de alerta).
+- **S3 · "Cuáles son las herramientas del SEO Técnico":** Screaming Frog, `site:`, PageSpeed Insights/Lighthouse y Octopus.
+- **S3 · "Cómo ver la estructuración del sitio":** regla de oro, cualquier página importante a máximo **3 clics** de la Home; páginas huérfanas con Screaming Frog.
+- **S13 · "El Rol del SEO Técnico":** el SEO técnico documenta el error y se lo explica al equipo de desarrollo (ticket técnico dirigido a un programador: por qué afecta, qué recomendación, p. ej. `.htaccess` o `robots.txt`). Si no sabes implementarlo, diagnosticas y delegas.
+
+## Práctica de coaches (afina criterios, no sustituye el curso)
+
+Fuente: `data/voice-profile.md` (Juan Angulo, SEO técnico).
+
+- **Auditar con explainer para el cliente:** cada issue con *qué es, por qué importa y cómo lo solucionaremos*, sin tecnicismos; evidencia ("Evidencias del error") para el antes y después; tareas separadas, que empiezan con verbo y son realizables según el CMS; listas de URLs en un Sheet; nada de "no se ha revisado" ni "debe validarse": entras, revisas y reportas (o pides accesos).
+- **Prioridad:** botones rotos, H1 e imágenes pesadas, alta; falta de alt, baja.
+- **Realizable según el CMS:** en Shopify el robots.txt es editable, el sitemap no, el canonical no viene bien por defecto y no admite subir WebP/AVIF; en sitios hechos con código el sitemap y el robots los genera un developer.
+- **Screaming Frog vs GSC:** un 404 que solo ve Screaming Frog suele venir de un enlace interno. "Descubierta, actualmente sin indexar" no implica que falte en el sitemap.
+- **HTTP vs HTTPS:** si GSC muestra enlaces http, mira en Screaming Frog si hay enlaces internos http; si no, son históricos o externos.
+- **Caché:** si los cambios tardan en verse, revisa el plugin de caché y prueba en incógnito.

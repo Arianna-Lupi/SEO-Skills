@@ -4,7 +4,7 @@
 # dependencies = ["requests"]
 # ///
 """
-serp.py — Captura determinista de una SERP de Google vía SerpApi (REST).
+serp.py, Captura determinista de una SERP de Google vía SerpApi (REST).
 
 Qué hace:
   Consulta https://serpapi.com/search.json con una query y devuelve un JSON

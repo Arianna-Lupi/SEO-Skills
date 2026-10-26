@@ -1,0 +1,50 @@
+[
+  {
+    "query": "ya tengo el análisis del sitio pero no sé por dónde empezar ni qué hacer primero",
+    "should_trigger": true
+  },
+  {
+    "query": "arma el cronograma de SEO para este cliente a 4 meses",
+    "should_trigger": true
+  },
+  {
+    "query": "ayúdame a definir los objetivos y KPIs de mi proyecto",
+    "should_trigger": true
+  },
+  {
+    "query": "qué debo entregar para graduarme del diplomado",
+    "should_trigger": true
+  },
+  {
+    "query": "cuál es la diferencia entre canónica y redirección 301",
+    "should_trigger": false
+  },
+  {
+    "query": "escribe el artículo de blog sobre cafeteras",
+    "should_trigger": false
+  },
+  {
+    "query": "revisa el robots.txt de mi sitio",
+    "should_trigger": false
+  },
+  {
+    "query": "genera la plantilla master completa de mi proyecto",
+    "should_trigger": true
+  },
+  {
+    "query": "hazme un brief por cada página del plan",
+    "should_trigger": true
+  },
+  {
+    "query": "una keyword por página, valida mi mapa de contenidos",
+    "should_trigger": true
+  },
+  {
+    "query": "arma el calendario de contenidos por cluster",
+    "should_trigger": true
+  },
+  {
+    "query": "cuántos clics puedo esperar si cumplo el plan",
+    "should_trigger": false
+  }
+]

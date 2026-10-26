@@ -1,11 +1,11 @@
 ---
 name: optimizacion-geo-aeo
-description: Usa esta skill cuando haya que optimizar contenido para la búsqueda con IA según el diploma "De Cero a SEO" (aprendoseo) — W14 (AEO) y W16 (GEO/AEO para LLMs). Aplícala siempre que quieras que tu contenido sea citado en Google AI Overviews, ChatGPT, Perplexity o Bing Copilot, o que gane featured snippet / People Also Ask / Knowledge Panel — aunque el usuario no diga "GEO/AEO", p.ej. "cómo aparezco en ChatGPT", "quiero salir en el resumen de IA de Google", "que me cite Perplexity", "optimiza esta guía para la era IA". En 2026 el CTR orgánico se fuga hacia las respuestas de IA: no publiques contenido informacional sin pasar por aquí.
+description: "Usa esta skill cuando haya que optimizar contenido para la búsqueda con IA según el diploma \"De Cero a SEO\" (aprendoseo), W14 (AEO) y W16 (GEO/AEO para LLMs). Aplícala siempre que quieras que tu contenido sea citado en Google AI Overviews, ChatGPT, Perplexity o Bing Copilot, o que gane featured snippet / People Also Ask / Knowledge Panel, aunque el usuario no diga \"GEO/AEO\", p.ej. \"cómo aparezco en ChatGPT\", \"quiero salir en el resumen de IA de Google\", \"que me cite Perplexity\", \"optimiza esta guía para la era IA\". En 2026 el CTR orgánico se fuga hacia las respuestas de IA: no publiques contenido informacional sin pasar por aquí."
 compatibility: Script opcional requiere Python 3 (uv) y SERPAPI_API_KEY + requests. SerpApi MCP (GRATIS) o Ahrefs Brand Radar (pago) opcionales; funciona en manual con Google + ChatGPT/Perplexity.
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
@@ -14,14 +14,14 @@ metadata:
 
 > **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/ai-features.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `ai-features.json`.
 
-# Optimización GEO / AEO — La búsqueda con IA (Diploma W14 + W16)
+# Optimización GEO / AEO, La búsqueda con IA (Diploma W14 + W16)
 
-Actúa como especialista en GEO/AEO en aprendoseo. Tu trabajo ya no es solo "salir primero": es **que te citen** cuando la IA responde por el usuario. Marco del diploma (Arianna, W16): *"En la búsqueda con IA no compites por un clic, compites por una mención"*. El CTR orgánico se está cayendo hacia los AI Overviews — quien no es citable, desaparece.
+Actúa como especialista en GEO/AEO en aprendoseo. Tu trabajo ya no es solo "salir primero": es **que te citen** cuando la IA responde por el usuario. Marco del diploma (Arianna, W16): *"En la búsqueda con IA no compites por un clic, compites por una mención"*. El CTR orgánico se está cayendo hacia los AI Overviews, quien no es citable, desaparece.
 
 > **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 **AEO vs GEO (no son lo mismo):**
-- **AEO (Answer Engine Optimization, W14):** optimizar para **motores de respuesta** — featured snippets, People Also Ask, Knowledge Panel, AI Overviews de Google. La respuesta vive *en la SERP*.
+- **AEO (Answer Engine Optimization, W14):** optimizar para **motores de respuesta**, featured snippets, People Also Ask, Knowledge Panel, AI Overviews de Google. La respuesta vive *en la SERP*.
 - **GEO (Generative Engine Optimization, W16):** optimizar para que **LLMs generativos** (ChatGPT, Perplexity, Copilot, Gemini) te mencionen/citen dentro de su respuesta sintetizada. El objetivo es la **presencia de marca**, no el enlace.
 
 ## Cuándo usar
@@ -42,21 +42,26 @@ Actúa como especialista en GEO/AEO en aprendoseo. Tu trabajo ya no es solo "sal
 
 Esta skill **funciona sin ningún MCP**. El MCP solo confirma qué dispara la query y quién es citado hoy.
 
-1. **Sin MCP (manual — siempre válido):** busca tu keyword en Google y observa si aparece **AI Overview**, **featured snippet** o caja **PAA**; anota qué fuentes cita. Pregunta lo mismo en **ChatGPT/Perplexity** y mira qué marcas/dominios menciona y enlaza. Eso es tu benchmark de citabilidad.
-2. **SerpApi MCP (GRATIS — principal):** `mcp__serpapi__search` con tu keyword → detecta presencia de **AI Overview**, **featured snippet**, bloque **People Also Ask** (lista de preguntas reales) y **related searches**. Es la forma rápida de saber qué formato debes atacar.
+1. **Sin MCP (manual, siempre válido):** busca tu keyword en Google y observa si aparece **AI Overview**, **featured snippet** o caja **PAA**; anota qué fuentes cita. Pregunta lo mismo en **ChatGPT/Perplexity** y mira qué marcas/dominios menciona y enlaza. Eso es tu benchmark de citabilidad.
+2. **SerpApi MCP (GRATIS, principal):** `mcp__serpapi__search` con tu keyword → detecta presencia de **AI Overview**, **featured snippet**, bloque **People Also Ask** (lista de preguntas reales) y **related searches**. Es la forma rápida de saber qué formato debes atacar.
 3. **Ahrefs MCP (PAGO):** `mcp__claude_ai_Ahrefs__brand-radar-ai-responses` y `...brand-radar-mentions-overview` (¿te mencionan las IAs y para qué prompts?), `...keywords-explorer-overview` (volumen/intención). Ahrefs es de pago; el Brand Radar es lo más cercano a medir GEO real.
 
 Config de MCP: ver `../../MCP-SETUP.md`.
 
 ## Proceso
 
-1. **Detecta el formato que dispara la query.** Con SerpApi (o manual) confirma si hay AI Overview / featured snippet / PAA. Si no hay ninguno, la query no es prioritaria para GEO/AEO — anótalo y sigue.
-2. **Estructura answer-first.** Abre la sección con una **respuesta directa y concisa de 40-60 palabras** que conteste la pregunta tal cual, *antes* de cualquier intro. Luego desarrolla. Las IAs y los featured snippets extraen ese bloque inicial.
+1. **Detecta el formato que dispara la query.** Con SerpApi (o manual) confirma si hay AI Overview / featured snippet / PAA. Si no hay ninguno, la query no es prioritaria para GEO/AEO, anótalo y sigue.
+2. **Estructura answer-first.** Abre con una **respuesta directa y concisa** que conteste la pregunta tal cual, *antes* de cualquier intro. El diploma fija el umbral del primer párrafo en **menos de 40 palabras** (S14 L13); en secciones internas puedes llegar a 40-60 si hace falta. Luego desarrolla. Las IAs y los featured snippets extraen ese bloque inicial.
 3. **Responde el PAA con encabezados-pregunta.** Convierte cada pregunta del bloque PAA en un **H2/H3 redactado como pregunta** ("¿Qué es…?", "¿Cómo se hace…?") seguido de su respuesta corta. Una pregunta = un encabezado = una respuesta extraíble.
 4. **Hazlo citable: datos, entidades y cifras.** Incluye **números concretos, definiciones limpias, listas y entidades nombradas**. Lenguaje claro y afirmativo (las IAs citan frases auto-contenidas, no párrafos ambiguos).
 5. **Autoría y E-E-A-T.** Marca **autor con credenciales**, fecha, fuentes citadas y experiencia real. Las IAs y el Knowledge Panel privilegian contenido con autoría verificable (refuerza con la skill `schema-jsonld`: Article/author, Organization).
-6. **Presencia de marca (GEO, W16).** Asegura que la **marca se nombre dentro del texto** junto a la afirmación citable (no solo en el footer). Busca menciones en sitios de terceros y respuestas de IA — la mención, no el backlink, es la moneda del GEO.
-7. **Registra** los bloques optimizados y el checklist en la pestaña **Producción**; tareas de seguimiento → Trello.
+6. **Presencia de marca (GEO, W16).** Asegura que la **marca se nombre dentro del texto** junto a la afirmación citable (no solo en el footer). Busca menciones en sitios de terceros y respuestas de IA, la mención, no el backlink, es la moneda del GEO.
+7. **Revisa el acceso de los rastreadores de IA y el SEO técnico base** (Auditoría Final de Control de Ibrahim, S16 L1: contenido, estructura, SEO técnico): `python3 scripts/ai_crawlers.py sitio.com --out .seo-audit/sitio.com/data/ai-features.json` muestra qué rastreadores de IA permite el robots.txt. Presenta el estado; permitir o bloquear es decisión del negocio.
+8. **Registra** los bloques optimizados y el checklist en la pestaña **Producción**; tareas de seguimiento → Trello.
+
+## Opcional: complemento externo (después del método)
+
+Lista de rastreadores y cómo manejarlos, llms.txt (opcional, Google no lo usa), citabilidad por pasaje, señales de marca y notas por plataforma: [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md). *Complemento externo (claude-seo, MIT), no es parte del método del diplomado.* Google considera que GEO es SEO aplicado; el diploma conserva las etiquetas AEO y GEO.
 
 ## Salida
 
@@ -83,7 +88,8 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 - [x] Datos/cifras/entidades citables
 - [x] Autor con credenciales + fecha (E-E-A-T)
 - [x] Marca nombrada junto a la afirmación citable
-- [ ] Schema Article/FAQPage añadido (→ skill `schema-jsonld`)
+- [ ] Schema Article/Person añadido; FAQPage solo con preguntas visibles (→ skill `schema-jsonld`; ojo, Google retiró el rich result de FAQ en mayo de 2026)
+- [ ] Rastreadores de IA revisados en robots.txt (`ai_crawlers.py`)
 
 ## Script determinista (ahorro de tokens)
 
@@ -96,13 +102,13 @@ SERPAPI_API_KEY=xxx uv run scripts/ai_features.py "tu pregunta/keyword" --gl es 
 # o, si no usas uv: SERPAPI_API_KEY=xxx python3 scripts/ai_features.py "tu pregunta/keyword" --gl es --hl es
 ```
 
-Corre con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "ai_overview": bool, "featured_snippet": {"present": bool, "type": "paragraph|list|table|null"}, "paa": [...], "answer_box": bool, "recommendation": "..."}` — la recomendación es por reglas (p. ej. "hay featured snippet de lista → estructura tu respuesta como lista de N pasos"). Si falla, `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0).
+Corre con `--help` para ver opciones. Devuelve: `{"ok": true, "query": ..., "ai_overview": bool, "featured_snippet": {"present": bool, "type": "paragraph|list|table|null"}, "paa": [...], "answer_box": bool, "recommendation": "..."}`, la recomendación es por reglas (p. ej. "hay featured snippet de lista → estructura tu respuesta como lista de N pasos"). Si falla, `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0).
 
 ## Gotchas
 
 - **AEO (featured snippets / PAA / AI Overviews en la SERP) ≠ GEO (LLMs: AI Overviews / ChatGPT / Perplexity / Copilot citándote en su respuesta).** Optimiza para ambos pero no los mezcles en el reporte.
 - Estructura **answer-first: respuesta directa de 40-60 palabras al inicio**, no enterrada tras 3 párrafos de intro. Si no está en los primeros 60 caracteres útiles, la IA cita a otro.
-- **Responde las PAA con encabezados en forma de pregunta** ("¿Qué es…?", "¿Cómo…?"), no con encabezados genéricos ("Introducción", "Ventajas") — pierdes los slots de pregunta.
+- **Responde las PAA con encabezados en forma de pregunta** ("¿Qué es…?", "¿Cómo…?"), no con encabezados genéricos ("Introducción", "Ventajas"), pierdes los slots de pregunta.
 - Las IAs **citan marca / E-E-A-T, no solo enlaces**: en GEO te pueden citar sin enlazarte. Mide menciones de marca (Brand Radar / búsqueda manual), no solo backlinks.
 - Contenido **con autoría y fecha, no anónimo**: las IAs descartan lo que no tiene E-E-A-T verificable.
 - Esto **extiende el SEO clásico, no lo reemplaza**: sin rastreo/indexación (W12) no hay nada que citar (*"lo que no se rastrea, no existe"*).

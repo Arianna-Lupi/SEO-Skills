@@ -4,10 +4,10 @@
 # dependencies = ["requests", "beautifulsoup4"]
 # ///
 """
-serp_outline.py — Extractor de esquemas (H1/H2/H3) de los competidores del top de la SERP.
+serp_outline.py, Extractor de esquemas (H1/H2/H3) de los competidores del top de la SERP.
 
 Qué hace (determinista):
-  1. Obtiene las URLs orgánicas del top N (vía SerpApi) — o usa --urls para
+  1. Obtiene las URLs orgánicas del top N (vía SerpApi), o usa --urls para
      pasar una lista y saltarte SerpApi.
   2. Descarga cada URL y extrae su estructura de encabezados H1/H2/H3.
   3. Junta los H2 más repetidos en un esquema sugerido y suma las preguntas

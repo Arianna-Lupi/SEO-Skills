@@ -3,7 +3,7 @@
 # requires-python = ">=3.9"
 # ///
 """
-run_unlighthouse.py — Análisis de rendimiento de TODO el sitio con Unlighthouse
+run_unlighthouse.py, Análisis de rendimiento de TODO el sitio con Unlighthouse
 (Lighthouse en cada ruta) y vuelco a .seo-audit/<sitio>/data/performance.json,
 el esquema que consume el dashboard (skill dashboard-seo).
 
@@ -461,7 +461,7 @@ def run_unlighthouse(site, outdir, max_routes, mobile, throttle, extra):
     except FileNotFoundError:
         return None, "npx no ejecutable"
     except subprocess.TimeoutExpired:
-        return None, "timeout (>45 min) — usa --max-routes para acotar"
+        return None, "timeout (>45 min), usa --max-routes para acotar"
 
     # unlighthouse-ci puede devolver exit !=0 por presupuestos; igual buscamos el JSON.
     raw = _collect_results(outdir)
@@ -513,7 +513,7 @@ def main():
                 return
             with open(args.json_path, encoding="utf-8") as f:
                 raw = json.load(f)
-            source = f"Unlighthouse (Lighthouse) — {args.json_path} — {today}"
+            source = f"Unlighthouse (Lighthouse), {args.json_path}, {today}"
         else:
             tmpdir = tempfile.mkdtemp(prefix="unlighthouse-")
             raw, err = run_unlighthouse(
@@ -526,7 +526,7 @@ def main():
                 dest = os.path.join(datadir, "unlighthouse-raw")
                 shutil.rmtree(dest, ignore_errors=True)
                 shutil.copytree(tmpdir, dest)
-            source = f"Unlighthouse (Lighthouse en cada ruta) — {today}"
+            source = f"Unlighthouse (Lighthouse en cada ruta), {today}"
 
         pages, pages_audits = parse_unlighthouse_json(raw)
         if not pages:

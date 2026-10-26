@@ -1,0 +1,48 @@
+{
+  "skill_name": "proyeccion-seo-gsc",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo 14 meses de Search Console y el plan de contenidos. ¿Cuántos clics podría tener en 12 meses si lo cumplo?",
+      "expected_output": "Corre proyeccion_gsc.py proyectar y entrega un rango (conservador, base, optimista) con línea base real, curva de CTR de la propia web, supuestos listados y la advertencia de que no es garantía.",
+      "assertions": [
+        "entrega rangos por escenario y no un número único",
+        "lista los supuestos (cumplimiento, posición objetivo, meses de maduración) y ofrece editarlos",
+        "calcula la línea base y la curva de CTR con datos reales de Search Console",
+        "dice explícitamente que la proyección no es una garantía",
+        "las páginas nuevas sin volumen aportado quedan como pendiente de dato y no suman"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Tengo solo 2 meses de datos en Search Console, proyéctame el año.",
+      "expected_output": "Se niega a proyectar y explica que faltan al menos 3 meses, idealmente 12 a 16, sin inventar cifras.",
+      "assertions": [
+        "se niega a proyectar",
+        "indica qué datos faltan",
+        "no entrega cifras estimadas ni porcentajes de crecimiento"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Pasó el primer mes del plan. Compara lo proyectado con lo real.",
+      "expected_output": "Corre el subcomando seguimiento y reporta real contra el rango, el estado y revisa primero el cumplimiento del plan antes de culpar al algoritmo.",
+      "assertions": [
+        "compara el mes real con el rango mínimo, base y máximo",
+        "indica el estado (dentro, por debajo o por encima)",
+        "revisa el cumplimiento del plan antes de culpar a factores externos",
+        "remite al bloque plan vs real de reporte-seo-gsc"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "No tengo suficientes consultas para calcular el CTR por posición, usa el CTR típico de Google.",
+      "expected_output": "Rechaza usar un CTR 'típico' como dato: pide la curva propia o acepta una curva que el usuario aporte rotulada como supuesto suyo.",
+      "assertions": [
+        "no presenta una curva genérica como dato real",
+        "acepta una curva solo si el usuario la aporta y la rotula como supuesto",
+        "advierte que los resultados son menos fiables"
+      ]
+    }
+  ]
+}

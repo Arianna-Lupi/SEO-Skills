@@ -97,3 +97,11 @@ bash scripts/trigger_eval.sh skills/brief-de-contenido/evals/eval_queries.json b
 ```
 
 El umbral de aprobación es 0.5: los `should_trigger:true` tienen que quedar con `trigger_rate ≥ 0.5` y los near-misses (`false`) con `trigger_rate < 0.5`. Para no sobreajustar la descripción a los propios ejemplos usamos un split train/validation 60/40: iteramos la `description` (hasta 5 veces) solo contra el set de train y, al pasar, la validamos una única vez contra el 40% reservado.
+
+## Ronda "diplomado primero + claude-seo": datos que salen de tu equipo
+
+- **Consentimiento antes de enviar URLs a terceros:** `psi_campo.py` (API de PageSpeed/CrUX de Google) exige `--confirmo`; `crux_campo.py` usa tu clave gratuita de CrUX. Ninguna skill envía datos a un servicio sin que lo pidas.
+- **Google Drive (opcional):** `plan-seo` puede publicar la Master y los briefs en Drive solo si tienes el conector o las credenciales, mostrando antes qué creará y dónde, y pidiendo confirmación. Nunca comparte públicamente por defecto. El repo no guarda credenciales.
+- **Proyecciones:** `proyeccion-seo-gsc` es una extensión, no un método del diplomado, y no es una garantía de resultados. Se niega a proyectar con menos de 3 meses de datos.
+- **Atribución:** los complementos adaptados de claude-seo (MIT) están listados en `FUENTES.md` y su licencia en `THIRD-PARTY-LICENSES.md`.
+- **Datos de alumnos y clientes:** las plantillas de la comunidad se usaron solo por su estructura (encabezados y secciones); las fixtures del repo son sintéticas.

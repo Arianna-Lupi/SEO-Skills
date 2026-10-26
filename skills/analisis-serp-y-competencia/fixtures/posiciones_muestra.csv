@@ -1,0 +1,11 @@
+keyword,domain,position,url,volume
+como preparar cafe,revistacafe.example,2,https://revistacafe.example/preparar-cafe,5400
+como preparar cafe,tienda-cafe.example,,,5400
+cafe de especialidad,revistacafe.example,6,https://revistacafe.example/especialidad,2400
+cafe de especialidad,granos.example,3,https://granos.example/cafe-especialidad,2400
+cafe de especialidad,tienda-cafe.example,11,,2400
+cafe organico,granos.example,8,https://granos.example/organico,
+cafe organico,tienda-cafe.example,2,,
+metodo v60,revistacafe.example,4,https://revistacafe.example/v60,
+metodo v60,granos.example,9,https://granos.example/v60,
+metodo v60,tienda-cafe.example,,,

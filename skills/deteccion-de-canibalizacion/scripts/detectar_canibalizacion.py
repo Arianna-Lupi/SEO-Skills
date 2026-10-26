@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-detectar_canibalizacion.py — Detecta canibalización REAL (varias URLs de un
+detectar_canibalizacion.py, Detecta canibalización REAL (varias URLs de un
 mismo sitio compitiendo hoy por la misma query en Google Search Console) y
 clasifica severidad + acción recomendada.
 
@@ -12,7 +12,17 @@ canibalización PLANEADA (misma keyword asignada a 2 URLs en un mapa manual);
 este detecta canibalización REAL ya ocurriendo, a partir del export de
 Search Console con dimensiones Query + Página (o el MCP de GSC/Ahrefs).
 
-Entrada: CSV o JSON con filas {query, url, clicks, impressions, position, ctr?}.
+Entrada: CSV o JSON con filas {query, url, clicks, impressions, position, ctr?, date?}.
+Señales extra (opcionales, v1.1):
+  - date:   si el export trae una fecha por fila (GSC por día o semana), calcula
+            cuántas veces cambia la URL líder de la query ("Google alterna cuál
+            muestra"). 2 o más cambios suben la severidad a Alta.
+  - slugs:  similitud entre los slugs de las dos URLs principales. Slugs casi
+            iguales apuntan a contenido duplicado o a la misma keyword.
+  - --brand: consultas de marca (navegacionales). Se marcan `branded` y quedan
+            en severidad Bajo: que la home y "quiénes somos" salgan por la marca
+            es normal.
+  - suggested_target: URL sugerida para conservar (más clics, luego mejor posición).
 
 Usage:
     python3 detectar_canibalizacion.py --file gsc_query_page.csv
@@ -29,6 +39,10 @@ JSON output (stdout):
         "total_clicks": N, "total_impressions": N,
         "dominance_ratio": 0.0-1.0 | null,
         "position_gap": float | null,
+        "slug_similarity": 0.0-1.0 | null,
+        "leader_changes": N | null,   (solo con columna date)
+        "branded": bool,
+        "suggested_target": "url",
         "severity": "Alta|Media|Bajo",
         "action": "..."
       }],
@@ -43,7 +57,10 @@ import argparse
 import csv
 import io
 import json
+import re
 import sys
+import unicodedata
+from urllib.parse import urlparse
 
 # Umbrales de severidad (ajustables al criterio del método).
 DOMINANCE_ALTA_MAX = 0.60   # < 60% de los clics en la URL líder -> tráfico repartido de verdad
@@ -75,6 +92,7 @@ def normalize_row(d: dict) -> dict:
         "clicks": to_float(low.get("clicks") or low.get("clics")) or 0.0,
         "impressions": to_float(low.get("impressions") or low.get("impresiones")) or 0.0,
         "position": to_float(low.get("position") or low.get("posicion") or low.get("posición")),
+        "date": (low.get("date") or low.get("fecha") or "").strip(),
     }
 
 
@@ -95,6 +113,30 @@ def parse_rows(raw: str, fmt: str) -> list:
     if not reader.fieldnames:
         raise ValueError("CSV sin cabecera")
     return [normalize_row(r) for r in reader]
+
+
+def slug_tokens(url: str) -> set:
+    path = urlparse(url if "://" in url else "https://x" + url).path
+    path = "".join(c for c in unicodedata.normalize("NFD", path.lower()) if unicodedata.category(c) != "Mn")
+    stop = {"de", "del", "la", "el", "los", "las", "para", "en", "y", "blog", "tag", "categoria", "category"}
+    return {t for t in re.split(r"[^a-z0-9]+", path) if t and t not in stop}
+
+
+def slug_similarity(a: str, b: str):
+    ta, tb = slug_tokens(a), slug_tokens(b)
+    if not ta or not tb:
+        return None
+    return round(len(ta & tb) / len(ta | tb), 2)
+
+
+def leader_changes(dated: dict):
+    """dated: {fecha: {url: (clicks, position)}} -> nº de veces que cambia la URL líder."""
+    leaders = []
+    for d in sorted(dated):
+        cand = dated[d]
+        best = sorted(cand.items(), key=lambda kv: (-kv[1][0], kv[1][1] if kv[1][1] is not None else 999))[0][0]
+        leaders.append(best)
+    return sum(1 for i in range(1, len(leaders)) if leaders[i] != leaders[i - 1]) if len(leaders) > 1 else None
 
 
 def classify(group_urls: list) -> tuple:
@@ -140,6 +182,8 @@ def main() -> int:
     )
     p.add_argument("--file", default="-", help="CSV o JSON con filas {query, url, clicks, impressions, position}. '-' = stdin.")
     p.add_argument("--format", choices=["auto", "csv", "json"], default="auto", help="Formato de entrada (auto detecta).")
+    p.add_argument("--brand", action="append", default=[], metavar="TEXTO",
+                   help="Texto de marca (repetible). Las queries que lo contienen se marcan branded y quedan en severidad Bajo.")
     p.add_argument("--min-impressions", type=float, default=5.0,
                    help="Ignora URLs con menos impresiones que esto (ruido). Default: 5.")
     try:
@@ -170,7 +214,9 @@ def main() -> int:
     by_query = {}
     for r in rows:
         key = r["query"].lower()
-        by_query.setdefault(key, {"display": r["query"], "urls": {}})
+        by_query.setdefault(key, {"display": r["query"], "urls": {}, "dated": {}})
+        if r["date"]:
+            by_query[key]["dated"].setdefault(r["date"], {})[r["url"]] = (r["clicks"], r["position"])
         u = by_query[key]["urls"].setdefault(r["url"], {"url": r["url"], "clicks": 0.0, "impressions": 0.0, "position": None})
         u["clicks"] += r["clicks"]
         u["impressions"] += r["impressions"]
@@ -186,6 +232,17 @@ def main() -> int:
             continue
         urls.sort(key=lambda u: (-u["clicks"], -u["impressions"]))
         severity, action, dominance_ratio, position_gap = classify(urls)
+        sim = slug_similarity(urls[0]["url"], urls[1]["url"])
+        changes = leader_changes(g["dated"]) if g["dated"] else None
+        branded = any(b.lower() in g["display"].lower() for b in args.brand)
+        if changes is not None and changes >= 2 and severity != "Alta":
+            severity = "Alta"
+            action += f" La URL líder cambió {changes} veces entre fechas: Google alterna cuál muestra."
+        if sim is not None and sim >= 0.5:
+            action += f" Los slugs se parecen (similitud {sim}): revisa si es contenido duplicado."
+        if branded:
+            severity = "Bajo"
+            action = "Consulta de marca (navegacional): que varias URLs salgan por la marca suele ser normal. Solo actúa si compiten dos páginas de contenido."
         by_severity[severity] += 1
         cannibalization.append({
             "query": g["display"],
@@ -195,6 +252,10 @@ def main() -> int:
             "total_impressions": int(sum(u["impressions"] for u in urls)),
             "dominance_ratio": dominance_ratio,
             "position_gap": round(position_gap, 1) if position_gap is not None else None,
+            "slug_similarity": sim,
+            "leader_changes": changes,
+            "branded": branded,
+            "suggested_target": urls[0]["url"],
             "severity": severity,
             "action": action,
         })

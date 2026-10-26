@@ -1,18 +1,18 @@
 ---
 name: reporte-seo-gsc
-description: Usa esta skill cuando haya que redactar el informe SEO mensual para un cliente a partir de las 4 métricas de Google Search Console (clics, impresiones, CTR, posición promedio), según el método del diploma "De Cero a SEO" (aprendoseo). Convierte datos de GSC en un informe ejecutivo mes vs mes con interpretación de negocio, no en una tabla cruda. Úsala al cierre de mes o cuando el cliente pida resultados — aunque no diga "reporte", p.ej. "arma el informe mensual de SEO para el cliente", "¿cómo venimos este mes?", "justifica el trabajo SEO", "pásame los resultados de Search Console".
-compatibility: Script opcional requiere Python 3 (uv). GSC vía mcp-gsc (GRATIS), Ahrefs MCP (pago) o SerpApi (apoyo) — todos opcionales; funciona pegando el export CSV de GSC.
+description: Usa esta skill cuando haya que redactar el informe SEO mensual para un cliente a partir de las 4 métricas de Google Search Console (clics, impresiones, CTR, posición promedio), según el método del diploma "De Cero a SEO" (aprendoseo). Convierte datos de GSC en un informe ejecutivo mes vs mes con interpretación de negocio, no en una tabla cruda. Úsala al cierre de mes o cuando el cliente pida resultados, aunque no diga "reporte", p.ej. "arma el informe mensual de SEO para el cliente", "¿cómo venimos este mes?", "justifica el trabajo SEO", "pásame los resultados de Search Console".
+compatibility: Script opcional requiere Python 3 (uv). GSC vía mcp-gsc (GRATIS), Ahrefs MCP (pago) o SerpApi (apoyo), todos opcionales; funciona pegando el export CSV de GSC.
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
 > No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
 
 
-> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/meta.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `meta.json` (summary) y `next-steps.json` — las 4 métricas de GSC las PIDES al usuario, no las inventas.
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/meta.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `search-console.json` (mes vs mes), `cwv-field.json` (si hay CrUX), `meta.json` (summary) y `next-steps.json`: las 4 métricas de GSC las PIDES al usuario, no las inventas.
 
 # Reporte SEO Mensual desde GSC (Diploma W12)
 
@@ -29,7 +29,7 @@ Actúa como consultor SEO en aprendoseo que reporta a un cliente. El cliente no 
 ## Entradas (qué te doy)
 
 - **Datos de GSC** del periodo (mes actual) y del **mes anterior** para comparar.
-- Si no hay MCP: el **export de GSC** (CSV/captura) pegado — la skill lo interpreta.
+- Si no hay MCP: el **export de GSC** (CSV/captura) pegado, la skill lo interpreta.
 - **Tareas realizadas** en el mes (de Trello/Plantilla Master).
 - Contexto del negocio: objetivos, páginas/keywords clave.
 
@@ -37,10 +37,10 @@ Actúa como consultor SEO en aprendoseo que reporta a un cliente. El cliente no 
 
 Funciona **sin MCP**: tú pegas el export de GSC y la skill lo interpreta y redacta.
 
-1. **Sin MCP (manual — principal si no hay conexión):** exporta de GSC las 4 métricas (Clics, Impresiones, CTR, Posición promedio) para el mes y el mes anterior; pega la tabla y la skill la analiza y redacta el informe.
+1. **Sin MCP (manual, principal si no hay conexión):** exporta de GSC las 4 métricas (Clics, Impresiones, CTR, Posición promedio) para el mes y el mes anterior; pega la tabla y la skill la analiza y redacta el informe.
 1. **MCP de GSC `mcp-gsc` (GRATIS, comunitario):** trae clics/impresiones/CTR/posición e inspección de URLs en vivo directamente desde Search Console (ver `../../MCP-SETUP.md`); sin MCP se usa el export CSV de GSC (y el script `gsc_report.py`).
-2. **Ahrefs MCP (PAGO — GSC conectado):** lectura directa con `mcp__claude_ai_Ahrefs__gsc-performance-history` (evolución), `...gsc-keywords` (keywords ganadoras/perdedoras), `...gsc-pages` (páginas), `...gsc-keyword-history` (histórico de una keyword). Ahrefs es de pago y requiere GSC conectado.
-3. **SerpApi MCP (GRATIS — apoyo):** `mcp__serpapi__search` para contextualizar la SERP de una keyword que se movió (qué cambió arriba).
+2. **Ahrefs MCP (PAGO, GSC conectado):** lectura directa con `mcp__claude_ai_Ahrefs__gsc-performance-history` (evolución), `...gsc-keywords` (keywords ganadoras/perdedoras), `...gsc-pages` (páginas), `...gsc-keyword-history` (histórico de una keyword). Ahrefs es de pago y requiere GSC conectado.
+3. **SerpApi MCP (GRATIS, apoyo):** `mcp__serpapi__search` para contextualizar la SERP de una keyword que se movió (qué cambió arriba).
 
 Config de MCP: ver `../../MCP-SETUP.md`.
 
@@ -57,18 +57,24 @@ Config de MCP: ver `../../MCP-SETUP.md`.
 6. **Define próximos pasos** accionables.
 7. **Redacta en tono ejecutivo**, traduciendo todo a valor de negocio.
 
+## Opcional: Core Web Vitals de campo y complementos (después del método)
+
+- `CRUX_API_KEY=xxx python3 skills/reporte-seo-gsc/scripts/crux_campo.py https://sitio.com --out .seo-audit/sitio.com/data/cwv-field.json` trae LCP, INP y CLS de **usuarios reales** (p75, 28 días). Si CrUX no tiene datos, escribe `pendiente de dato` en el informe; no estimes.
+- Persistir el mes vs mes para el dashboard: `python3 skills/reporte-seo-gsc/scripts/gsc_report.py --current actual.csv --previous anterior.csv --label-current 2026-09 --label-previous 2026-08 --out .seo-audit/sitio.com/data/search-console.json`.
+- Más detalle (GSC API, GA4, umbrales): [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md). *Complemento externo (claude-seo, MIT), no es parte del método del diplomado.*
+
 ## Salida
 
 Informe mensual en formato **Doc**, con esta estructura del diploma:
 
 1. **Resumen Ejecutivo** (3-4 frases: qué pasó y qué significa para el negocio).
-2. **Análisis de Rendimiento Orgánico** — tabla **mes vs mes** con las 4 métricas + interpretación.
+2. **Análisis de Rendimiento Orgánico**, tabla **mes vs mes** con las 4 métricas + interpretación.
 3. **Keywords y Páginas Ganadoras**.
 4. **Tareas Realizadas y Próximos Pasos**.
 
-Además: **tabla mes vs mes** lista para pegar y **vínculo a Trello** para las tareas/próximos pasos.
+Si hay datos de campo, añade al final de la sección 2 una línea de **Core Web Vitals (campo)** con la fuente. Además: **tabla mes vs mes** lista para pegar y **vínculo a Trello** para las tareas/próximos pasos.
 
-## Ejemplo
+## Ejemplo (ilustrativo, las cifras no son de ningún cliente)
 
 **Resumen ejecutivo:** "En mayo el tráfico orgánico creció un 18% en clics pese a un ligero descenso en posición media, gracias a la mejora de CTR tras reescribir los metatítulos de la sección Blog. Recomendamos extender esa optimización a Producto."
 
@@ -103,8 +109,10 @@ Corre con `--help` para ver opciones. Salida: `{"ok":true,"totals":{"clicks":{"c
 ## Gotchas
 
 - Interpreta: **impresiones ↑ + clics ↓ = problema de CTR / metatítulo, no de posicionamiento** (interpretación estrella del diploma → revisar metas con `optimizacion-on-page-meta`).
-- GSC da **4 métricas: clics, impresiones, CTR y posición promedio** — no inventes otras ni mezcles con datos de Analytics.
+- GSC da **4 métricas: clics, impresiones, CTR y posición promedio**, no inventes otras ni mezcles con datos de Analytics.
 - Compara **mes vs mes en UTC, sobre las mismas fechas**; no compares un mes con festivos/estacionalidad distinta sin avisarlo.
 - El reporte es **para el cliente: ejecutivo y en valor de negocio, no un volcado de métricas** ni una tabla cruda de GSC.
 - **Posición media que empeora ≠ mal resultado**: puede bajar al entrar keywords nuevas de cola larga; crúzala siempre con clics/impresiones.
+- El export de GSC se limita a 1.000 filas: los totales del encabezado de GSC mandan sobre la suma de filas.
+- Core Web Vitals en el informe son **de campo (CrUX/GSC)**; los de laboratorio van aparte y se rotulan como tal.
 - Cierra con **próximos pasos accionables vinculados a Trello**, no con un párrafo genérico.

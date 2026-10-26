@@ -1,0 +1,28 @@
+{
+  "skill_name": "analisis-de-competidores",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quiero saber quiénes son mis competidores SEO reales para estas 5 keywords: agencia seo madrid, consultor seo, posicionamiento web, auditoría seo y precio seo. Mi dominio es miagencia.com.",
+      "expected_output": "Plan para ejecutar el script con las 5 keywords separadas por |, excluir el dominio propio, interpretar repetición con la regla de 3 de 5 (60 %), distinguir competidor de negocio y SEO, y elegir 3 a 4 competidores sin inventar datos.",
+      "assertions": [
+        "usa varias keywords para el Análisis de Repetición e indica --own miagencia.com",
+        "aplica la regla de que un dominio en 3 de 5 keywords es competidor crítico",
+        "distingue competidor de negocio de competidor SEO y directo de indirecto",
+        "limita la lista final a 3 o 4 competidores",
+        "si falta SERPAPI_API_KEY o dependencias, ofrece el modo manual con Google en incógnito",
+        "no inventa posiciones ni dominios"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "El script me devolvió Wikipedia, YouTube y Amazon entre los más repetidos. ¿Los pongo como mis competidores principales?",
+      "expected_output": "Explica que son plataformas: competidores SEO o señal de formato (video, marketplace), pero no los rivales de negocio a copiar; los anota aparte y elige 3 a 4 competidores reales.",
+      "assertions": [
+        "indica que son plataformas y no rivales de negocio a copiar",
+        "interpreta YouTube en el top como señal de que la SERP premia video",
+        "recomienda elegir 3 a 4 competidores reales aparte de las plataformas"
+      ]
+    }
+  ]
+}

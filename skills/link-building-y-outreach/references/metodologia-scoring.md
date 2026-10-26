@@ -10,19 +10,19 @@ Cada oportunidad se puntúa en 3 ejes, luego se ordena en tiers de prioridad. Me
 
 ## Cómo se combinan en tiers
 
-**Tier Alto**: viabilidad pesa más que los otros dos ejes. Gratis o casi gratis, bajo esfuerzo, listo para actuar ya — incluye listados existentes que solo necesitan una corrección de datos, y relaciones B2B directas sin fricción.
+**Tier Alto**: viabilidad pesa más que los otros dos ejes. Gratis o casi gratis, bajo esfuerzo, listo para actuar ya, incluye listados existentes que solo necesitan una corrección de datos, y relaciones B2B directas sin fricción.
 
 **Tier Medio**: oportunidades genuinas que requieren esfuerzo real de outreach (pitch editorial, ask de relación) pero sin costo directo.
 
-**Tier Bajo**: autoridad real pero requiere aprobación de presupuesto (cámaras de comercio, acreditaciones, asociaciones industriales, patrocinios de eventos). No se descartan — se documentan y se priorizan dentro del tier según relevancia, para tenerlas listas cuando haya presupuesto.
+**Tier Bajo**: autoridad real pero requiere aprobación de presupuesto (cámaras de comercio, acreditaciones, asociaciones industriales, patrocinios de eventos). No se descartan, se documentan y se priorizan dentro del tier según relevancia, para tenerlas listas cuando haya presupuesto.
 
 ## Por qué viabilidad pesa más
 
-Una fuente de autoridad alta que cuesta dinero o tarda meses en dar fruto no es mejor que una fuente gratis y rápida con relevancia genuina — es distinta, y en la mayoría de los presupuestos de cliente, el ritmo de tier Alto → Medio → Bajo es el que realmente se ejecuta. Reportar 27 oportunidades sin priorizar es una lista de deseos, no un plan de outreach.
+Una fuente de autoridad alta que cuesta dinero o tarda meses en dar fruto no es mejor que una fuente gratis y rápida con relevancia genuina, es distinta, y en la mayoría de los presupuestos de cliente, el ritmo de tier Alto → Medio → Bajo es el que realmente se ejecuta. Reportar 27 oportunidades sin priorizar es una lista de deseos, no un plan de outreach.
 
 ## Clasificación de tipo de adquisición
 
 - **earned**: viene de relevancia genuina, relación existente, o listado gratuito por mérito propio.
-- **sponsored-disclosed**: implica membresía o patrocinio pago, siempre declarado como tal en la nota de la oportunidad — nunca se presenta como enlace orgánico.
+- **sponsored-disclosed**: implica membresía o patrocinio pago, siempre declarado como tal en la nota de la oportunidad, nunca se presenta como enlace orgánico.
 
-Nunca hay una tercera categoría de "enlace pagado oculto" — si una fuente exige pago a cambio de un enlace sin desglose editorial genuino, no entra en el pool.
+Nunca hay una tercera categoría de "enlace pagado oculto", si una fuente exige pago a cambio de un enlace sin desglose editorial genuino, no entra en el pool.

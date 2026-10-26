@@ -1,0 +1,8 @@
+{"objetivo": "Generar leads para una clínica dental ficticia",
+ "hallazgos": [
+  {"observacion": "El botón de agendar no funciona en móvil", "detalle": "Se pierden contactos", "accion": "Reparar el botón de agendar cita", "area": "conversion", "prioridad": "Alta", "horas": 2},
+  {"observacion": "No hay página para ortodoncia", "detalle": "Una página por servicio", "accion": "Crear la página de ortodoncia", "area": "contenido", "prioridad": "Media", "horas": 6},
+  {"observacion": "Robots bloquea /servicios", "detalle": "Google no rastrea", "accion": "Corregir el robots.txt", "area": "tecnica", "prioridad": "Alta", "horas": 1},
+  {"observacion": "Sin reseñas respondidas", "detalle": "Prominencia", "accion": "Responder las reseñas de la ficha", "area": "autoridad", "prioridad": "Media"},
+  {"observacion": "Título largo", "detalle": "Se corta", "accion": "Título de la home", "area": "tecnica", "prioridad": "Baja", "horas": 1}
+ ]}

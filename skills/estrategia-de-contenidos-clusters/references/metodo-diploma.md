@@ -1,14 +1,14 @@
-# Método del diploma — Estrategia de Contenidos, Clusters, E-E-A-T y CRO (Semana 7, Arianna Lupi)
+# Método del diploma: Estrategia de Contenidos, Clusters, E-E-A-T y CRO (Semana 7, Arianna Lupi)
 
 > Fuente: corpus interno "De Cero a SEO" (chunks, doc_type resumenes-prompts/transcripciones), Semana 7. Material de aprendoseo.
 
 ## El método paso a paso (como lo enseña el curso)
 
-Arianna define la estrategia sobre **tres pilares**: (1) **Estrategia de Contenidos** — qué pieza corresponde a cada keyword; (2) **Priorización** — no se puede todo a la vez, hay que elegir qué va primero; (3) **Organización** — agrupar las keywords en clusters para avanzar con orden.
+Arianna define la estrategia sobre **tres pilares**: (1) **Estrategia de Contenidos**, qué pieza corresponde a cada keyword; (2) **Priorización**, no se puede todo a la vez, hay que elegir qué va primero; (3) **Organización**, agrupar las keywords en clusters para avanzar con orden.
 
 **Distinción clave:** "El SEO es el canal" (el medio para atraer tráfico); "la Estrategia es el plan" (qué áreas tocar: técnico, local, contenido). La estrategia de contenido se centra en *qué publicar, bajo qué formato y con qué fin*.
 
-**Prerequisitos (la base) — sin esto la estrategia no queda bien hecha:**
+**Prerequisitos (la base), sin esto la estrategia no queda bien hecha:**
 1. Auditoría Técnica hecha (Semana 3, sitio limpio).
 2. Investigación de Palabras Clave terminada (Semanas 4 y 5, listado de keywords).
 3. Análisis de Competencia (Semana 6).
@@ -21,7 +21,7 @@ Arianna define la estrategia sobre **tres pilares**: (1) **Estrategia de Conteni
 
 **Selección de las "10 de Oro":** de tus ~40 keywords investigadas, selecciona las **10 más inmediatas/importantes** para empezar a crear contenido. Para cada una, asigna **Formato** (un "traje": guía, video, blog o landing/página de ventas) y **Objetivo** (una "misión": informar/tráfico, educar/autoridad o vender/conversión). Intenta que esas 10 pertenezcan al mismo cluster para ganar autoridad temática rápido.
 
-**Clustering — Cluster vs. Categoría:**
+**Clustering, Cluster vs. Categoría:**
 - **Categoría** = organización general del sitio (jerarquía del menú, servicios principales).
 - **Cluster** = estrategia específica para el **blog**; conjunto de contenidos que "orbitan" alrededor de un **tema pilar** para ganar autoridad temática.
 - Estructura **Página Pilar** (tema amplio, alta competencia) + **Páginas de Soporte** (long-tail, dudas específicas) que enlazan hacia la pilar para transferir autoridad.
@@ -37,7 +37,7 @@ Arianna define la estrategia sobre **tres pilares**: (1) **Estrategia de Conteni
 
 - **40 keywords investigadas → 10 de Oro** (las más inmediatas/importantes).
 - **3 a 5 clusters** grandes (corazón del negocio).
-- **Capacidad mensual realista:** 5, 10 o 15 páginas/mes — sé honesto sobre lo que puedes crear/optimizar de verdad.
+- **Capacidad mensual realista:** 5, 10 o 15 páginas/mes, sé honesto sobre lo que puedes crear/optimizar de verdad.
 - Volcar todo en la **Plantilla Master → pestaña "Estrategia SEO"** (asignar cluster + nivel de prioridad + fecha por keyword). No dejar celdas vacías en las definiciones principales.
 - **Calendario:** ponle fecha de inicio a la producción del primer cluster, basado en la capacidad mensual.
 - **Clusters balanceados:** que no haya uno con 20 keywords y otros con 1.
@@ -82,5 +82,5 @@ Arianna define la estrategia sobre **tres pilares**: (1) **Estrategia de Conteni
 
 - **Clustering de "Marketing Digital":** clusters posibles = "SEO", "Redes Sociales", "Email Marketing". Cada artículo se etiqueta con su cluster en la Plantilla Master.
 - **Capacidad mensual:** "Si solo puedes optimizar o crear 10 páginas al mes, elige las 10 keywords con mayor impacto potencial." Mejor avanzar firme en un cluster que abarcar demasiado y no terminar nada.
-- **CRO en sitios de anuncios (AdSense):** incluso monetizando con anuncios el CRO importa — estudiar dónde colocar los anuncios para más clics sin arruinar la experiencia.
+- **CRO en sitios de anuncios (AdSense):** incluso monetizando con anuncios el CRO importa, estudiar dónde colocar los anuncios para más clics sin arruinar la experiencia.
 - **Tip de cierre ("Set yourself up for a win"):** define horarios de ejecución; tus compañeros de curso son tus futuros competidores en las SERPs; quien mejor se organiza y pide feedback en la comunidad se queda los mejores puestos.

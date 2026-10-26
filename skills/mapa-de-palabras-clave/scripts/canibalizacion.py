@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-canibalizacion.py — Detecta canibalización de keywords (una keyword apuntando a
+canibalizacion.py, Detecta canibalización de keywords (una keyword apuntando a
 varias URLs) y propone quick wins, según el método del diploma "De Cero a SEO"
 (mapa de keywords 1:1, una keyword principal por URL).
 

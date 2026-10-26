@@ -1,0 +1,37 @@
+{
+  "skill_name": "optimizacion-geo-aeo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quiero que ChatGPT y Perplexity citen mi blog. ¿Qué reviso en mi robots.txt?",
+      "expected_output": "Revisa rastreadores de IA con ai_crawlers.py, separa búsqueda de entrenamiento, aclara que bloquear GPTBot no bloquea OAI-SearchBot y que la decisión es del negocio.",
+      "assertions": [
+        "distingue rastreadores de búsqueda y de entrenamiento",
+        "menciona OAI-SearchBot y PerplexityBot",
+        "aclara que Google-Extended no afecta a Google Search",
+        "no impone permitir o bloquear: presenta opciones"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "¿Necesito un llms.txt para salir en AI Overviews?",
+      "expected_output": "Responde que Google no lo usa ni lo necesita, que es opcional y que no es parte del método del diploma.",
+      "assertions": [
+        "afirma que Google Search no usa llms.txt",
+        "lo presenta como opcional",
+        "ancla la prioridad en answer-first, estructura, E-E-A-T y SEO técnico del diploma"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Optimiza este párrafo de introducción para que la IA lo cite: [texto sobre qué es el link building].",
+      "expected_output": "Reescribe con respuesta directa de menos de 40 palabras (S14 L13), lista o tabla si aplica y marca autor/fecha.",
+      "assertions": [
+        "la respuesta directa tiene menos de 40 palabras",
+        "propone encabezados en forma de pregunta",
+        "no inventa cifras ni fuentes",
+        "cita AEO o GEO con la terminología del diploma"
+      ]
+    }
+  ]
+}

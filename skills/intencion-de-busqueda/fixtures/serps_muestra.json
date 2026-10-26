@@ -1,0 +1,15 @@
+{
+  "keywords": {
+    "cafe de especialidad": {
+      "urls": ["https://tienda-a.com/cafe-especialidad", "https://tienda-b.com/cafe", "https://blog-c.com/que-es-cafe-de-especialidad", "https://tienda-d.com/granos", "https://wikipedia.org/wiki/Cafe", "https://tienda-e.com/especialidad", "https://tienda-f.com/cafes", "https://tienda-g.com/tostados", "https://blog-h.com/guia", "https://tienda-i.com/origen"],
+      "types": ["categoria", "categoria", "articulo", "categoria", "articulo", "categoria", "categoria", "categoria", "articulo", "categoria"],
+      "own_type": "articulo"
+    },
+    "comprar cafe de especialidad": {
+      "urls": ["https://tienda-a.com/cafe-especialidad", "https://tienda-b.com/cafe", "https://tienda-d.com/granos", "https://tienda-e.com/especialidad", "https://tienda-f.com/cafes", "https://tienda-g.com/tostados", "https://tienda-i.com/origen", "https://tienda-j.com/shop", "https://tienda-k.com/tienda", "https://tienda-l.com/cafe"]
+    },
+    "como preparar cafe en v60": {
+      "urls": ["https://blog-c.com/v60", "https://blog-m.com/metodo-v60", "https://youtube.com/watch?v=1", "https://blog-h.com/guia-v60", "https://wikipedia.org/wiki/V60"]
+    }
+  }
+}

@@ -37,6 +37,29 @@
         "si genera el brief, aplica la variante E-commerce (atributos técnicos, reseñas/prueba social, urgencia/escasez, cross/up-sell)",
         "el metatítulo respeta 50-60 caracteres y la metadescripción 120-155 con CTA"
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "Revisa este brief que hizo un alumno para 'productos sin gluten en Venezuela': es un artículo de blog con H1, H2 y H4, y la meta descripción tiene 90 caracteres. En la SERP salen solo tiendas.",
+      "expected_output": "Una revisión con el método Problema, Por qué importa, Recomendación que detecta el tipo de página equivocado (el SERP son tiendas, el brief debe ser de venta), el salto de H2 a H4, la meta descripción fuera de rango, y entrega un outline corregido.",
+      "assertions": [
+        "detecta que el SERP trae tiendas y que el tipo de página (blog) no coincide con la intención",
+        "señala el salto de H2 a H4 como jerarquía rota",
+        "indica que la meta descripción de 90 caracteres está fuera de 120-155",
+        "usa el formato Problema, Por qué importa, Recomendación",
+        "entrega un outline corregido que el alumno pueda copiar"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Ya tengo un brief redactado en brief.md para la keyword 'cera para velas'. Valídalo antes de pasárselo al redactor.",
+      "expected_output": "La skill ejecuta brief_check.py (o valida a mano) y reporta conteos de metas, H1 único, saltos de nivel y bloques faltantes, sin aprobar un brief que tenga severidad alta.",
+      "assertions": [
+        "valida el meta título (50-60) y la meta descripción (120-155) con conteo exacto",
+        "verifica un solo H1 con la keyword y ausencia de saltos de nivel",
+        "revisa que existan intención, benchmark y enlaces internos con anchor",
+        "no aprueba el brief si hay hallazgos de severidad alta"
+      ]
     }
   ]
 }

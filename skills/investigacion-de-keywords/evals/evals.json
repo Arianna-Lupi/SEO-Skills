@@ -36,6 +36,18 @@
         "aplica el Duelo de Keywords ante keywords similares (gana mejor ratio volumen/dificultad)",
         "agrupa en clusters y marca el punto dulce priorizando long-tail"
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "Mi lista tiene la keyword 'tendencias en medicina' para vender un software de consultorio, y otra que dice 'el regalo perfecto para esa persona especial'. Además una sale con volumen 0 en la herramienta. ¿Las dejo?",
+      "expected_output": "Aplica la práctica de Vero y Ari: 'tendencias en medicina' atrae otra audiencia (cambiar el ángulo al problema del negocio); la frase de copy sirve de título, no de keyword; la de volumen 0 no se elimina, se revisa la SERP (más de 3 artículos o más de 5 páginas indica demanda) y se anota la nota, sin inventar volumen.",
+      "assertions": [
+        "descarta o reformula 'tendencias en medicina' porque atrae a una audiencia que no compra el software",
+        "explica que la frase de copy es un título y no una keyword",
+        "no elimina la keyword sin datos: revisa la SERP y anota el criterio",
+        "marca el volumen como pendiente de dato o con nota, sin inventar cifras",
+        "propone ángulos por problema, tipo de cliente o función para ampliar la lista"
+      ]
     }
   ]
 }

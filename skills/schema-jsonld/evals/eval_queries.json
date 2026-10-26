@@ -1,0 +1,18 @@
+[
+  {
+    "query": "quiero que me salgan las estrellas en Google",
+    "should_trigger": true
+  },
+  {
+    "query": "datos estructurados para este artículo",
+    "should_trigger": true
+  },
+  {
+    "query": "optimiza mi robots.txt",
+    "should_trigger": false
+  },
+  {
+    "query": "redacta el artículo sobre jardinería",
+    "should_trigger": false
+  }
+]

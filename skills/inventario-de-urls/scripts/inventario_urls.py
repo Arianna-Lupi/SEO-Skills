@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-inventario_urls.py — Inventario GRATIS de URLs de un sitio vía sitemap (cero deps).
+inventario_urls.py, Inventario GRATIS de URLs de un sitio vía sitemap (cero deps).
 
 Qué hace (determinista):
   1. Descarga /robots.txt y lee las directivas `Sitemap:`.
@@ -10,7 +10,7 @@ Qué hace (determinista):
 
 Solo usa la librería estándar (urllib + xml.etree). No necesita claves ni
 instalar nada. Para >500 URLs, páginas huérfanas o códigos de estado en vivo,
-usar Screaming Frog CLI (gratis hasta 500 URLs) — ESTE script es la ruta
+usar Screaming Frog CLI (gratis hasta 500 URLs), ESTE script es la ruta
 free de cero dependencias y solo ve URLs publicadas en el sitemap.
 
 Uso:
@@ -27,6 +27,7 @@ Deps: solo stdlib.
 """
 
 import argparse
+import gzip
 import json
 import os
 import re
@@ -64,7 +65,11 @@ def fetch(url):
     try:
         req = Request(url, headers=BROWSER_HEADERS)
         with urlopen(req, timeout=TIMEOUT) as resp:
-            return resp.read(), None
+            data = resp.read()
+        # Sitemaps comprimidos (.xml.gz o Content-Encoding raro): descomprime.
+        if data[:2] == b"\x1f\x8b":
+            data = gzip.decompress(data)
+        return data, None
     except Exception as e:  # noqa: BLE001 - degradación controlada
         FETCH_ERRORS.append(str(e))
         return None, str(e)
@@ -116,6 +121,9 @@ def parse_sitemap(xml_bytes):
     return kind, locs
 
 
+SITEMAPS_READ = []  # {"sitemap","kind","count"} de cada archivo leído
+
+
 def collect_urls(seed_sitemaps, max_urls):
     """BFS por los sitemaps; sigue índices. Devuelve set de URLs."""
     seen_maps, urls, queue = set(), set(), list(seed_sitemaps)
@@ -129,6 +137,7 @@ def collect_urls(seed_sitemaps, max_urls):
             log(f"sitemap no descargado {sm}: {err}")
             continue
         kind, locs = parse_sitemap(data)
+        SITEMAPS_READ.append({"sitemap": sm, "kind": kind, "count": len(locs)})
         if kind == "index":
             queue.extend(loc for loc in locs if loc not in seen_maps)
         elif kind == "urlset":
@@ -156,7 +165,9 @@ def main():
         if seeds:
             source = "robots"
         else:
-            seeds = [urljoin(base + "/", p) for p in ("sitemap.xml", "sitemap_index.xml")]
+            seeds = [urljoin(base + "/", p) for p in (
+                "sitemap.xml", "sitemap_index.xml", "wp-sitemap.xml",
+                "sitemap-index.xml", "sitemap/sitemap.xml")]
             source = "sitemap.xml"
 
     urls = collect_urls(seeds, args.max)
@@ -189,6 +200,7 @@ def main():
         "ok": True,
         "source": source,
         "count": len(out),
+        "sitemaps_read": SITEMAPS_READ,
         "urls": out,
     }, ensure_ascii=False))
 

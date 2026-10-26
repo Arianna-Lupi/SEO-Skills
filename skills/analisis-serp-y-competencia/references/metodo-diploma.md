@@ -1,4 +1,4 @@
-# Método del diploma — Análisis de SERP y competencia (Semana 6, Arianna Lupi)
+# Método del diploma: Análisis de SERP y competencia (Semana 6, Arianna Lupi)
 
 > Fuente: corpus interno "De Cero a SEO" (colección chunks, doc_type resumenes-prompts/transcripciones), Semana 6. Material de aprendoseo.
 
@@ -8,13 +8,13 @@ Arianna Lupi dicta la Semana 6 completa (7 videos). El análisis de competencia 
 
 1. **Cambiar la mentalidad e identificar a quién analizar (video 1).** Distinguir **Competidor de Negocio** vs **Competidor SEO** (definiciones abajo). Usar el análisis como **selling point**: "Tu competidor recibe 10,000 clics al mes por estas búsquedas y tú no apareces" abre la mente del dueño de negocio para invertir en SEO.
 
-2. **Ejercicio de "Ojo Clínico" — análisis manual (video 2).** Antes de herramientas, para **3 a 5 keywords principales**: buscar la palabra en Google, tomar los **3 primeros resultados**, entrar a cada sitio y analizar visualmente:
+2. **Ejercicio de "Ojo Clínico", análisis manual (video 2).** Antes de herramientas, para **3 a 5 keywords principales**: buscar la palabra en Google, tomar los **3 primeros resultados**, entrar a cada sitio y analizar visualmente:
    - ¿Es fácil navegar? ¿Cómo es su diseño?
    - ¿Qué encabezados (H1, H2) usan?
    - ¿Tienen blog? ¿Qué tipo de fotos publican?
    - ¿Cuál es su llamado a la acción (CTA): botón de compra, registro, etc.? La idea es ver "no solo qué dicen, sino cómo lo dicen" y qué te gusta/disgusta de su experiencia de usuario.
 
-3. **Identificar competidores SEO reales (video 3) — 3 métodos:**
+3. **Identificar competidores SEO reales (video 3), 3 métodos:**
    - **Búsqueda Directa en Google:** meter tus keywords principales y ver quiénes ocupan las primeras posiciones de forma recurrente. (Google Search es "la más fiel a la realidad del usuario".)
    - **Herramientas SEO:** Ahrefs, SEMrush o extensiones gratis para ver qué dominios comparten más keywords contigo.
    - **Análisis de Repetición:** fijarse en los que "aparecen en todos lados". **Si un dominio se repite en 3 de tus 5 keywords principales, es un competidor crítico.**
@@ -50,7 +50,7 @@ Arianna Lupi dicta la Semana 6 completa (7 videos). El análisis de competencia 
 - **Ojo Clínico:** sobre **3-5 keywords**, mirar el **top 3** de cada una.
 - **Análisis de Repetición:** dominio en **3 de 5** keywords → competidor crítico.
 
-**Troubleshooting (video 4) — si no encuentras datos de un competidor:**
+**Troubleshooting (video 4), si no encuentras datos de un competidor:**
 - Tus keywords pueden ser long-tail demasiado específicas que llevan a sitios pequeños sin datos públicos.
 - Si te sientes "trancado", vuelve atrás y **simplifica las keywords** para encontrar competidores con más volumen.
 
@@ -86,17 +86,51 @@ Arianna Lupi dicta la Semana 6 completa (7 videos). El análisis de competencia 
 - **Competidor de Negocio:** el local o profesional que te quita clientes directamente (ej: la otra academia de SEO de tu ciudad).
 - **Competidor SEO:** cualquier sitio que aparece en Google para las mismas keywords que tú quieres posicionar, venda o no lo mismo. Te quita **visibilidad** aunque no te quite la venta (un blog informativo o Wikipedia puede ser tu mayor competidor SEO).
 - **Competidor Directo vs Indirecto (video 3):** Directo = ofrece tu mismo servicio/producto y va tras tu mismo cliente ideal. Indirecto = no vende lo mismo pero ocupa los primeros lugares para tus keywords (blog de noticias, Wikipedia, comparador).
-- **"Ojo Clínico":** ejercicio manual de mirar el top 3 de la SERP de tus keywords con perspectiva estratégica (diseño, navegación, encabezados, fotos, CTA) — no qué dicen sino **cómo** lo dicen y qué te gusta/disgusta.
-- **Análisis de Repetición:** método para detectar competidores críticos — los dominios que "aparecen en todos lados"; si uno se repite en 3 de tus 5 keywords, es crítico.
-- **Brecha / Gap de contenido:** keywords o temas que la competencia cubre (y le traen tráfico) y tú no — tu próxima oportunidad de contenido.
+- **"Ojo Clínico":** ejercicio manual de mirar el top 3 de la SERP de tus keywords con perspectiva estratégica (diseño, navegación, encabezados, fotos, CTA), no qué dicen sino **cómo** lo dicen y qué te gusta/disgusta.
+- **Análisis de Repetición:** método para detectar competidores críticos, los dominios que "aparecen en todos lados"; si uno se repite en 3 de tus 5 keywords, es crítico.
+- **Brecha / Gap de contenido:** keywords o temas que la competencia cubre (y le traen tráfico) y tú no, tu próxima oportunidad de contenido.
 - **Costo de Oportunidad:** el tráfico/negocio que el cliente está perdiendo frente a la competencia. Mostrarle a un dueño de negocio las miles de visitas mensuales que su competidor sí tiene es la forma más efectiva de que entienda el valor del SEO. Es el eje del reporte.
-- **Selling point:** el análisis de competencia como herramienta de venta — "ver que al vecino le funciona abre la mente del dueño para invertir en SEO".
+- **Selling point:** el análisis de competencia como herramienta de venta, "ver que al vecino le funciona abre la mente del dueño para invertir en SEO".
 - **SERP:** página de resultados de Google; el "espacio visible" por el que se compite.
 
 ## Ejemplos del curso
 
 - **Negocio muy de nicho (video 3):** "spa para niñas en Valencia" sin competidores directos → ampliar la búsqueda a "spas en Valencia" o "masajes para niños"; ellos captan tu audiencia en una etapa más temprana del embudo.
 - **Wikipedia / blog de noticias robando el #1 (video 3):** aunque no vendan lo tuyo, si ocupan el puesto 1 de una keyword transaccional son tu competencia; hay que estudiar cómo presentan la información para superarlos.
-- **El factor humano vs la IA (video 5):** "Este tipo de cosas no nos va a reemplazar el robot... el análisis, la sintetización y las conclusiones." La IA extrae datos, pero analizar y concluir es lo que diferencia al profesional — por eso se aprende a hacerlo manualmente primero.
+- **El factor humano vs la IA (video 5):** "Este tipo de cosas no nos va a reemplazar el robot... el análisis, la sintetización y las conclusiones." La IA extrae datos, pero analizar y concluir es lo que diferencia al profesional, por eso se aprende a hacerlo manualmente primero.
 - **De insight a tarea (tip video 6):** si el análisis detectó que la competencia usa mejores CTA, la tarea no es "analizar botones", es "diseñar e implementar nuevos CTA en las páginas X, Y y Z".
 - **Cuándo hacerlo (video 7):** incluir este análisis en el primer o segundo mes de trabajo con cualquier cliente, para establecer la base de hacia dónde debe crecer el sitio.
+
+## Práctica de coaches (afina criterios, no contradice el curso)
+
+**Vero (Estrategia SEO):**
+- Elegir competidores: un sitio de prensa que vive de publicidad sirve para ideas de contenido, no para páginas de producto; un competidor de alcance muy distinto no sirve; añadir dos competidores más y referentes de otros países como inspiración; si el nicho no tiene rivales con datos, buscar internacionales o sitios de información cercana.
+- Qué mirar: páginas que tiene el rival y tú no, cómo estructura servicios, precios o paquetes, FAQ, portafolio y llamados a la acción, categorías y navegación, landings por ciudad.
+- Las conclusiones responden qué tiene el rival que el alumno no. Mejorar la velocidad propia es tarea del sitio, no conclusión del competidor. Una plantilla llena sin conclusiones está incompleta.
+- Datos: AR de Ahrefs en blanco si no aparece; MozBar para autoridad; Ahrefs Traffic Checker o el de SE Ranking según cuál devuelva datos; Mangools SERP Simulator para comparar metas.
+
+**Ari (Arianna):**
+- Separar competidor de negocio y competidor SEO ("no es una competidora SEO, no te está robando clics en Google").
+- Preguntar "¿cuál consideras que es el competidor más pesado y por qué?" y atacar primero lo ganable.
+- El documento de análisis pesa más que la tabla; si la herramienta marca cero, se escribe 0; el reporte nombra el sitio correcto en todas las secciones e incluye 3 o 4 keywords de arranque.
+- Llevar el análisis al embudo, listar las 5 a 10 páginas con más tráfico de cada competidor y sumar una columna de Prioridad o Esfuerzo con un quick win. Para negocios físicos, Local Pack, Maps, citaciones locales y perfil de empresa.
+
+## Del análisis a la SERP: qué otras semanas aportan al flujo ampliado
+
+Esta sección conecta la Semana 6 con la lectura de la SERP. Los scripts nuevos (`perfil_competidor.py`, `comparar_serp.py`) automatizan la recogida de datos del Ojo Clínico; el criterio sigue siendo el del curso.
+
+**Semana 4 · lección 8, "Tipos de contenido SEO" (Diana Rodríguez).** Cada keyword necesita un "hogar" distinto: página de servicios o inicio, categoría, ficha de producto o artículo de blog. Tip de Diana: identifica qué tipo de contenido "domina" cada keyword. "Si para una búsqueda Google solo muestra tiendas (páginas de producto), no intentes posicionar ahí un artículo de blog, porque la intención del usuario es comprar, no leer." Acción del curso: busca una keyword de tu nicho y observa si los primeros resultados son categorías o productos individuales; replica esa estructura. De aquí sale la brecha **tipo de página** del comparador (la más pesada) y el caso de eval "la SERP la dominan otras páginas que la tuya".
+
+**Semana 4 · lecciones 3 a 5 y 14 (intención y Validación de Intención).** La SERP actual son "las pistas" del formato que hay que crear. Desarrollado en `intencion-de-busqueda`; esta skill lo invoca cuando hay desajuste.
+
+**Semana 8 · lección 3, "¿Qué es un brief de contenido?".** "El brief debe estar dictado por el SERP": si los resultados son guías paso a paso, el brief pide una guía; si son listados de herramientas, un listado. Acción: busca tu keyword y observa qué tipo de contenido aparece en los primeros 3 lugares. Por eso la salida de esta skill (tipo dominante, temas frecuentes, formato) alimenta `brief-de-contenido`.
+
+**Semana 6 · lección 6, "¿Cómo convertir ideas en tareas?".** Plazos, recursos y capacidad; asignar un responsable a cada idea aprobada; verbos de acción ("diseñar e implementar nuevos CTA en las páginas X, Y y Z", no "analizar botones"); empezar por lo fácil. `comparar_serp.py` redacta el borrador con verbo y ICE, y deja plazo, recurso y responsable como `pendiente de dato` para que los defina quien ejecuta.
+
+## Qué pone el repo que el diplomado no enseña
+
+Para que quede claro qué es método y qué es ayuda propia:
+
+- **Del diplomado:** Competidor de Negocio y SEO, Directo e Indirecto, Ojo Clínico sobre el top 3, 3 métodos para identificar rivales, Análisis de Repetición (3 de 5), Plantilla Master con 50 a 60 % de datos en 2 competidores, reporte con Costo de Oportunidad, tareas con verbo, tipos de contenido según la SERP.
+- **Ayuda del repo (no es del diplomado):** el umbral del 60 % para el "patrón común" del top, la clasificación automática del tipo de página, el puntaje de Costo de Oportunidad con su fórmula, los pesos por categoría de brecha y los valores iniciales de impacto, confianza y facilidad de las tareas. El 60 % se toma por analogía con el umbral de competidor crítico (3 de 5). El curso enseña el Costo de Oportunidad como concepto (tráfico que pierdes frente a tu competidor), no como puntaje.
+- **Práctica de coaches:** ver [`practica-coaches.md`](practica-coaches.md).
