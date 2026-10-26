@@ -1,0 +1,32 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "aprendoseo",
+  "owner": {
+    "name": "aprendoseo"
+  },
+  "metadata": {
+    "description": "SEO Skills de aprendoseo (De Cero a SEO): enrutador /aprendoclub, skills y agentes en español."
+  },
+  "plugins": [
+    {
+      "name": "seo-skills",
+      "source": "./",
+      "description": "Enrutador /aprendoclub, 30 skills y 4 agentes de SEO en español, basados en el diplomado De Cero a SEO. Corren sin conectar nada; SerpApi, Search Console y Ahrefs son opcionales.",
+      "author": {
+        "name": "aprendoseo",
+        "url": "https://github.com/Arianna-Lupi"
+      },
+      "category": "marketing",
+      "homepage": "https://github.com/Arianna-Lupi/SEO-Skills",
+      "keywords": [
+        "seo",
+        "aprendoseo",
+        "aprendoclub",
+        "auditoria-seo",
+        "geo",
+        "espanol"
+      ],
+      "version": "1.4.0"
+    }
+  ]
+}

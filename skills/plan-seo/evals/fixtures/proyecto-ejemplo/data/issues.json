@@ -1,0 +1,25 @@
+{
+  "issues": [
+    {
+      "id": "I1",
+      "title": "robots.txt bloquea /servicios",
+      "severity": "Crítico",
+      "block": "1. Indexabilidad y rastreabilidad",
+      "fix": "Corregir el robots.txt",
+      "status": "Pendiente",
+      "evidence": "Disallow: /servicios (fixture)"
+    },
+    {
+      "id": "I2",
+      "title": "Imágenes sin alt",
+      "severity": "Bajo",
+      "block": "Imágenes",
+      "fix": "Añadir alt descriptivo",
+      "status": "Pendiente",
+      "evidence": "12 imágenes (fixture)",
+      "impact": 6,
+      "confidence": 9,
+      "ease": 9
+    }
+  ]
+}

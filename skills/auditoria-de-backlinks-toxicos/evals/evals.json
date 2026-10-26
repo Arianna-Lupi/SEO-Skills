@@ -1,0 +1,25 @@
+{
+  "skill_name": "auditoria-de-backlinks-toxicos",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo este CSV de backlinks, ¿hay anchors sobreoptimizados?",
+      "expected_output": "Ejecuta anchor_profile.py, reporta distribución y banderas como heurísticas de terceros, sin veredicto.",
+      "assertions": [
+        "usa anchor_profile.py o calcula la distribución por tipo",
+        "presenta los rangos como heurísticas, no como regla de Google",
+        "no marca tóxico solo por el anchor"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Mi tráfico cayó y creo que me hicieron negative SEO, ¿desautorizo todo lo de bajo DR?",
+      "expected_output": "No desautoriza por DR bajo solo; aplica la rúbrica de 4 categorías con evidencia, y deriva a Vero ante penalización manual.",
+      "assertions": [
+        "no marca Toxic por ascore o DR bajo solo",
+        "exige señales co-ocurrentes",
+        "menciona la salvedad de los coaches sobre off page"
+      ]
+    }
+  ]
+}

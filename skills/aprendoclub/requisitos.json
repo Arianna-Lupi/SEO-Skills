@@ -1,0 +1,304 @@
+{
+  "version": 1,
+  "python_min": "3.9",
+  "nota": "Fuente de verdad de lo que necesita cada script. Lo lee skills/aprendoclub/scripts/requisitos.py y lo valida scripts/validar_skills.py. Nunca guardes valores de claves aquí.",
+  "paquetes": {
+    "requests": {
+      "pip": "requests",
+      "para": "peticiones HTTP y SerpApi"
+    },
+    "bs4": {
+      "pip": "beautifulsoup4",
+      "para": "leer HTML (metas, encabezados)"
+    },
+    "tldextract": {
+      "pip": "tldextract",
+      "para": "sacar el dominio registrado de una URL"
+    },
+    "openpyxl": {
+      "pip": "openpyxl",
+      "para": "escribir la Plantilla Master en .xlsx (sin él se entrega CSV)"
+    },
+    "docx": {
+      "pip": "python-docx",
+      "para": "escribir briefs en .docx (sin él se entrega Markdown)"
+    }
+  },
+  "claves": {
+    "SERPAPI_API_KEY": {
+      "para": "SERP, People Also Ask y autocompletar en vivo",
+      "donde": "https://serpapi.com/users/sign_up (cuenta gratis, 100 búsquedas al mes, sin tarjeta); la clave está en https://serpapi.com/manage",
+      "alternativa": "modo manual: revisa la SERP en el navegador en incógnito y pega los resultados"
+    },
+    "CRUX_API_KEY": {
+      "para": "Core Web Vitals de campo (datos reales de usuarios) con la API de Chrome UX Report",
+      "donde": "Google Cloud Console: habilita Chrome UX Report API y crea una clave (gratis)",
+      "alternativa": "modo manual: copia los datos de campo desde Search Console, informe Core Web Vitals"
+    },
+    "PSI_API_KEY": {
+      "para": "PageSpeed Insights con más cuota",
+      "donde": "Google Cloud Console: habilita PageSpeed Insights API y crea una clave (gratis)",
+      "alternativa": "funciona sin clave, con límite de cuota"
+    }
+  },
+  "variables": {
+    "SEO_USER_AGENT": {
+      "para": "forzar otro User-Agent al rastrear (por defecto, uno de navegador real)"
+    },
+    "SCREAMING_FROG_BINARY": {
+      "para": "ruta al ejecutable de Screaming Frog si no está en la ubicación habitual"
+    }
+  },
+  "herramientas": {
+    "node": {
+      "comandos": [
+        "npx",
+        "node"
+      ],
+      "donde": "https://nodejs.org (solo para medir un sitio en vivo con Unlighthouse)",
+      "alternativa": "modo manual: PageSpeed Insights o un export de Unlighthouse con --json",
+      "requerida_en": {}
+    },
+    "screaming-frog": {
+      "comandos": [
+        "screamingfrogseospider",
+        "ScreamingFrogSEOSpiderCli"
+      ],
+      "donde": "https://www.screamingfrog.co.uk/seo-spider/ (gratis hasta 500 URLs por rastreo)",
+      "alternativa": "modo manual: exporta los CSV desde la app o usa inventario_urls.py por sitemap",
+      "requerida_en": {
+        "inventario-de-urls/sf_crawl_all.py": true
+      }
+    }
+  },
+  "conectores_mcp": [
+    {
+      "id": "search-console",
+      "nombre": "Google Search Console (mcp-gsc, gratis)",
+      "opcional": true,
+      "usado_por": [
+        "reporte-seo-gsc",
+        "deteccion-de-canibalizacion",
+        "proyeccion-seo-gsc",
+        "actualizacion-de-contenido"
+      ],
+      "guia": "MCP-SETUP.md",
+      "alternativa": "exportar los CSV desde Search Console y pasarlos a los scripts"
+    },
+    {
+      "id": "ahrefs",
+      "nombre": "Ahrefs (de pago)",
+      "opcional": true,
+      "usado_por": [
+        "investigacion-de-keywords",
+        "analisis-serp-y-competencia",
+        "auditoria-de-backlinks-toxicos"
+      ],
+      "guia": "MCP-SETUP.md",
+      "alternativa": "exports de Ahrefs, DinoRank u otra herramienta, o dejar el dato como pendiente de dato"
+    },
+    {
+      "id": "google-drive",
+      "nombre": "Google Drive",
+      "opcional": true,
+      "usado_por": [
+        "plan-seo"
+      ],
+      "guia": "skills/plan-seo/references/publicar-en-google-drive.md",
+      "alternativa": "guardar los archivos en .seo-audit/<sitio>/entregables/ y subirlos a mano"
+    },
+    {
+      "id": "google-sheets",
+      "nombre": "Google Sheets",
+      "opcional": true,
+      "usado_por": [
+        "plan-seo"
+      ],
+      "guia": "skills/plan-seo/references/publicar-en-google-drive.md",
+      "alternativa": "entregar el .xlsx o los CSV"
+    }
+  ],
+  "scripts": {
+    "actualizacion-de-contenido/gsc_oportunidades.py": {},
+    "analisis-de-competidores/competitor_domains.py": {
+      "python": [
+        "requests",
+        "tldextract"
+      ],
+      "env": {
+        "SEO_USER_AGENT": "opcional",
+        "SERPAPI_API_KEY": "opcional"
+      },
+      "modo_manual": "pasa las URLs del top con --urls o anótalas a mano"
+    },
+    "analisis-rendimiento/psi_campo.py": {
+      "env": {
+        "PSI_API_KEY": "opcional"
+      }
+    },
+    "analisis-rendimiento/run_unlighthouse.py": {
+      "herramientas": [
+        "node"
+      ],
+      "modo_manual": "usa PageSpeed Insights o pasa un export con --json"
+    },
+    "analisis-serp-y-competencia/brechas.py": {},
+    "analisis-serp-y-competencia/comparar_serp.py": {},
+    "analisis-serp-y-competencia/perfil_competidor.py": {
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      }
+    },
+    "analisis-serp-y-competencia/serp.py": {
+      "python": [
+        "requests"
+      ],
+      "env": {
+        "SERPAPI_API_KEY": "requerida"
+      },
+      "modo_manual": "revisa la SERP en el navegador en incógnito y pega top, PAA y features"
+    },
+    "arquitectura-y-enlazado-interno/matriz_enlaces.py": {},
+    "arquitectura-y-enlazado-interno/orphans.py": {},
+    "auditoria-de-backlinks-toxicos/anchor_profile.py": {},
+    "auditoria-de-backlinks-toxicos/classify_domains.py": {},
+    "auditoria-de-backlinks-toxicos/generate_disavow.py": {},
+    "auditoria-tecnica/chequeos_tecnicos.py": {
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      }
+    },
+    "auditoria-tecnica/comparar_corridas.py": {},
+    "auditoria-tecnica/http_checks.py": {
+      "python": [
+        "requests"
+      ],
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      },
+      "modo_manual": "usa Screaming Frog o parse_sf.py"
+    },
+    "auditoria-tecnica/onpage_extract.py": {
+      "python": [
+        "requests"
+      ],
+      "modo_manual": "revisa título, metas y encabezados a mano o con Screaming Frog"
+    },
+    "auditoria-tecnica/parse_sf.py": {},
+    "auditoria-tecnica/puntaje_salud.py": {},
+    "brief-de-contenido/brief_check.py": {},
+    "brief-de-contenido/serp_outline.py": {
+      "python": [
+        "bs4",
+        "requests"
+      ],
+      "env": {
+        "SEO_USER_AGENT": "opcional",
+        "SERPAPI_API_KEY": "opcional"
+      },
+      "modo_manual": "abre el top 5 y copia los encabezados, o pasa las URLs con --urls"
+    },
+    "calidad-de-contenido-eeat/calidad_contenido.py": {},
+    "configurar-serpapi/set_key.py": {},
+    "dashboard-seo/build_dashboard.py": {},
+    "deteccion-de-canibalizacion/detectar_canibalizacion.py": {},
+    "estrategia-de-contenidos-clusters/cluster.py": {},
+    "estrategia-de-contenidos-clusters/serp_overlap.py": {},
+    "intencion-de-busqueda/serp_overlap.py": {},
+    "inventario-de-urls/inventario_urls.py": {
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      }
+    },
+    "inventario-de-urls/sf_crawl_all.py": {
+      "env": {
+        "SCREAMING_FROG_BINARY": "opcional"
+      },
+      "herramientas": [
+        "screaming-frog"
+      ],
+      "modo_manual": "usa inventario_urls.py por sitemap o exporta desde Screaming Frog"
+    },
+    "investigacion-de-keywords/expand_keywords.py": {
+      "python": [
+        "requests"
+      ],
+      "env": {
+        "SERPAPI_API_KEY": "requerida"
+      },
+      "modo_manual": "usa el autocompletar de Google y 'Otras preguntas de los usuarios' a mano"
+    },
+    "link-building-y-outreach/verificar_enlaces.py": {},
+    "mapa-de-palabras-clave/canibalizacion.py": {},
+    "mapa-de-palabras-clave/validar_mapa.py": {},
+    "optimizacion-de-imagenes/auditar_imagenes.py": {
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      }
+    },
+    "optimizacion-geo-aeo/ai_crawlers.py": {},
+    "optimizacion-geo-aeo/ai_features.py": {
+      "python": [
+        "requests"
+      ],
+      "env": {
+        "SERPAPI_API_KEY": "requerida"
+      },
+      "modo_manual": "busca la query en Google y anota si sale resumen con IA"
+    },
+    "optimizacion-on-page-meta/meta_audit.py": {},
+    "optimizacion-on-page-meta/meta_check.py": {},
+    "optimizacion-on-page-meta/serp_metadata.py": {
+      "python": [
+        "bs4",
+        "requests"
+      ],
+      "env": {
+        "SEO_USER_AGENT": "opcional",
+        "SERPAPI_API_KEY": "opcional"
+      },
+      "modo_manual": "abre el top 10 y copia título y metadescripción de cada uno"
+    },
+    "plan-seo/generar_briefs.py": {
+      "python_opcional": [
+        "docx"
+      ],
+      "modo_manual": "se entregan en Markdown"
+    },
+    "plan-seo/generar_master.py": {
+      "python_opcional": [
+        "openpyxl"
+      ],
+      "modo_manual": "se entrega en CSV"
+    },
+    "plan-seo/generar_plan.py": {},
+    "proyeccion-seo-gsc/proyeccion_gsc.py": {},
+    "redaccion-y-optimizacion-nlp/ai_tells.py": {},
+    "redaccion-y-optimizacion-nlp/readability.py": {},
+    "reporte-seo-gsc/crux_campo.py": {
+      "env": {
+        "CRUX_API_KEY": "requerida"
+      },
+      "modo_manual": "copia los datos de campo desde Search Console"
+    },
+    "reporte-seo-gsc/gsc_report.py": {},
+    "schema-jsonld/schema_gen.py": {},
+    "schema-jsonld/validate_schema.py": {},
+    "seo-ecommerce/auditar_producto.py": {
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      }
+    },
+    "seo-local/verificar_nap.py": {
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      }
+    },
+    "sitemap-y-robots/generar_sitemap_robots.py": {},
+    "sitemap-y-robots/revisar_robots_sitemap.py": {
+      "env": {
+        "SEO_USER_AGENT": "opcional"
+      }
+    }
+  }
+}

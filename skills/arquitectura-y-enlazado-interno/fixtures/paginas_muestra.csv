@@ -1,0 +1,7 @@
+url,role,cluster
+https://ejemplo.example/,home,
+https://ejemplo.example/seo-tecnico/,pilar,seo tecnico
+https://ejemplo.example/seo-tecnico/auditoria/,cluster,seo tecnico
+https://ejemplo.example/seo-tecnico/core-web-vitals/,cluster,seo tecnico
+https://ejemplo.example/seo-tecnico/robots-txt/,cluster,seo tecnico
+https://ejemplo.example/curso-seo/,producto,

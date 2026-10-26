@@ -14,7 +14,7 @@ Cumple **cualquiera** de estas dos condiciones:
 **(b) Ascore bajo + señal de riesgo adicional:**
 `domain_ascore <= 2` **Y** al menos una señal adicional genuina: `sitewide`, `external_links > 1000`, o anchor comercial/exacto repetido en más de 5 dominios distintos.
 
-**Nunca** se marca Toxic por ascore solo ni por país solo — evita falsos positivos de sitios nuevos legítimos.
+**Nunca** se marca Toxic por ascore solo ni por país solo, evita falsos positivos de sitios nuevos legítimos.
 
 ### 2. Suspicious
 
@@ -35,12 +35,12 @@ No califica en ninguna de las 3 anteriores: perfil limpio, sin señales de riesg
 
 ## Reglas de manejo de datos (no negociables)
 
-- **País vacío es señal neutra.** Nunca dispara Suspicious ni Toxic por sí solo — siempre requiere una señal co-ocurrente (sitewide, external>umbral, o anchor en masa) para escalar. Descartar un dominio solo por el país es el error más común de rúbricas caseras: produce falsos positivos masivos en países con poca cobertura de datos.
-- **Análisis domain-first, propagación a backlinks individuales.** Clasificas a nivel de dominio primero, luego heredas la categoría a cada backlink de ese dominio. Excepción caso a caso: si un backlink individual diverge claramente del patrón de su dominio (ej. dominio Neutral-OK pero una página específica tiene external>1000 + sitewide), marca ese backlink con override y sube su categoría un nivel — sin tocar la categoría general del dominio.
+- **País vacío es señal neutra.** Nunca dispara Suspicious ni Toxic por sí solo, siempre requiere una señal co-ocurrente (sitewide, external>umbral, o anchor en masa) para escalar. Descartar un dominio solo por el país es el error más común de rúbricas caseras: produce falsos positivos masivos en países con poca cobertura de datos.
+- **Análisis domain-first, propagación a backlinks individuales.** Clasificas a nivel de dominio primero, luego heredas la categoría a cada backlink de ese dominio. Excepción caso a caso: si un backlink individual diverge claramente del patrón de su dominio (ej. dominio Neutral-OK pero una página específica tiene external>1000 + sitewide), marca ese backlink con override y sube su categoría un nivel, sin tocar la categoría general del dominio.
 - **Consolida duplicados exactos** (mismo origen + mismo destino, distinto first/last seen) en una sola fila con `instance_count`.
-- **Nofollow desde dominio tóxico se incluye igual** en la clasificación y en el disavow — el atributo `nofollow` no protege del todo contra el efecto de un enlace tóxico. Prefiere prolijidad/exhaustividad sobre omisión.
-- **Cada fila necesita evidencia citable.** La columna `evidencia` debe nombrar la regla exacta aplicada — es lo que hace la clasificación auditable y defendible frente al cliente.
+- **Nofollow desde dominio tóxico se incluye igual** en la clasificación y en el disavow, el atributo `nofollow` no protege del todo contra el efecto de un enlace tóxico. Prefiere prolijidad/exhaustividad sobre omisión.
+- **Cada fila necesita evidencia citable.** La columna `evidencia` debe nombrar la regla exacta aplicada, es lo que hace la clasificación auditable y defendible frente al cliente.
 
 ## Adaptar los umbrales
 
-Los umbrales (`external_links > 1000`, `ascore <= 2`, rango 3-5, país "relacionado") vienen de un caso real y son punto de partida razonable, no dogma. Ajústalos si el sitio del cliente tiene un perfil de backlinks atípico (ej. nicho ultra-local con pocos dominios de referencia, o sitio internacional donde "país relacionado" no aplica) — documenta el cambio y el motivo en el propio informe.
+Los umbrales (`external_links > 1000`, `ascore <= 2`, rango 3-5, país "relacionado") vienen de un caso real y son punto de partida razonable, no dogma. Ajústalos si el sitio del cliente tiene un perfil de backlinks atípico (ej. nicho ultra-local con pocos dominios de referencia, o sitio internacional donde "país relacionado" no aplica), documenta el cambio y el motivo en el propio informe.

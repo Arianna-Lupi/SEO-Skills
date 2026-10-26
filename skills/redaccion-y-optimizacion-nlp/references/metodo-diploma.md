@@ -1,10 +1,10 @@
-# Método del diploma — Redacción SEO y NLP (Semana 11, Dana Aliaga + módulo NLP)
+# Método del diploma: Redacción SEO y NLP (Semana 11, Dana Aliaga + módulo NLP)
 
 > Fuente: corpus interno "De Cero a SEO" (chunks, doc_type resumenes-prompts/transcripciones), Semana 11. Material de aprendoseo.
 
 ## El método paso a paso (como lo enseña el curso)
 
-**Mantra que gobierna todo:** *"Escribe para humanos, optimiza para robots."* No se sacrifica la calidad por el algoritmo: un texto que Google posiciona pero que nadie lee no sirve — la clave es ser **útil para la persona y legible para la máquina**.
+**Mantra que gobierna todo:** *"Escribe para humanos, optimiza para robots."* No se sacrifica la calidad por el algoritmo: un texto que Google posiciona pero que nadie lee no sirve, la clave es ser **útil para la persona y legible para la máquina**.
 
 **Redacción Tradicional vs. Redacción SEO (Dana Aliaga):**
 - **Tradicional:** belleza del lenguaje, gramática y estilo; informa o entretiene sin buscar visibilidad.
@@ -23,13 +23,13 @@
 3. **Humanización obligatoria:** editar el borrador de IA para que suene humano, con ejemplos prácticos, criterio y empatía, y adaptarlo al tono de marca. *"La IA es tu asistente, no tu autor."*
 4. **Revisión, Reposo y Entrega:** verificar **escaneabilidad** (párrafos cortos, negritas, listas); **dejar reposar** el texto horas/un día para revisarlo con "ojos frescos"; registrar en la Plantilla Master (link del Doc, estado "Redactado", verificar **H1, URL y keyword principal**).
 
-**NLP (Procesamiento de Lenguaje Natural) — cómo Google interpreta el texto:** el SEO moderno ya no se basa en repetir keywords, sino en construir **relevancia semántica** que el NLP valide. Google analiza en **4 etapas**:
+**NLP (Procesamiento de Lenguaje Natural), cómo Google interpreta el texto:** el SEO moderno ya no se basa en repetir keywords, sino en construir **relevancia semántica** que el NLP valide. Google analiza en **4 etapas**:
 1. **Análisis Léxico:** desglosa el texto en **tokens** (palabras individuales) para analizarlas.
 2. **Análisis Sintáctico:** revisa la relación entre palabras en la oración (sujeto, predicado, tiempos verbales).
 3. **Análisis Semántico:** determina el significado real de las frases y cómo se conectan los conceptos.
 4. **Análisis Pragmático:** interpreta el contexto y la intención detrás de lo que se dice.
 
-**Entidades / autoridad semántica:** Google premia textos con vocabulario rico y bien estructurado que demuestran dominio del tema. *"No escribas para el diccionario, escribe para el contexto"* — el NLP permite a Google saber que "banco" es institución financiera y no mueble, por las palabras que lo rodean. Antes de redactar, identifica **5 términos relacionados** que den contexto (ej. keyword 'SEO' → 'algoritmo', 'indexación', 'SERPs').
+**Entidades / autoridad semántica:** Google premia textos con vocabulario rico y bien estructurado que demuestran dominio del tema. *"No escribas para el diccionario, escribe para el contexto"*, el NLP permite a Google saber que "banco" es institución financiera y no mueble, por las palabras que lo rodean. Antes de redactar, identifica **5 términos relacionados** que den contexto (ej. keyword 'SEO' → 'algoritmo', 'indexación', 'SERPs').
 
 **Image SEO:** incluir al menos una imagen con **nombre de archivo amistoso/descriptivo** (ej. `guia-redaccion-seo.jpg`) y su **atributo ALT** (texto alternativo).
 
@@ -37,13 +37,13 @@
 
 - **Ubicación de keyword:** keyword principal en el **H1** y en las **primeras 100 palabras** del texto; presente también de forma natural en el primer párrafo y encabezados.
 - **Densidad:** natural, sin keyword stuffing/spam.
-- **Escaneabilidad:** párrafos cortos (no más de **3–4 líneas**, móvil-friendly), negritas, listas.
+- **Escaneabilidad:** párrafos cortos (no más de **3-4 líneas**, móvil-friendly), negritas, listas.
 - **Tono:** definir **3 adjetivos** de marca antes de escribir.
 - **Mapa semántico:** **5 términos** relacionados que den contexto antes de redactar.
 - **Imagen:** nombre de archivo descriptivo (con guiones) + ALT text.
 - **Reposo:** dejar descansar el texto horas/un día antes de la revisión final.
 - **Cierre en Plantilla Master:** link del Doc + estado "Redactado" + H1, URL y keyword verificados.
-- **Herramientas del curso:** Hemingway Editor (legibilidad — eliminar oraciones en rojo), Grammarly (corrección sintáctica/gramatical), Surfer SEO (términos semánticos/LSI que faltan vs. competencia), Neuron Writer (sugerencias NLP en tiempo real — "una de las más potentes"), Jasper (IA de contenido optimizada), ChatGPT (esquemas, comparativa con competencia, ajuste de tono).
+- **Herramientas del curso:** Hemingway Editor (legibilidad, eliminar oraciones en rojo), Grammarly (corrección sintáctica/gramatical), Surfer SEO (términos semánticos/LSI que faltan vs. competencia), Neuron Writer (sugerencias NLP en tiempo real, "una de las más potentes"), Jasper (IA de contenido optimizada), ChatGPT (esquemas, comparativa con competencia, ajuste de tono).
 
 ## Prompts originales que da el curso (verbatim)
 

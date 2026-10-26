@@ -1,4 +1,4 @@
-# Método del diploma — Investigación de palabras clave (Semana 4, Arianna Lupi + Diana Rodríguez)
+# Método del diploma: Investigación de palabras clave (Semana 4, Arianna Lupi + Diana Rodríguez)
 
 > Fuente: corpus interno "De Cero a SEO" (colección chunks, doc_type resumenes-prompts/transcripciones), Semana 4. Material de aprendoseo.
 
@@ -25,7 +25,7 @@ El flujo completo de la semana, en orden, deja la tab "Investigación de palabra
 
 6. **Conseguir métricas con herramientas (Diana, video 12).** Llenar tres columnas nuevas: **Volumen de búsqueda** (búsquedas/mes), **Tráfico potencial** (si la herramienta lo da) y **Dificultad (KD)** (Alta/Media/Baja). Usar varias herramientas en conjunto porque tienen límites diarios.
 
-7. **Seleccionar las correctas — "la limpia" (Diana, videos 13-14).** Aplicar los 3 criterios de selección (relevancia, intención, volumen vs. dificultad), inyectar long-tails con autocompletado y descartar sin miedo lo que no aporta. "Es preferible tener 10 palabras clave que conviertan… que 50 términos genéricos."
+7. **Seleccionar las correctas, "la limpia" (Diana, videos 13-14).** Aplicar los 3 criterios de selección (relevancia, intención, volumen vs. dificultad), inyectar long-tails con autocompletado y descartar sin miedo lo que no aporta. "Es preferible tener 10 palabras clave que conviertan… que 50 términos genéricos."
 
 8. **Completar campos de ejecución (Diana, video 15).** Para las 10-15 prioritarias, llenar **URL Sugerida**, **Idea de Contenido** y **H1 Sugerido**.
 
@@ -35,7 +35,7 @@ El flujo completo de la semana, en orden, deja la tab "Investigación de palabra
 
 **La Plantilla Master** es el "centro de mando". Reglas del curso:
 - Crear una **copia propia** (Archivo > Hacer una copia / "Make a Copy").
-- **Una plantilla independiente por cliente/proyecto** — no mezclar datos de sitios distintos.
+- **Una plantilla independiente por cliente/proyecto**, no mezclar datos de sitios distintos.
 - Solo se necesita lo básico de Google Sheets: copiar, pegar, arrastrar celdas, añadir columnas.
 
 **Columnas finales de la tab "Investigación de palabras clave"** (en orden, según se van completando):
@@ -55,7 +55,7 @@ El flujo completo de la semana, en orden, deja la tab "Investigación de palabra
 **Los 3 criterios de selección (Diana, video 13):**
 1. **Relevancia:** "Si alguien busca esto y llega a mi web, ¿realmente le resuelvo su necesidad?" Si no, descartar.
 2. **Intención de búsqueda:** que la keyword cumpla la intención buscada.
-3. **Volumen y Dificultad:** buscar el **"punto dulce"** — volumen medio/alto con dificultad baja.
+3. **Volumen y Dificultad:** buscar el **"punto dulce"**, volumen medio/alto con dificultad baja.
 
 **Filtro final (Diana, video 14):** Filtro de Negocio (sin relación directa → eliminar) + Validación de Intención + Competencia vs. Oportunidad (elegir el mejor equilibrio facilidad/visitas).
 
@@ -91,11 +91,11 @@ El flujo completo de la semana, en orden, deja la tab "Investigación de palabra
 
 - **Palabra clave (keyword):** para el usuario, las palabras/frases con que presenta un problema o pregunta a un buscador; para el SEO, el nombre técnico de esas búsquedas. Funciona como **brújula/guía** del contenido que el usuario quiere.
 - **Los 4 tipos de keyword por intención (Arianna, video 3):**
-  - **Informativa** — el usuario busca aprender o resolver una duda (ej: "qué es el yoga"). Ideal para blogs/guías.
-  - **Navegacional** — el usuario ya sabe a qué sitio quiere ir y usa Google como atajo (ej: "Facebook login", "DinoRank"). Clave: aparecer #1 por tu propio nombre (branding).
-  - **Investigación Comercial** — el usuario compara opciones u opiniones antes de decidir (ej: "mejores zapatillas para correr", "iPhone vs Samsung"). Tiene "hambre de compra" pero necesita el empujón final.
-  - **Transaccional** — listo para comprar/actuar (ej: "comprar vestido de novia"). Mucha competencia pero genera dinero directo; Arianna sugiere variantes long-tail más específicas.
-- **"Punto dulce":** keyword con volumen de búsqueda medio/alto **y** dificultad baja — donde sí es posible competir.
+  - **Informativa**, el usuario busca aprender o resolver una duda (ej: "qué es el yoga"). Ideal para blogs/guías.
+  - **Navegacional**, el usuario ya sabe a qué sitio quiere ir y usa Google como atajo (ej: "Facebook login", "DinoRank"). Clave: aparecer #1 por tu propio nombre (branding).
+  - **Investigación Comercial**, el usuario compara opciones u opiniones antes de decidir (ej: "mejores zapatillas para correr", "iPhone vs Samsung"). Tiene "hambre de compra" pero necesita el empujón final.
+  - **Transaccional**, listo para comprar/actuar (ej: "comprar vestido de novia"). Mucha competencia pero genera dinero directo; Arianna sugiere variantes long-tail más específicas.
+- **"Punto dulce":** keyword con volumen de búsqueda medio/alto **y** dificultad baja, donde sí es posible competir.
 - **Long Tail (cola larga):** frases largas y específicas (ej: "mejores zapatillas deportivas para correr largas distancias"); menos competencia e intención de compra más alta que las genéricas.
 - **Cluster:** grupo de keywords relacionadas organizadas en una subcategoría temática; dan estructura y construyen **Topic Authority** (Google te percibe como autoridad del tema).
 - **"Duelo de Keywords" (video 14, check-list):** comparar keywords similares dentro de un cluster y quedarse con la del mejor ratio Volumen/Dificultad, marcándola como "Prioritaria".
@@ -110,4 +110,23 @@ El flujo completo de la semana, en orden, deja la tab "Investigación de palabra
 - **"Vestido de novia para la playa":** variante long-tail de una transaccional genérica para destacar con menos competencia.
 - **"Marketing de nicho" (fila completa, Diana video 15):** Keyword = Marketing de nicho · Intención = Informativa · Idea de contenido = página explicando qué es y cómo aplicarlo · H1 = "¿Qué es el marketing de nicho y cómo aplicarlo con éxito?".
 - **"Curso SEO gratuito" (vol. alto, dif. 40) vs "Mejores cursos SEO 2025" (menos vol., dif. más alta):** se elige la del mejor equilibrio facilidad/visitas (video 14).
-- **Tip de validación de Arianna:** antes de escribir una página, busca la keyword en Google; si todo lo que rankea son blogs de "beneficios", no intentes posicionar una página de venta directa — irías contra la intención que Google ya detectó.
+- **Tip de validación de Arianna:** antes de escribir una página, busca la keyword en Google; si todo lo que rankea son blogs de "beneficios", no intentes posicionar una página de venta directa, irías contra la intención que Google ya detectó.
+
+## Práctica de coaches (afina criterios, no contradice el curso)
+
+**Vero (Estrategia SEO), cómo revisa la investigación:**
+- Una keyword equilibra volumen decente (aunque no sea el más alto), intención acorde a lo que ofrece el negocio y competencia baja o media. Se piensa "cómo te buscaría alguien que no conoce tu marca" y se parte de los servicios, no del blog existente.
+- Cómo ampliar una lista corta, por ejes con fórmula: por problema ("psicóloga para + problema + ciudad"), por tipo de cliente y momento ("primera vez corte de cabello niño"), por marca y falla, por especialidad y función.
+- Errores que corrige: keywords que atraen otra audiencia ("tendencias en medicina" para vender software), frases de copy como keyword, keywords amarradas a una sigla antes de investigar el término general.
+- Sin datos no se elimina: la SERP con más de 3 artículos (o más de 5 páginas) indica demanda. Se anota con una nota que explique el criterio.
+- Ubicación: el volumen se investiga sin ciudad y la ciudad entra en el H1.
+- Tildes y plurales: la estrategia se decide por volumen, la redacción lleva gramática correcta.
+
+**Ari y Dana/Diana, cómo revisan la investigación:**
+- Intención antes que volumen ("prioriza la intención sobre el volumen"); "<100" no prueba ausencia de demanda en mercados pequeños.
+- Palabras que describan un problema o una compra, no secciones del sitio.
+- Cola larga para bajar dificultad. Mínimo de 30 keywords (o 50 según el ejercicio) validadas con datos.
+- Si una herramienta no encuentra la palabra, probar otra o mirar Google antes de descartarla.
+- Con "mejor": Google suele mostrar listados de terceros; conviene un artículo "qué buscar en..." o apoyarse en testimonios externos.
+- El campo "Idea de contenido" lleva formato y contenido, no "Blog" a secas.
+- Cluster es agrupación por tema, no formato (guía, consulta o landing son formatos).

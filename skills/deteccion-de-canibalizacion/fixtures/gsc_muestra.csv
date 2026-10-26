@@ -1,0 +1,11 @@
+query,url,clicks,impressions,position,date
+café de especialidad,https://tienda-cafe.example/cafe-de-especialidad,40,900,6,2026-08
+café de especialidad,https://tienda-cafe.example/blog/mejor-cafe,35,850,7,2026-08
+café de especialidad,https://tienda-cafe.example/cafe-de-especialidad,20,800,7,2026-09
+café de especialidad,https://tienda-cafe.example/blog/mejor-cafe,45,820,6,2026-09
+café de especialidad,https://tienda-cafe.example/cafe-de-especialidad,50,900,5,2026-10
+café de especialidad,https://tienda-cafe.example/blog/mejor-cafe,15,700,8,2026-10
+cómo hacer pan,https://tienda-cafe.example/blog/como-hacer-pan,100,1200,3,
+cómo hacer pan,https://tienda-cafe.example/recetas/pan-casero,2,60,25,
+tienda cafe,https://tienda-cafe.example/,80,500,1,
+tienda cafe,https://tienda-cafe.example/quienes-somos,10,200,2,

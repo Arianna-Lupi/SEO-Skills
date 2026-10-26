@@ -1,0 +1,18 @@
+[
+  {
+    "query": "tengo enlaces spam apuntando a mi web",
+    "should_trigger": true
+  },
+  {
+    "query": "genera el disavow",
+    "should_trigger": true
+  },
+  {
+    "query": "investiga keywords de mi nicho",
+    "should_trigger": false
+  },
+  {
+    "query": "escribe metadescripciones",
+    "should_trigger": false
+  }
+]

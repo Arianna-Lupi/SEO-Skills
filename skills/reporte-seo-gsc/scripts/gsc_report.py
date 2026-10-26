@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-gsc_report.py — Compara mes vs. mes desde exports de Google Search Console (determinista).
+gsc_report.py, Compara mes vs. mes desde exports de Google Search Console (determinista).
 
 Qué hace:
   1. Lee dos CSV de "Rendimiento" de GSC (--current y --previous). Columnas
@@ -97,8 +97,11 @@ def totals_of(rows):
     clicks = sum(r["clicks"] for r in rows.values())
     impressions = sum(r["impressions"] for r in rows.values())
     ctr = round(clicks / impressions * 100, 2) if impressions else 0.0
+    # posición media ponderada por impresiones (como la calcula GSC); sin impresiones, media simple
+    wsum = sum(r["position"] * r["impressions"] for r in rows.values() if r["position"] > 0)
+    wden = sum(r["impressions"] for r in rows.values() if r["position"] > 0)
     poss = [r["position"] for r in rows.values() if r["position"] > 0]
-    position = round(sum(poss) / len(poss), 1) if poss else 0.0
+    position = round(wsum / wden, 1) if wden else (round(sum(poss) / len(poss), 1) if poss else 0.0)
     return clicks, impressions, ctr, position
 
 
@@ -111,6 +114,9 @@ def main():
     ap.add_argument("--current", required=True, help="CSV del periodo actual")
     ap.add_argument("--previous", required=True, help="CSV del periodo anterior")
     ap.add_argument("--top", type=int, default=10, help="cuántos ganadores/perdedores listar")
+    ap.add_argument("--out", help="escribe el JSON también aquí (ej. .seo-audit/<sitio>/data/search-console.json)")
+    ap.add_argument("--label-current", default=None, help="etiqueta del periodo actual (ej. 2026-09)")
+    ap.add_argument("--label-previous", default=None, help="etiqueta del periodo anterior (ej. 2026-08)")
     args = ap.parse_args()
 
     for p in (args.current, args.previous):
@@ -165,7 +171,14 @@ def main():
     if not insights:
         insights.append("sin variaciones relevantes mes vs. mes; mantené la estrategia y monitorea.")
 
-    out({"ok": True, "totals": totals, "winners": winners, "losers": losers, "insights": insights})
+    result = {"ok": True, "totals": totals, "winners": winners, "losers": losers, "insights": insights,
+              "periods": {"current": args.label_current, "previous": args.label_previous},
+              "note": "Totales calculados desde las filas del CSV. Los exports de GSC se limitan a 1.000 filas: si el CSV está truncado, los totales de filas subestiman el sitio; usa los totales del encabezado de GSC para el resumen."}
+    if args.out:
+        os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
+        with open(args.out, "w", encoding="utf-8") as fh:
+            json.dump(result, fh, ensure_ascii=False, indent=2)
+    out(result)
 
 
 if __name__ == "__main__":

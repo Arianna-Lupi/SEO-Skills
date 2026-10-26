@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# aprendoclub-run: lanzador único de los scripts de las SEO Skills (patrón del lanzador de claude-seo, MIT).
+#
+#   aprendoclub-run <script> [args...]      preflight + ejecuta (si falta algo requerido, no corre y avisa)
+#   aprendoclub-run --check <script>|--all  comprueba requisitos y devuelve JSON con "needs"
+#   aprendoclub-run --status                estado de Python, uv, paquetes, claves y conectores
+#   aprendoclub-run --install <script> --yes   instala lo que falte en un venv aislado (solo con permiso)
+#   aprendoclub-run --update-check          compara la versión instalada con la última (usa red)
+#
+# Intérprete, en este orden: APRENDOCLUB_PYTHON, python3, python, "py -3" (Python 3.9+; se
+# ignora el atajo falso de la Microsoft Store). No instala nada por su cuenta y nunca usa sudo.
+set -u
+
+SELF="${BASH_SOURCE[0]}"
+case "$SELF" in */*) HERE="${SELF%/*}" ;; *) HERE="." ;; esac
+HERE="$(cd "$HERE" && pwd)"
+
+py_ok() { "$@" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)' >/dev/null 2>&1; }
+
+PY=()
+if [ -n "${APRENDOCLUB_PYTHON:-}" ]; then
+  if py_ok "$APRENDOCLUB_PYTHON"; then PY=("$APRENDOCLUB_PYTHON"); fi
+else
+  for cand in python3 python; do
+    if command -v "$cand" >/dev/null 2>&1; then
+      case "$(command -v "$cand")" in *WindowsApps*) continue ;; esac
+      if py_ok "$cand"; then PY=("$cand"); break; fi
+    fi
+  done
+  if [ ${#PY[@]} -eq 0 ] && command -v py >/dev/null 2>&1 && py_ok py -3; then PY=(py -3); fi
+fi
+
+if [ ${#PY[@]} -eq 0 ]; then
+  case "$(uname -s 2>/dev/null)" in
+    Darwin) CMD="brew install python   (o descarga el instalador en https://www.python.org/downloads/)" ;;
+    Linux)  CMD="sudo apt install python3   (o el gestor de paquetes de tu distribución; ejecútalo tú, el lanzador no usa sudo)" ;;
+    *)      CMD="winget install Python.Python.3.12   (o https://www.python.org/downloads/)" ;;
+  esac
+  printf '{\n  "ok": false,\n  "reason": "no encontré Python 3.9 o superior",\n  "fallback": "modo manual: las skills funcionan sin scripts, sigue el método paso a paso",\n  "needs": [{"type": "python", "name": "Python 3.9+", "required": true, "command": "%s", "where": "https://www.python.org/downloads/", "fallback": "modo manual", "alternativa_uv": "con uv: curl -LsSf https://astral.sh/uv/install.sh | sh y luego uv python install"}]\n}\n' "$CMD"
+  exit 3
+fi
+
+if [ "${1:-}" = "--update-check" ]; then
+  shift
+  exec "${PY[@]}" "$HERE/actualizar.py" --check "$@"
+fi
+if [ $# -eq 0 ]; then exec "${PY[@]}" "$HERE/requisitos.py" --help; fi
+exec "${PY[@]}" "$HERE/requisitos.py" "$@"

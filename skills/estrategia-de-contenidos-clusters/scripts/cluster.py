@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cluster.py — Agrupa una lista de keywords en clusters temáticos (determinista, sin API).
+cluster.py, Agrupa una lista de keywords en clusters temáticos (determinista, sin API).
 
 Qué hace:
   1. Normaliza cada keyword (minúsculas, sin tildes, sin stopwords ES).
@@ -32,7 +32,7 @@ import re
 import sys
 import unicodedata
 
-# Stopwords ES (lista compacta inline — suficiente para agrupar keywords).
+# Stopwords ES (lista compacta inline: suficiente para agrupar keywords).
 STOPWORDS = {
     "a", "al", "algo", "ante", "como", "con", "contra", "cual", "cuando", "de",
     "del", "desde", "donde", "el", "ella", "ello", "en", "entre", "es", "esa",

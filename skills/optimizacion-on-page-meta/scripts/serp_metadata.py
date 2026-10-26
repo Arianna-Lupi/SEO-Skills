@@ -4,10 +4,10 @@
 # dependencies = ["requests", "beautifulsoup4"]
 # ///
 """
-serp_metadata.py — Extrae metatítulo y metadescripción de los competidores del top de la SERP.
+serp_metadata.py, Extrae metatítulo y metadescripción de los competidores del top de la SERP.
 
 Qué hace (determinista):
-  1. Obtiene las URLs orgánicas del top N (vía SerpApi) — o usa --urls para
+  1. Obtiene las URLs orgánicas del top N (vía SerpApi), o usa --urls para
      pasar una lista y saltarte SerpApi.
   2. ENTRA a cada URL y extrae su <title>, su <meta name="description"> y, de
      apoyo, el H1 y los og:title/og:description.

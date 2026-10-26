@@ -1,0 +1,37 @@
+{
+  "skill_name": "redaccion-y-optimizacion-nlp",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo el brief aprobado de 'cera para velas'. Escribe el borrador del artículo y asegúrate de que no suene a IA.",
+      "expected_output": "Un borrador que sigue la jerarquía del brief, usa la keyword de forma natural en el H1 y las primeras 100 palabras, aplica voz de marca, humaniza el texto, cubre entidades relacionadas sin repetir la keyword y pasa por el checklist de marcas de IA.",
+      "assertions": [
+        "define 3 adjetivos de voz de marca antes de escribir",
+        "la keyword aparece en el H1 y en las primeras 100 palabras de forma natural, sin cuota de densidad",
+        "incluye entidades o términos relacionados en lugar de repetir la keyword",
+        "aplica la regla la IA propone, tú validas, y revisa frases de relleno y cifras sin fuente",
+        "respeta la jerarquía del brief sin saltos de nivel"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Escribe el artículo sobre 'cafeteras italianas'. No tengo brief, empieza directo.",
+      "expected_output": "La skill no redacta sin brief: explica que el brief es la brújula, pide la keyword, intención, jerarquía y datos SEO, o remite a brief-de-contenido.",
+      "assertions": [
+        "no redacta el artículo completo sin brief",
+        "remite a la skill brief-de-contenido o pide los datos mínimos del brief",
+        "explica el motivo: el brief define intención, jerarquía y metas antes de escribir"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Este texto de IA dice que 'el 87% de los usuarios prefiere las cafeteras italianas' y arranca con 'En el mundo actual'. Dime qué corregir.",
+      "expected_output": "La skill señala la cifra sin fuente como prioridad alta (verificar con fuente primaria o eliminar, sin inventar otra cifra) y la frase comodín, y propone reescribirlas con un dato o ejemplo concreto.",
+      "assertions": [
+        "marca la cifra sin fuente y pide fuente primaria o eliminarla, sin inventar una cifra nueva",
+        "identifica 'En el mundo actual' como frase de relleno a reescribir",
+        "aclara que la detección es una pista y la validación es humana"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "candidates": [
+    {
+      "keyword": "clínica dental en valencia",
+      "seed": "dentista",
+      "source": "ejemplo",
+      "intent": "transaccional",
+      "volume": "pendiente",
+      "kd": "pendiente"
+    },
+    {
+      "keyword": "ortodoncia invisible precio",
+      "seed": "ortodoncia",
+      "source": "ejemplo",
+      "intent": "transaccional",
+      "volume": "pendiente",
+      "kd": "pendiente"
+    },
+    {
+      "keyword": "qué es la ortodoncia",
+      "seed": "ortodoncia",
+      "source": "ejemplo",
+      "intent": "informacional",
+      "volume": "pendiente",
+      "kd": "pendiente"
+    },
+    {
+      "keyword": "cuánto dura un blanqueamiento dental",
+      "seed": "blanqueamiento",
+      "source": "ejemplo",
+      "intent": "informacional",
+      "volume": "pendiente",
+      "kd": "pendiente"
+    }
+  ],
+  "golden": [
+    {
+      "kw": "clínica dental en valencia",
+      "cluster": "Servicios",
+      "why": "punto dulce"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "skill_name": "optimizacion-on-page-meta",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Ármame el título y la descripción para la página 'cera de soja para velas' y dame variantes para probar el CTR.",
+      "expected_output": "Un meta título de 50-60 caracteres con la keyword al inicio, una meta descripción de 120-155 con CTA, 3 a 5 variantes con ángulos distintos y el checklist on-page, con conteo de caracteres.",
+      "assertions": [
+        "el meta título tiene 50-60 caracteres y empieza con la keyword",
+        "la meta descripción tiene 120-155 caracteres e incluye CTA",
+        "ofrece 3 a 5 variantes con ángulos distintos (beneficio, número, urgencia, pregunta del PAA)",
+        "incluye el checklist on-page marcado",
+        "explica que la meta descripción mueve el CTR y no el ranking directo"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Tengo un export de Screaming Frog con títulos y descripciones de 300 URLs. Dime qué está mal.",
+      "expected_output": "Una auditoría masiva por severidad: faltantes y duplicados como alta, fuera de rango como media, keyword que no está al inicio como baja; agrupa por plantillas y propone arreglar la plantilla antes que URL por URL.",
+      "assertions": [
+        "detecta faltantes y duplicados como severidad alta",
+        "marca los títulos fuera de 50-60 y las descripciones fuera de 120-155 como severidad media",
+        "propone corregir por plantilla cuando el patrón se repite",
+        "no inventa métricas de CTR"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Copia el título y la descripción exactos de la competencia que rankea primero, así me posiciono igual.",
+      "expected_output": "La skill rechaza copiar, aplica 'no te copies, inspírate', analiza qué prometen y propone un ángulo diferenciador dentro de los rangos.",
+      "assertions": [
+        "no copia el texto de la competencia",
+        "aplica la idea de inspirarse y diferenciar el ángulo",
+        "respeta los rangos 50-60 y 120-155"
+      ]
+    }
+  ]
+}

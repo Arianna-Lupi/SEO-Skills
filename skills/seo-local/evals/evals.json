@@ -1,0 +1,40 @@
+{
+  "skill_name": "seo-local",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo una barbería en Valencia y no aparezco cuando buscan 'barbería cerca de mí'. Qué hago.",
+      "expected_output": "Un plan de SEO local: reclamar o crear la ficha de Google Business Profile, categorías y descripción, NAP consistente, plan de reseñas y páginas por servicio y zona.",
+      "assertions": [
+        "reclama o crea la ficha de Google Business Profile",
+        "explica los 3 pilares proximidad, relevancia y prominencia",
+        "pide auditar el NAP idéntico en web, redes y Google Maps",
+        "propone un plan de reseñas simple (QR o mensaje posventa) y responder siempre",
+        "aclara que no basta con la ficha: la web también debe apuntar a la keyword local",
+        "no inventa número de reseñas, rating ni posición"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Soy psicólogo y tengo una sola página con todo. Quiero que me encuentren.",
+      "expected_output": "Estructura de una página por servicio, keywords '[servicio] en [ciudad]', formulario con '¿Cómo nos conociste?' y SEO local si hay consultorio.",
+      "assertions": [
+        "recomienda una página diferente para cada servicio",
+        "propone keywords tipo servicio en ciudad",
+        "propone medir con formulario y pregunta de cómo nos conociste",
+        "señala el cuidado de YMYL en salud"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Tengo 3 sedes. Voy a copiar la misma página cambiando el nombre de la ciudad.",
+      "expected_output": "Advierte que cada sede es una entidad independiente y que las páginas duplicadas cambiando la ciudad son de bajo valor; pide contenido propio por sede.",
+      "assertions": [
+        "advierte que las reseñas no se transfieren entre sedes",
+        "rechaza las páginas idénticas cambiando solo la ciudad",
+        "pide contenido propio por sede",
+        "pide NAP consistente por ubicación"
+      ]
+    }
+  ]
+}

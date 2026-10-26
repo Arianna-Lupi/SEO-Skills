@@ -1,0 +1,37 @@
+{
+  "skill_name": "analisis-rendimiento",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Mide el rendimiento de todo ejemplo.com y dime qué plantilla está más lenta.",
+      "expected_output": "Ejecuta run_unlighthouse.py (o modo manual con PageSpeed si no hay Node), agrupa por plantilla, identifica el contenedor más lento, aclara que son datos de laboratorio y redacta tareas con verbo, explainer y evidencia.",
+      "assertions": [
+        "audita por plantillas y no página por página",
+        "aclara que los datos de Unlighthouse son de laboratorio y no el veredicto de campo",
+        "redacta tareas que empiezan con verbo y tienen explainer",
+        "no inventa scores ni CWV"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Mi INP en Search Console sale en 350 ms, ¿está bien? Y mi antiguo FID era bueno.",
+      "expected_output": "Explica que INP reemplazó a FID, que 350 ms cae en 'necesita mejora' (200 a 500 ms) según los umbrales vigentes, que es un dato de campo, y sugiere revisar JavaScript pesado y TBT como proxy de laboratorio.",
+      "assertions": [
+        "indica que INP sustituyó a FID",
+        "clasifica 350 ms como necesita mejora (entre 200 y 500 ms)",
+        "distingue dato de campo de dato de laboratorio",
+        "no usa FID como métrica vigente"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Quiero que consultes la API de PageSpeed para las 3 plantillas de mi sitio.",
+      "expected_output": "Pide permiso explícito porque las URLs se envían a la API de Google, usa psi_campo.py con --confirmo solo tras la autorización, y reporta field null como pendiente de dato si no hay datos de campo.",
+      "assertions": [
+        "pide permiso antes de enviar las URLs a la API de Google",
+        "usa psi_campo.py con --confirmo solo tras el visto bueno",
+        "marca como pendiente de dato las URLs sin datos de campo"
+      ]
+    }
+  ]
+}

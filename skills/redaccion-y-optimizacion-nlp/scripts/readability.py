@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-readability.py — Analiza la legibilidad y la optimización on-page de un artículo
+readability.py, Analiza la legibilidad y la optimización on-page de un artículo
 en español (heurísticas del diploma "De Cero a SEO": frases cortas, párrafos
 cortos, densidad y colocación de la keyword).
 

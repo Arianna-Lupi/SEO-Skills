@@ -1,0 +1,18 @@
+[
+  {
+    "query": "cómo hago para que ChatGPT me cite",
+    "should_trigger": true
+  },
+  {
+    "query": "necesito salir en AI Overviews",
+    "should_trigger": true
+  },
+  {
+    "query": "arregla el sitemap",
+    "should_trigger": false
+  },
+  {
+    "query": "haz un reporte mensual de clics",
+    "should_trigger": false
+  }
+]

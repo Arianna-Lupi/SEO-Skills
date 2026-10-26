@@ -4,7 +4,7 @@
 # dependencies = ["requests"]
 # ///
 """
-ai_features.py — Detecta features de IA/respuesta de una SERP (AEO/GEO) vía SerpApi.
+ai_features.py, Detecta features de IA/respuesta de una SERP (AEO/GEO) vía SerpApi.
 
 Qué hace (determinista):
   Consulta SerpApi para una query y detecta si la SERP tiene AI Overview,

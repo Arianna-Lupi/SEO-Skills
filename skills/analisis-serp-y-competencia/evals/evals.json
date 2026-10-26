@@ -1,0 +1,81 @@
+{
+  "skill_name": "analisis-serp-y-competencia",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vendo café de especialidad online. Mis 5 keywords son: café de especialidad, café en grano, cómo preparar café, café orgánico y tienda de café online. En Google arriba siempre sale revistacafe.com, que no vende café. ¿Es mi competencia? ¿Qué hago con eso?",
+      "expected_output": "Distingue competidor de negocio y competidor SEO, aplica el Análisis de Repetición (3 de 5 keywords es crítico), propone el Ojo Clínico manual sobre el top 3 antes de usar herramientas, entrega la tabla de competencia y un reporte de brechas bajo Costo de Oportunidad con conclusiones sobre qué tiene el rival que el sitio propio no.",
+      "assertions": [
+        "explica que revistacafe.com es competidor SEO aunque no sea competidor de negocio",
+        "aplica el Análisis de Repetición e indica el umbral de 3 de 5 keywords para considerarlo crítico",
+        "propone el ejercicio Ojo Clínico manual sobre el top 3 antes de las herramientas",
+        "elige 3 a 4 competidores a analizar",
+        "las conclusiones dicen qué tiene el competidor que el sitio propio no tiene",
+        "enmarca las brechas bajo Costo de Oportunidad y las convierte en tareas que empiezan con verbo",
+        "no inventa tráfico, volúmenes ni autoridad de dominio"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Mi competidor principal es un periódico digital que vive de publicidad. ¿Lo uso para comparar mis páginas de producto?",
+      "expected_output": "Responde con el criterio de Vero: la prensa sirve para ideas de contenido, no para comparar páginas de producto; sugiere buscar competidores con modelo de negocio similar o referentes internacionales, y separa competidor de negocio y SEO.",
+      "assertions": [
+        "indica que un sitio de prensa sirve para ideas de contenido y no para comparar páginas de producto",
+        "recomienda elegir competidores de negocio similar o referentes de otros países",
+        "distingue competidor de negocio y competidor SEO"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Te paso las posiciones: para 'cómo preparar café' revistacafe.example está 2 y nosotros no salimos; para 'café de especialidad' granos.example 3, revistacafe.example 6 y nosotros 11. ¿Qué brechas tengo y cuál ataco primero?",
+      "expected_output": "Usa las posiciones aportadas sin inventar volúmenes, identifica dos brechas, ordena por repetición y esfuerzo (la de posición 11 es una mejora de bajo esfuerzo), y las presenta como Costo de Oportunidad con una columna de Prioridad o Esfuerzo.",
+      "assertions": [
+        "identifica las dos brechas a partir de las posiciones dadas",
+        "reconoce que 'café de especialidad' (posición 11) es de menor esfuerzo",
+        "incluye una columna de Prioridad o Esfuerzo",
+        "no inventa volumen de búsqueda ni tráfico",
+        "convierte cada brecha en una tarea con verbo"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Quiero posicionar mi artículo 'Café de especialidad: guía de compra' para la keyword 'comprar café de especialidad'. Busqué en Google y arriba salen puras tiendas con productos y categorías. Tengo los HTML de los tres primeros guardados y el mío también. ¿Qué me falta para competir?",
+      "expected_output": "Detecta que la SERP está dominada por categorías y fichas de producto y que la página del usuario es un artículo. Dice que la brecha principal es de tipo de página, no de contenido, remite a intencion-de-busqueda antes de pulir el artículo, usa perfil_competidor.py con --html y comparar_serp.py, marca las demás brechas como dependientes del tipo y propone como primera tarea crear la página de categoría o de producto que premia la SERP.",
+      "assertions": [
+        "identifica el desajuste de tipo de página como la brecha más importante",
+        "remite a intencion-de-busqueda antes de recomendar cambios de contenido",
+        "propone perfilar los HTML con perfil_competidor.py (modo --html) y compararlos con comparar_serp.py",
+        "indica que las brechas de formato, temas o schema quedan en segundo plano hasta resolver el tipo",
+        "la primera tarea empieza con verbo y propone crear la página que premia la SERP",
+        "no inventa volumen, KD ni tráfico y escribe pendiente de dato si falta"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Analicé 'cómo preparar café', 'café en grano' y 'comprar café de especialidad'. Quiero saber qué dominios se repiten y qué tiene que tener mi guía para entrar al top. Tengo un perfiles.json de perfil_competidor.py.",
+      "expected_output": "Ejecuta comparar_serp.py con los perfiles, entrega el Análisis de Repetición (competidor crítico a partir del 60 % de las keywords, mínimo 2), el patrón común del top (lo que tiene al menos 60 %), la tabla de su página frente al top, brechas por categoría y tareas con verbo, ICE y prioridad. Aclara que el puntaje de Costo de Oportunidad no es del diplomado y que no son visitas.",
+      "assertions": [
+        "calcula la repetición de dominios y URLs entre las keywords y marca los críticos",
+        "presenta el patrón común usando el umbral de 60 %",
+        "incluye una tabla de la página propia frente al top",
+        "agrupa las brechas por tipo de página, temas, estructura, formato, schema, E-E-A-T y frescura",
+        "cada tarea empieza con verbo y lleva ICE y prioridad",
+        "aclara que el puntaje de Costo de Oportunidad es una ayuda del repo y no del diplomado",
+        "deja plazo, recurso y responsable como pendiente de dato para que los defina el usuario"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Corrí perfil_competidor.py sobre el top de 'recetas de café' y dos resultados salieron con 0 palabras y casi sin encabezados, y otro dio 403. ¿Puedo fiarme del análisis?",
+      "expected_output": "Explica que las páginas con HTML casi vacío dependen de JavaScript y que sus conteos son parciales, que no deben entrar en rangos de palabras y que hay que revisarlas a ojo (Ojo Clínico) o con un navegador real. Sobre el 403 explica que es probable un WAF, que no se debe insistir ni desactivar robots.txt en sitios ajenos y propone guardar el HTML desde el navegador y usar --html. Recuerda que el análisis es orientativo con menos de 5 páginas legibles.",
+      "assertions": [
+        "reconoce que 0 palabras con HTML casi vacío indica dependencia de JavaScript",
+        "excluye esas páginas de los rangos de palabras y pide revisarlas a ojo",
+        "atribuye el 403 a un posible WAF y propone guardar el HTML con --html o usar un rastreador con navegador real",
+        "no recomienda saltarse robots.txt ni forzar el rastreo en un sitio ajeno",
+        "advierte que el patrón con pocas páginas legibles es orientativo",
+        "no rellena con datos estimados las páginas que no se pudieron leer"
+      ]
+    }
+  ]
+}

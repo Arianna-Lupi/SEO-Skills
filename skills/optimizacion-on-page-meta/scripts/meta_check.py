@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-meta_check.py — Valida metatítulo y metadescripción según las reglas del diploma
+meta_check.py, Valida metatítulo y metadescripción según las reglas del diploma
 "De Cero a SEO": metatítulo con keyword al inicio y 50-60 caracteres;
 metadescripción de 120-155 caracteres con CTA.
 

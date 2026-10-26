@@ -1,0 +1,10 @@
+[
+  {"query": "Mi artículo está optimizado pero no posiciona, ¿será un tema de calidad o de E-E-A-T?", "should_trigger": true},
+  {"query": "Revisa si este texto suena a IA y qué le falta para ser confiable", "should_trigger": true},
+  {"query": "¿Este contenido es delgado? ¿Debo agregarle más palabras?", "should_trigger": true},
+  {"query": "Qué señales de autoría y confianza le faltan a mi página de servicios", "should_trigger": true},
+  {"query": "Escribe un artículo sobre cafeteras italianas", "should_trigger": false},
+  {"query": "Configura el robots.txt y el sitemap de mi sitio", "should_trigger": false},
+  {"query": "Haz el keyword research de mi nicho", "should_trigger": false},
+  {"query": "Genera el JSON-LD de Product para esta ficha", "should_trigger": false}
+]

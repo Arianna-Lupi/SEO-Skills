@@ -1,4 +1,4 @@
-# Método del diploma — Mapa de Palabras Clave (Semana 5, Verónica Romero)
+# Método del diploma: Mapa de Palabras Clave (Semana 5, Verónica Romero)
 
 > Fuente: corpus interno "De Cero a SEO" (colección chunks, doc_type resumenes-prompts/transcripciones), Semana 5. Material de aprendoseo.
 
@@ -14,13 +14,13 @@ La "hoja de ruta de la semana" (Arianna, video 1), ejecutada sobre la pestaña *
 
 3. **Asignar la keyword principal a cada URL con valor (video 5).** Relación **1:1** (una keyword por URL) para evitar canibalización y darle pistas claras a Google. Proceso: analizar el contenido actual de la página → validar buscando esa idea en Google → si lo que rankea coincide con lo que ofreces, esa es la keyword principal. Filosofía: "aprovechar lo que ya tienes; a veces la keyword perfecta ya está en el texto, solo falta declararla oficialmente en el mapa".
 
-4. **Evaluar la intención por temperatura (video 6).** Clasificar cada keyword en 3 niveles (Baja/Media/Alta — ver definiciones). Preguntarse: "¿Qué tan listo está este usuario para comprar/convertir cuando busca esto?"
+4. **Evaluar la intención por temperatura (video 6).** Clasificar cada keyword en 3 niveles (Baja/Media/Alta, ver definiciones). Preguntarse: "¿Qué tan listo está este usuario para comprar/convertir cuando busca esto?"
 
-5. **Analizar los datos por keyword (video 7).** Para cada keyword principal obtener **3 datos**: Volumen de búsqueda, Dificultad (KD) y **Posición Actual** de tu URL hoy. Es "refrescar" lo de la Semana 4 (Diana) pero aplicado a páginas existentes. Hallazgo común: si la herramienta dice que "ninguna página entra en las primeras 100", nada está optimizado — es el punto de partida normal, no algo malo.
+5. **Analizar los datos por keyword (video 7).** Para cada keyword principal obtener **3 datos**: Volumen de búsqueda, Dificultad (KD) y **Posición Actual** de tu URL hoy. Es "refrescar" lo de la Semana 4 (Diana) pero aplicado a páginas existentes. Hallazgo común: si la herramienta dice que "ninguna página entra en las primeras 100", nada está optimizado, es el punto de partida normal, no algo malo.
 
 6. **Definir el Plan de Acción (video 8).** Asignar a cada URL una de 3 acciones en la columna "Acción": **Actualizar/Optimizar**, **Eliminar/Redireccionar** o **Mantener** (criterios abajo). Esto cierra el ciclo y genera la lista de tareas.
 
-7. **Elegir las mejores páginas — Top 5 (video 9).** Seleccionar las **5 URLs prioritarias** bajo 3 lentes (volumen×dificultad, intención alta, cerca del top 10) y darles un orden lógico de trabajo.
+7. **Elegir las mejores páginas, Top 5 (video 9).** Seleccionar las **5 URLs prioritarias** bajo 3 lentes (volumen×dificultad, intención alta, cerca del top 10) y darles un orden lógico de trabajo.
 
 8. **Consolidar (Arianna, video 10).** Validar el mapa: inventario limpio (sin duplicados ni basura técnica), una keyword única por página, intención clara y Top 5 definido.
 
@@ -43,15 +43,15 @@ La "hoja de ruta de la semana" (Arianna, video 1), ejecutada sobre la pestaña *
 - **CON valor SEO:** páginas de Servicios/Productos, Artículos de Blog (resuelven dudas/educan), Categorías de E-commerce.
 - **SIN valor SEO (no optimizar):** páginas Legales (términos, privacidad), páginas de Autor (sirven a la autoridad interna pero rara vez se buscan), Carpetas de organización interna sin contenido real.
 
-**Criterios del Plan de Acción (video 8) — combinado con el prompt del video 8:**
+**Criterios del Plan de Acción (video 8), combinado con el prompt del video 8:**
 - **Actualizar / Optimizar:** la página tiene valor SEO pero su posición es baja o inexistente (>100), o el contenido está desactualizado. Objetivo: mejorar texto, encabezados y relevancia para subir. (El prompt sugiere el rango orientativo **posición 4-20**.)
 - **Eliminar / Redireccionar:** la página no tiene valor SEO, tiene contenido duplicado, hay canibalización, o "ensucia" el rastreo. Objetivo: limpiar para que Google se concentre en lo importante.
 - **Mantener (dejar como está):** la página ya está posicionada en los primeros lugares (el prompt orienta **top 3**) y cumple su función.
 
 **Criterios para el Top 5 (video 9):**
-1. **Alto Volumen + Baja Dificultad** — las "frutas bajas" (low-hanging fruit), tráfico rápido.
-2. **Intención Alta (conversión)** — aunque tengan menos tráfico, son las que venden; impactan el negocio.
-3. **Cerca del Top 10** — una URL en posición 12-15 con un ajuste pequeño salta a la página 1.
+1. **Alto Volumen + Baja Dificultad**, las "frutas bajas" (low-hanging fruit), tráfico rápido.
+2. **Intención Alta (conversión)**, aunque tengan menos tráfico, son las que venden; impactan el negocio.
+3. **Cerca del Top 10**, una URL en posición 12-15 con un ajuste pequeño salta a la página 1.
 
 **Orden lógico de trabajo (video 9):** 1) arreglar bases / pilares con errores graves; 2) oportunidades de tráfico rápido (alto volumen / baja dificultad); 3) bajo potencial o largo plazo.
 
@@ -97,7 +97,7 @@ La "hoja de ruta de la semana" (Arianna, video 1), ejecutada sobre la pestaña *
   - **Media (Investigación Comercial):** ya sabe qué necesita y compara opciones/lugares (ej: "cursos de marketing digital en Barcelona").
   - **Alta (Transaccional):** necesidad urgente/específica, listo para actuar (ej: "contratar asesoría de marketing", página de curso con precio y botón). Son "el dinero".
 - **URL:** dirección física de una página en el mundo digital; se compone de protocolo (https), subdominio (www), dominio y extensión (.com/.es).
-- **"Frutas bajas" (low-hanging fruit):** páginas con alto volumen y baja dificultad — tráfico rápido si se optimizan bien.
+- **"Frutas bajas" (low-hanging fruit):** páginas con alto volumen y baja dificultad, tráfico rápido si se optimizan bien.
 - **Plan de Acción:** las 3 decisiones por URL (Actualizar/Optimizar, Eliminar/Redireccionar, Mantener) que transforman los datos en tareas.
 
 ## Ejemplos del curso
@@ -107,3 +107,16 @@ La "hoja de ruta de la semana" (Arianna, video 1), ejecutada sobre la pestaña *
 - **Reporte para clientes (video 8):** el mapa es una herramienta de venta y autoridad: "Analizamos página por página y detectamos qué actualizar, qué eliminar y qué está funcionando bien".
 - **"Eliminar" da miedo pero es necesario (tip video 8):** si una página no ayuda al usuario ni al SEO, solo consume recursos; al quitarla, das más fuerza a tus páginas de Intención Alta.
 - **Si no tienes web aún (video 2):** practica el mapeo con cualquier sitio con muchas URLs de tu nicho; lo importante es dominar la metodología.
+
+## Práctica de coaches (afina criterios, no contradice el curso)
+
+**Vero (instructora de la Semana 5), cómo revisa los mapas:**
+- **Inventario con Screaming Frog:** rastrear el dominio en modo Spider (no el sitemap); si el sitemap es un índice, cargar cada archivo por separado; filtrar a URLs de contenido y descartar imágenes y archivos. En proyectos reales se analizan todas las URLs; en práctica basta un subconjunto.
+- **Valor y acciones:** las páginas de etiquetas de WordPress son listados automáticos que se pueden eliminar sin perder los posts. Con muchas páginas heredadas clasifica en **Conservar, Actualizar, Unificar o Eliminar**; "rama seca" es la página que no aporta valor, no tiene potencial y no cumple función en la estructura.
+- **Una fila es una página futura:** la keyword principal va en URL y H1; las secundarias como H2, FAQ o atributos. Si dos keywords muestran casi las mismas páginas en la SERP, comparten intención y se atienden con una URL; si la SERP muestra páginas distintas, se separan.
+- **Prioridad:** home y páginas de servicio primero ("bases sólidas"), después productos con búsquedas claras, al final los posts informativos.
+- **Posición:** se anota la posición orgánica de la URL de trabajo; si no aparece, no está posicionada. En páginas nuevas se espera a Search Console antes de decidir.
+- **Sin sitio propio:** elegir 3 sitios parecidos y trabajar sobre uno.
+- **Errores típicos que corrige:** varias keywords con la misma intención (una URL principal y variantes dentro), tipo de contenido equivocado (mirar la SERP), mapa con imágenes y archivos, sitemap completo cargado como si fuera el sitio, observaciones con nombres distintos a los procesos del plan (Mapa de palabras clave, Arquitectura web, Mejoras de conversión).
+
+**Cruce estrategia y técnico (práctica de coaches):** la canibalización se detecta en el mapa y se resuelve con canonical, 301 y enlazado; el mapa decide qué URL posiciona qué y el inventario, el sitemap y Search Console confirman que esas URLs existen, se indexan y reciben enlaces.

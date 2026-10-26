@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /private/
+Disallow: /wp-content/uploads/
+
+User-agent: GPTBot
+Disallow: /
+
+Sitemap: http://localhost:8767/sitemap.xml

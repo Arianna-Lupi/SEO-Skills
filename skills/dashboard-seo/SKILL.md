@@ -1,11 +1,11 @@
 ---
 name: dashboard-seo
-description: Usa esta skill como PASO DE CIERRE de cualquier trabajo SEO para entregar un dashboard local con TODO lo encontrado, o cuando el usuario pida ver los resultados juntos — aunque no diga "dashboard", p.ej. "muéstrame todo junto", "un panel con los resultados", "informe visual", "una web local con la auditoría", "el resumen de todo". Reúne en una sola página local (issues por severidad, keywords, las 10 de Oro, clusters, competidores, AEO/GEO, auditorías previas, inventario y próximos pasos) los datos estructurados que las skills y agentes dejan en .seo-audit/<sitio>/data/*.json, genera el index.html y devuelve un URL local (http://127.0.0.1:PUERTO). Es el entregable final: cualquier auditoría, investigación de keywords o flujo de contenido debe terminar aquí.
+description: "Usa esta skill como PASO DE CIERRE de cualquier trabajo SEO para entregar un dashboard local con TODO lo encontrado, o cuando el usuario pida ver los resultados juntos, aunque no diga \"dashboard\", p.ej. \"muéstrame todo junto\", \"un panel con los resultados\", \"informe visual\", \"una web local con la auditoría\", \"el resumen de todo\". Reúne en una sola página local (issues por severidad, keywords, las 10 de Oro, clusters, competidores, AEO/GEO, auditorías previas, inventario y próximos pasos) los datos estructurados que las skills y agentes dejan en .seo-audit/<sitio>/data/*.json, genera el index.html y devuelve un URL local (http://127.0.0.1:PUERTO). Es el entregable final: cualquier auditoría, investigación de keywords o flujo de contenido debe terminar aquí."
 compatibility: Script requiere Python 3 (uv), solo stdlib. Sirve con `python3 -m http.server`. No necesita claves ni red. La carpeta .seo-audit/ va en .gitignore (datos del cliente, no se suben).
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
@@ -52,6 +52,8 @@ Carpeta por proyecto, **gitignored** (datos del cliente, no se suben):
   index.html                 ← lo genera build_dashboard.py
 ```
 
+Archivos del grupo D (reporte, schema, off page, IA), todos opcionales: `search-console.json` (`gsc_report.py --out`), `cwv-field.json` (`crux_campo.py`, Core Web Vitals de campo), `schema-validation.json` (`validate_schema.py --out`), `backlinks.json` (`anchor_profile.py` y `verificar_enlaces.py`, claves `anchors` y `verificacion`) y las claves `crawlers` y `llms_txt` dentro de `ai-features.json` (`ai_crawlers.py --out`). Cada sección se oculta sola si su archivo no existe. Los Core Web Vitals de **campo** (usuarios reales) van separados de los de **laboratorio** (`performance.json`) y se rotulan distinto.
+
 Reglas:
 - **Funciona con lo que haya.** No hace falta tener todos los archivos: las secciones sin datos se ocultan solas.
 - Cada skill, al terminar su trabajo para un sitio, **escribe/actualiza su JSON** en `data/` (con `Write` o su script). No pisa los de las demás.
@@ -85,8 +87,8 @@ Tras correr `agente-auditoria-tecnica` + `agente-investigacion-keywords` sobre `
 1. Los agentes dejaron `issues.json`, `keywords.json`, `clusters.json`, `competitors.json` en `.seo-audit/ejemplo.com/data/`.
 2. `uv run build_dashboard.py --site ejemplo.com` → genera `index.html`.
 3. `python3 -m http.server 8787 --directory .seo-audit/ejemplo.com` (background).
-4. Respondes: *"Dashboard listo: http://127.0.0.1:8787/ — 1 crítico (sitemap), 2 altos. Pendiente: conectar GSC y volumen/KD."*
+4. Respondes: *"Dashboard listo: http://127.0.0.1:8787/, 1 crítico (sitemap), 2 altos. Pendiente: conectar GSC y volumen/KD."*
 
 ## Script determinista (ahorro de tokens)
 
-`scripts/build_dashboard.py` — lee `.seo-audit/<sitio>/data/*.json`, escribe `index.html` (página autocontenida, sin dependencias) y opcionalmente sirve con `--serve`. Oculta secciones sin datos. Stdlib pura.
+`scripts/build_dashboard.py`, lee `.seo-audit/<sitio>/data/*.json`, escribe `index.html` (página autocontenida, sin dependencias) y opcionalmente sirve con `--serve`. Oculta secciones sin datos. Stdlib pura.

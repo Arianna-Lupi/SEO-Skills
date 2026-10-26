@@ -1,0 +1,26 @@
+{
+  "skill_name": "link-building-y-outreach",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Hazme el plan de outreach para mi blog de clases de piano.",
+      "expected_output": "Prospectar, Negociar, Seguimiento (S12 L5), tabla con scoring, correos personalizados y declaración de pagos.",
+      "assertions": [
+        "sigue prospectar, negociar y seguimiento",
+        "no inventa emails ni URLs de contacto",
+        "declara los enlaces pagados como sponsored-disclosed",
+        "propone anchor limpio sin números"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "¿Siguen publicados los enlaces que conseguimos el mes pasado? Te paso la lista.",
+      "expected_output": "Usa verificar_enlaces.py: estado, anchor y rel por URL; un error puede ser WAF.",
+      "assertions": [
+        "usa verificar_enlaces.py o revisa cada URL",
+        "reporta rel nofollow o sponsored",
+        "no afirma que un enlace desapareció sin verificar"
+      ]
+    }
+  ]
+}

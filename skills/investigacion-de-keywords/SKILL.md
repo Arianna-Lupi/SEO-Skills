@@ -1,15 +1,17 @@
 ---
 name: investigacion-de-keywords
-description: Usa esta skill cuando el usuario quiera investigar, buscar, encontrar o descubrir palabras clave / keywords, armar una lista de palabras clave, clasificarlas por intención, agruparlas en clusters o decidir cuáles atacar primero — aunque no diga "keywords", p.ej. "qué términos podría posicionar", "qué busca mi público en Google", "no sé por dónde empezar con SEO en mi web", "ayúdame a llenar la tab de Investigación de palabras clave". Sigue el método del diploma "De Cero a SEO" (aprendoseo): define audiencia con el Cuestionario SEO, descubre con los 4 métodos, clasifica por intención, agrupa en clusters y selecciona el "punto dulce" (volumen medio-alto × dificultad baja, priorizando long-tail).
+description: "Usa esta skill cuando el usuario quiera investigar, buscar, encontrar o descubrir palabras clave / keywords, armar una lista de palabras clave, clasificarlas por intención, agruparlas en clusters o decidir cuáles atacar primero, aunque no diga \"keywords\", p.ej. \"qué términos podría posicionar\", \"qué busca mi público en Google\", \"no sé por dónde empezar con SEO en mi web\", \"ayúdame a llenar la tab de Investigación de palabras clave\". Sigue el método del diploma \"De Cero a SEO\" (aprendoseo): define audiencia con el Cuestionario SEO, descubre con los 4 métodos, clasifica por intención, agrupa en clusters y selecciona el \"punto dulce\" (volumen medio-alto × dificultad baja, priorizando long-tail)."
 compatibility: Script opcional requiere Python 3 (uv) y requests; SerpApi/Ahrefs MCP opcionales (la skill funciona 100% manual).
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
 > No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+
+> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/keywords.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `keywords.json` (candidates + las 10 de Oro).
 
 
 Actúa como especialista en investigación de palabras clave en aprendoseo, siguiendo el método de Arianna Lupi y Diana Rodríguez (Semana 4 del diploma "De Cero a SEO").
@@ -23,7 +25,7 @@ Actúa como especialista en investigación de palabras clave en aprendoseo, sigu
 - Pide clasificar keywords por intención, agruparlas en clusters o decidir cuáles atacar primero.
 - Pide ayuda con URLs sugeridas, ideas de contenido o H1 a partir de keywords.
 
-Si en realidad quiere asignar keywords a URLs existentes, usa la skill `mapa-de-palabras-clave`. Si quiere analizar competidores/SERP, usa `analisis-serp-y-competencia`.
+Si en realidad quiere asignar keywords a URLs existentes, usa la skill `mapa-de-palabras-clave`. Si quiere analizar competidores/SERP, usa `analisis-serp-y-competencia`. Si la duda es solo la intención de una keyword o si dos keywords van en la misma página, usa `intencion-de-busqueda`.
 
 ## Entradas (qué te doy)
 
@@ -38,7 +40,7 @@ Si falta la audiencia, **no avances**: primero completa el Cuestionario SEO. Reg
 
 Esta skill funciona **sin ningún MCP**. **Herramienta por defecto para volumen/dificultad: DinoRank (la de la casa) o Ahrefs.** El usuario pega volumen/KD desde ahí; tú razonas clasificación, clusters y selección. (Alternativas: Ahrefs/SEMrush free, Google Keyword Planner, Google Search Console.)
 
-- **SerpApi MCP (GRATIS — principal):** `mcp__serpapi__search` para Google Autocomplete/Suggest, "People Also Ask" y búsquedas relacionadas → genera long-tail real y valida intención. Ideal para el método 2 (Autocomplete).
+- **SerpApi MCP (GRATIS, principal):** `mcp__serpapi__search` para Google Autocomplete/Suggest, "People Also Ask" y búsquedas relacionadas → genera long-tail real y valida intención. Ideal para el método 2 (Autocomplete).
 - **Ahrefs MCP (PAGO):** `mcp__claude_ai_Ahrefs__keywords-explorer-overview` (volumen, KD, tráfico potencial), `...-matching-terms` y `...-related-terms` (ideas), `...-search-suggestions` (long-tail) → llena las columnas de métricas con datos reales.
 
 Nunca exijas un MCP. La IA genera ideas; **valida siempre con datos reales**. Ver `../../MCP-SETUP.md`.
@@ -64,9 +66,10 @@ Nunca exijas un MCP. La IA genera ideas; **valida siempre con datos reales**. Ve
    - **Relevancia** con el negocio.
    - **Intención** alineada con el objetivo.
    - **"Punto dulce"** = volumen medio/alto + dificultad baja. **Prioriza long-tail.**
+   - Práctica de coaches (Vero y Ari): pesa **intención y relevancia antes que volumen**, y piensa "cómo te buscaría alguien que no conoce tu marca". Detalle en [`references/metodo-diploma.md`](references/metodo-diploma.md), sección "Práctica de coaches".
 8. **Filtrado final:**
    - **Filtro de Negocio** (¿aporta clientes/objetivo?).
-   - **Validación de Intención** (¿la SERP confirma esa intención?).
+   - **Validación de Intención** (¿la SERP confirma esa intención?). Para hacerla bien, usa la skill `intencion-de-busqueda`: abre la SERP, mira el formato que Google premia y, si dos keywords muestran casi las mismas páginas, quédate con una sola.
    - **"Duelo de Keywords"**: ante dos similares, gana la de mejor ratio Volumen/Dificultad.
 9. **Columnas de Ejecución** por keyword ganadora:
    - **URL Sugerida**: corta, sin tildes, con la keyword (ej. `/seo-para-restaurantes`).
@@ -90,7 +93,7 @@ Negocio: estudio de yoga en Bogotá. Audiencia: mujeres 28-45, principiantes, bu
 |---|---|---|---|---|---|---|---|
 | clases de yoga para principiantes bogota | Clases | Transaccional | 480 | Baja | ✅ | /clases-yoga-principiantes-bogota | Clases de yoga para principiantes en Bogotá |
 | yoga para el estres | Beneficios | Informativa | 1.300 | Baja | ✅ | /yoga-para-el-estres | Yoga para el estrés: rutina para empezar hoy |
-| yoga | — | Navegacional/ambigua | 110.000 | Alta | ❌ | — | — |
+| yoga | - | Navegacional/ambigua | 110.000 | Alta | ❌ | - | - |
 
 "yoga" cae por dificultad Alta y por perder el Duelo de Keywords frente a las long-tail del punto dulce.
 
@@ -102,8 +105,6 @@ Ejecuta (cero instalación, resuelve deps solo):
 
 ```
 SERPAPI_API_KEY=... uv run skills/investigacion-de-keywords/scripts/expand_keywords.py --seed "rutina facial" --seed "serum vitamina c" --gl es --hl es
-> **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/keywords.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `keywords.json` (candidates + las 10 de Oro).
-
 # o, si no usas uv: SERPAPI_API_KEY=... python3 skills/investigacion-de-keywords/scripts/expand_keywords.py --seed "rutina facial" --seed "serum vitamina c" --gl es --hl es
 # o por archivo (una semilla por línea):
 SERPAPI_API_KEY=... uv run skills/investigacion-de-keywords/scripts/expand_keywords.py --file semillas.txt --gl es --hl es
@@ -120,3 +121,11 @@ Ejecútalo con `--help` para ver opciones. Salida: `{"ok":true,"seeds":[...],"ca
 - Agrupa siempre en **clusters**: sin clusters no se construye Topic Authority.
 - URL **corta, sin tildes y con la keyword**, no larga ni con acentos.
 - H1 con la keyword **lo más a la izquierda posible**, no al final.
+- **Keywords sin datos no se borran** (práctica de Vero): revisa la SERP; si hay más de 3 artículos o más de 5 páginas sobre el término, hay demanda. Anótala con una nota que explique el criterio y márcala `pendiente de dato` en volumen, no con una cifra inventada.
+- **Keyword que atrae otra audiencia** ("tendencias en medicina" para vender software, "diseño acrílico" que lleva a uñas): cambia el ángulo al problema que resuelve el negocio.
+- **Una frase de copy no es una keyword** ("el regalo perfecto para esa persona especial" sirve de título, no de keyword). Tampoco lo son las secciones del sitio ("rutas", "contacto", "sobre mí").
+- **Volumen sin ciudad, ciudad en el H1** (Vero): mide el volumen sin la ubicación y deja la ciudad para el H1. Si "Lima" y "Miraflores" dan la misma SERP, deja una.
+- **Tildes y plurales**: elige la variante por volumen para la estrategia, pero escribe con gramática correcta en el contenido.
+- **No amarres la keyword a una sigla o marca** antes de investigar el término genérico ("talleres de teatro" primero, "talleres de teatro UCV" después).
+- **"Idea de contenido" con formato y contenido**, no "Blog" a secas (Ari): "Artículo con tabla de precios + calculadora".
+- **Opcional, después del método:** el agrupamiento por solape de SERP y otras ideas externas están en [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md).

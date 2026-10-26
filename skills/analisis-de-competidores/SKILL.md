@@ -1,11 +1,11 @@
 ---
 name: analisis-de-competidores
-description: Usa esta skill cuando el usuario quiera SABER QUIÉNES son sus competidores SEO reales a partir de una keyword (o unas pocas) — aunque no diga "competidores", p.ej. "quién me gana en Google con esta palabra", "sácame los dominios que rankean esto", "quiénes son los que salen arriba", "identifica a mi competencia para esta keyword". Hace el pipeline determinista: SerpApi busca la keyword → toma el top 5-10 de URLs → ENTRA a cada link (sigue redirects) → extrae el dominio registrado de cada uno → agrega, cuenta repetición ("un dominio que sale en varias SERPs = competidor crítico") y devuelve la lista de competidores priorizada. Es el paso de DESCUBRIR competidores; para el análisis profundo de gaps/ojo clínico usa `analisis-serp-y-competencia`.
-compatibility: Script requiere Python 3 (uv) + requests + tldextract y SERPAPI_API_KEY (o --urls para modo manual). Sin clave/deps degrada a modo manual (Google en incógnito). Alternativa: MCP de SerpApi (ver MCP-SETUP.md).
+description: "Usa esta skill cuando el usuario quiera SABER QUIÉNES son sus competidores SEO reales a partir de una keyword (o unas pocas), aunque no diga \"competidores\", p.ej. \"quién me gana en Google con esta palabra\", \"sácame los dominios que rankean esto\", \"quiénes son los que salen arriba\", \"identifica a mi competencia para esta keyword\". Hace el pipeline determinista: SerpApi busca la keyword → toma el top 5-10 de URLs → ENTRA a cada link (sigue redirects) → extrae el dominio registrado de cada uno → agrega, cuenta repetición (\"un dominio que sale en varias SERPs = competidor crítico\") y devuelve la lista de competidores priorizada. Es el paso de DESCUBRIR competidores; para el análisis profundo de gaps/ojo clínico usa `analisis-serp-y-competencia`."
+compatibility: "Script requiere Python 3 (uv) + requests + tldextract y SERPAPI_API_KEY (o --urls para modo manual). Sin clave/deps degrada a modo manual (Google en incógnito). Alternativa: MCP de SerpApi (ver MCP-SETUP.md)."
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.2"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
@@ -13,7 +13,9 @@ metadata:
 
 > **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/competitors.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `competitors.json`.
 
-# Análisis de Competidores — descubrir por dominio (SerpApi)
+# Análisis de Competidores: descubrir por dominio (SerpApi)
+
+> **Método completo del diploma:** las definiciones, el Análisis de Repetición y la práctica de los coaches están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
 Actúa como estratega SEO en aprendoseo (método de Arianna Lupi, "De Cero a SEO", Semana 6). Esta skill resuelve **una pregunta concreta**: dada una keyword, **¿quiénes son los dominios que compiten de verdad por ella?** No copia al rival ni analiza gaps (eso es `analisis-serp-y-competencia`); su trabajo es **descubrir y priorizar los dominios competidores** con datos reales de la SERP.
 
@@ -38,7 +40,7 @@ Después de esta skill: análisis profundo con `analisis-serp-y-competencia`, o 
 
 Funciona **sin MCP** con el script (que trae su propia clave de `~/.claude/seo-skills.env`). Fallback 100% manual: Google en incógnito, copiar el top 10, anotar el dominio de cada uno y marcar los que se repiten.
 
-- **SerpApi (GRATIS — principal aquí):** el script usa la REST de SerpApi. Alternativa MCP: `mcp__serpapi__search`.
+- **SerpApi (GRATIS, principal aquí):** el script usa la REST de SerpApi. Alternativa MCP: `mcp__serpapi__search`.
 - **Ahrefs (PAGO, enriquece):** `mcp__claude_ai_Ahrefs__site-explorer-organic-competitors` descubre rivales SEO por solapamiento de keywords; úsalo para cruzar/confirmar la lista que saca el script. No es obligatorio.
 
 Config de MCP/clave: ver `../../MCP-SETUP.md` y la skill `configurar-serpapi`.
@@ -50,10 +52,11 @@ El grueso lo hace el **script determinista** (abajo). Tu trabajo es interpretar 
 1. **Ejecuta el script** con la keyword (o varias separadas por `|`) y tu dominio en `--own`.
 2. **Lee `competitors`** del JSON: viene ordenado por **repetición** (en cuántas keywords aparece) y luego por **mejor posición**.
 3. **Prioriza:**
-   - `repeticion ≥ 2` (aparece en varias SERPs) = **competidor crítico**.
+   - `critical: true` = **competidor crítico** según la regla del curso (un dominio en 3 de 5 keywords, es decir 60 % o más; con menos de 3 keywords, repetición de al menos 2).
    - `best_position` baja (1-3) = domina esa keyword.
    - Descarta agregadores/marketplaces irrelevantes si el objetivo es competencia directa (Amazon, YouTube, etc.), pero anótalos: a veces ES la SERP que hay que batir.
-4. **Clasifica** cada dominio crítico como Competidor de Negocio y/o SEO (¿vende lo mismo o solo rankea?).
+4. **Clasifica** cada dominio crítico como Competidor de Negocio y/o SEO (¿vende lo mismo o solo rankea?) y como Directo o Indirecto. El campo `type_hint` del script es solo una pista para plataformas conocidas.
+   - Criterios de los coaches: la prensa que vive de publicidad sirve para ideas de contenido, no para comparar páginas de producto; un rival de alcance muy distinto no sirve; si tu nicho no tiene rivales con datos, amplía a sitios del mismo tema o a referentes de otros países. **Elige 3 a 4 competidores** y ataca primero lo ganable.
 5. **Entrega** la lista priorizada y pásala como insumo a la siguiente skill.
 
 ## Script determinista (ahorro de tokens)
@@ -74,7 +77,7 @@ uv run skills/analisis-de-competidores/scripts/competitor_domains.py "curso seo"
 ```
 
 Corre con `--help` para ver opciones. Devuelve:
-`{"ok": true, "keywords": [...], "top": N, "competitors": [{domain, repeticion, best_position, positions:{kw:pos}, sample_url, title}], "own_domain": ...}`.
+`{"ok": true, "keywords": [...], "top": N, "competitors": [{domain, repeticion, critical, type_hint, best_position, positions:{kw:pos}, sample_url, title}], "own_domain": ...}`.
 Ordenado por `repeticion` desc y `best_position` asc. Si falla: `{"ok": false, "reason": "...", "fallback": "modo manual: ..."}` (exit 0).
 
 ## Salida
@@ -84,7 +87,7 @@ Tabla de competidores priorizada, lista para la tab **Competencia** de la Planti
 | Dominio | Repetición (de N kw) | Mejor posición | Negocio/SEO | Directo/Indirecto | URL ejemplo |
 |---|---|---|---|---|---|
 
-Marca los `repeticion ≥ 2` como **críticos**. Debajo, 1 línea por dominio crítico diciendo por qué compite.
+Marca los `critical: true` como **críticos**. Debajo, 1 línea por dominio crítico diciendo por qué compite.
 
 ## Ejemplo
 
@@ -100,3 +103,10 @@ Script devuelve `example-seo.com` con `repeticion: 3` (sale en las 3 SERPs) y `b
 - **Repetición = criticidad:** prioriza los dominios que salen en varias SERPs, no el que salió #1 en una sola keyword suelta.
 - **SERP en incógnito / región correcta:** usa el `gl`/`hl` correcto; la personalización falsea el ranking. Si el negocio es local, la keyword debe llevar la ciudad.
 - Esta skill **descubre y prioriza**; el análisis de gaps, ojo clínico y costo de oportunidad es `analisis-serp-y-competencia`. No dupliques ese trabajo aquí.
+- **Usa términos cortos (semilla), no long-tail, para descubrir** (Semana 6 · video 3): las long-tail muy específicas llevan a sitios pequeños sin datos públicos. Si te quedas sin datos, simplifica las keywords.
+- **Plataformas (Wikipedia, YouTube, marketplaces, foros)** aparecen en muchas SERP: son competidores SEO o el formato que hay que batir, pero no son un rival de negocio al que copiar. Anótalas y sepáralas de la lista de 3 a 4 competidores.
+- **Opcional, después del método:** el filtrado de dominios ubicuos y la clasificación por tipo de dominio están en [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md).
+
+## Siguiente paso: perfilar y comparar
+
+Ya tienes los dominios y los críticos. Para ver **qué hace cada página del top** y qué le falta a la tuya, pasa a `analisis-serp-y-competencia` (versión 1.2): `scripts/perfil_competidor.py` perfila las URLs del top (acepta el JSON que produce `serp.py`, y también URLs sueltas) y `scripts/comparar_serp.py` saca el patrón común, las brechas, el Costo de Oportunidad y las tareas con ICE. Primero haz el Ojo Clínico sobre el top 3 (Semana 6 · lección 2).

@@ -4,7 +4,7 @@
 # dependencies = ["requests", "tldextract"]
 # ///
 """
-competitor_domains.py — Descubre competidores SEO por dominio desde la SERP.
+competitor_domains.py, Descubre competidores SEO por dominio desde la SERP.
 
 Qué hace (determinista):
   1. Consulta la SERP de una o varias keywords vía SerpApi.
@@ -14,6 +14,13 @@ Qué hace (determinista):
   4. Agrega los dominios, cuenta en cuántas keywords aparece cada uno
      ("Análisis de Repetición": un dominio en varias SERPs = competidor crítico)
      y los ordena por repetición y mejor posición.
+
+  5. Marca `critical` (regla del curso: un dominio en 3 de 5 keywords, es decir
+     60 % o más de las keywords analizadas, es competidor crítico; con menos de
+     3 keywords se exige repetición >= 2) y añade `type_hint` cuando el dominio
+     es una plataforma conocida (Wikipedia, YouTube, marketplaces, redes). El
+     type_hint es solo una pista: confirma a mano si es competidor de negocio
+     o solo competidor SEO.
 
 Requisitos:
   - Env SERPAPI_API_KEY (o --urls para saltarte SerpApi con una lista manual).
@@ -35,8 +42,8 @@ Salida (JSON a stdout):
     "keywords": ["..."],
     "top": 10,
     "competitors": [
-      {"domain","repeticion","best_position","positions":{"kw":pos},
-       "sample_url","title"}, ...
+      {"domain","repeticion","critical","type_hint","best_position",
+       "positions":{"kw":pos},"sample_url","title"}, ...
     ],
     "own_domain": "midominio.com" | null
   }
@@ -61,6 +68,26 @@ BROWSER_HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
 }
+
+
+# Pista de tipo para plataformas conocidas (no es un veredicto).
+PLATFORM_HINTS = {
+    "wikipedia.org": "enciclopedia (competidor SEO, no de negocio)",
+    "youtube.com": "video (formato que Google premia en esa SERP)",
+    "amazon.com": "marketplace", "amazon.es": "marketplace", "mercadolibre.com": "marketplace",
+    "ebay.com": "marketplace", "aliexpress.com": "marketplace",
+    "reddit.com": "foro", "quora.com": "foro", "facebook.com": "red social",
+    "instagram.com": "red social", "pinterest.com": "red social", "linkedin.com": "red social",
+    "tripadvisor.com": "directorio de opiniones", "yelp.com": "directorio de opiniones",
+    "paginasamarillas.es": "directorio",
+}
+
+
+def is_critical(repeticion, n_keywords):
+    """Regla del curso: 3 de 5 keywords (60 %) = crítico; con pocas keywords, repetición >= 2."""
+    if n_keywords < 3:
+        return repeticion >= 2
+    return repeticion / n_keywords >= 0.6
 
 
 def log(msg):
@@ -213,6 +240,8 @@ def main():
         competitors.append({
             "domain": dom,
             "repeticion": len(positions),
+            "critical": is_critical(len(positions), len(keywords)),
+            "type_hint": PLATFORM_HINTS.get(dom),
             "best_position": best,
             "positions": positions,
             "sample_url": e["sample_url"],

@@ -1,0 +1,72 @@
+{
+  "skill_name": "plan-seo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Hice el análisis de la web de mi cliente (una clínica dental) y tengo 12 observaciones sueltas. Ordénalas en un plan para los próximos meses.",
+      "expected_output": "Un plan por meses donde cada observación termina en una tarea con verbo, prioridad, responsable y fecha, con la técnica antes que el contenido, vinculada a un objetivo.",
+      "assertions": [
+        "cada tarea empieza con verbo",
+        "el plan se reparte en Mes 1 bases y estrategia, Mes 2 contenido, Mes 3 autoridad y publicación, Mes 4 resultados",
+        "las tareas técnicas que bloquean a Google van antes que las de contenido",
+        "cada tarea responde a un objetivo definido",
+        "los campos sin dato (responsable, fecha, horas) aparecen como pendiente de dato y no inventados"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Tengo una tienda nueva y no sé qué objetivo ponerle ni cómo medirlo. El cliente dice que quiere tráfico.",
+      "expected_output": "Un objetivo SMART alineado a vender (E-commerce), con métricas base reales o pendiente de dato y una pregunta al cliente para aterrizar 'tráfico' en ventas.",
+      "assertions": [
+        "alinea el objetivo principal con el modelo de negocio (vender para e-commerce)",
+        "pregunta qué venta o contacto necesita el cliente detrás de 'tráfico'",
+        "no inventa línea base ni metas numéricas sin datos",
+        "menciona el cuestionario SEO y los accesos a Search Console, Analytics y CMS"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Estoy por entregar mi proyecto final del diplomado. ¿Qué debe tener?",
+      "expected_output": "La lista del proyecto final: Plantilla Master completa y presentación de slides con el esquema Portada, Objetivos, Auditoría técnica, Estrategia de contenidos, Conclusión.",
+      "assertions": [
+        "menciona la Plantilla Master 100% llena",
+        "incluye el esquema de slides del diplomado",
+        "remite a propuesta-y-reporte-de-servicios-seo para el discurso al cliente"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Tengo keywords, clusters y los issues de la auditoría de una clínica dental. Arma la Plantilla Master completa y un brief por cada página del plan.",
+      "expected_output": "Se corre generar_master.py y generar_briefs.py sobre .seo-audit/<sitio>/data: Master con las pestañas reales y celdas pendientes de dato, mapa validado 1 keyword por URL y briefs por tipo en la carpeta entregables.",
+      "assertions": [
+        "genera la Master con las pestañas 1, 3, 5, 7, 9, 11, Actualización, 13, 15, 17 y 19 con los encabezados reales",
+        "marca como pendiente de dato el volumen, la KD y los precios que no existen y no inventa ninguno",
+        "valida que cada keyword apunte a una sola URL y avisa de la canibalización",
+        "crea briefs separados para blog, landing, ecommerce y actualización con las secciones de la plantilla",
+        "avisa de que si el mapa se derivó automáticamente es un borrador que debe revisarse",
+        "no sube nada a Google Drive sin mostrar qué creará y pedir confirmación"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Dos de mis páginas apuntan a la misma keyword. ¿Cómo lo ordeno?",
+      "expected_output": "Detecta la canibalización, deja una keyword principal por URL, mueve las otras a secundarias y reutiliza mapa-de-palabras-clave y deteccion-de-canibalizacion.",
+      "assertions": [
+        "identifica la keyword repetida en más de una URL",
+        "propone una sola keyword principal por URL y mueve el resto a secundarias",
+        "remite a mapa-de-palabras-clave y deteccion-de-canibalizacion sin duplicar su método"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Quiero dejar la Master y los briefs en mi Google Drive.",
+      "expected_output": "Explica las tres vías (archivos locales, conectores, API propia), muestra qué se creará y dónde, y pide confirmación; nunca comparte público por defecto.",
+      "assertions": [
+        "presenta la vía de archivos locales como base",
+        "pide confirmación antes de crear o compartir cualquier cosa en Drive",
+        "no comparte con 'cualquiera con el enlace' por defecto",
+        "pide el enlace de la copia oficial de la Master si usa los conectores"
+      ]
+    }
+  ]
+}

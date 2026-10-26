@@ -1,0 +1,41 @@
+{
+  "skill_name": "actualizacion-de-contenido",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Mi artículo /blog/cera-para-velas tiene muchas impresiones en Search Console pero casi nadie hace clic. Está en la página 2 para 'cera de soja para velas'. Dime qué hacer, no quiero reescribirlo entero.",
+      "expected_output": "Un Brief de Optimización Actual vs. Sugerido para un blog existente: diagnóstico basado en los datos de Search Console, alcance acotado (metadatos y H2), URL que se mantiene, keywords secundarias a incluir, Links From / Links To con site:, y bloques de cambios documentados y de qué se conserva.",
+      "assertions": [
+        "pide o usa datos reales de Search Console (impresiones, CTR, posición) y no inventa cifras",
+        "propone un alcance acotado (solo metadatos y H2 o expansión) y no una reescritura total",
+        "mantiene la URL actual porque la página ya recibe tráfico y menciona la 301 solo si hubiera que cambiarla",
+        "presenta el meta título (50-60c) y la meta descripción (120-155c con CTA) en formato Actual vs. Sugerido",
+        "incluye el método Links From / Links To con el comando site:dominio.com \"keyword\"",
+        "incluye los bloques 'cambios documentados antes de tocar' y 'qué se conserva'"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Tengo una ficha de producto de una tienda que recibe visitas pero vende poco. Quiero un plan de mejoras ordenado por impacto y esfuerzo.",
+      "expected_output": "Un brief de optimización para e-commerce con la matriz Impacto vs. Esfuerzo (P1 metas y descripciones, P2 Schema y reseñas, P3 imágenes y videos), enfoque en victorias rápidas, keywords transaccionales, CTAs y envío y devoluciones visibles, sin inventar reseñas.",
+      "assertions": [
+        "usa la matriz Impacto vs. Esfuerzo con P1, P2 y P3 según el curso",
+        "pone las metas, descripciones y keywords con impresiones como P1 (victorias rápidas)",
+        "no inventa reseñas ni testimonios: si faltan los deja como pendiente",
+        "revisa CTAs e información de envío y devoluciones",
+        "no mezcla la ficha de producto con una guía informativa"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Cambia la URL de mi página /servicios/diseno-web a /diseno-web-profesional-barcelona-precios porque tiene mejor keyword. Ya recibe bastante tráfico.",
+      "expected_output": "La skill advierte la regla de oro (si ya genera tráfico no se cambia la URL), pide validar intención y SERP antes de cambiar de keyword, y solo si hay un motivo real propone el cambio con 301 y actualización de enlaces internos.",
+      "assertions": [
+        "advierte que si la página ya genera tráfico y clics no se recomienda cambiar la URL",
+        "explica que un cambio exigiría redirección 301 y enlaces internos actualizados",
+        "sugiere optimizar metas, H1 y H2 en lugar de la URL",
+        "no recomienda el cambio solo por volumen de la keyword sin analizar intención y SERP"
+      ]
+    }
+  ]
+}

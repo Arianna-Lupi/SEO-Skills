@@ -1,0 +1,41 @@
+{
+  "skill_name": "intencion-de-busqueda",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo un blog sobre café y mi artículo 'Café de especialidad: guía completa' está muy bien optimizado pero no pasa de la página 3. Al buscar 'café de especialidad' en Google veo sobre todo tiendas y categorías de productos. ¿Qué está pasando?",
+      "expected_output": "Diagnóstico de desajuste de formato: la SERP premia categorías o tiendas (intención comercial/transaccional) y la página propia es un artículo informativo. Aplica la regla de Arianna de buscar primero en Google, nombra el tipo de keyword y la temperatura, recomienda atacar la keyword con una categoría o página de producto y reasignar el artículo a una informativa, sin inventar volúmenes.",
+      "assertions": [
+        "cita la regla de buscar la keyword en Google y leer qué tipo de resultados aparecen antes de crear la página",
+        "clasifica la keyword por tipo (informativa, comercial, transaccional o navegacional) y por temperatura (baja, media o alta)",
+        "identifica el desajuste entre el formato de la página (artículo) y el formato que premia la SERP (categoría o tienda)",
+        "recomienda cambiar el formato o reasignar la keyword, no seguir puliendo el artículo",
+        "propone reasignar el artículo a una keyword informativa para respetar el 1:1",
+        "no inventa volumen, dificultad ni posiciones"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "¿Debo crear una página para 'ferretería online' y otra para 'tienda de ferretería'? Las dos las busqué y me salen casi los mismos sitios.",
+      "expected_output": "Aplica el criterio de Vero: si la SERP muestra casi las mismas páginas comparten intención y van en una sola URL; una principal en URL y H1 y la otra como H2, FAQ o variante. Advierte del riesgo de canibalización si se separan.",
+      "assertions": [
+        "concluye que ambas keywords comparten intención y van en una sola URL",
+        "indica cuál va en URL y H1 y cuál entra como H2, FAQ o variante en el texto",
+        "explica que separarlas crea canibalización (el sitio compite consigo mismo)",
+        "menciona la excepción: si la SERP mostrara páginas distintas, se separarían"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Quiero posicionar mi agencia para la keyword 'mejores agencias de marketing digital'. Tengo una página de servicios. ¿Cómo la clasifico y qué hago?",
+      "expected_output": "Reconoce una keyword con 'mejores' (investigación comercial, temperatura media) cuya SERP suele traer listados de terceros; advierte que la página de servicios rara vez rankea ahí; propone leer la SERP, apuntar a un artículo del tipo 'qué buscar en una agencia', salir en listados externos y reservar la página de servicios para una keyword transaccional.",
+      "assertions": [
+        "clasifica la keyword como investigación comercial con temperatura media",
+        "advierte que con 'mejores' Google suele mostrar listados de terceros y que la página de servicios rara vez rankea",
+        "propone una alternativa concreta (artículo tipo 'qué buscar en...', aparecer en listados externos o testimonios)",
+        "pide o realiza la lectura de la SERP antes de decidir el formato",
+        "reserva la página de servicios para una keyword transaccional distinta (1:1)"
+      ]
+    }
+  ]
+}

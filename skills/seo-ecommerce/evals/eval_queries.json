@@ -1,0 +1,9 @@
+[
+  {"query": "optimiza mi tienda Shopify para Google", "should_trigger": true},
+  {"query": "qué título y descripción pongo a esta ficha de producto", "should_trigger": true},
+  {"query": "cómo estructuro las colecciones de mi ecommerce", "should_trigger": true},
+  {"query": "las paginaciones de mi tienda me duplican contenido", "should_trigger": true},
+  {"query": "quiero que mis productos salgan con estrellas y precio en Google", "should_trigger": true},
+  {"query": "ayúdame a ordenar el plan de SEO por meses", "should_trigger": false},
+  {"query": "cómo salgo en el mapa de mi ciudad", "should_trigger": false}
+]

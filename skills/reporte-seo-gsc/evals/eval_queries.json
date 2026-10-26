@@ -1,0 +1,18 @@
+[
+  {
+    "query": "hazme el informe mensual para el cliente",
+    "should_trigger": true
+  },
+  {
+    "query": "impresiones subieron pero los clics bajaron, qué le digo al cliente",
+    "should_trigger": true
+  },
+  {
+    "query": "revisa el canonical de mi home",
+    "should_trigger": false
+  },
+  {
+    "query": "escribe un brief de contenido",
+    "should_trigger": false
+  }
+]

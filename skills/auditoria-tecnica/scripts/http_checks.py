@@ -4,7 +4,7 @@
 # dependencies = ["requests"]
 # ///
 """
-http_checks.py — Chequeo HTTP en vivo de una lista de URLs (fallback sin Screaming Frog).
+http_checks.py, Chequeo HTTP en vivo de una lista de URLs (fallback sin Screaming Frog).
 
 Qué hace (determinista):
   1. Lee URLs desde --file (una por línea).

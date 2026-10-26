@@ -1,0 +1,77 @@
+{
+  "pages": [
+    {
+      "url": "https://ejemplo-clinica.test/",
+      "url_estado": "existente",
+      "keyword": "clínica dental en valencia",
+      "secundarias": [
+        "dentista en valencia"
+      ],
+      "intencion": "Transaccional",
+      "tipo": "Home",
+      "cluster": "Servicios",
+      "rol": "Pilar",
+      "accion": "Actualizar",
+      "impacto": 9,
+      "confianza": 8,
+      "facilidad": 7,
+      "posicion": 14,
+      "meta_title_actual": "Inicio",
+      "h1": "Clínica dental en Valencia"
+    },
+    {
+      "url": "https://ejemplo-clinica.test/ortodoncia/",
+      "url_estado": "propuesta",
+      "keyword": "ortodoncia invisible precio",
+      "secundarias": [
+        "precio invisalign"
+      ],
+      "intencion": "Transaccional",
+      "tipo": "Landing",
+      "cluster": "Servicios",
+      "rol": "Spoke",
+      "accion": "Crear",
+      "impacto": 8,
+      "confianza": 7,
+      "facilidad": 6,
+      "h1": "Ortodoncia invisible en Valencia: precios y financiación",
+      "meta_title": "Ortodoncia invisible precio en Valencia | Clínica Ejemplo"
+    },
+    {
+      "url": "https://ejemplo-clinica.test/blog/que-es-la-ortodoncia/",
+      "url_estado": "propuesta",
+      "keyword": "qué es la ortodoncia",
+      "intencion": "Informacional",
+      "tipo": "Blog",
+      "cluster": "Servicios",
+      "rol": "Spoke",
+      "accion": "Crear",
+      "impacto": 5,
+      "confianza": 8,
+      "facilidad": 8
+    },
+    {
+      "url": "https://ejemplo-clinica.test/blog/ortodoncia/",
+      "url_estado": "propuesta",
+      "keyword": "ortodoncia: qué es",
+      "intencion": "Informacional",
+      "tipo": "Blog",
+      "cluster": "Servicios",
+      "rol": "Spoke",
+      "accion": "Crear"
+    },
+    {
+      "url": "https://ejemplo-clinica.test/tienda/",
+      "url_estado": "propuesta",
+      "keyword": "kit de blanqueamiento",
+      "intencion": "Transaccional",
+      "tipo": "Ecommerce",
+      "cluster": "Productos",
+      "rol": "Pilar",
+      "accion": "Crear",
+      "impacto": 6,
+      "confianza": 6,
+      "facilidad": 5
+    }
+  ]
+}

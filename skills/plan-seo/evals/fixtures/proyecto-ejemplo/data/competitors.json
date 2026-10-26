@@ -1,0 +1,22 @@
+{
+  "by_pillar": [
+    {
+      "pillar": "clínica dental en valencia",
+      "query": "clínica dental valencia",
+      "results": [
+        {
+          "position": 1,
+          "domain": "competidor-a.test",
+          "title": "A",
+          "url": "https://competidor-a.test/"
+        },
+        {
+          "position": 2,
+          "domain": "competidor-b.test",
+          "title": "B",
+          "url": "https://competidor-b.test/"
+        }
+      ]
+    }
+  ]
+}

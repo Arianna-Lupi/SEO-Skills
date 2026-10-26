@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-orphans.py — Detecta páginas huérfanas y analiza enlazado interno desde exports de Screaming Frog.
+orphans.py, Detecta páginas huérfanas y analiza enlazado interno desde exports de Screaming Frog.
 
 Qué hace (determinista):
   1. Lee internal_all.csv (todas las URLs rastreables) y all_inlinks.csv
@@ -10,6 +10,14 @@ Qué hace (determinista):
   3. Cuenta inlinks por URL; marca las de pocos inlinks (--low, default <3).
   4. Si internal_all trae columna de profundidad de rastreo (Crawl Depth),
      lista las URLs con profundidad > 3 (regla del diploma: clics desde home).
+  5. Distingue DOS profundidades (práctica de Juan, Semana 9): la profundidad
+     en clics desde la home (Crawl Depth, la que cuenta para la regla de los 3
+     clics) y la profundidad de carpeta (niveles en la ruta de la URL, lo que
+     muestra Octopus). `depth_detail` lista ambas para las URLs a más de
+     3 clics o con carpeta de 4 o más niveles; `depth_mismatch` marca las que
+     parecen profundas por carpeta pero están a pocos clics (no hay problema
+     de rastreo) y las que están a muchos clics aunque la ruta sea corta (el
+     problema real: contenido enterrado).
 
 Mapeo de columnas case-insensitive ("Address", "Destination", "Source",
 "Crawl Depth"/"Depth") para tolerar exports en inglés.
@@ -20,7 +28,9 @@ Uso:
 
 Salida (JSON a stdout):
   {"ok": true, "orphans": [...], "low_inlinks": [{"url","inlinks"}],
-   "depth_gt3": [...], "summary": {...}}
+   "depth_gt3": [...], "depth_detail": [{"url","click_depth","folder_depth"}],
+   "depth_mismatch": [{"url","click_depth","folder_depth","reading"}],
+   "summary": {...}}
   o: {"ok": false, "reason": "..."}
 
 Deps: solo stdlib (csv).
@@ -31,6 +41,7 @@ import csv
 import json
 import os
 import sys
+from urllib.parse import urlparse
 
 
 def out(obj):
@@ -48,6 +59,11 @@ def find_col(fieldnames, *candidates):
             if c.lower() in k:
                 return orig
     return None
+
+
+def folder_depth(url):
+    path = urlparse(url).path
+    return len([seg for seg in path.split("/") if seg])
 
 
 def open_csv(path):
@@ -129,6 +145,19 @@ def main():
     # profundidad > 3
     depth_gt3 = sorted(u for u, d in depth_by_url.items() if d > 3)
 
+    depth_detail = []
+    depth_mismatch = []
+    for u, d in sorted(depth_by_url.items()):
+        fd = folder_depth(u)
+        if d > 3 or fd >= 4:
+            depth_detail.append({"url": u, "click_depth": d, "folder_depth": fd})
+        if fd >= 4 and d <= 3:
+            depth_mismatch.append({"url": u, "click_depth": d, "folder_depth": fd,
+                                   "reading": "Carpeta profunda pero a pocos clics: no hay problema de rastreo; revisa si la estructura de URL aún tiene sentido."})
+        elif d > 3 and fd <= 2:
+            depth_mismatch.append({"url": u, "click_depth": d, "folder_depth": fd,
+                                   "reading": "Ruta corta pero enterrada a más de 3 clics: es el problema real; enlázala desde la home, el menú o un pilar."})
+
     summary = {
         "urls_total": len(internal_set),
         "orphans": len(orphans),
@@ -139,7 +168,8 @@ def main():
     }
 
     out({"ok": True, "orphans": orphans, "low_inlinks": low_inlinks,
-         "depth_gt3": depth_gt3, "summary": summary})
+         "depth_gt3": depth_gt3, "depth_detail": depth_detail,
+         "depth_mismatch": depth_mismatch, "summary": summary})
 
 
 if __name__ == "__main__":

@@ -1,11 +1,11 @@
 ---
 name: configurar-serpapi
-description: Usa esta skill cuando una skill SEO necesite datos en vivo de SerpApi (SERP real, People Also Ask, autocomplete, AI Overview) y NO haya una clave configurada, o cuando el usuario quiera conectar/activar SerpApi o dar su API key — aunque no diga "SerpApi", p.ej. "no tengo clave", "cómo consigo datos reales de Google", "quiero datos en vivo", "aquí está mi api key", "conecta SerpApi", "configura mi clave". Guía al usuario para crear una cuenta GRATIS en SerpApi (100 búsquedas/mes sin tarjeta), pide su API key, la guarda en ~/.claude/seo-skills.env y la valida, para que todas las skills la usen automáticamente en cada sesión sin volver a pedirla.
-compatibility: Script opcional requiere Python 3 (uv) + requests solo para validar la clave. Guarda la clave en ~/.claude/seo-skills.env, que los scripts de SerpApi cargan solos. Alternativa: MCP de SerpApi (ver MCP-SETUP.md).
+description: Usa esta skill cuando una skill SEO necesite datos en vivo de SerpApi (SERP real, People Also Ask, autocomplete, AI Overview) y NO haya una clave configurada, o cuando el usuario quiera conectar/activar SerpApi o dar su API key, aunque no diga "SerpApi", p.ej. "no tengo clave", "cómo consigo datos reales de Google", "quiero datos en vivo", "aquí está mi api key", "conecta SerpApi", "configura mi clave". Guía al usuario para crear una cuenta GRATIS en SerpApi (100 búsquedas/mes sin tarjeta), pide su API key, la guarda en ~/.claude/seo-skills.env y la valida, para que todas las skills la usen automáticamente en cada sesión sin volver a pedirla.
+compatibility: "Script opcional requiere Python 3 (uv) (solo stdlib). Guarda la clave en ~/.claude/seo-skills.env, que los scripts de SerpApi cargan solos. Alternativa: MCP de SerpApi (ver MCP-SETUP.md)."
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números ni claves.**
@@ -37,7 +37,9 @@ Actúa como asistente de configuración en aprendoseo. Varias skills (`analisis-
    - `--test` consulta la cuenta de SerpApi (no gasta búsquedas) y devuelve si es válida y cuántas búsquedas le quedan.
    - Si el usuario prefiere no dejarla en el comando: `--key -` y que la pegue por stdin.
 
-5. **Confirma.** Si `test.valid` es `true`, dile que ya quedó: todas las skills la tomarán sola en esta y futuras sesiones. Si es `false` (401), la clave está mal: que la copie de nuevo desde el panel.
+5. **Confirma y revisa la cuota.** Para comprobar más tarde una clave ya guardada sin pegarla otra vez: `python3 set_key.py --check-only`. Si el resultado trae `quota_warning` (10 búsquedas o menos), avisa y guarda lo que queda para las keywords prioritarias; sin cuota, las skills siguen en modo manual.
+
+   **Confirma.** Si `test.valid` es `true`, dile que ya quedó: todas las skills la tomarán sola en esta y futuras sesiones. Si es `false` (401), la clave está mal: que la copie de nuevo desde el panel.
 
 6. **(Opcional) MCP.** Si además quiere el MCP de SerpApi (para que el modelo lea SERPs directamente sin script), remítelo a `MCP-SETUP.md`. El MCP y la clave de los scripts son independientes; tener ambos no estorba.
 
@@ -60,4 +62,4 @@ Usuario: *"quiero datos reales, no tengo clave"*.
 
 ## Script determinista (ahorro de tokens)
 
-`scripts/set_key.py` — guarda/actualiza la variable en `~/.claude/seo-skills.env` (conserva otras), `chmod 600`, enmascara la clave en la salida y valida con `--test` sin gastar búsquedas. Stdlib (+ requests solo para `--test`).
+`scripts/set_key.py`, guarda/actualiza la variable en `~/.claude/seo-skills.env` (conserva otras), `chmod 600`, enmascara la clave en la salida y valida con `--test` sin gastar búsquedas. Solo stdlib. `--check-only` valida la clave guardada y avisa cuando queda poca cuota.

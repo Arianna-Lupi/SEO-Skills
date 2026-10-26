@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "query": "cómo preparar café",
+  "top": [
+    {
+      "position": 1,
+      "title": "Guía",
+      "link": "https://cafeguia.test/blog/como-preparar-cafe",
+      "snippet": ""
+    },
+    {
+      "position": 2,
+      "title": "Métodos",
+      "link": "https://tazadiaria.test/blog/metodos-cafe",
+      "snippet": ""
+    },
+    {
+      "position": 3,
+      "title": "Lab",
+      "link": "https://cafelab.test/aprende/preparar-cafe",
+      "snippet": ""
+    }
+  ],
+  "paa": [],
+  "related": [],
+  "features": {
+    "ai_overview": false,
+    "featured_snippet": false,
+    "knowledge_panel": false
+  }
+}

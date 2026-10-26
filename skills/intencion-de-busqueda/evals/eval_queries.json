@@ -1,0 +1,12 @@
+[
+  { "query": "Mi página está súper optimizada y no rankea, sospecho que Google quiere otro tipo de página para esa keyword.", "should_trigger": true },
+  { "query": "¿Esta keyword es informativa o transaccional? No sé si hacer blog o landing.", "should_trigger": true },
+  { "query": "Estas dos palabras clave salen casi con los mismos resultados, ¿van en la misma página?", "should_trigger": true },
+  { "query": "Google me muestra listados de terceros para 'mejores X', ¿qué hago con mi página?", "should_trigger": true },
+  { "query": "Valida la intención de estas 20 keywords mirando la SERP antes de asignarlas.", "should_trigger": true },
+  { "query": "Descúbreme 30 keywords para mi tienda de plantas.", "should_trigger": false },
+  { "query": "Asígname una keyword primaria a cada URL del sitio y dime cuáles canibalizan.", "should_trigger": false },
+  { "query": "Redacta el artículo completo para la keyword 'cómo cuidar una monstera'.", "should_trigger": false },
+  { "query": "Revisa el robots.txt y el sitemap de mi web.", "should_trigger": false },
+  { "query": "Dame el export de Search Console y encuentra las páginas que se pisan por la misma query.", "should_trigger": false }
+]

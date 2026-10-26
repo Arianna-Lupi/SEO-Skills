@@ -1,0 +1,8 @@
+[
+  {"query": "cuántos clics puedo esperar si cumplo el plan de contenidos", "should_trigger": true},
+  {"query": "en cuánto tiempo voy a rankear estas páginas nuevas", "should_trigger": true},
+  {"query": "compara lo proyectado con Search Console de este mes", "should_trigger": true},
+  {"query": "cómo le explico al cliente qué resultados esperar", "should_trigger": true},
+  {"query": "arma el informe mensual de Search Console", "should_trigger": false},
+  {"query": "genera los briefs de contenido", "should_trigger": false}
+]

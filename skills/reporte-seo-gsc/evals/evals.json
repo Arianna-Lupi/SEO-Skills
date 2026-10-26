@@ -1,0 +1,26 @@
+{
+  "skill_name": "reporte-seo-gsc",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Arma el informe de septiembre con estos dos CSV de GSC.",
+      "expected_output": "Estructura del diploma con las 4 métricas mes vs mes, ganadoras, tareas y próximos pasos, usando gsc_report.py.",
+      "assertions": [
+        "incluye Resumen Ejecutivo, Rendimiento, Ganadoras y Próximos Pasos",
+        "usa solo clics, impresiones, CTR y posición de GSC",
+        "calcula deltas con el script y no a ojo",
+        "avisa si el CSV está limitado a 1.000 filas"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "El cliente pregunta si pasamos Core Web Vitals. No tengo datos.",
+      "expected_output": "No inventa valores: ofrece crux_campo.py con CRUX_API_KEY o PageSpeed Insights y marca pendiente de dato.",
+      "assertions": [
+        "no inventa LCP, INP ni CLS",
+        "distingue datos de campo de laboratorio",
+        "marca pendiente de dato si CrUX no tiene datos"
+      ]
+    }
+  ]
+}

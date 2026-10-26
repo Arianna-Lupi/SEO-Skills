@@ -1,11 +1,11 @@
 ---
 name: deteccion-de-canibalizacion
-description: Usa esta skill cuando haya que diagnosticar canibalización REAL (varias URLs de un sitio ya existente compitiendo hoy por la misma query, con datos de Google Search Console/Ahrefs), no la prevención al armar un mapa nuevo — aunque el usuario no diga "canibalización", p.ej. "por qué no despega esta keyword si tengo contenido bueno", "dos artículos míos aparecen turnándose en Google", "las posiciones suben y bajan sin razón", "¿debería fusionar o redirigir estas dos páginas?", "tengo un export de Search Console con query y página". Agrupa por query, calcula cuánto se reparte el clic entre URLs, clasifica severidad (Alta/Media/Bajo) y recomienda fusionar+301, diferenciar intención o solo monitorear.
+description: Usa esta skill cuando haya que diagnosticar canibalización REAL (varias URLs de un sitio ya existente compitiendo hoy por la misma query, con datos de Google Search Console/Ahrefs), no la prevención al armar un mapa nuevo, aunque el usuario no diga "canibalización", p.ej. "por qué no despega esta keyword si tengo contenido bueno", "dos artículos míos aparecen turnándose en Google", "las posiciones suben y bajan sin razón", "¿debería fusionar o redirigir estas dos páginas?", "tengo un export de Search Console con query y página". Agrupa por query, calcula cuánto se reparte el clic entre URLs, clasifica severidad (Alta/Media/Bajo) y recomienda fusionar+301, diferenciar intención o solo monitorear.
 compatibility: Script requiere Python 3 (uv), solo stdlib. Datos vía export de GSC (Query+Página) o MCP de GSC/Ahrefs; SerpApi MCP opcional para verificar la SERP en vivo. Funciona 100% manual pegando el export.
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
@@ -15,14 +15,16 @@ metadata:
 
 # Detección de canibalización (real, con datos de ranking)
 
-Actúa como especialista en canibalización SEO en aprendoseo. Tu trabajo: mirar **qué está pasando de verdad hoy en Google** (no un mapa planeado) y decidir, con datos, si dos o más URLs se están pisando por la misma query.
+Actúa como especialista en canibalización SEO en aprendoseo.
 
-**Diferencia clave con `mapa-de-palabras-clave`:** esa skill *previene* la canibalización asignando 1 keyword por URL al planificar. Esta skill la *diagnostica* en un sitio que ya existe, cruzando el rendimiento real por query+página (clics, impresiones, posición) — la única forma de confirmar si de verdad hay tráfico repartido o si solo lo parece.
+> **Método del diploma:** el criterio base (1 keyword por URL, "una intención, una URL", Duelo de Keywords y las acciones Eliminar/Redireccionar del Mapa) y la práctica de los coaches están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para no contradecir el curso. Tu trabajo: mirar **qué está pasando de verdad hoy en Google** (no un mapa planeado) y decidir, con datos, si dos o más URLs se están pisando por la misma query.
+
+**Diferencia clave con `mapa-de-palabras-clave`:** esa skill *previene* la canibalización asignando 1 keyword por URL al planificar. Esta skill la *diagnostica* en un sitio que ya existe, cruzando el rendimiento real por query+página (clics, impresiones, posición), la única forma de confirmar si de verdad hay tráfico repartido o si solo lo parece.
 
 ## Cuándo usar
 
 - Sospechas que **dos o más URLs compiten** por la misma búsqueda (Google alterna cuál muestra).
-- Una keyword **no despega** pese a tener contenido bueno — puede estar repartida entre varias páginas.
+- Una keyword **no despega** pese a tener contenido bueno, puede estar repartida entre varias páginas.
 - Vas a decidir si **fusionar, redirigir (301) o diferenciar** dos piezas de contenido similares.
 - Antes de un **refresh de contenido** o una migración, para no arrastrar el problema.
 
@@ -39,7 +41,7 @@ Si el sitio todavía no tiene keywords asignadas ni URLs mapeadas, usa primero `
 Funciona **100% manual**: el usuario exporta de GSC (Rendimiento → Páginas Y Consultas, agrupado por ambas dimensiones) y pega la tabla.
 
 - **MCP de GSC por usuario** (`mcp__mcp-hub__gsc-<owner>-get-advanced-search-analytics`, GRATIS): trae clics/impresiones/posición con dimensiones `query` + `page` directo de Search Console, sin exportar a mano.
-- **Ahrefs MCP (PAGO — GSC conectado):** `mcp__claude_ai_Ahrefs__gsc-pages` y `...gsc-keywords` para cruzar qué páginas y qué keywords se solapan; `...site-explorer-organic-keywords` por URL para ver el solape de keywords orgánicas entre dos URLs sin depender de GSC.
+- **Ahrefs MCP (PAGO, GSC conectado):** `mcp__claude_ai_Ahrefs__gsc-pages` y `...gsc-keywords` para cruzar qué páginas y qué keywords se solapan; `...site-explorer-organic-keywords` por URL para ver el solape de keywords orgánicas entre dos URLs sin depender de GSC.
 - **SerpApi MCP (GRATIS):** `mcp__serpapi__search` para confirmar **qué URL muestra Google ahora mismo** en la query sospechosa (a veces GSC promedia semanas y la SERP actual ya cambió cuál gana).
 
 Nunca exijas un MCP. Ver `../../MCP-SETUP.md`.
@@ -49,14 +51,15 @@ Nunca exijas un MCP. Ver `../../MCP-SETUP.md`.
 1. **Consigue el export** de GSC con Query + Página (o usa el MCP de GSC del owner correspondiente). Filtra por sección/carpeta si el sitio es grande.
 2. **Ejecuta el script** (`scripts/detectar_canibalizacion.py`) para agrupar por query, calcular cuánto domina la URL líder (`dominance_ratio`) y clasificar severidad.
 3. **Lee `cannibalization`**, priorizado por severidad:
-   - **Alta** — el clic se reparte de verdad (ninguna URL domina >60%) o las dos están a ≤5 posiciones en el top 20: canibalización real, actuando.
-   - **Media** — una URL domina (60-90% del clic) pero la otra sigue robando: riesgo, vale la pena resolver.
-   - **Bajo** — dominancia casi total (>90%) o solo impresiones sin clics: probable ruido de cola larga, monitorear.
+   - **Alta**, el clic se reparte de verdad (ninguna URL domina >60%) o las dos están a ≤5 posiciones en el top 20: canibalización real, actuando.
+   - **Media**, una URL domina (60-90% del clic) pero la otra sigue robando: riesgo, vale la pena resolver.
+   - **Bajo**, dominancia casi total (>90%) o solo impresiones sin clics: probable ruido de cola larga, monitorear.
 4. **Verifica en vivo** los casos Alta/Media con `mcp__serpapi__search`: confirma cuál URL rankea hoy y si de verdad son la misma intención de búsqueda o dos ángulos distintos.
-5. **Diagnostica la causa** mirando título/H1/contenido de cada URL del grupo:
+5. **Diagnostica la causa** mirando título/H1/contenido de cada URL del grupo. Primer filtro de los coaches (Vero, Dana, Diana): **¿comparten SERP?** Si la SERP de las dos queries muestra casi las mismas páginas, comparten intención y sobra una URL; dos páginas pueden nombrar "Madrid" sin canibalizar si la intención, el contenido y la estructura difieren. Después:
    - Contenido casi duplicado apuntando a lo mismo → **fusionar + redirigir 301** la débil hacia la fuerte.
    - Intención distinta pero títulos/keywords calcados (p.ej. informativa vs. transaccional) → **diferenciar**: retitular, cambiar keyword objetivo de la débil, reforzar enlazado interno hacia la pilar.
    - Solape mínimo / long-tail natural → **mantener**, solo vigilar.
+   Señales extra que calcula el script (v1.1): `leader_changes` (la URL líder cambia entre fechas, Google alterna), `slug_similarity` (slugs casi iguales sugieren contenido duplicado), `branded` (consultas de marca, normalmente no son un problema) y `suggested_target` (la URL a conservar).
 6. **Devuelve el fix a las skills que corrigen la causa raíz:** `mapa-de-palabras-clave` (reasignar 1 keyword : 1 URL) y `arquitectura-y-enlazado-interno` (redirigir enlaces internos hacia la URL ganadora).
 7. **Cierra en dashboard** (`dashboard-seo`): cada query canibalizada como un issue con su severidad.
 
@@ -85,8 +88,8 @@ Script → "café de especialidad": dominancia 0.53 (reparto real), posiciones a
 ## Gotchas
 
 - **Sin datos de query+página no hay diagnóstico real.** Un mapa de keywords planeado (`mapa-de-palabras-clave`) NO prueba canibalización; solo el rendimiento real en GSC/Ahrefs la confirma.
-- **Impresiones sin clics no siempre son canibalización** — puede ser una URL apareciendo por variantes de long-tail relacionadas. Revisa `dominance_ratio` antes de actuar.
-- **Antes de fusionar/redirigir, decide cuál URL "gana"** (mejor posición media, más autoridad/backlinks, más reciente) — redirige siempre la débil hacia la fuerte, nunca al revés.
+- **Impresiones sin clics no siempre son canibalización**, puede ser una URL apareciendo por variantes de long-tail relacionadas. Revisa `dominance_ratio` antes de actuar.
+- **Antes de fusionar/redirigir, decide cuál URL "gana"** (mejor posición media, más autoridad/backlinks, más reciente), redirige siempre la débil hacia la fuerte, nunca al revés.
 - **90 días de datos** dan más señal que 7-28: la posición diaria fluctúa y puede simular canibalización que no es tal.
 - No confundas con **metas duplicadas** (`optimizacion-on-page-meta`): dos títulos iguales sin URLs compitiendo en ranking real no es esta skill.
 
@@ -104,4 +107,9 @@ uv run skills/deteccion-de-canibalizacion/scripts/detectar_canibalizacion.py --f
 cat export.json | uv run skills/deteccion-de-canibalizacion/scripts/detectar_canibalizacion.py --file - --format json
 ```
 
-Ejecútalo con `--help` para ver opciones (incluye `--min-impressions` para filtrar ruido). Devuelve `{"ok":true,"cannibalization":[{"query","urls":[{"url","clicks","impressions","position"}],"total_clicks","total_impressions","dominance_ratio","position_gap","severity","action"}],"summary":{...}}`. Solo stdlib. Si Python no está disponible, hazlo en **modo manual** agrupando la tabla por query.
+Ejecútalo con `--help` para ver opciones (`--min-impressions` filtra ruido; `--brand "mi marca"` marca las consultas de marca, repetible). Si el export trae una columna `date` (por día, semana o mes), calcula también las alternancias de la URL líder. Devuelve `{"ok":true,"cannibalization":[{"query","urls":[{"url","clicks","impressions","position"}],"total_clicks","total_impressions","dominance_ratio","position_gap","slug_similarity","leader_changes","branded","suggested_target","severity","action"}],"summary":{...}}`. Hay un export de prueba en `fixtures/gsc_muestra.csv`. Solo stdlib. Si Python no está disponible, hazlo en **modo manual** agrupando la tabla por query.
+- **Una keyword secundaria no se usa como principal de otra URL** (Diana): es la forma más común de crear canibalización desde el mapa.
+- **Dos páginas con la misma ciudad no canibalizan** si la intención, el contenido y la estructura difieren (Diana). Revisa la SERP antes de fusionar.
+- **Si una keyword será solo un H2, no la trates como contenido individual** (Dana): sácala de las plantillas y absorbe su tema en la página principal.
+- **Consultas de marca**: que la home y "quiénes somos" salgan por la marca es normal. Filtra con `--brand`.
+- **Opcional, después del método:** matriz de decisión ampliada, plan de redirecciones y medición posterior en [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md).

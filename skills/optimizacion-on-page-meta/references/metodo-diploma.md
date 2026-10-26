@@ -1,4 +1,4 @@
-# Método del diploma — Metatítulos, metadescripciones y on-page (Semanas 8 y 11, Arianna Lupi / Dana Aliaga)
+# Método del diploma: Metatítulos, metadescripciones y on-page (Semanas 8 y 11, Arianna Lupi / Dana Aliaga)
 
 > Fuente: corpus interno "De Cero a SEO" (chunks, doc_type resumenes-prompts/transcripciones), Semanas 8 y 11. Material de aprendoseo.
 
@@ -27,7 +27,7 @@ Las metas y la jerarquía de encabezados se enseñan en la **Semana 8** (dentro 
 | **Imagen / ALT** | Al menos una imagen con **nombre de archivo amistoso** (ej. `guia-redaccion-seo.jpg`) y su **atributo ALT** descriptivo | S11 chunk 1; S11 transcripción ("atributos ALT y un nombre de archivo amistoso al SEO") |
 | **URL** | Semántica, descriptiva, "lo más descriptivos posible para que sea fácil para Google y para sus usuarios entender qué están viendo en la URL" | S8 transcripción |
 
-**Anatomía de un metatítulo (ejemplo de la transcripción S8):** keyword principal + atributo + marca → *"Gafas de sol para niños — Protección UV 100% | [Marca]"*.
+**Anatomía de un metatítulo (ejemplo de la transcripción S8):** keyword principal + atributo + marca → *"Gafas de sol para niños, Protección UV 100% | [Marca]"*.
 
 ## Prompts originales que da el curso (verbatim)
 
@@ -55,6 +55,6 @@ Las metas y la jerarquía de encabezados se enseñan en la **Semana 8** (dentro 
 ## Ejemplos del curso
 
 - **Caso "gafas de sol para niños" (S8 transcripción):** metatítulo = keyword ("gafas de sol para niños") + atributo ("protección UV 100%") + nombre de la marca, manteniéndose entre 50-60 caracteres.
-- **"Roba como un artista" (S8 chunk 6):** Arianna recomienda analizar la competencia, pero buscar un margen diferenciador que resuene con tu avatar para ganar el clic — *"No te copies, inspírate"*.
+- **"Roba como un artista" (S8 chunk 6):** Arianna recomienda analizar la competencia, pero buscar un margen diferenciador que resuene con tu avatar para ganar el clic, *"No te copies, inspírate"*.
 - **"Todo es un conjunto" (S8 chunk 5):** el metatítulo atrae el clic, pero los encabezados retienen al usuario y le confirman a Google que tu contenido es el mejor. No uses los headings solo para meter keywords.
 - **"Escribe para humanos, optimiza para robots" (S11 chunk 2):** no se sacrifica calidad por el algoritmo; el texto debe ser útil para la persona y legible para la máquina.

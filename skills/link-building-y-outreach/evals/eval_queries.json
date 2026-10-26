@@ -1,0 +1,18 @@
+[
+  {
+    "query": "cómo consigo backlinks de calidad",
+    "should_trigger": true
+  },
+  {
+    "query": "redáctame el correo para un guest post",
+    "should_trigger": true
+  },
+  {
+    "query": "audita la velocidad del sitio",
+    "should_trigger": false
+  },
+  {
+    "query": "haz el mapa de palabras clave",
+    "should_trigger": false
+  }
+]

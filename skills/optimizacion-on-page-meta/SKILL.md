@@ -1,22 +1,22 @@
 ---
 name: optimizacion-on-page-meta
-description: Optimiza metatítulos, metadescripciones y on-page de una URL según el método del diploma "De Cero a SEO" (aprendoseo). Usa esta skill cuando vayas a publicar o reoptimizar una página — AUNQUE el usuario no diga "meta" ni "on-page", p.ej. "ármame el título y la descripción de esta página", "tengo CTR bajo / no me hacen clic en Google", "mejora el on-page de esta URL", "dame variantes para A/B de CTR". Genera metatítulo (50-60 chars, keyword al inicio) y metadescripción (120-155 con CTA), variantes para A/B y un checklist on-page accionable. No publiques nada sin pasar por aquí.
-compatibility: Script opcional de validación de metas requiere Python 3 (uv); si no está, modo manual con simulador de SERP. SerpApi MCP (gratis) y Ahrefs MCP (pago) opcionales.
+description: Optimiza metatítulos, metadescripciones y on-page de una URL según el método del diploma "De Cero a SEO" (aprendoseo). Usa esta skill cuando vayas a publicar o reoptimizar una página, AUNQUE el usuario no diga "meta" ni "on-page", p.ej. "ármame el título y la descripción de esta página", "tengo CTR bajo / no me hacen clic en Google", "mejora el on-page de esta URL", "dame variantes para A/B de CTR". Genera metatítulo (50-60 chars, keyword al inicio) y metadescripción (120-155 con CTA), variantes para A/B y un checklist on-page accionable. No publiques nada sin pasar por aquí.
+compatibility: Scripts opcionales meta_check.py y meta_audit.py (solo stdlib) y serp_metadata.py (requests/beautifulsoup4) requieren Python 3 (uv); si no está, modo manual con simulador de SERP. SerpApi MCP (gratis) y Ahrefs MCP (pago) opcionales.
 metadata:
   author: aprendoseo
   milestone: SEO skills (De Cero a SEO)
-  version: "1.0"
+  version: "1.1"
 ---
 
 > **🚫 Regla de datos (obligatoria): NUNCA inventes números.**
-> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta** — que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
+> No estimes, supongas ni inventes métricas o datos que no tengas: volumen de búsqueda, dificultad/KD, clics, impresiones, CTR, posición, tráfico, Core Web Vitals, backlinks, fechas, precios, etc. Si te falta un dato, **pídeselo al usuario y espera su respuesta**, que lo pegue a mano, lo exporte (Google Search Console, Ahrefs, DinoRank, Screaming Frog…) o lo conecte por MCP. Da igual de dónde venga, pero tiene que venir de una fuente real. Si aun así no hay dato, márcalo explícitamente como `pendiente de dato` y NO continúes como si lo tuvieras. Un entregable con huecos honestos vale más que uno con cifras inventadas.
 
 
 > **📊 Cierre en dashboard.** Cuando trabajes sobre un sitio, además de tu entrega persiste tu salida estructurada en `.seo-audit/<sitio>/data/content-briefs.json` (esquema en la skill `dashboard-seo`). Al cerrar el flujo SEO, genera/actualiza el dashboard con `dashboard-seo` y entrega el URL local. Tu archivo: `content-briefs.json` (meta_title / meta_desc).
 
 # Optimización On-Page + Metas (Diploma W8 + W11)
 
-Actúa como especialista on-page en aprendoseo. Tu trabajo es que la página **se rastree, se indexe y posicione**, y que cuando aparezca en la SERP, la gente haga clic. Recuerda el marco del diploma: *"Lo que no se rastrea, no existe"* — pero rastrear no basta si el metatítulo no convence.
+Actúa como especialista on-page en aprendoseo. Tu trabajo es que la página **se rastree, se indexe y posicione**, y que cuando aparezca en la SERP, la gente haga clic. Recuerda el marco del diploma: *"Lo que no se rastrea, no existe"*, pero rastrear no basta si el metatítulo no convence.
 
 > **Método completo del diploma:** los pasos detallados, las plantillas y los prompts originales de Arianna están en [`references/metodo-diploma.md`](references/metodo-diploma.md). Lee ese archivo para seguir el método exacto del curso; no improvises el método.
 
@@ -38,8 +38,8 @@ Actúa como especialista on-page en aprendoseo. Tu trabajo es que la página **s
 
 Esta skill **funciona sin ningún MCP**. El MCP solo enriquece con datos reales de SERP/volumen.
 
-1. **Sin MCP (manual — siempre válido):** abre la SERP de tu keyword, copia los **títulos y metadescripciones del top 5-10** para tener un benchmark de CTR. Usa el simulador de SERP de **Mangools** para verificar que tu título no se corte en 50-60 caracteres.
-2. **SerpApi MCP (GRATIS — principal):** `mcp__serpapi__search` con tu keyword → títulos/metas que ya rankean (benchmark de CTR), bloque **PAA (People Also Ask)** y *related searches* para nutrir secundarias y la metadescripción.
+1. **Sin MCP (manual, siempre válido):** abre la SERP de tu keyword, copia los **títulos y metadescripciones del top 5-10** para tener un benchmark de CTR. Usa el simulador de SERP de **Mangools** para verificar que tu título no se corte en 50-60 caracteres.
+2. **SerpApi MCP (GRATIS, principal):** `mcp__serpapi__search` con tu keyword → títulos/metas que ya rankean (benchmark de CTR), bloque **PAA (People Also Ask)** y *related searches* para nutrir secundarias y la metadescripción.
 3. **Ahrefs MCP (PAGO):** `mcp__claude_ai_Ahrefs__keywords-explorer-overview` (volumen/dificultad de la keyword), `...keywords-explorer-related-terms` (secundarias). Ahrefs es de pago.
 
 Config de MCP: ver `../../MCP-SETUP.md`.
@@ -94,6 +94,16 @@ Devuelve `{"ok":true,"query":...,"paa":[...],"competitors":[{url,serp_title,serp
 
 Para DESCUBRIR primero qué dominios/URLs son la competencia, usa la skill `analisis-de-competidores` y pásale aquí las URLs con `--urls`.
 
+## Script de auditoría masiva de metas
+
+Para revisar muchas URLs a la vez (export de Screaming Frog o hoja de la Plantilla Master), no cuentes caracteres uno por uno:
+
+```bash
+python3 skills/optimizacion-on-page-meta/scripts/meta_audit.py --file metas.csv
+```
+
+Columnas reconocidas: `url`, `title`, `description`, y opcionalmente `keyword` y `h1`. Devuelve faltantes y duplicados (severidad alta), fuera de rango 50 a 60 y 120 a 155 (media) y keyword que no está al inicio (baja). Solo stdlib. Si el patrón se repite, corrige la plantilla del CMS, no página por página.
+
 ## Salida
 
 - **Set de metas:** metatítulo elegido + 3-5 variantes (con conteo de caracteres) y metadescripción + variantes.
@@ -112,11 +122,19 @@ Para DESCUBRIR primero qué dominios/URLs son la competencia, usa la skill `anal
 
 **Checklist:** keyword en H1 ✅, en primeras 100 palabras ✅, URL `/auditoria-seo-tecnica` ✅, jerarquía sin saltos ✅, ALT pendiente ⬜.
 
+## Práctica de coaches y complementos
+
+- Criterios y ejemplos reales de Diana Rodríguez y Dana Aliaga (CTA en el título, encabezados, URL, local): [`references/practica-coaches.md`](references/practica-coaches.md). Hay un matiz de Diana (descripción de 150 a 160 y "H1 igual que meta es redundante") que **no está en el curso**; aplica el rango del diplomado.
+- Opcional, **después** del método: [`references/complementos-claude-seo.md`](references/complementos-claude-seo.md) (diferencias de umbrales con claude-seo, severidad de metas). Es un **Complemento externo (claude-seo, MIT), no es parte del método del diplomado**.
+
 ## Gotchas
 
-- **Metatítulo 50-60 chars con keyword al inicio; metadescripción 120-155 con CTA** — verifica siempre el corte en el simulador, no a ojo. Keyword al final = menos peso y menos clic.
-- **La metadescripción no es factor de ranking directo, pero mueve el CTR** — escríbela para que la persona haga clic, no para "meter keyword".
-- **No dupliques metas entre URLs** — cada página, su título y su descripción únicos; metas duplicadas confunden a Google y canibalizan.
+- **Metatítulo 50-60 chars con keyword al inicio; metadescripción 120-155 con CTA**, verifica siempre el corte en el simulador, no a ojo. Keyword al final = menos peso y menos clic.
+- **La metadescripción no es factor de ranking directo, pero mueve el CTR**, escríbela para que la persona haga clic, no para "meter keyword".
+- **No dupliques metas entre URLs**, cada página, su título y su descripción únicos; metas duplicadas confunden a Google y canibalizan.
 - **Saltos de encabezado** (H2→H4) rompen la jerarquía y confunden al rastreador.
 - **URLs con tildes/eñes o larguísimas** → menos rastreables y compartibles. Corta y sin tildes.
 - **No reescribas el mismo título 5 veces igual:** las variantes A/B deben atacar **ángulos distintos** (beneficio, número, urgencia, pregunta del PAA).
+- **Un brief o una página sin meta título está incompleto:** exige título y descripción antes de aprobar.
+- **Evita comillas dobles dentro de la meta descripción y no repitas la marca si ya está en el título** (consejo de claude-seo, ver complementos; no es parte del curso).
+- **No copies la meta de la competencia:** analiza qué prometen y busca un ángulo diferenciador ("no te copies, inspírate").

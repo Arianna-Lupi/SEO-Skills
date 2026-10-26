@@ -1,0 +1,8 @@
+[
+  {"query": "un cliente me pidió una cotización de SEO, cuánto cobro", "should_trigger": true},
+  {"query": "quiero armar mis paquetes de servicios freelance", "should_trigger": true},
+  {"query": "cómo le presento mi análisis al cliente", "should_trigger": true},
+  {"query": "qué le escribo al cliente si bajó el tráfico", "should_trigger": true},
+  {"query": "arma el informe mensual de Search Console", "should_trigger": false},
+  {"query": "optimiza la meta descripción de esta página", "should_trigger": false}
+]

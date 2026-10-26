@@ -34,6 +34,29 @@
         "indica si el canonical es self-canonical correcto para la home",
         "no clasifica issues inexistentes ni genera un plan de remediación completo no solicitado"
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "Mi sitio está hecho en React y cuando hago 'ver código fuente' casi no veo texto. ¿Es un problema SEO y cómo lo documento para el developer?",
+      "expected_output": "Identifica un posible CSR, explica SSR vs CSR con la prueba de ver código fuente y Ctrl+F, lo registra como hallazgo de plantilla y redacta una tarea con verbo, explainer y ticket para el developer, sin inventar resultados de indexación.",
+      "assertions": [
+        "explica la diferencia entre SSR y CSR y cómo comprobarla con ver código fuente y Ctrl+F",
+        "trata el hallazgo por plantilla y no página por página",
+        "redacta la tarea empezando con verbo y con explainer (qué es, por qué importa, cómo se soluciona)",
+        "propone un ticket dirigido al developer porque el arreglo es de código",
+        "no afirma que Google no indexa el sitio sin evidencia de GSC"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Tengo la auditoría de hace tres meses y la de hoy en dos issues.json. ¿Cómo comparo si mejoró el sitio?",
+      "expected_output": "Usa comparar_corridas.py y puntaje_salud.py con --previo, presenta issues nuevos, resueltos y que subieron de severidad, y aclara que el puntaje es un indicador interno y no una métrica de Google.",
+      "assertions": [
+        "usa o propone comparar_corridas.py y puntaje_salud.py",
+        "separa issues nuevos, resueltos y que cambiaron de severidad",
+        "aclara que el puntaje es una rúbrica interna y no una métrica de Google",
+        "no inventa cifras que no salgan de los archivos"
+      ]
     }
   ]
 }

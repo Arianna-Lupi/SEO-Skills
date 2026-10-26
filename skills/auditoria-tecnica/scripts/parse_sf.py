@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-parse_sf.py — Resume exports de Screaming Frog en un sumario de severidad (determinista).
+parse_sf.py, Resume exports de Screaming Frog en un sumario de severidad (determinista).
 
 Qué hace:
   1. Lee internal_all.csv (o autodetecta dentro de --folder) y cuenta URLs,

@@ -107,3 +107,33 @@ Salido del corpus real del curso: transcripciones, resúmenes y prompts ya inger
 2. Investigación externa (B) → ideas de agentes + formato técnico correcto.
 3. Validación del CLI de Screaming Frog contra un proyecto interno real que ya lo corre gratis (`../../technical-audit/`) → corrección del framing free/paid.
 4. Datos de conexión de MCPs verificados contra docs oficiales / READMEs.
+
+---
+
+## C. Complementos externos: claude-seo (MIT, agricidaniel)
+
+Repo: https://github.com/AgriciDaniel/claude-seo · Licencia en [`THIRD-PARTY-LICENSES.md`](THIRD-PARTY-LICENSES.md). Se usó para traer lo que el diplomado no detalla (rúbricas, umbrales vigentes, checklists, scripts), siempre adaptado al español y al método del diplomado. **Regla**: si claude-seo contradice al diplomado, gana el diplomado; todo lo importado vive en `references/complementos-claude-seo.md` de cada skill, etiquetado como complemento externo.
+
+- **Grupo A** (A-tecnico): citar claude-seo (MIT) para `seo-technical`, `seo-sitemap`, `seo-images`, `seo-drift`, `pagespeed_check.py`, `sitemap_discovery.py`.
+- **Grupo B** (B-contenido): claude-seo (MIT, agricidaniel): `skills/seo-content-brief` (autor original puneetindersingh), `skills/seo-content`, `agents/seo-content.md`, `skills/seo-cluster` (método original de Lutfiya Miller), `scripts/content_quality.py`, `content_humanize.py`, `content_verify.py`. Perfiles de coaches: dana.md y diana.md.
+- **Grupo C** (C-keywords-competencia): - README, ROADMAP y FUENTES: añadir `intencion-de-busqueda` (v1.0) y subir a 1.1 las otras 6; listar scripts nuevos: `serp_overlap.py`, `validar_mapa.py`, `brechas.py`, `matriz_enlaces.py`. Citar claude-seo (MIT) en FUENTES con los archivos de origen indicados arriba.
+- **Grupo D** (D-offpage-ia-reportes): añadir claude-seo (MIT) como origen de los complementos de estas 7 skills.
+- **Grupo E** (E-planificacion-verticales): ** añadir Semanas 2, 13, 14 y 16 y Bonus L9 como fuentes; claude-seo (MIT, agricidaniel): `skills/seo-plan`, `seo-local`, `seo-maps`, `seo-ecommerce`, `scripts/schema_ecommerce_validate.py`, `skills/seo/references/local-schema-types.md`.
+
+## D. Práctica de los coaches y de la comunidad
+
+Perfiles construidos con los mensajes reales de los coaches en los canales del foro (Verónica Romero, Ibraim Mogollón, Dana Aliaga, Diana Rodríguez, Arianna Lupi y Juan Angulo) y cruzados con los resúmenes del diplomado. Usados como autoridad secundaria (nunca contradicen el curso) en `references/practica-coaches.md` y en ejemplos. De la comunidad solo se tomó la **estructura** de las plantillas compartidas (encabezados de pestañas y secciones de briefs), sin datos de alumnos ni clientes.
+
+- Semanas del diplomado añadidas como fuente en esta ronda: S2, S4, S5, S7, S8, S10, S11, S12, S13, S14 y S16, y el Bonus (DinoRank).
+- Instructoras según los resúmenes: Diana Rodríguez imparte las lecciones 8 a 15 de la Semana 4; la Semana 11 la imparte Dana Aliaga.
+
+## E. Enrutador, instalador y presentaciones (ronda aprendoclub)
+
+- **Diplomado (autoridad):** el orden de las fases de `/aprendoclub audit` sale de las Semanas 1 a 4, 6, 9 y 12 a 16 (detalle por fase en `skills/aprendoclub/references/metodo-diploma.md`). Los comandos y sus nombres son del repo.
+- **claude-seo (MIT, © 2026 agricidaniel)**, como patrón y no como texto copiado, licencia en [`THIRD-PARTY-LICENSES.md`](THIRD-PARTY-LICENSES.md):
+  - `skills/seo/SKILL.md` y `skills/seo-audit/SKILL.md`: orquestador `/seo <comando> <argumento>`, tabla de comandos, auditoría con subagentes en paralelo y subagentes condicionales según el tipo de negocio.
+  - `install.sh`, `install.ps1`, `uninstall.sh`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` y el flujo `/plugin marketplace add` más `/plugin install`: instalación rápida, desinstalación y empaquetado como plugin.
+  - `bin/claude-seo` y `scripts/runtime.py`: idea del lanzador estable que resuelve el intérprete de Python y falla con un mensaje claro (adaptado a `aprendoclub-run`, sin entorno administrado ni dependencias pesadas).
+  - `skills/seo-audit/SKILL.md`: puntaje de salud 0 a 100 (ya en `auditoria-tecnica/scripts/puntaje_salud.py`).
+  - Competencia v1.2 (grupo F): `skills/seo-sxo/references/page-type-taxonomy.md`, `skills/seo-sxo/SKILL.md`, `skills/seo-content` (señales E-E-A-T) y `skills/seo-dataforseo/SKILL.md` (solo mención, de pago y no implementado).
+- **PPT Master** (https://github.com/hugohe3/ppt-master, MIT, © 2025-2026 Hugo He): herramienta externa prevista para las presentaciones editables (v1.4.0). Solo se menciona y se invoca como herramienta externa, previa confirmación; no se incorpora su código ni su texto, así que no está en `THIRD-PARTY-LICENSES.md`. Si eso cambia, se agrega allí su licencia. Diseño y lo que se leyó de su repositorio: [`docs/diseno-presentacion-pptx.md`](docs/diseno-presentacion-pptx.md). Se descartó Slidev como base de las presentaciones.

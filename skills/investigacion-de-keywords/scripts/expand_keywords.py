@@ -4,7 +4,7 @@
 # dependencies = ["requests"]
 # ///
 """
-expand_keywords.py — Expande semillas de keywords vía SerpApi (Autocomplete + Related/PAA).
+expand_keywords.py, Expande semillas de keywords vía SerpApi (Autocomplete + Related/PAA).
 
 Qué hace (determinista):
   1. Toma una o más semillas (--seed repetible) o un archivo (--file, una por línea).

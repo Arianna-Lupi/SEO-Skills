@@ -1,0 +1,23 @@
+{
+  "pages": [
+    {
+      "url": "https://ejemplo-clinica.test/",
+      "keyword": "clínica dental en valencia",
+      "accion": "Actualizar",
+      "mes": "Mes 1"
+    },
+    {
+      "url": "https://ejemplo-clinica.test/ortodoncia/",
+      "keyword": "ortodoncia invisible precio",
+      "accion": "Crear",
+      "mes": "Mes 2",
+      "volumen": 90
+    },
+    {
+      "url": "https://ejemplo-clinica.test/blog/que-es-la-ortodoncia/",
+      "keyword": "qué es la ortodoncia",
+      "accion": "Crear",
+      "mes": "Mes 3"
+    }
+  ]
+}

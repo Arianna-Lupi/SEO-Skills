@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "query": "comprar café de especialidad",
+  "top": [
+    {
+      "position": 1,
+      "title": "Categoría",
+      "link": "https://tostadores.test/tienda/cafe-de-especialidad/",
+      "snippet": ""
+    },
+    {
+      "position": 2,
+      "title": "Producto",
+      "link": "https://tostadores.test/producto/etiopia-yirgacheffe",
+      "snippet": ""
+    },
+    {
+      "position": 3,
+      "title": "Categoría 2",
+      "link": "https://granoalto.test/categoria/cafe-de-especialidad/",
+      "snippet": ""
+    }
+  ],
+  "paa": [],
+  "related": [],
+  "features": {
+    "ai_overview": false,
+    "featured_snippet": false,
+    "knowledge_panel": false
+  }
+}
