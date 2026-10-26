@@ -4,6 +4,7 @@ Resumen en español para quienes usan las SEO Skills. Lo más nuevo va arriba. P
 
 ## Próxima versión
 
+## [1.4.0] - 2026-10-26
 - Nuevo comando `/aprendoclub`: un solo punto de entrada. `/aprendoclub audit midominio.com` hace la auditoría completa paso a paso, con pausas para que confirmes, y termina siempre en el dashboard.
 - Instalación mucho más rápida: dos comandos, sin preguntas y sin instalar nada extra. También puedes instalarlas como plugin de Claude Code.
 - Actualizar es un solo paso: vuelve a correr el comando de instalación. Se conservan tus claves y tus carpetas `.seo-audit/`, y si habías cambiado una skill a mano, se guarda una copia antes.
